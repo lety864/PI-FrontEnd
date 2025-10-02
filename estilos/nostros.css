@@ -1,0 +1,75 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+header {
+  display: flex; /*contenedor pal navbar */
+  justify-content: space-between; 
+  align-items: center;
+  padding: 15px 50px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+}
+
+.hero {
+  background: url('fondo.jpg') no-repeat center/cover;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+.about, .features, .cta {
+  padding: 60px 80px;
+  text-align: center;
+}
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  background: #f7f6f1;
+}
+
+.feature {
+  max-width: 300%;
+}
+
+.cta {
+  background: #d5d3c7;
+}
+
+footer {
+  background: #4c4035;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 40px;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col ul li {
+  margin: 5px 0;
+}
+
+.footer-col ul li a {
+  text-decoration: none;
+  color: #ddd;
+}
+
+.copyright {
+  background: #fff;
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+}
