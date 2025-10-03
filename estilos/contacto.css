@@ -1,0 +1,90 @@
+
+.margin{
+    margin: 20px;
+}
+.back6{
+    background-color: rgb(43, 86, 226);
+}
+.container-fondo{
+    background: url('/assets/contacto-madera2.jpg') no-repeat center/cover;
+    height: 900px;
+
+}
+
+.hero {
+  background: url('/assets/contacto6.jpg') no-repeat center/cover;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #686763;
+  font-size: 36px;
+  font-weight: regular;
+  font-family: Poppins, sans-serif;
+}
+
+.encabezado {
+    display: flex;
+    height: 146px;
+    font-size: 36px;
+    font-weight: regular;
+    font-family: Poppins, sans-serif;
+    align-items: center;
+    justify-content: center;
+    color: #686763;
+}
+
+.texto-sucursal{
+    color: #A5A58D;
+    font-size: 24px;
+    font-weight: regular;
+    font-family: Roboto, sans-serif;
+}
+
+.texto-sucursal:hover{
+    color: #686763;
+    transition: 0.5s;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.icon-text{
+    font-size: 24px;
+    font-weight: regular;
+    font-family: Roboto, sans-serif;
+}
+
+.icon-color{
+    color: #A5A58D;
+}
+
+footer {
+  background: #B09D89;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 40px;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col ul li {
+  margin: 5px 0;
+}
+
+.footer-col ul li a {
+  text-decoration: none;
+  color: #ddd;
+}
+
+.copyright {
+  background: #B09D89;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+}
+
