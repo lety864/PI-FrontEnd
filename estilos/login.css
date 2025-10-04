@@ -1,0 +1,141 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@700&display=swap');
+
+/* PALETA  DE COLOR LOGIN- Mueblería España*/
+:root {
+  --background: #F5F4EF;
+  --foreground: #686763;
+  --primary: #A5A58D;
+  --primary-foreground: #ffffff;
+  --secondary: #CB997E;
+  --secondary-foreground: #ffffff;
+  --accent: #B7B7A4;
+  --accent-foreground: #686763;
+  --footer-bg: #5E503F;
+  --card: #ffffff;
+  --border: rgba(104, 103, 99, 0.2);
+  --muted-foreground: #686763;
+  --font-weight-semibold: 600;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --radius: 0.75rem;
+}
+
+/*ESTILOS GENERALES*/
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary);
+}
+
+/*LOGIN */
+.login-container {
+  min-height: 100vh;
+  background-color: var(--background);
+}
+
+.login-box {
+  background-color: var(--card);
+  border-radius: var(--radius);
+  max-width: 400px;
+  width: 100%;
+}
+
+.btn-custom-primary {
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+  border: none;
+  padding: 0.75rem;
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius);
+  transition: background-color 0.3s ease;
+}
+
+.btn-custom-primary:hover {
+  background-color: #B8856B;
+}
+
+/* FOOTER */
+.footer {
+  background-color: var(--footer-bg);
+  color: var(--primary-foreground);
+  padding: 3rem 0 1rem;
+}
+
+.footer h4 {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+.footer p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* COPYRIGHT */
+.copyright {
+  background-color: #4A3C2E;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+}
+
+
+/* LOGIN GRID */
+.login-grid .row {
+  background-color: var(--background);
+}
+
+/* Imagen lateral izquierda */
+.login-image {
+  background-image: url('https://i5.walmartimages.com/asr/8c1cef39-345b-47ac-bae5-a13e3e2d33b4.f2f0c43144c123cdc5f746a61199e7d6.png?odnHeight=612&odnWidth=612&odnBg=FFFFFF');
+  background-size: cover;
+  background-position: center;
+
+}
+/* Columna derecha con degradado */
+.login-grid .col-md-6:nth-child(2) {
+  background: linear-gradient(to bottom right, var(--background), var(--accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Caja de login */
+.login-box {
+  background-color: var(--card);
+  border-radius: var(--radius);
+  max-width: 400px;
+  width: 100%;
+}
+
+.login-container {
+  min-height: 100vh;
+  background-color: var(--background);
+}
+
+/* Enlaces */
+.link-forgot,
+.link-register {
+  color: var(--primary);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.link-forgot:hover,
+.link-register:hover {
+  color: var(--secondary);
+  text-decoration: underline;
+}

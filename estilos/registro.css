@@ -1,0 +1,63 @@
+:root {
+  --background: #F5F4EF;
+  --foreground: #686763;
+  --primary: #A5A58D;
+  --primary-foreground: #ffffff;
+  --secondary: #CB997E;
+  --secondary-foreground: #ffffff;
+  --accent: #B7B7A4;
+  --accent-foreground: #686763;
+  --footer-bg: #5E503F;
+  --card: #ffffff;
+  --border: rgba(104, 103, 99, 0.2);
+  --muted-foreground: #686763;
+  --font-weight-semibold: 600;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --radius: 0.75rem;
+}
+
+body.bg-custom {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.bg-form {
+  background-color: var(--background);
+}
+
+.bg-card {
+  background-color: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.text-secondary {
+  color: var(--secondary);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+  border: none;
+  border-radius: var(--radius);
+}
+
+.btn-secondary:hover {
+  background-color: #b97d65;
+}
+
+.bg-image {
+  background-image: url('tu-imagen.jpg'); /* Reemplaza con la ruta real */
+  background-size: cover;
+  background-position: center;
+}
