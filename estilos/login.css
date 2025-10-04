@@ -1,17 +1,15 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@700&display=swap');
-
-/* PALETA  DE COLOR LOGIN- Mueblería España*/
+/* PALETA DE DE COLORES PRINCIPALES LOGIN- Mueblería España*/
 :root {
-  --background: #F5F4EF;
-  --foreground: #686763;
-  --primary: #A5A58D;
+  /* Colores principales */
+  --background: #F5F4EF;        /* Blanco */
+  --foreground: #686763;        /* Gris Oscuro */
+  --primary: #A5A58D;           /* Verde Olivo */
   --primary-foreground: #ffffff;
-  --secondary: #CB997E;
+  --secondary: #CB997E;         /* Terracota */
   --secondary-foreground: #ffffff;
-  --accent: #B7B7A4;
+  --accent: #B7B7A4;            /* Verde Claro - Hover */
   --accent-foreground: #686763;
-  --footer-bg: #5E503F;
+  --footer-bg: #5E503F;         /* Café Oscuro */
   --card: #ffffff;
   --border: rgba(104, 103, 99, 0.2);
   --muted-foreground: #686763;
@@ -19,6 +17,19 @@
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --radius: 0.75rem;
+  
+  /* Colores de soporte */
+  --card: #ffffff;
+  --border: rgba(104, 103, 99, 0.2);
+  --muted-foreground: #686763;
+  
+  /* Tipografía */
+  --font-weight-semibold: 600;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  
+  /* Bordes */
+  --radius: 0.75rem; /* 12px */
 }
 
 /*ESTILOS GENERALES*/

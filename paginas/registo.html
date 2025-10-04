@@ -31,6 +31,10 @@
               <label for="confirm-password" class="form-label text-muted">Confirmar contraseña</label>
               <input type="password" class="form-control" id="confirm-password" required />
             </div>
+            <div class="mb-3">
+           <label for="telefono" class="form-label text-muted">Número de teléfono</label>
+           <input type="tel" class="form-control" id="telefono" pattern="[0-9]{10}" placeholder="Ej. 5512345678" required />
+           </div>
             <button type="submit" class="btn btn-secondary w-100 fw-medium">Regístrate</button>
             <p class="mt-3 text-center text-muted">
               ¿Ya eres miembro? <a href="login.html" class="text-accent fw-medium">Inicia sesión</a>
@@ -43,7 +47,24 @@
      <div class="col-md-6 d-none d-md-block bg-image">
      <img src="photo/registro.webp" alt="Decoración moderna" class="img-fluid h-100 w-100 object-fit-cover" />
      </div>
-   
+   <!-- Footer -->
+  <footer class="footer mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 mb-4">
+          <h4>Contacto</h4>
+          <p><i class="bi bi-geo-alt me-2"></i>San Felipe del Progreso, Edo. Méx.</p>
+          <p><i class="bi bi-whatsapp me-2"></i>WhatsApp disponible</p>
+          <p><i class="bi bi-telephone me-2"></i>Teléfono disponible</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="copyright">
+    © 2025 Mueblería España. Todos los derechos reservados.
+  </div>
+
   </div>
 </body>
 </html>

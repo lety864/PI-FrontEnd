@@ -1,20 +1,35 @@
+/* PALETA DE  DE COLORES  Mueblería España*/
 :root {
-  --background: #F5F4EF;
-  --foreground: #686763;
-  --primary: #A5A58D;
+  /* Colores principales */
+  --background: #F5F4EF;        /* Blanco */
+  --foreground: #686763;        /* Gris Oscuro */
+  --primary: #A5A58D;           /* Verde Olivo */
   --primary-foreground: #ffffff;
-  --secondary: #CB997E;
+  --secondary: #CB997E;         /* Terracota */
   --secondary-foreground: #ffffff;
-  --accent: #B7B7A4;
+  --accent: #B7B7A4;            /* Verde Claro - Hover */
   --accent-foreground: #686763;
-  --footer-bg: #5E503F;
+  --footer-bg: #5E503F;         /* Café Oscuro */
   --card: #ffffff;
-  --border: rgba(104, 103, 99, 0.2);
+ --border: rgba(104, 103, 99, 0.2);
   --muted-foreground: #686763;
   --font-weight-semibold: 600;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --radius: 0.75rem;
+
+ /* Colores de soporte */
+  --card: #ffffff;
+  --border: rgba(104, 103, 99, 0.2);
+  --muted-foreground: #686763;
+  
+  /* Tipografía */
+  --font-weight-semibold: 600;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  
+  /* Bordes */
+  --radius: 0.75rem; /* 12px */
 }
 
 body.bg-custom {
@@ -61,3 +76,31 @@ body.bg-custom {
   background-size: cover;
   background-position: center;
 }
+/* FOOTER */
+.footer {
+  background-color: var(--footer-bg);
+  color: var(--primary-foreground);
+  padding: 3rem 0 1rem;
+}
+
+.footer h4 {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+.footer p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* COPYRIGHT */
+.copyright {
+  background-color: #4A3C2E;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+}
+
