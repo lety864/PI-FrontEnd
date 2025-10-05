@@ -81,24 +81,52 @@ h1, h2, h3, h4 {
 }
 
 /* =======HERO SECTION============= */
+
 .hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
-              url('https://images.unsplash.com/photo-1556228720') center/cover;
-  min-height: 500px;
+  position: relative;
+  min-height: 80vh;
+  
+  /* --- Propiedades del fondo --- */
+  background-image: url('../assets/images/hero-muebleria.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* --- Centrado del contenido de texto --- */
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
   text-align: center;
 }
 
-.hero h1 {
-  font-size: 3.5rem;
-  font-weight: 700;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  margin: 0;
+/* --- Overlay --- */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
 }
 
+/* --- Estilos para el contenido del Hero --- */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: white; /* Color del texto */
+}
+
+.hero-content h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+}
+#hero-title {
+  opacity: 0; /* Empieza invisible al cargar página */
+  transition: opacity 1.5s ease-in-out; /* animación de opacidad */
+}
 /* ======ABOUT SECTION (Texto principal sobre nosotros============= */
 .about-section {
   background-color: var(--background);
@@ -110,8 +138,41 @@ h1, h2, h3, h4 {
   line-height: 1.8;
   color: var(--foreground);
 }
+/* ==========Datos visuales de estadisticas de la mueblería=============== */
+.stats-section {
+  background-color: var(--primary);
+  padding: 4rem 0;
+}
 
-/* ==========FEATURES SECTION (Características)=============== */
+.stat-card {
+  padding: 2rem 1rem;
+}
+
+.stat-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--primary-foreground);
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: var(--font-weight-medium);
+}
+
+@media (max-width: 768px) {
+  .stat-number {
+    font-size: 2.5rem;
+  }
+  
+  .stat-label {
+    font-size: 1rem;
+  }
+}
+
+/* ==========FEATURES(Características)=============== */
 .features-section {
   padding: 5rem 0;
   background-color: var(--card);
@@ -120,7 +181,7 @@ h1, h2, h3, h4 {
 .features-section h2 {
   font-size: 2rem;
   color: var(--primary);
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   font-weight: var(--font-weight-semibold);
 }
 
@@ -140,20 +201,29 @@ h1, h2, h3, h4 {
   font-size: 3rem;
   color: var(--secondary);
   margin-bottom: 1.5rem;
+  background-color: rgba(203, 153, 126, 0.1); /* Terracota suave */
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin: 0 auto 1.5rem;
+  transition: background-color 0.3s ease;
 }
-
+.feature-card:hover .feature-icon {
+  background-color: rgba(203, 153, 126, 0.2);
+}
 .feature-card h3 {
   color: var(--primary);
   margin-bottom: 1rem;
   font-size: 1.5rem;
   font-weight: var(--font-weight-semibold);
 }
-
 .feature-card p {
   color: var(--foreground);
   font-size: 1rem;
 }
-
 /* ========CTA SECTION (Call to Action - Botones)================== */
 .cta-section {
   background-color: var(--primary);
@@ -213,6 +283,13 @@ h1, h2, h3, h4 {
 .btn-custom-secondary:hover {
   background-color: white;
   color: var(--primary);  /* Verde Olivo */
+}
+/*==========TEAMC CODE&COFFEE==============*/
+.card-img-top {
+  width: 150px !important;      /* Ancho fijo */
+  height: 150px !important;     /* Alto fijo */
+  object-fit: cover;            /* Recorta para llenar el espacio */
+  object-position: center;      /* Centra la imagen */
 }
 
 /* =============FOOTER======================== */
