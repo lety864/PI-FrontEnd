@@ -150,7 +150,7 @@ h1, h2, h3, h4 {
 
 .stat-number {
   font-family: 'Playfair Display', serif;
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--primary-foreground);
   margin-bottom: 0.5rem;
