@@ -359,9 +359,15 @@ h1, h2, h3, h4 {
     /* Cambia solo el color del texto en Privacidad */
     .custom-privacidad {
     color: white !important; 
-     --font-weight-normal: 700;
 }
     .nav-link{
         color: white;
          --font-weight-normal: 700;
     }
+
+    .p-3 {
+   border: 3px solid #CB997E; /* grosor, tipo y color del borde */
+  border-radius: 15px;       /* redondea las esquinas */
+  padding: 20px;             /* separa el contenido del borde */
+  background-color: transparent; /* sin fondo */
+}
