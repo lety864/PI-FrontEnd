@@ -1,0 +1,238 @@
+/* =VARIABLES DE COLOR - Mueblería España================*/
+:root {
+  /* Colores principales */
+  --background: #F5F4EF;        /* Blanco */
+  --foreground: #686763;        /* Gris Oscuro */
+  --primary: #A5A58D;           /* Verde Olivo */
+  --primary-foreground: #ffffff;
+  --secondary: #CB997E;         /* Terracota */
+  --secondary-foreground: #ffffff;
+  --accent: #B7B7A4;            /* Verde Claro - Hover */
+  --accent-foreground: #686763;
+  --footer-bg: #5E503F;         /* Café Oscuro */
+  
+  /* Colores de soporte */
+  --card: #ffffff;
+  --border: rgba(104, 103, 99, 0.2);
+  --muted-foreground: #686763;
+  
+  /* Tipografía */
+  --font-weight-semibold: 600;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  
+  /* Bordes */
+  --radius: 0.75rem; /* 12px */
+}
+
+/* ==========ESTILOS GENERALES=================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--foreground);
+  background-color: var(--background);
+  line-height: 1.6;
+}
+
+/* ==========UTILIDADES=================== */
+.margin {
+  margin: 20px;
+}
+
+/* ==========HERO SECTION=================== */
+.hero {
+  background: url('/assets/contacto6.jpg') no-repeat center/cover;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--card);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+/* ==========ENCABEZADOS=================== */
+.encabezado {
+  display: flex;
+  height: 146px;
+  font-size: 2.25rem;
+  font-weight: var(--font-weight-semibold);
+  font-family: 'Playfair Display', serif;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+}
+
+/* ==========CONTENEDOR DE SUCURSALES=================== */
+.container-fondo {
+  background: url('/assets/contacto-madera2.jpg') no-repeat center/cover;
+  min-height: 900px;
+  background-color: rgba(245, 244, 239, 0.9);
+  background-blend-mode: overlay;
+  border-radius: var(--radius);
+  padding: 2rem 0;
+}
+
+/* ==========NAVEGACIÓN DE SUCURSALES=================== */
+.texto-sucursal {
+  color: var(--primary);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-semibold);
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.texto-sucursal:hover {
+  color: var(--secondary);
+  transform: translateX(5px);
+  text-decoration: none;
+}
+
+/* ==========INFORMACIÓN DE CONTACTO=================== */
+.icon-text {
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-normal);
+  font-family: 'Poppins', sans-serif;
+  color: var(--foreground);
+}
+
+.icon-color {
+  color: var(--secondary);
+  font-size: 1.5rem;
+}
+
+/* Separadores */
+hr {
+  border-color: var(--border);
+  opacity: 0.5;
+}
+
+/* ==========MAPA=================== */
+.mapa {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+}
+
+.mapa iframe {
+  border-radius: var(--radius);
+}
+
+/* ==========FORMULARIO DE CONTACTO=================== */
+.back6 {
+  background-color: var(--card);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* =============FOOTER======================== */
+.footer {
+  background-color: var(--footer-bg);
+  color: var(--primary-foreground);
+  padding: 3rem 0 1rem;
+}
+
+.footer h4 {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+.footer p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.footer a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: var(--accent);
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer ul li {
+  margin-bottom: 0.5rem;
+}
+
+.social-icons a {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  display: inline-block;
+}
+
+.social-icons a:hover {
+  color: var(--accent);
+}
+
+/* ==========COPYRIGHT============= */
+.copyright {
+  background-color: #4A3C2E;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+}
+
+/* ==========RESPONSIVE DESIGN============= */
+@media (max-width: 992px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .encabezado {
+    font-size: 2rem;
+    height: auto;
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 400px;
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+    padding: 0 1rem;
+  }
+  
+  .container-fondo {
+    min-height: auto;
+    padding: 1rem;
+  }
+  
+  .encabezado {
+    font-size: 1.5rem;
+  }
+  
+  footer {
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+  
+  .footer-col {
+    margin-bottom: 1.5rem;
+  }
+}
