@@ -1,24 +1,31 @@
-/* ===== PALETA DE COLORES - Mueblería España ===== */
+/* =VARIABLES DE COLOR - Mueblería España=================*/
 :root {
-  --background: #F5F4EF;
-  --foreground: #686763;
-  --primary: #A5A58D;
+  /* Colores principales */
+  --background: #F5F4EF;        /* Blanco */
+  --foreground: #686763;        /* Gris Oscuro */
+  --primary: #A5A58D;           /* Verde Olivo */
   --primary-foreground: #ffffff;
-  --secondary: #CB997E;
+  --secondary: #CB997E;         /* Terracota */
   --secondary-foreground: #ffffff;
-  --accent: #B7B7A4;
+  --accent: #B7B7A4;            /* Verde Claro - Hover */
   --accent-foreground: #686763;
-  --footer-bg: #5E503F;
+  --footer-bg: #5E503F;         /* Café Oscuro */
+  
+  /* Colores de soporte */
   --card: #ffffff;
   --border: rgba(104, 103, 99, 0.2);
   --muted-foreground: #686763;
+  
+  /* Tipografía */
   --font-weight-semibold: 600;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --radius: 0.75rem;
+  
+  /* Bordes */
+  --radius: 0.75rem; /* 12px */
 }
 
-/* ===== ESTILOS GENERALES ===== */
+/* ==========ESTILOS GENERALES=================== */
 * {
   margin: 0;
   padding: 0;
@@ -36,10 +43,35 @@ h1, h2, h3, h4 {
   font-family: 'Playfair Display', serif;
 }
 
-body.bg-custom {
+
+body {
+  background-color: #f7f3ed;
   background: linear-gradient(180deg, #f7f3ed 0%, #ede8e0 100%);
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+/* TITULOS */
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--foreground);
+  background: linear-gradient(180deg, #f7f3ed 0%, #ede8e0 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', serif;
 }
 
 /* NAVBAR */
@@ -80,9 +112,23 @@ body.bg-custom {
   color: var(--primary);
 }
 
+@media (max-width: 576px) {
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+  .navbar-nav .nav-link {
+    font-size: 0.9rem;
+    margin: 0.25rem 0;
+  }
+  .navbar-icons i {
+    font-size: 1rem;
+    margin-left: 0.5rem;
+  }
+}
+
 /* MAIN - FORMULARIO */
 .main-registro {
-  min-height: 100vh;
+  flex: 1 0 auto;
   display: grid;
   place-items: center;
   margin: 0;
@@ -127,15 +173,21 @@ body.bg-custom {
 .text-accent { color: var(--accent); }
 
 .btn-secondary {
-  background-color: var(--secondary);
-  color: var(--secondary-foreground);
+  background-color: var(--primary); /* olive green */
+  color: var(--secondary-foreground); /* texto color white */
   border: none;
   border-radius: var(--radius);
   width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
 }
 
 .btn-secondary:hover {
-  background-color: #b97d65;
+  background-color: #8a8b74; /* darker olive */
+}
+
+.form-label {
+  font-size: 0.9rem;
 }
 
 .image-section {
@@ -151,60 +203,6 @@ body.bg-custom {
   display: block;
 }
 
-/* FOOTER */
-.footer {
-  background-color: var(--footer-bg);
-  color: var(--primary-foreground);
-  padding: 3rem 1rem 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.footer .row {
-  width: 100%;
-  max-width: 1200px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 1.5rem;
-}
-
-.footer h4 {
-  font-size: 1.2rem;
-  margin-bottom: 0.8rem;
-  font-weight: 600;
-}
-
-.footer p {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
-.footer a {
-  color: var(--accent);
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.footer a:hover {
-  color: var(--primary-foreground);
-}
-
-.copyright {
-  width: 100%;
-  background-color: #4A3C2E;
-  color: rgba(255, 255, 255, 0.75);
-  text-align: center;
-  padding: 1rem 0;
-  font-size: 0.9rem;
-  margin-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* PARTE RESPONSIVA */
 @media (max-width: 1200px) {
   .registro-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -221,7 +219,6 @@ body.bg-custom {
 @media (max-width: 992px) {
   .registro-grid {
     grid-template-columns: 1fr;
-    gap: 10px;
   }
   .form-section {
     grid-column: 1 / 2;
@@ -231,7 +228,6 @@ body.bg-custom {
     max-width: 100%;
   }
   .image-section {
-    grid-column: 1 / 2;
     min-height: 250px;
   }
 }
@@ -242,21 +238,22 @@ body.bg-custom {
   }
   .form-container {
     padding: 1rem;
+    max-width: 100%;
   }
-  .navbar-brand {
-    font-size: 1.2rem;
-  }
-  .navbar-nav .nav-link {
+  .form-control {
     font-size: 0.9rem;
   }
-  .footer .row {
-    flex-direction: column;
-    align-items: center;
+  h2 {
+    font-size: 1.5rem;
   }
-  .footer h4 {
-    font-size: 1rem;
-  }
-  .footer p {
+  .form-label {
     font-size: 0.85rem;
+  }
+  .btn-secondary {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+  .main-registro {
+    padding: 1rem;
   }
 }

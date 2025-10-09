@@ -1,21 +1,15 @@
-/* PALETA DE COLORES */
+/* =VARIABLES DE COLOR - Mueblería España=================*/
 :root {
-  --background: #F5F4EF;
-  --foreground: #686763;
-  --primary: #A5A58D;
+  /* Colores principales */
+  --background: #F5F4EF;        /* Blanco */
+  --foreground: #686763;        /* Gris Oscuro */
+  --primary: #A5A58D;           /* Verde Olivo */
   --primary-foreground: #ffffff;
-  --secondary: #CB997E;
+  --secondary: #CB997E;         /* Terracota */
   --secondary-foreground: #ffffff;
-  --accent: #B7B7A4;
+  --accent: #B7B7A4;            /* Verde Claro - Hover */
   --accent-foreground: #686763;
-  --footer-bg: #5E503F;
-  --card: #ffffff;
-  --border: rgba(104, 103, 99, 0.2);
-  --muted-foreground: #686763;
-  --font-weight-semibold: 600;
-  --font-weight-medium: 500;
-  --font-weight-normal: 400;
-  --radius: 0.75rem;
+  --footer-bg: #5E503F;         /* Café Oscuro */
   
   /* Colores de soporte */
   --card: #ffffff;
@@ -29,22 +23,26 @@
   
   /* Bordes */
   --radius: 0.75rem; /* 12px */
-
 }
 
-/* ESTILOS GENERALES */
-body {
+/* ==========ESTILOS GENERALES=================== */
+* {
   margin: 0;
   padding: 0;
-  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
   font-family: 'Poppins', sans-serif;
-  background-color: var(--background);
   color: var(--foreground);
+  background-color: var(--background);
+  line-height: 1.6;
 }
 
 h1, h2, h3, h4 {
   font-family: 'Playfair Display', serif;
 }
+
 
 body {
   background-color: #f7f3ed;
@@ -109,8 +107,8 @@ h2 {
 
 /* BOTON */
 .btn-custom-primary {
-  background-color: var(--secondary) !important;
-  color: var(--secondary-foreground) !important;
+  background-color: var(--primary) !important; /* olive green */
+  color: var(--primary-foreground) !important;
   border: none !important;
   padding: 0.75rem;
   font-weight: var(--font-weight-semibold);
@@ -119,7 +117,7 @@ h2 {
 }
 
 .btn-custom-primary:hover {
-  background-color: #B8856B !important;
+  background-color: #8E8F77 !important; /* olive green para el hover */
   transform: scale(1.03);
 }
 
@@ -190,57 +188,4 @@ main {
   .login-box {
     width: 90%;
   }
-}
-
-/* FOOTER */
-.footer {
-  background-color: var(--footer-bg);
-  color: var(--primary-foreground);
-  padding: 3rem 1rem 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.footer .row {
-  width: 100%;
-  max-width: 1200px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 1.5rem;
-}
-
-.footer h4 {
-  font-size: 1.2rem;
-  margin-bottom: 0.8rem;
-  font-weight: 600;
-}
-
-.footer p {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
-.footer a {
-  color: var(--accent);
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.footer a:hover {
-  color: var(--primary-foreground);
-}
-
-.copyright {
-  width: 100%;
-  background-color: #4A3C2E;
-  color: rgba(255, 255, 255, 0.75);
-  text-align: center;
-  padding: 1rem 0;
-  font-size: 0.9rem;
-  margin-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }

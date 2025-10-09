@@ -8,6 +8,8 @@
   <!-- Bootstrap y estilos -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <!-- VINCULAR CSS -->
   <link rel="stylesheet" href="/estilos/login.css" />
 </head>
 <body>
@@ -17,12 +19,10 @@
     <div class="container">
       <a class="navbar-brand fw-bold" href="#">Mueblería España</a>
 
-      <!-- Botón hamburguesa para móvil -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Links -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
@@ -33,7 +33,6 @@
           <li class="nav-item"><a class="nav-link" href="politicas.html">Garantías</a></li>
         </ul>
 
-        <!-- Iconos -->
         <div class="navbar-icons d-flex gap-3">
           <i class="bi bi-search"></i>
           <i class="bi bi-person"></i>
@@ -46,71 +45,53 @@
   <!-- MAIN -->
   <main class="container-fluid d-grid align-items-center justify-content-center min-vh-100 p-0">
     <section class="row g-0 w-100">
-      <!-- Imagen a la izquierda -->
       <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center bg-image">
         <img src="photo/login.png" alt="Decoración moderna" class="img-fluid w-100 h-100 object-fit-cover" />
       </div>
 
-      <!-- Formulario derecha -->
       <div class="col-12 col-md-6 d-flex align-items-center justify-content-center bg-form py-5">
         <div class="login-box p-4 rounded shadow w-75">
           <h2 class="text-center mb-4">Iniciar Sesión</h2>
 
-          <form>
+          <!-- FORMULARIO -->
+          <form id="loginForm">
             <div class="mb-3">
-              <label for="email" class="form-label">Usuario</label>
-              <input type="email" class="form-control" id="email" placeholder="usuario@correo.com" required />
+              <label for="username" class="form-label">Usuario</label>
+              <input type="text" class="form-control" id="username" placeholder="usuario123" required />
             </div>
 
             <div class="mb-3">
               <label for="password" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="password" placeholder="********" required />
+              <div class="input-group">
+                <input type="password" class="form-control" id="password" placeholder="********" required />
+                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                  <i class="bi bi-eye" id="eyeIcon"></i>
+                </button>
+              </div>
             </div>
 
+            <div id="alertMessage" class="alert alert-danger d-none text-center mb-3"></div>
+
             <div class="text-end mb-3">
-              <a href="#" class="link-forgot">¿Olvidaste tu contraseña?</a>
+              <a href="contraseña.html" class="link-forgot">¿Olvidaste tu contraseña?</a>
             </div>
 
             <button type="submit" class="btn-custom-primary w-100 mb-3">Entrar</button>
 
             <div class="text-center">
-              <span>¿No tienes una cuenta? <a href="#" class="link-register">¡Regístrate!</a></span>
+              <span>¿No tienes una cuenta? <a href="registo.html" class="link-register">¡Regístrate!</a></span>
             </div>
           </form>
+
         </div>
       </div>
     </section>
   </main>
-
-  <!-- FOOTER -->
-  <footer class="footer mt-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-3 col-md-6 mb-4">
-          <h4>Contacto</h4>
-          <p><i class="bi bi-geo-alt me-2"></i></p>Atlacomulco-San Felipe del Progreso, Manzana 003, 50640, Ejido San Juan Jalpa, Estado de México</p>
-          <p><i class="bi bi-whatsapp me-2"></i>WhatsApp disponible: +52 712 115 4345</p>
-          <p><i class="bi bi-telephone me-2"></i>Teléfono disponible:+52 712 115 4345 </p>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-4">
-          <h4>Enlaces útiles</h4>
-          <p><a href="../index.html">Inicio</a></p>
-          <p><a href="catalogo.html">Catálogo</a></p>
-          <p><a href="nosotros.html">Sobre Nosotros</a></p>
-          <p><a href="contacto.html">Contacto</a></p>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-4">
-          <h4>Síguenos</h4>
-          <p><i class="bi bi-facebook me-2"></i><a href="#">Facebook:@almacen.espana </a></p>
-        </div>
-      </div>
-    </div>
-    <div class="copyright mt-3">
-      © 2025 Mueblería España. Todos los derechos reservados.
-    </div>
-  </footer>
-
+  
   <!-- JS Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- SCRIPT LOGIN -->
+  <script src="/scripts/login.js"></script>
 </body>
 </html>
