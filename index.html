@@ -3,66 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muebleria España</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <meta name="description" content="Mueblería España - Muebles artesanales únicos y electrodomésticos de las mejores marcas. Encuentra el mueble perfecto para tu hogar.">
+    <title>Inicio - Mueblería España</title>
 
-    <link rel="stylesheet" href="./estilos/style.css">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Design System CSS (SIEMPRE PRIMERO) -->
+    <link rel="stylesheet" href="estilos/global.css">
+    
+    <!-- Page-Specific Styles -->
+    <link rel="stylesheet" href="estilos/index.css">
 </head>
 <body>
 
-  <!-- NAVBAR GENERAL-->
-         <div class="full-width-nav-container sticky-top">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- ========================================= -->
+    <!-- NAVBAR PRINCIPAL (Sticky, con búsqueda) -->
+    <!-- ========================================= -->
+    <div class="full-width-nav-container sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Navegación principal">
             <div class="container-fluid">
-
-                <button class="btn btn-outline-secondary d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasProducts" aria-controls="offcanvasProducts">
-                    <i class="bi bi-list"></i>
+                
+                <!-- Botón de menú móvil (Offcanvas) -->
+                <button class="btn btn-outline-light d-lg-none me-2" type="button" 
+                        data-bs-toggle="offcanvas" data-bs-target="#offcanvasProducts" 
+                        aria-controls="offcanvasProducts" aria-label="Abrir menú de productos">
+                    <i class="bi bi-list fs-4"></i>
                 </button>
 
-                <a class="navbar-brand d-flex align-items-center" href="#">
-                  <img src="./assets/mundo.png" alt="Logo Muebleria España" height="30" class="me-2">
-                  Muebleria España
-              </a>
+                <!-- Logo/Brand -->
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <img src="./assets/mundo.png" alt="Logo Mueblería España" height="30" class="me-2">
+                    Mueblería España
+                </a>
 
+                <!-- Menú Desktop -->
                 <div class="collapse navbar-collapse" id="mainNavbarDesktop">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Nosotros</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">Nosotros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contacto">Contacto</a>
+                        </li>
                     </ul>
-                    <form class="d-flex me-3"><input class="form-control" type="search" placeholder="Buscar en la tienda" aria-label="Search"></form>
+                    
+                    <!-- Barra de búsqueda (Desktop) -->
+                    <form class="d-flex me-3" role="search">
+                        <input class="form-control search-input" type="search" 
+                               placeholder="Buscar en la tienda" aria-label="Buscar productos">
+                    </form>
+                    
+                     <!-- Iconos de acción (Desktop) -->
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-cart-fill fs-4"></i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-person-fill fs-4"></i></a></li>
-                        
+                        <li class="nav-item">
+                            <a class="nav-link position-relative" href="#" aria-label="Carrito de compras">
+                                <i class="bi bi-cart-fill fs-4"></i>
+                                <!-- BADGE OCULTO - Desktop -->
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">
+                                    2
+                                    <span class="visually-hidden">productos en el carrito</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" aria-label="Mi cuenta">
+                                <i class="bi bi-person-fill fs-4"></i>
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
+                <!-- Iconos de acción (Móvil) -->
                 <div class="d-flex align-items-center d-lg-none">
                     <ul class="navbar-nav flex-row">
                         <li class="nav-item ms-3">
-                          <a class="nav-link" href="#"><i class="bi bi-cart-fill fs-3"></i></a>
-                            
+                            <a class="nav-link position-relative" href="#" aria-label="Carrito de compras">
+                                <i class="bi bi-cart-fill fs-3"></i>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    2
+                                    <span class="visually-hidden">productos en el carrito</span>
+                                </span>
+                            </a>
                         </li>
                         <li class="nav-item ms-3">
-                            <a class="nav-link" href="#"><i class="bi bi-person-fill fs-3"></i></a>
+                            <a class="nav-link" href="#" aria-label="Mi cuenta">
+                                <i class="bi bi-person-fill fs-3"></i>
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </div>
-          <div class="container">
-        <div class="floating-nav-container">
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light d-none d-lg-block">
+    <!-- ========================================= -->
+    <!-- NAVBAR SECUNDARIO (Categorías - Desktop) -->
+    <!-- ========================================= -->
+    <div class="container">
+        <div class="floating-nav-container">
+            <nav class="navbar navbar-expand-lg navbar-light d-none d-lg-block" aria-label="Navegación de categorías">
                 <div class="container-fluid">
                     <ul class="navbar-nav">
+                        <!-- Salas -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Salas</a>
+                            <a class="nav-link dropdown-toggle" href="#" role="button" 
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Salas
+                            </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Ver todo</a></li>
                                 <li><a class="dropdown-item" href="#">Modulares de 4 piezas</a></li>
@@ -70,20 +129,28 @@
                                 <li><a class="dropdown-item" href="#">Sofacamas</a></li>
                                 <li><a class="dropdown-item" href="#">Reclinables</a></li>
                             </ul>
-                        </li>             
+                        </li>
 
+                        <!-- Dormitorio -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dormitorio</a>
+                            <a class="nav-link dropdown-toggle" href="#" role="button" 
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Dormitorio
+                            </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Ver todo</a></li>
-                                <li><a class="dropdown-item" href="#">Recamaras king size y matrimonial</a></li>
+                                <li><a class="dropdown-item" href="#">Recámaras king size y matrimonial</a></li>
                                 <li><a class="dropdown-item" href="#">Cabeceras</a></li>
                                 <li><a class="dropdown-item" href="#">Bases</a></li>
                             </ul>
                         </li>
 
+                        <!-- Comedores -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Comedores</a>
+                            <a class="nav-link dropdown-toggle" href="#" role="button" 
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Comedores
+                            </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Ver todo</a></li>
                                 <li><a class="dropdown-item" href="#">4 sillas</a></li>
@@ -92,74 +159,98 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item"><a class="nav-link" href="#">Roperos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Colchones</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Roperos</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Colchones</a>
+                        </li>
 
-                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Linea blanca</a>
+                        <!-- Línea Blanca -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" 
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Línea blanca
+                            </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Ver todo</a></li>
                                 <li><a class="dropdown-item" href="#">Lavadoras</a></li>
                                 <li><a class="dropdown-item" href="#">Estufas</a></li>
                                 <li><a class="dropdown-item" href="#">Refrigeradores</a></li>
-                                <li><a class="dropdown-item" href="#">Licuadoras</a></li>
-                                <li><a class="dropdown-item" href="#">Planchas</a></li>
-                                <li><a class="dropdown-item" href="#">Hornos de microondas</a></li>
+                                <li><a class="dropdown-item" href="#">Microondas</a></li>
                             </ul>
                         </li>
 
-                        <li class="nav-item"><a class="nav-link fw-bold text-danger" href="#">Ofertas</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold text-danger" href="#ofertas">Ofertas</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
         </div>
-        </div>
+    </div>
 
-    <!-- NAVBAR COLAPSADO-->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasProducts" aria-labelledby="offcanvasProductsLabel">
+    <!-- ========================================= -->
+    <!-- OFFCANVAS (Menú Móvil)                   -->
+    <!-- ========================================= -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasProducts" 
+         aria-labelledby="offcanvasProductsLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasProductsLabel">PRODUCTOS</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar menú"></button>
         </div>
         <div class="offcanvas-body">
+            <!-- Búsqueda en móvil -->
+            <div class="px-3 mb-3">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar">
+                    <button class="btn btn-outline-primary" type="submit">Buscar</button>
+                </form>
+            </div>
 
             <ul class="list-group list-group-flush">
-              <br>
-              <div class="px-3">
-                <form class="d-flex mb-3">
-                    <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Buscar</button>
-                </form>
-              </div>
-
+                <!-- Salas -->
                 <li class="list-group-item">
-                    <a href="#collapseSalas" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseSalas">Salas</a>
+                    <a href="#collapseSalas" data-bs-toggle="collapse" role="button" 
+                       aria-expanded="false" aria-controls="collapseSalas">
+                        Salas <i class="bi bi-chevron-down float-end"></i>
+                    </a>
                     <div class="collapse" id="collapseSalas">
-                        <ul>
+                        <ul class="list-unstyled ps-3 mt-2">
                             <li><a href="#">Ver todo</a></li>
-                            <li><a href="#">4 sillas</a></li>
-                            <li><a href="#">6 sillas</a></li>
-                            <li><a href="#">8 sillas</a></li>
+                            <li><a href="#">Modulares de 4 piezas</a></li>
+                            <li><a href="#">Modulares de 5 piezas</a></li>
+                            <li><a href="#">Sofacamas</a></li>
+                            <li><a href="#">Reclinables</a></li>
                         </ul>
                     </div>
                 </li>
 
+                <!-- Dormitorio -->
                 <li class="list-group-item">
-                    <a href="#collapseDormitorio" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseDormitorio">Dormitorio</a>
+                    <a href="#collapseDormitorio" data-bs-toggle="collapse" role="button" 
+                       aria-expanded="false" aria-controls="collapseDormitorio">
+                        Dormitorio <i class="bi bi-chevron-down float-end"></i>
+                    </a>
                     <div class="collapse" id="collapseDormitorio">
-                        <ul>
+                        <ul class="list-unstyled ps-3 mt-2">
                             <li><a href="#">Ver todo</a></li>
-                            <li><a href="#">Recamaras king size y matrimonial</a></li>
+                            <li><a href="#">Recámaras king size y matrimonial</a></li>
                             <li><a href="#">Cabeceras</a></li>
                             <li><a href="#">Bases</a></li>
                         </ul>
                     </div>
                 </li>
 
+                <!-- Comedores -->
                 <li class="list-group-item">
-                    <a href="#collapseComedores" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseComedores">Comedores</a>
+                    <a href="#collapseComedores" data-bs-toggle="collapse" role="button" 
+                       aria-expanded="false" aria-controls="collapseComedores">
+                        Comedores <i class="bi bi-chevron-down float-end"></i>
+                    </a>
                     <div class="collapse" id="collapseComedores">
-                        <ul>
+                        <ul class="list-unstyled ps-3 mt-2">
                             <li><a href="#">Ver todo</a></li>
                             <li><a href="#">4 sillas</a></li>
                             <li><a href="#">6 sillas</a></li>
@@ -171,44 +262,580 @@
                 <li class="list-group-item"><a href="#">Roperos</a></li>
                 <li class="list-group-item"><a href="#">Colchones</a></li>
 
+                <!-- Línea Blanca -->
                 <li class="list-group-item">
-                    <a href="#collapseLineaBlanca" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseLineaBlanca">Línea blanca</a>
+                    <a href="#collapseLineaBlanca" data-bs-toggle="collapse" role="button" 
+                       aria-expanded="false" aria-controls="collapseLineaBlanca">
+                        Línea blanca <i class="bi bi-chevron-down float-end"></i>
+                    </a>
                     <div class="collapse" id="collapseLineaBlanca">
-                        <ul>
+                        <ul class="list-unstyled ps-3 mt-2">
                             <li><a href="#">Ver todo</a></li>
                             <li><a href="#">Lavadoras</a></li>
                             <li><a href="#">Estufas</a></li>
                             <li><a href="#">Refrigeradores</a></li>
-                            <li><a href="#">Licuadoras</a></li>
-                            <li><a href="#">Planchas</a></li>
-                            <li><a href="#">Hornos de microondas</a></li>
+                            <li><a href="#">Microondas</a></li>
                         </ul>
                     </div>
                 </li>
-                
-                <li class="list-group-item"><a href="#" class="fw-bold text-danger">Ofertas</a></li>
 
+                <li class="list-group-item">
+                    <a href="#ofertas" class="fw-bold text-danger">Ofertas</a>
+                </li>
             </ul>
 
             <hr class="my-3">
 
+            <!-- Enlaces adicionales -->
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><a href="#">Nosotros</a></li>
-                <li class="list-group-item"><a href="#">Contacto</a></li>
+                <li class="list-group-item"><a href="about.html">Nosotros</a></li>
+                <li class="list-group-item"><a href="#contacto">Contacto</a></li>
             </ul>
-
         </div>
     </div>
 
-    <!--FIN DE NAVBAR-->
+    <!-- ========== MAIN CONTENT ========== -->
+    <main>
+        <!-- ========================================= -->
+        <!-- HERO SECTION (Carousel Bootstrap)        -->
+        <!-- ========================================= -->
+        <section id="heroCarousel" class="carousel slide" data-bs-ride="carousel" aria-label="Banner principal">
+            <!-- Indicadores -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" 
+                        class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" 
+                        aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" 
+                        aria-label="Slide 3"></button>
+            </div>
 
-    
+            <div class="carousel-inner">
+                <!-- Slide 1: Principal -->
+                <div class="carousel-item active" style="background-image: url('assets/inicio/Hero1.png');">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1>Muebles con alma, hogares con historia</h1>
+                        <p>Descubre nuestra selección de muebles y electrodomésticos diseñados para durar.</p>
+                        <a href="#" class="cta-button">Explorar Catálogo</a>
+                    </div>
+                </div>
 
-    <main class="container mt-4">
-        
+                <!-- Slide 2: Ofertas -->
+                <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1617806118233-18e1de247200?w=1600&q=80');">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1>¡Ofertas que renuevan tu hogar!</h1>
+                        <p>Hasta 30% de descuento en comedores y salas seleccionadas. ¡No te lo pierdas!</p>
+                        <a href="#ofertas" class="cta-button">Ver Ofertas</a>
+                    </div>
+                </div>
+
+                <!-- Slide 3: Novedades -->
+                <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=1600&q=80');">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1>Lo nuevo ha llegado: Colección 2025</h1>
+                        <p>Muebles que cuentan una historia. </p>
+                        <a href="#" class="cta-button">Descubrir Colección</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controles -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </section>
+
+        <!-- ========================================= -->
+        <!-- CATEGORÍAS DE MUEBLES                    -->
+        <!-- ========================================= -->
+        <section class="py-5" style="margin-top: 80px;">
+            <div class="container">
+                <!-- Section Header -->
+                <div class="section-header">
+                    <p class="section-label">Nuestros Muebles</p>
+                    <h2>Encuentra el Mueble Perfecto</h2>
+                    <p>Los más vendidos: desde piezas artesanales únicas hasta muebles modernos.</p>
+                </div>
+
+                <!-- Grid de Categorías -->
+                <div class="row g-4">
+                    <!-- Salas -->
+                    <div class="col-md-6 col-lg-3">
+                        <article class="category-card">
+                            <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500&q=80" 
+                                 alt="Sala moderna y elegante" 
+                                 class="category-card-image" loading="lazy">
+                            <div class="category-card-overlay">
+                                <h3>Salas</h3>
+                                <p>38 productos disponibles</p>
+                                <a href="#" class="btn-category">
+                                    Ver más
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Dormitorio -->
+                    <div class="col-md-6 col-lg-3">
+                        <article class="category-card">
+                            <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?w=500&q=80" 
+                                 alt="Dormitorio acogedor" 
+                                 class="category-card-image" loading="lazy">
+                            <div class="category-card-overlay">
+                                <h3>Dormitorio</h3>
+                                <p>31 productos disponibles</p>
+                                <a href="#" class="btn-category">
+                                    Ver más
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Comedores -->
+                    <div class="col-md-6 col-lg-3">
+                        <article class="category-card">
+                            <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=500&q=80" 
+                                 alt="Comedor elegante" 
+                                 class="category-card-image" loading="lazy">
+                            <div class="category-card-overlay">
+                                <h3>Comedores</h3>
+                                <p>24 productos disponibles</p>
+                                <a href="#" class="btn-category">
+                                    Ver más
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Roperos -->
+                    <div class="col-md-6 col-lg-3">
+                        <article class="category-card">
+                            <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=500&q=80" 
+                                 alt="Ropero de madera artesanal" 
+                                 class="category-card-image" loading="lazy">
+                            <div class="category-card-overlay">
+                                <h3>Roperos</h3>
+                                <p>19 productos disponibles</p>
+                                <a href="#" class="btn-category">
+                                    Ver más
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================= -->
+        <!-- LÍNEA BLANCA                             -->
+        <!-- ========================================= -->
+        <section class="py-5" style="margin-top: 80px;">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-label">Línea Blanca</p>
+                    <h2>Electrodomésticos para tu Hogar</h2>
+                    <p>Las mejores marcas en línea blanca con garantía y servicio profesional.</p>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Refrigeradores -->
+                    <div class="col-md-6 col-lg-3">
+                        <article class="category-card">
+                            <img src="https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=500&q=80" 
+                                 alt="Refrigerador moderno" 
+                                 class="category-card-image" loading="lazy">
+                            <div class="category-card-overlay">
+                                <h3>Refrigeradores</h3>
+                                <p>22 modelos disponibles</p>
+                                <a href="#" class="btn-category">
+                                    Ver más
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Estufas -->
+                    <div class="col-md-6 col-lg-3">
+                        <article class="category-card">
+                            <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=500&q=80" 
+                                 alt="Estufa de cocina" 
+                                 class="category-card-image" loading="lazy">
+                            <div class="category-card-overlay">
+                                <h3>Estufas</h3>
+                                <p>18 modelos disponibles</p>
+                                <a href="#" class="btn-category">
+                                    Ver más
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Lavadoras -->
+                    <div class="col-md-6 col-lg-3">
+                        <article class="category-card">
+                            <img src="https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=500&q=80" 
+                                 alt="Lavadora moderna" 
+                                 class="category-card-image" loading="lazy">
+                            <div class="category-card-overlay">
+                                <h3>Lavadoras</h3>
+                                <p>15 modelos disponibles</p>
+                                <a href="#" class="btn-category">
+                                    Ver más
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Microondas -->
+                    <div class="col-md-6 col-lg-3">
+                        <article class="category-card">
+                            <img src="https://images.unsplash.com/photo-1585659722983-3a675dabf23d?w=500&q=80" 
+                                 alt="Microondas de acero inoxidable" 
+                                 class="category-card-image" loading="lazy">
+                            <div class="category-card-overlay">
+                                <h3>Microondas</h3>
+                                <p>12 modelos disponibles</p>
+                                <a href="#" class="btn-category">
+                                    Ver más
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================= -->
+        <!-- BANNER DE COLCHONES                      -->
+        <!-- ========================================= -->
+        <section class="py-5" style="margin-top: 80px;">
+            <div class="container">
+                <div class="promo-banner">
+                    <div class="row g-0 align-items-center">
+                        <div class="col-lg-6">
+                            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80" 
+                                 alt="Dormitorio acogedor con colchón premium" 
+                                 style="height: 436px; object-fit: cover;">
+                        </div>
+                        <div class="col-lg-6 p-5">
+                            <h3 class="mb-4">¿Buscas el Colchón Perfecto?</h3>
+                            <p class="text-medium mb-4">
+                                Descubre nuestra selección de colchones de las mejores marcas. 
+                                Comfort y calidad garantizados para un descanso reparador.
+                            </p>
+                            <ul class="features-list">
+                                <li><i class="bi bi-shield-check"></i> Garantía extendida</li>
+                                <li><i class="bi bi-truck"></i> Entrega a domicilio</li>
+                            </ul>
+                            <a href="#" class="btn btn-custom-primary">
+                                Ver Colchones
+                                <i class="bi bi-arrow-right ms-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================= -->
+        <!-- PRODUCTOS DESTACADOS (con precios)       -->
+        <!-- ========================================= -->
+        <section class="py-5" style="margin-top: 80px;" id="ofertas">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-label">Destacados</p>
+                    <h2>Nuestros Favoritos</h2>
+                    <p>Piezas seleccionadas por su calidad y diseño</p>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Producto 1 -->
+                    <div class="col-md-6 col-lg-3">
+                        <article class="product-card">
+                            <div class="product-image-container">
+                                <img src="https://images.unsplash.com/photo-1594620302200-9a762244a156?w=500&q=80" 
+                                     alt="Ropero Artesanal de Roble" 
+                                     class="product-image" loading="lazy">
+                                <span class="product-badge">Oferta</span>
+                                <button class="product-favorite" aria-label="Agregar a favoritos">
+                                    <i class="bi bi-heart"></i>
+                                </button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Ropero Artesanal Roble</h3>
+                                <div class="product-rating">
+                                    <div class="stars">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <span class="rating-count">(24)</span>
+                                </div>
+                                <div class="product-price">
+                                    <span class="current-price">$4,699 MXN</span>
+                                    <span class="old-price">$5,999</span>
+                                </div>
+                                <button class="btn btn-custom-primary btn-add-cart">
+                                    <i class="bi bi-cart-plus"></i>
+                                    Agregar al Carrito
+                                </button>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Producto 2 -->
+                    <div class="col-md-6 col-lg-3">
+                        <article class="product-card">
+                            <div class="product-image-container">
+                                <img src="https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=500&q=80" 
+                                     alt="Refrigerador Samsung 18p³" 
+                                     class="product-image" loading="lazy">
+                                <span class="product-badge">Oferta</span>
+                                <button class="product-favorite" aria-label="Agregar a favoritos">
+                                    <i class="bi bi-heart"></i>
+                                </button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Refrigerador Samsung 18p³</h3>
+                                <div class="product-rating">
+                                    <div class="stars">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <span class="rating-count">(18)</span>
+                                </div>
+                                <div class="product-price">
+                                    <span class="current-price">$14,999 MXN</span>
+                                    <span class="old-price">$18,999</span>
+                                </div>
+                                <button class="btn btn-custom-primary btn-add-cart">
+                                    <i class="bi bi-cart-plus"></i>
+                                    Agregar al Carrito
+                                </button>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Producto 3 -->
+                    <div class="col-md-6 col-lg-3">
+                        <article class="product-card">
+                            <div class="product-image-container">
+                                <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=500&q=80" 
+                                     alt="Mesa de Comedor Moderna" 
+                                     class="product-image" loading="lazy">
+                                <button class="product-favorite" aria-label="Agregar a favoritos">
+                                    <i class="bi bi-heart"></i>
+                                </button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Mesa de Comedor Moderna</h3>
+                                <div class="product-rating">
+                                    <div class="stars">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <span class="rating-count">(12)</span>
+                                </div>
+                                <div class="product-price">
+                                    <span class="current-price">$8,499 MXN</span>
+                                </div>
+                                <button class="btn btn-custom-primary btn-add-cart">
+                                    <i class="bi bi-cart-plus"></i>
+                                    Agregar al Carrito
+                                </button>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Producto 4 -->
+                    <div class="col-md-6 col-lg-3">
+                        <article class="product-card">
+                            <div class="product-image-container">
+                                <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=500&q=80" 
+                                     alt="Estufa Mabe 6 Quemadores" 
+                                     class="product-image" loading="lazy">
+                                <span class="product-badge">Oferta</span>
+                                <button class="product-favorite" aria-label="Agregar a favoritos">
+                                    <i class="bi bi-heart"></i>
+                                </button>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">Estufa Mabe 6 Quemadores</h3>
+                                <div class="product-rating">
+                                    <div class="stars">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <span class="rating-count">(15)</span>
+                                </div>
+                                <div class="product-price">
+                                    <span class="current-price">$9,999 MXN</span>
+                                    <span class="old-price">$12,999</span>
+                                </div>
+                                <button class="btn btn-custom-primary btn-add-cart">
+                                    <i class="bi bi-cart-plus"></i>
+                                    Agregar al Carrito
+                                </button>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================= -->
+        <!-- VISITA SUCURSALES                        -->
+        <!-- ========================================= -->
+        <section class="py-5" style="margin-top: 80px;">
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-6">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" 
+                             alt="Interior de nuestra tienda" 
+                             class="img-fluid rounded shadow-lg">
+                    </div>
+                    <div class="col-lg-6">
+                        <p class="section-label">Nuestras Tiendas</p>
+                        <h2 class="mb-4">Visita Nuestras Sucursales</h2>
+                        <p class="text-medium mb-5">
+                            Experimenta la calidad de nuestros muebles y electrodomésticos en persona. 
+                            Nuestro equipo de expertos te ayudará a encontrar exactamente lo que necesitas 
+                            para tu hogar.
+                        </p>
+                        <ul class="location-details">
+                            <li><i class="bi bi-geo-alt-fill"></i> 3 sucursales en Estado de México</li>
+                            <li><i class="bi bi-clock-fill"></i> Lun-Sáb: 9:00 AM - 7:00 PM</li>
+                            <li><i class="bi bi-telephone-fill"></i> +52 776 XXX XXXX</li>
+                        </ul>
+                        <a href="#" class="btn btn-custom-primary">
+                            Ver Ubicaciones
+                            <i class="bi bi-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <!-- ========== FOOTER ========== -->
+<footer class="footer" style="margin-top: 80px;">
+    <div class="container">
+        <div class="row g-4">
+            <!-- Columna 1: Marca -->
+            <div class="col-lg-4">
+                <h4 class="mb-4">Mueblería España</h4>
+                <p class="mb-4">
+                    Creamos hogares combinando la tradición artesanal mexicana con las mejores 
+                    marcas de electrodomésticos del mercado.
+                </p>
+                <!-- Redes Sociales -->
+                <div class="d-flex gap-3">
+                    <a href="#" class="text-white-50" aria-label="Facebook">
+                        <i class="bi bi-facebook fs-5"></i>
+                    </a>
+                    <a href="#" class="text-white-50" aria-label="Instagram">
+                        <i class="bi bi-instagram fs-5"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Columna 2: Enlaces Rápidos -->
+            <div class="col-md-6 col-lg-2">
+                <h4 class="h6 mb-4">Enlaces Rápidos</h4>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="about.html">Sobre Nosotros</a></li>
+                    <li class="mb-2"><a href="#">Catálogo</a></li>
+                    <li class="mb-2"><a href="#">Productos Artesanales</a></li>
+                    <li class="mb-2"><a href="#">Marcas Comerciales</a></li>
+                    <li class="mb-2"><a href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+            
+            <!-- Columna 3: Atención al Cliente -->
+            <div class="col-md-6 col-lg-2">
+                <h4 class="h6 mb-4">Atención al Cliente</h4>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#">Garantías y Políticas</a></li>
+                    <li class="mb-2"><a href="#">Preguntas Frecuentes</a></li>
+                    <li class="mb-2"><a href="#">Métodos de Pago</a></li>
+                </ul>
+            </div>
+            
+            <!-- Columna 4: Contacto -->
+            <div class="col-lg-4">
+                <h4 class="h6 mb-4">Contacto</h4>
+                
+              <!-- Dirección -->
+        <div class="mb-4">
+             <div class="d-flex gap-3 mb-2">
+               <i class="bi bi-geo-alt-fill"></i>
+                  <div>
+                   San Felipe del Progreso<br>
+                      Estado de México, 50640
+                </div>
+            </div>
+           <a href="#" class="small" style="margin-left: 36px;">
+              Ver en Google Maps →
+             </a>
+        </div>
+                
+                <!-- Info de contacto -->
+                <div class="d-flex gap-3 mb-3">
+                    <i class="bi bi-telephone-fill"></i>
+                    <div>
+                        Contáctanos vía WhatsApp o teléfono para una atención personalizada.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Copyright -->
+<div class="copyright">
+    <div class="container">
+        <p class="mb-0">© 2025 Mueblería España. Todos los derechos reservados.</p>
+    </div>
+</div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Smooth Scroll -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

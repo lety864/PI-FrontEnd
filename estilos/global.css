@@ -1,0 +1,299 @@
+/* ================================
+   🏠 MUEBLERÍA ESPAÑA
+   Design System v1.0
+   ================================
+ 
+   📋 INSTRUCCIONES PARA EL EQUIPO:
+   1. Enlazar ESTE archivo en TODAS las páginas con:
+      <link rel="stylesheet" href="styles/design-system.css">
+   2. NO modificar colores directamente en HTML (usar las variables)
+   3. SIEMPRE usar var(--nombre-variable) en vez de colores #HEX
+   4. Antes de crear un color nuevo, consultarlo con el equipo
+   
+   🎓 NOTA: Este archivo usa CSS avanzado (variables, transiciones).
+      Si algo no se entiende, revisar los comentarios o preguntar.
+   
+   ================================ */
+
+/* ===== 1. RESET Y BASE ===== 
+   Esto elimina los estilos por defecto que cada navegador trae.
+   Chrome, Firefox, Safari tienen márgenes diferentes por defecto,
+   esto los resetea para que todos se vean igual. */
+
+* {
+  margin: 0;           /* Elimina todos los márgenes por defecto */
+  padding: 0;          /* Elimina todos los paddings por defecto */
+  box-sizing: border-box;  /* Hace que width incluya padding y border */
+  /*  Ejemplo: si un div tiene width: 100px y padding: 10px,
+     el ancho total será 100px (no 120px) */
+}
+
+/* ===== 2. VARIABLES DE DISEÑO ===== 
+   CONCEPTO: Variables CSS (Custom Properties)
+   
+   Las variables se definen UNA vez aquí y se usan en TODO el sitio.
+   Si el cliente dice "cambia el verde", solo modificas UNA línea.
+   
+   Sintaxis:
+   - Definir:  --nombre-variable: valor;
+   - Usar:     var(--nombre-variable)
+   
+   ESTO ES AVANZADO: No lo vimos en el bootcamp, pero es estándar
+   en la industria. Los navegadores modernos lo soportan. */
+
+:root {
+  /*  :root = selector que apunta al elemento <html>
+     Todo lo que esté aquí es GLOBAL (disponible en cualquier lugar) */
+  
+  /* --- Colores principales --- */
+  --primary: #A5A58D;              /* Verde oliva - color principal del sitio */
+  --primary-hover: #8F8F7A;        /* Verde más oscuro para hover en botones */
+  --primary-light: #B7B7A4;        /* Verde claro para acentos suaves */
+  
+  --secondary: #CB997E;            /* Terracota - color secundario (botones, acentos) */
+  --secondary-hover: #B8856B;      /* Terracota oscuro para hover */
+  --secondary-light: rgba(203, 153, 126, 0.1);  /* Terracota transparente (10% opacidad) */
+  
+  /* --- Fondos --- */
+  --background-light: #F5F4EF;     /* Beige claro - fondo general del sitio */
+  --background-white: #FFFFFF;     /* Blanco puro - cards, navbar */
+  --background-dark: #5E503F;      /* Café oscuro - footer */
+  --background-darker: #4A3C2E;    /* Café más oscuro - copyright del footer */
+  
+  /* --- Textos --- */
+  --text-dark: #686763;            /* Gris oscuro - texto principal */
+  --text-medium: #757575;          /* Gris medio - texto secundario */
+  --text-light: #999999;           /* Gris claro - texto poco importante */
+  --text-white: #FFFFFF;           /* Blanco para texto sobre fondos oscuros */
+  --text-white-soft: rgba(255, 255, 255, 0.9);   /* Blanco casi opaco (90%) */
+  --text-white-muted: rgba(255, 255, 255, 0.7);  /* Blanco semi-transparente (70%) */
+  
+  /* --- Bordes --- */
+  --border-light: #E5E5E5;         /* Gris muy claro - bordes sutiles */
+  --border-medium: rgba(104, 103, 99, 0.2);  /* Gris con 20% opacidad */
+  
+  /* --- Tipografía --- 
+     💡 TIP: Estas fuentes se cargan desde Google Fonts en el HTML */
+  --font-primary: 'Poppins', sans-serif;       /* Fuente para textos normales */
+  --font-display: 'Playfair Display', serif;   /* Fuente elegante para títulos */
+  
+  /* Pesos de fuente (font-weight) */
+  --font-weight-normal: 400;       /* Normal (texto común) */
+  --font-weight-medium: 500;       /* Medio (destacar sin exagerar) */
+  --font-weight-semibold: 600;     /* Semi-negrita (botones, subtítulos) */
+  --font-weight-bold: 700;         /* Negrita (títulos importantes) */
+  
+  /* --- Espaciado --- 
+     rem = unidad relativa al tamaño de fuente base (1rem = 16px por defecto) */
+  --space-xs: 0.25rem;   /* 4px - espacios muy pequeños */
+  --space-sm: 0.5rem;    /* 8px - espacios pequeños */
+  --space-md: 1rem;      /* 16px - espacios estándar */
+  --space-lg: 1.5rem;    /* 24px - espacios grandes */
+  --space-xl: 2rem;      /* 32px - espacios extra grandes */
+  --space-2xl: 3rem;     /* 48px - espacios muy grandes (secciones) */
+  
+  /* --- Bordes redondeados --- */
+  --radius: 0.75rem;     /* 12px - esquinas redondeadas para botones, cards */
+  
+  /* --- Sombras --- 
+     Sintaxis: offset-x offset-y blur spread color */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);      /* Sombra suave */
+  --shadow-md: 0 2px 10px rgba(0, 0, 0, 0.1);     /* Sombra mediana */
+  --shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.15);    /* Sombra pronunciada */
+}
+
+/* ===== 3. ESTILOS GLOBALES ===== 
+   Estos estilos se aplican a TODO el sitio automáticamente. */
+
+body {
+  font-family: var(--font-primary);        /* Usa Poppins para todo el texto */
+  color: var(--text-dark);                 /* Color de texto por defecto */
+  background-color: var(--background-light);  /* Fondo beige del sitio */
+  line-height: 1.6;  /* Espacio entre líneas = 1.6x el tamaño de fuente
+                        (mejora la legibilidad) */
+}
+
+/* Todos los títulos usan la fuente elegante */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);  /* Playfair Display */
+}
+
+/* Títulos grandes (h1, h2, h3) en color primario */
+h1, h2, h3 {
+  color: var(--primary);  /* Verde oliva */
+}
+
+/* Títulos pequeños (h4, h5, h6) en color texto oscuro */
+h4, h5, h6 {
+  color: var(--text-dark);
+}
+
+/* ===== 4. COMPONENTES COMUNES ===== 
+   Estilos reutilizables para elementos que se repiten en el sitio. */
+
+/* --- Navbar --- */
+.navbar {
+  background-color: var(--background-white);  /* Fondo blanco */
+  box-shadow: var(--shadow-md);               /* Sombra para dar profundidad */
+  padding: 1rem 0;                            /* Espaciado interno arriba/abajo */
+}
+
+.navbar-brand {
+  font-family: var(--font-display);           /* Fuente elegante para el logo */
+  font-size: 1.5rem;                          /* Tamaño grande (24px) */
+  font-weight: var(--font-weight-bold);       /* Negrita */
+  color: var(--primary) !important;           /* Color primario 
+                                                 !important sobrescribe Bootstrap */
+}
+
+.navbar-nav .nav-link {
+  color: var(--text-dark);                    /* Color texto por defecto */
+  font-weight: var(--font-weight-medium);     /* Un poco más pesado que normal */
+  margin: 0 0.5rem;                           /* Espacio horizontal entre links */
+  transition: color 0.3s ease;                /* Anima el cambio de color */
+  /* 👆 TRANSICIÓN: hace que el cambio de color tarde 0.3 segundos
+     en vez de ser instantáneo. "ease" = curva de animación suave */
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--primary);  /* Al pasar el mouse, cambia a verde */
+}
+
+/* --- Botones Personalizados --- 
+   Bootstrap tiene botones, pero estos siguen nuestro diseño específico. */
+
+   /* Botón primario - Verde Oliva */
+.btn-custom-primary {
+  background-color: var(--primary);           /* Fondo verde oliva */
+  color: var(--text-white);                   /* Texto blanco */
+  border: none;                               /* Sin borde */
+  padding: 0.8rem 2rem;                       /* Espaciado interno (12.8px arriba/abajo, 32px izq/der) */
+  font-weight: var(--font-weight-semibold);   /* Texto semi-negrita */
+  border-radius: var(--radius);               /* Esquinas redondeadas */
+  transition: all 0.3s ease;                  /* Anima TODAS las propiedades */
+}
+
+.btn-custom-primary:hover {
+  background-color: var(--primary-hover);     /* Color más oscuro */
+  transform: scale(1.05);  /* ⚠️ AVANZADO: Agranda el botón al 105% 
+                              Esto crea un efecto de "crecer" al hacer hover */
+}
+
+/* Botón secundario (transparente con borde) */
+.btn-custom-secondary {
+  background-color: transparent;              /* Fondo transparente */
+  color: var(--text-white);                   /* Texto blanco */
+  border: 2px solid var(--text-white);        /* Borde blanco de 2px */
+  padding: 0.8rem 2rem;                       /* Mismo padding que el primario */
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius);
+  transition: all 0.3s ease;
+}
+
+.btn-custom-secondary:hover {
+  background-color: var(--text-white);        /* Se rellena de blanco */
+  color: var(--primary);                      /* Texto cambia a verde */
+}
+
+.btn-custom-primary:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.05);
+}
+
+/* Botón terracota - Para CTAs especiales (opcional) */
+.btn-custom-terracotta {
+  background-color: var(--secondary);
+  color: var(--text-white);
+  border: none;
+  padding: 0.8rem 2rem;
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius);
+  transition: all 0.3s ease;
+}
+
+.btn-custom-terracotta:hover {
+  background-color: var(--secondary-hover);
+  transform: scale(1.05);
+}
+
+/* --- Cards (Tarjetas de productos/contenido) --- */
+.card {
+  background-color: var(--background-white);  /* Fondo blanco */
+  border: 1px solid var(--border-light);      /* Borde gris claro */
+  border-radius: var(--radius);               /* Esquinas redondeadas */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;  
+  /* Anima 2 propiedades: transform Y box-shadow */
+}
+
+.card:hover {
+  transform: translateY(-5px);  /* AVANZADO: Mueve la card 5px hacia ARRIBA
+                                   Crea efecto de "levitar" */
+  box-shadow: var(--shadow-lg);  /* Sombra más pronunciada al hacer hover */
+}
+
+/* --- Footer --- */
+.footer {
+  background-color: var(--background-dark);   /* Fondo café oscuro */
+  color: var(--text-white-soft);              /* Texto blanco casi opaco */
+  padding: 3rem 0 1rem;                       /* 48px arriba, 16px abajo, 0 lados */
+}
+
+.footer h4 {
+  color: var(--text-white);                   /* Títulos en blanco puro */
+  margin-bottom: 1.5rem;                      /* Espacio debajo de títulos */
+}
+
+.footer a {
+  color: var(--text-white-muted);             /* Links semi-transparentes */
+  transition: color 0.3s ease;                /* Anima cambio de color */
+  text-decoration: none;                      /* Sin subrayado */
+}
+
+.footer a:hover {
+  color: var(--primary-light);  /* Al pasar mouse, cambia a verde claro */
+}
+
+/* Copyright (banda inferior del footer) */
+.copyright {
+  background-color: var(--background-darker);  /* Café más oscuro */
+  color: var(--text-white-muted);              /* Texto semi-transparente */
+  text-align: center;                          /* Centrado */
+  padding: 1rem 0;                             /* Espaciado vertical */
+  margin: 0;                                   /* Sin márgenes */
+}
+
+/* ===== 5. UTILIDADES ===== 
+   Clases de un solo propósito que se aplican directamente en el HTML.
+   Ejemplo: <p class="text-primary">Texto verde</p> */
+
+/* --- Colores de texto --- */
+.text-primary { color: var(--primary); }      /* Texto verde */
+.text-secondary { color: var(--secondary); }  /* Texto terracota */
+.text-medium { color: var(--text-medium); }   /* Texto gris medio */
+.text-light { color: var(--text-light); }     /* Texto gris claro */
+
+/* --- Colores de fondo --- */
+.bg-light { background-color: var(--background-light); }    /* Fondo beige */
+.bg-white { background-color: var(--background-white); }    /* Fondo blanco */
+.bg-primary { background-color: var(--primary); }           /* Fondo verde */
+
+/* ===== FIN DEL DESIGN SYSTEM ===== 
+
+   GUÍA RÁPIDA PARA USAR ESTE ARCHIVO:
+   
+   1. COLORES: Siempre usa var(--nombre) en tu CSS
+      Ejemplo: color: var(--primary);
+   
+   2. BOTONES: Usa las clases .btn-custom-primary o .btn-custom-secondary
+      Ejemplo: <button class="btn-custom-primary">Comprar</button>
+   
+   3. CARDS: Agrega la clase .card a tus tarjetas
+      Ejemplo: <div class="card">...</div>
+   
+   4. ESPACIADO: Usa las variables --space-* en tu CSS
+      Ejemplo: margin-bottom: var(--space-lg);
+   
+   5. Si necesitas un color nuevo, PREGUNTA AL EQUIPO antes de agregarlo.
+      Mantener la consistencia es clave para un proyecto profesional.
+   
+   ================================ */
