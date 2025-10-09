@@ -5,6 +5,10 @@
         left: 50%;
         transform: translateX(-50%);
     }
+
+    .full-width-nav-container .navbar {
+        background-color: #4e7a40; /* <-- PON AQUÍ TU COLOR PARA MÓVIL */
+    }
 }
 
 /* --- Estilos para los menús Offcanvas --- */
@@ -35,8 +39,45 @@
         margin-top: 20px; /* Margen superior original */
         border-radius: 12px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        background-color: #4e7a40;
     }
 
+    /* ===== EFECTO HOVER PARA NAVBAR PRINCIPAL ===== */
+
+    /* 1. Preparamos el enlace */
+    .full-width-nav-container .navbar-dark .nav-link {
+        position: relative;
+        z-index: 1;
+        transition: color 0.3s ease-in-out;
+        overflow: hidden;
+        border-radius: 8px; /* Bordes redondeados */
+    }
+
+    /* 2. Creamos el fondo circular (inicialmente invisible) */
+    .full-width-nav-container .navbar-dark .nav-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* Un fondo blanco semitransparente para que se vea bien sobre el fondo oscuro */
+        background-color: rgba(255, 255, 255, 0.15); 
+        border-radius: 8px;
+        z-index: -1;
+        clip-path: circle(0% at 50% 50%);
+        transition: clip-path 0.4s ease-in-out;
+    }
+
+    /* 3. Activamos la animación y el cambio de texto en hover */
+    .full-width-nav-container .navbar-dark .nav-link:hover::before {
+        clip-path: circle(75% at 50% 50%);
+    }
+
+    .full-width-nav-container .navbar-dark .nav-link:hover {
+        color: #ffffff; /* Hacemos el texto un poco más brillante */
+        font-weight: bold;
+    }
 
     /* ---- ESTILOS PARA EL NAVBAR SECUNDARIO (CENTRADO) ---- */
     .floating-nav-container {
@@ -57,8 +98,51 @@
         width: 100%;
         justify-content: space-around;
     }
+    /*
     .floating-nav-container .navbar-light .nav-link:hover {
+        background-color: #798a64;
+    }
+        */
+
+    .floating-nav-container .navbar-light .nav-link {
+        position: relative; /* Necesario para posicionar el fondo animado */
+        z-index: 1;         /* Asegura que el texto siempre esté visible */
+        transition: color 0.3s ease-in-out; /* Transición suave para el color del texto */
+        overflow: hidden;   /* Evita que el efecto se salga de los bordes redondeados */
+        border-radius: 8px; /* Redondeamos el propio enlace */
+    }
+
+    /* 2. Creamos el fondo que se rellenará (inicialmente invisible) */
+    .floating-nav-container .navbar-light .nav-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         background-color: #e9ecef;
+        border-radius: 8px;
+        z-index: -1;
+        
+        /* --- INICIA CAMBIO --- */
+        /* Estado inicial: un círculo de tamaño 0% en el centro */
+        clip-path: circle(0% at 50% 50%);
+        
+        /* Ahora la animación ocurrirá sobre la propiedad clip-path */
+        transition: clip-path 0.4s ease-in-out;
+        /* --- TERMINA CAMBIO --- */
+    }
+
+    /* 3. Activamos la animación al pasar el cursor */
+    .floating-nav-container .navbar-light .nav-link:hover::before {
+        /* Estado final: escalado a 1 (visible) */
+         clip-path: circle(75% at 50% 50%);
+    }
+
+    /* 4. (Opcional) Cambiamos el color del texto en el hover */
+    .floating-nav-container .navbar-light .nav-link:hover {
+        color: #671eaa; /* Color del texto cuando el fondo aparece */
+        /*font-weight: bold;*/
     }
     .floating-nav-container .navbar-light .dropdown-menu {
         margin-top: 10px;
@@ -68,6 +152,7 @@
     }
     .floating-nav-container .navbar-light .dropdown-item:hover {
         background-color: #e9ecef;
+
     }
 }
 .offcanvas-body {
@@ -76,8 +161,8 @@
 
 /* Encabezado del menú (donde dice PRODUCTOS o MENÚ) */
 .offcanvas-header {
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #dee2e6;
+    background-color: #3bcfaa;
+    border-bottom: 1px solid #852935;
 }
 
 .offcanvas-title {
@@ -97,12 +182,45 @@
     border-left: 4px solid transparent; /* Borde izquierdo invisible */
 }
 
-/* --- El Efecto Hover --- */
+/* ===== EFECTO HOVER PARA MENÚ OFF CANVAS ===== */
+
+/* 1. Preparamos el enlace */
+.offcanvas-body .list-group-item a {
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease-in-out;
+    overflow: hidden;
+    /* Mantenemos el borde y el padding que ya tenías */
+    display: block;
+    padding: 15px 25px;
+    color: #495057;
+    text-decoration: none;
+    font-size: 1rem;
+    border-left: 4px solid transparent; /* Lo mantenemos transparente inicialmente */
+}
+
+/* 2. Creamos el fondo circular */
+.offcanvas-body .list-group-item a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e9ecef; /* El color de fondo que tenías antes */
+    z-index: -1;
+    clip-path: circle(0% at 50% 50%);
+    transition: clip-path 0.4s ease-in-out;
+}
+
+/* 3. Activamos la animación y el cambio de texto en hover */
+.offcanvas-body .list-group-item a:hover::before {
+    clip-path: circle(75% at 50% 50%);
+}
+
 .offcanvas-body .list-group-item a:hover {
-    background-color: #e9ecef; /* Un fondo gris claro al pasar el ratón */
-    color: #000; /* Texto más oscuro */
-    transform: translateX(8px); /* Se desplaza un poco a la derecha */
-    border-left: 4px solid #0d6efd; /* Aparece una barra de color (azul de Bootstrap) */
+    color: #0d6efd; /* Un color azul para resaltar */
+    /*font-weight: bold;*/
 }
 
 /* Estilo para los sub-elementos (las categorías dentro de Sofás y Sillones) */
