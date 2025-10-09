@@ -119,3 +119,63 @@
 .offcanvas-body .list-group-item ul li a:hover {
     border-left-color: #fd7e14; /* Color naranja */
 }
+
+
+/*
+    Para login
+*/
+.modal-footer .btn-primary:hover {
+    background-color: #0b5ed7; /* Un azul un poco más oscuro */
+    border-color: #0a58ca;
+    transform: translateY(-2px); /* Eleva ligeramente el botón */
+    transition: all 0.2s ease-in-out;
+}
+
+/* Efecto para el campo de formulario al enfocarse */
+.modal-body .form-control:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Efecto para el enlace de "¿No tienes cuenta?" */
+.btn-register-link:hover {
+    color: #0d6efd; /* Cambia a color azul primario */
+    text-decoration: underline;
+}
+
+/* --- Estilos para el Modal con Imagen --- */
+/*
+    
+
+    /* Ajustes para que el modal se vea bien */
+    #loginModal .modal-content {
+    border-radius: 0.5rem; /* Bordes redondeados más sutiles */
+    overflow: hidden; /* Oculta lo que se salga de los bordes redondeados */
+    border: none;
+    }
+
+/* --- Estilos para la columna del video --- */
+
+.modal-video-col {
+  /* Aseguramos que el video no se desborde */
+  overflow: hidden;
+}
+
+.modal-video-col video {
+  width: 100%;
+  height: 100%;
+  /* Esta es la propiedad clave:
+     hace que el video cubra todo el espacio sin deformarse,
+     similar a 'background-size: cover' */
+  object-fit: cover;
+}
+
+
+
+
+/* Opcional: Si quieres que ambos modales compartan el mismo estilo de borde y overflow */
+#registerModal .modal-content {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: none;
+}

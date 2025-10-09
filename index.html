@@ -13,6 +13,8 @@
 </head>
 <body>
 
+
+
   <!-- NAVBAR GENERAL-->
          <div class="full-width-nav-container sticky-top">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -30,13 +32,17 @@
                 <div class="collapse navbar-collapse" id="mainNavbarDesktop">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Nosotros</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="#">Nosotros</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="./paginas/contacto.html">Contacto</a></li>
                     </ul>
                     <form class="d-flex me-3"><input class="form-control" type="search" placeholder="Buscar en la tienda" aria-label="Search"></form>
                     <ul class="navbar-nav">
                         <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-cart-fill fs-4"></i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-person-fill fs-4"></i></a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                <i class="bi bi-person-fill fs-4"></i>
+                            </a>
+                        </li>
                         
                     </ul>
                 </div>
@@ -48,8 +54,10 @@
                             
                         </li>
                         <li class="nav-item ms-3">
-                            <a class="nav-link" href="#"><i class="bi bi-person-fill fs-3"></i></a>
-                        </li>
+                          <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                              <i class="bi bi-person-fill fs-3"></i>
+                          </a>
+                      </li>
                     </ul>
                 </div>
             </div>
@@ -202,7 +210,119 @@
 
     <!--FIN DE NAVBAR-->
 
-    
+    <!-- Incio de sesion -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body p-0">
+            <div class="container-fluid">
+              <div class="row">
+
+                <div class="col-md-6 d-none d-md-block p-0 modal-video-col">
+                  <video autoplay muted playsinline>
+                    <source src="./assets/inicio.mp4" type="video/mp4">
+                    Tu navegador no soporta la etiqueta de video.
+                  </video>
+                </div>
+
+                <div class="col-md-6 p-4 p-md-5">
+                  
+                  <div class="d-flex justify-content-end">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+
+                  <h2 class="mb-4">Bienvenido</h2>
+                  
+                  <form>
+                    <div class="mb-3">
+                      <label for="emailInput" class="form-label">Correo Electrónico</label>
+                      <input type="email" class="form-control" id="emailInput" placeholder="tu@email.com">
+                    </div>
+                    <div class="mb-3">
+                      <label for="passwordInput" class="form-label">Contraseña</label>
+                      <input type="password" class="form-control" id="passwordInput">
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-primary btn-lg">Ingresar</button>
+                    </div>
+                  </form>
+
+                  <hr class="my-4">
+
+                  <div class="text-center">
+                    <p>¿No tienes una cuenta? 
+                      <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Regístrate</a>
+                    </p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin de inicio de sesion -->
+
+    <!-- Form de registro -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body p-0">
+            <div class="container-fluid">
+              <div class="row">
+
+                <div class="col-md-6 p-4 p-md-5">
+
+                  <div class="d-flex justify-content-end">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+
+                  <h2 class="mb-4">Crea tu Cuenta</h2>
+                  
+                  <form>
+                    <div class="mb-3">
+                      <label for="regName" class="form-label">Nombre Completo</label>
+                      <input type="text" class="form-control" id="regName" placeholder="Tu nombre">
+                    </div>
+                    <div class="mb-3">
+                      <label for="regEmail" class="form-label">Correo Electrónico</label>
+                      <input type="email" class="form-control" id="regEmail" placeholder="tu@email.com">
+                    </div>
+                    <div class="mb-3">
+                      <label for="regPassword" class="form-label">Crea una Contraseña</label>
+                      <input type="password" class="form-control" id="regPassword">
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-primary btn-lg">Registrarme</button>
+                    </div>
+                  </form>
+
+                  <hr class="my-4">
+
+                  <div class="text-center">
+                    <p>¿Ya tienes una cuenta? 
+                      <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Inicia Sesión</a>
+                    </p>
+                  </div>
+
+                </div>
+
+                <div class="col-md-6 d-none d-md-block p-0 modal-video-col">
+                  <video autoplay muted playsinline>
+                    <source src="./assets/registro.mp4" type="video/mp4">
+                    Tu navegador no soporta la etiqueta de video.
+                  </video>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin de form de registro -->
+
 
     <main class="container mt-4">
         
