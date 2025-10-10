@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Catálogo de productos - Mueblería España">
-    <title>Catálogo - Mueblería España</title>
+    <meta name="description" content="Catálogo de salas - Mueblería España. Descubre nuestra selección de muebles y electrodomésticos.">
+    <title>Salas - Mueblería España</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css">
     
@@ -16,54 +16,37 @@
     
     <link rel="stylesheet" href="../estilos/global.css">
     
-    <link rel="stylesheet" href="../estilos/index.css">
-
-    <style>
-        /* Estilos adicionales para la página de catálogo */
-        .filter-bar {
-            padding: 1rem;
-            background-color: #f8f9fa;
-            border-radius: 0.5rem;
-            margin-bottom: 2rem;
-        }
-    </style>
-</head>
+    </head>
 <body>
-
     <div class="full-width-nav-container sticky-top">
         <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Navegación principal">
             <div class="container-fluid">
-                
                 <button class="btn btn-outline-light d-lg-none me-2" type="button" 
                         data-bs-toggle="offcanvas" data-bs-target="#offcanvasProducts" 
                         aria-controls="offcanvasProducts" aria-label="Abrir menú de productos">
                     <i class="bi bi-list fs-4"></i>
                 </button>
-
                 <a class="navbar-brand d-flex align-items-center" href="../index.html">
                     <img src="../assets/mundo.png" alt="Logo Mueblería España" height="30" class="me-2">
                     Mueblería España
                 </a>
-
                 <div class="collapse navbar-collapse" id="mainNavbarDesktop">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-3">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Inicio</a>
+                            <a class="nav-link" href="../index.html">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">Nosotros</a>
+                            <a class="nav-link" href="../about.html">Sobre Nosotros</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#contacto">Contacto</a>
                         </li>
                     </ul>
-                    
                     <form class="d-flex me-3" role="search">
                         <input class="form-control search-input" type="search" 
                                placeholder="Buscar en la tienda" aria-label="Buscar productos">
                     </form>
-                    
-                     <ul class="navbar-nav">
+                    <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link position-relative" href="#" aria-label="Carrito de compras">
                                 <i class="bi bi-cart-fill fs-4"></i>
@@ -74,26 +57,25 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" aria-label="Mi cuenta">
+                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
                                 <i class="bi bi-person-fill fs-4"></i>
                             </a>
                         </li>
                     </ul>
                 </div>
-
                 <div class="d-flex align-items-center d-lg-none">
                     <ul class="navbar-nav flex-row">
                         <li class="nav-item ms-3">
                             <a class="nav-link position-relative" href="#" aria-label="Carrito de compras">
                                 <i class="bi bi-cart-fill fs-3"></i>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">
                                     2
                                     <span class="visually-hidden">productos en el carrito</span>
                                 </span>
                             </a>
                         </li>
                         <li class="nav-item ms-3">
-                            <a class="nav-link" href="#" aria-label="Mi cuenta">
+                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
                                 <i class="bi bi-person-fill fs-3"></i>
                             </a>
                         </li>
@@ -121,7 +103,6 @@
                                 <li><a class="dropdown-item" href="#">Reclinables</a></li>
                             </ul>
                         </li>
-
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" 
                                data-bs-toggle="dropdown" aria-expanded="false">
@@ -134,7 +115,6 @@
                                 <li><a class="dropdown-item" href="#">Bases</a></li>
                             </ul>
                         </li>
-
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" 
                                data-bs-toggle="dropdown" aria-expanded="false">
@@ -147,15 +127,12 @@
                                 <li><a class="dropdown-item" href="#">8 sillas</a></li>
                             </ul>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link" href="#">Roperos</a>
                         </li>
-                        
                         <li class="nav-item">
                             <a class="nav-link" href="#">Colchones</a>
                         </li>
-
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" 
                                data-bs-toggle="dropdown" aria-expanded="false">
@@ -169,7 +146,6 @@
                                 <li><a class="dropdown-item" href="#">Microondas</a></li>
                             </ul>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link fw-bold text-danger" href="#ofertas">Ofertas</a>
                         </li>
@@ -183,262 +159,325 @@
         
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="#">Salas</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Ver todo</li>
+                <li class="breadcrumb-item"><a href="../index.html">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Salas</li>
             </ol>
         </nav>
-
-        <div class="my-4">
-            <h1 class="display-5 fw-bold">Salas</h1>
-            <p class="text-muted">Descubre nuestra colección de salas modulares, sofás y más.</p>
-        </div>
-
-        <div class="d-flex flex-wrap justify-content-between align-items-center filter-bar">
-            <div class="d-flex flex-wrap gap-2">
-                <div class="dropdown">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Color
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Gris</a></li>
-                        <li><a class="dropdown-item" href="#">Beige</a></li>
-                        <li><a class="dropdown-item" href="#">Azul</a></li>
-                    </ul>
+        
+        <header class="border-bottom pb-4 mb-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4" style="color: var(--primary);">Salas</h1>
+                    <p class="lead text-medium">Explora nuestra colección completa de muebles y electrodomésticos.</p>
                 </div>
-                <div class="dropdown">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Material
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Lino</a></li>
-                        <li><a class="dropdown-item" href="#">Piel</a></li>
-                        <li><a class="dropdown-item" href="#">Tela</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Precio
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Menos de $10,000</a></li>
-                        <li><a class="dropdown-item" href="#">$10,000 - $20,000</a></li>
-                        <li><a class="dropdown-item" href="#">Más de $20,000</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="d-flex align-items-center gap-3 mt-3 mt-md-0">
-                <span class="text-muted">55 Productos</span>
-                <div class="dropdown">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Ordenar por: Relevancia
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">Relevancia</a></li>
-                        <li><a class="dropdown-item" href="#">Precio: Menor a Mayor</a></li>
-                        <li><a class="dropdown-item" href="#">Precio: Mayor a Menor</a></li>
-                        <li><a class="dropdown-item" href="#">Más vendidos</a></li>
-                    </ul>
+                <div class="col-lg-6 d-flex justify-content-lg-end align-items-center">
+                     <div class="d-flex gap-2">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Estilo
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Moderno</a></li>
+                                <li><a class="dropdown-item" href="#">Rústico</a></li>
+                                <li><a class="dropdown-item" href="#">Minimalista</a></li>
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Color
+                            </button>
+                            <ul class="dropdown-menu">
+                               <li><a class="dropdown-item" href="#">Blanco</a></li>
+                               <li><a class="dropdown-item" href="#">Gris</a></li>
+                               <li><a class="dropdown-item" href="#">Madera</a></li>
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Ordenar por: Relevancia
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Precio: de menor a mayor</a></li>
+                                <li><a class="dropdown-item" href="#">Precio: de mayor a menor</a></li>
+                                <li><a class="dropdown-item" href="#">Más vendidos</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </header>
 
         <div class="row g-4">
-            <div class="col-md-6 col-lg-4 col-xl-3">
-                 <article class="product-card">
+            
+            <div class="col-md-6 col-lg-3">
+                <article class="product-card">
                     <div class="product-image-container">
-                        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500&q=80" alt="Sofá Gris Moderno" class="product-image" loading="lazy">
-                        <span class="product-badge">Nuevo</span>
-                        <button class="product-favorite" aria-label="Agregar a favoritos"><i class="bi bi-heart"></i></button>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Sofá Gris Moderno</h3>
-                        <div class="product-price"><span class="current-price">$12,499 MXN</span></div>
-                        <button class="btn btn-custom-primary btn-add-cart"><i class="bi bi-cart-plus"></i> Agregar al Carrito</button>
-                    </div>
-                </article>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3">
-                 <article class="product-card">
-                    <div class="product-image-container">
-                        <img src="https://images.unsplash.com/photo-1540574163024-588462b3b7c8?w=500&q=80" alt="Sofá Modular Beige" class="product-image" loading="lazy">
-                         <span class="product-badge">Oferta</span>
-                        <button class="product-favorite" aria-label="Agregar a favoritos"><i class="bi bi-heart"></i></button>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Sofá Modular Beige</h3>
-                        <div class="product-price"><span class="current-price">$18,999 MXN</span> <span class="old-price">$22,500</span></div>
-                        <button class="btn btn-custom-primary btn-add-cart"><i class="bi bi-cart-plus"></i> Agregar al Carrito</button>
-                    </div>
-                </article>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3">
-                 <article class="product-card">
-                    <div class="product-image-container">
-                        <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefca3b0?w=500&q=80" alt="Sofá de Piel Clásico" class="product-image" loading="lazy">
-                        <button class="product-favorite" aria-label="Agregar a favoritos"><i class="bi bi-heart"></i></button>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Sofá de Piel Clásico</h3>
-                        <div class="product-price"><span class="current-price">$25,999 MXN</span></div>
-                        <button class="btn btn-custom-primary btn-add-cart"><i class="bi bi-cart-plus"></i> Agregar al Carrito</button>
-                    </div>
-                </article>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3">
-                 <article class="product-card">
-                    <div class="product-image-container">
-                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=500&q=80" alt="Sofá Azul de 2 Plazas" class="product-image" loading="lazy">
-                        <button class="product-favorite" aria-label="Agregar a favoritos"><i class="bi bi-heart"></i></button>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Sofá Azul de 2 Plazas</h3>
-                        <div class="product-price"><span class="current-price">$9,899 MXN</span></div>
-                        <button class="btn btn-custom-primary btn-add-cart"><i class="bi bi-cart-plus"></i> Agregar al Carrito</button>
-                    </div>
-                </article>
-            </div>
-             <div class="col-md-6 col-lg-4 col-xl-3">
-                 <article class="product-card">
-                    <div class="product-image-container">
-                        <img src="https://images.unsplash.com/photo-1599632482396-701a5e783633?w=500&q=80" alt="Sillón Reclinable Gris" class="product-image" loading="lazy">
-                        <span class="product-badge">Más Vendido</span>
-                        <button class="product-favorite" aria-label="Agregar a favoritos"><i class="bi bi-heart"></i></button>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Sillón Reclinable Gris</h3>
-                        <div class="product-price"><span class="current-price">$7,500 MXN</span></div>
-                        <button class="btn btn-custom-primary btn-add-cart"><i class="bi bi-cart-plus"></i> Agregar al Carrito</button>
-                    </div>
-                </article>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3">
-                 <article class="product-card">
-                    <div class="product-image-container">
-                        <img src="https://images.unsplash.com/photo-1604014237800-1c9102c219da?w=500&q=80" alt="Sofacama Funcional" class="product-image" loading="lazy">
-                        <button class="product-favorite" aria-label="Agregar a favoritos"><i class="bi bi-heart"></i></button>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Sofacama Funcional</h3>
-                        <div class="product-price"><span class="current-price">$11,200 MXN</span></div>
-                        <button class="btn btn-custom-primary btn-add-cart"><i class="bi bi-cart-plus"></i> Agregar al Carrito</button>
-                    </div>
-                </article>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3">
-                 <article class="product-card">
-                    <div class="product-image-container">
-                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500&q=80" alt="Sillón Individual de Diseño" class="product-image" loading="lazy">
-                        <button class="product-favorite" aria-label="Agregar a favoritos"><i class="bi bi-heart"></i></button>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Sillón Individual de Diseño</h3>
-                        <div class="product-price"><span class="current-price">$6,800 MXN</span></div>
-                        <button class="btn btn-custom-primary btn-add-cart"><i class="bi bi-cart-plus"></i> Agregar al Carrito</button>
-                    </div>
-                </article>
-            </div>
-             <div class="col-md-6 col-lg-4 col-xl-3">
-                 <article class="product-card">
-                    <div class="product-image-container">
-                        <img src="https://images.unsplash.com/photo-1567016432779-1fee749c953a?w=500&q=80" alt="Sala Esquinera de Lino" class="product-image" loading="lazy">
+                        <img src="../assets/catalogos/salas/sala_1.png" 
+                             alt="Ropero Artesanal de Roble" 
+                             class="product-image" loading="lazy">
                         <span class="product-badge">Oferta</span>
-                        <button class="product-favorite" aria-label="Agregar a favoritos"><i class="bi bi-heart"></i></button>
+                        <button class="product-favorite" aria-label="Agregar a favoritos">
+                            <i class="bi bi-heart"></i>
+                        </button>
                     </div>
                     <div class="product-info">
-                        <h3 class="product-title">Sala Esquinera de Lino</h3>
-                        <div class="product-price"><span class="current-price">$19,999 MXN</span> <span class="old-price">$24,000</span></div>
-                        <button class="btn btn-custom-primary btn-add-cart"><i class="bi bi-cart-plus"></i> Agregar al Carrito</button>
+                        <h3 class="product-title">Ropero Artesanal Roble</h3>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                            <span class="rating-count">(24)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">$4,699 MXN</span>
+                            <span class="old-price">$5,999</span>
+                        </div>
+                        <button class="btn btn-custom-primary btn-add-cart">
+                            <i class="bi bi-cart-plus"></i>
+                            Agregar al Carrito
+                        </button>
                     </div>
                 </article>
             </div>
+
+            <div class="col-md-6 col-lg-3">
+                 <article class="product-card">
+                    <div class="product-image-container">
+                        <img src="../assets/catalogos/salas/sala_2.png" 
+                             alt="Refrigerador Samsung 18p³" 
+                             class="product-image" loading="lazy">
+                        <span class="product-badge">Oferta</span>
+                        <button class="product-favorite" aria-label="Agregar a favoritos">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Refrigerador Samsung 18p³</h3>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                            <span class="rating-count">(18)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">$14,999 MXN</span>
+                            <span class="old-price">$18,999</span>
+                        </div>
+                        <button class="btn btn-custom-primary btn-add-cart">
+                            <i class="bi bi-cart-plus"></i>
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </article>
             </div>
 
-        <nav aria-label="Navegación de páginas de productos" class="mt-5 d-flex justify-content-center">
-            <ul class="pagination">
-                <li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
-                <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
-            </ul>
-        </nav>
+            <div class="col-md-6 col-lg-3">
+                <article class="product-card">
+                    <div class="product-image-container">
+                        <img src="../assets/catalogos/salas/sala_3.png" 
+                             alt="Mesa de Comedor Moderna" 
+                             class="product-image" loading="lazy">
+                        <button class="product-favorite" aria-label="Agregar a favoritos">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Mesa de Comedor Moderna</h3>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                            <span class="rating-count">(12)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">$8,499 MXN</span>
+                        </div>
+                        <button class="btn btn-custom-primary btn-add-cart">
+                            <i class="bi bi-cart-plus"></i>
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </article>
+            </div>
 
-    </main>
+            <div class="col-md-6 col-lg-3">
+                <article class="product-card">
+                    <div class="product-image-container">
+                        <img src="../assets/catalogos/salas/sala_4.png" 
+                             alt="Estufa Mabe 6 Quemadores" 
+                             class="product-image" loading="lazy">
+                        <span class="product-badge">Oferta</span>
+                        <button class="product-favorite" aria-label="Agregar a favoritos">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Estufa Mabe 6 Quemadores</h3>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                            <span class="rating-count">(15)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">$9,999 MXN</span>
+                            <span class="old-price">$12,999</span>
+                        </div>
+                        <button class="btn btn-custom-primary btn-add-cart">
+                            <i class="bi bi-cart-plus"></i>
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                 <article class="product-card">
+                    <div class="product-image-container">
+                        <img src="../assets/catalogos/salas/sala_5.png" 
+                             alt="Sala modular gris" 
+                             class="product-image" loading="lazy">
+                        <button class="product-favorite" aria-label="Agregar a favoritos">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Sala Modular "Nube"</h3>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
+                            </div>
+                            <span class="rating-count">(31)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">$12,499 MXN</span>
+                        </div>
+                        <button class="btn btn-custom-primary btn-add-cart">
+                            <i class="bi bi-cart-plus"></i>
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </article>
+            </div>
 
-    <footer class="footer" style="margin-top: 80px;">
-    <div class="container">
-        <div class="row g-4">
-            <div class="col-lg-4">
-                <h4 class="mb-4">Mueblería España</h4>
-                <p class="mb-4">
-                    Creamos hogares combinando la tradición artesanal mexicana con las mejores 
-                    marcas de electrodomésticos del mercado.
-                </p>
-                <div class="d-flex gap-3">
-                    <a href="#" class="text-white-50" aria-label="Facebook">
-                        <i class="bi bi-facebook fs-5"></i>
-                    </a>
-                    <a href="#" class="text-white-50" aria-label="Instagram">
-                        <i class="bi bi-instagram fs-5"></i>
-                    </a>
+            <div class="col-md-6 col-lg-3">
+                 <article class="product-card">
+                    <div class="product-image-container">
+                        <img src="../assets/catalogos/salas/sala_6.png" 
+                             alt="Lavadora de carga frontal" 
+                             class="product-image" loading="lazy">
+                        <span class="product-badge">Nuevo</span>
+                        <button class="product-favorite" aria-label="Agregar a favoritos">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Lavadora LG Smart Inverter</h3>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                            <span class="rating-count">(22)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">$11,899 MXN</span>
+                        </div>
+                        <button class="btn btn-custom-primary btn-add-cart">
+                            <i class="bi bi-cart-plus"></i>
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </article>
+            </div>
+            
+        </div> </main>
+    <footer class="site-footer" id="contacto">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <div class="footer-widget">
+                        <h4 class="widget-title">Mueblería España</h4>
+                        <p>Creamos hogares combinando la tradición artesanal con las mejores marcas de electrodomésticos del mercado.</p>
+                        <div class="social-links mt-4">
+                            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="col-md-6 col-lg-2">
-                <h4 class="h6 mb-4">Enlaces Rápidos</h4>
-                <ul class="list-unstyled">
-                    <li class="mb-2"><a href="about.html">Sobre Nosotros</a></li>
-                    <li class="mb-2"><a href="#">Catálogo</a></li>
-                    <li class="mb-2"><a href="#">Productos Artesanales</a></li>
-                    <li class="mb-2"><a href="#">Marcas Comerciales</a></li>
-                    <li class="mb-2"><a href="#contacto">Contacto</a></li>
-                </ul>
-            </div>
-            
-            <div class="col-md-6 col-lg-2">
-                <h4 class="h6 mb-4">Atención al Cliente</h4>
-                <ul class="list-unstyled">
-                    <li class="mb-2"><a href="#">Garantías y Políticas</a></li>
-                    <li class="mb-2"><a href="#">Preguntas Frecuentes</a></li>
-                    <li class="mb-2"><a href="#">Métodos de Pago</a></li>
-                </ul>
-            </div>
-            
-            <div class="col-lg-4">
-                <h4 class="h6 mb-4">Contacto</h4>
-                
-              <div class="mb-4">
-             <div class="d-flex gap-3 mb-2">
-               <i class="bi bi-geo-alt-fill"></i>
-                  <div>
-                   San Felipe del Progreso<br>
-                      Estado de México, 50640
+                <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                    <div class="footer-widget">
+                        <h4 class="widget-title">Enlaces</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Sobre Nosotros</a></li>
+                            <li><a href="#">Catálogo</a></li>
+                            <li><a href="#">Contacto</a></li>
+                            <li><a href="#">Login</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-           <a href="#" class="small" style="margin-left: 36px;">
-              Ver en Google Maps →
-             </a>
-        </div>
-                
-                <div class="d-flex gap-3 mb-3">
-                    <i class="bi bi-telephone-fill"></i>
-                    <div>
-                        Contáctanos vía WhatsApp o teléfono para una atención personalizada.
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <div class="footer-widget">
+                        <h4 class="widget-title">Atención al Cliente</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Preguntas Frecuentes</a></li>
+                            <li><a href="#">Métodos de Pago</a></li>
+                            <li><a href="#">Políticas y Garantías</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h4 class="widget-title">Contacto</h4>
+                        <ul class="list-unstyled contact-info">
+                            <li>
+                                <i class="bi bi-geo-alt-fill me-2"></i>
+                                <span>San Felipe del Progreso, Edo. de México, 50640</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-telephone-fill me-2"></i>
+                                <a href="tel:+527120000000">+52 (712) 000-0000</a>
+                            </li>
+                            <li>
+                                <i class="bi bi-envelope-fill me-2"></i>
+                                <a href="mailto:contacto@muebleria.com">contacto@muebleria.com</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
+    </footer>
+    <div class="copyright-bar">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 Mueblería España. Todos los derechos reservados.</p>
+        </div>
     </div>
-</footer>
 
-<div class="copyright">
-    <div class="container">
-        <p class="mb-0">© 2025 Mueblería España. Todos los derechos reservados.</p>
-    </div>
-</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
