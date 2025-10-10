@@ -1,0 +1,160 @@
+/* ====================================================
+   VARIABLES DE COLOR - Mueblería España
+   ==================================================== */
+:root {
+  /* Colores principales */
+  --background: #F5F4EF;        /* Blanco */
+  --foreground: #686763;        /* Gris Oscuro */
+  --primary: #A5A58D;           /* Verde Olivo (Usado para acentos/hover) */
+  --primary-foreground: #ffffff;
+  --secondary: #CB997E;         /* Terracota (NUEVO COLOR PRINCIPAL DE BOTONES) */
+  --secondary-foreground: #ffffff;
+  --accent: #B7B7A4;            /* Verde Claro - Hover secundario */
+  --accent-foreground: #686763;
+  --footer-bg: #5E503F;         /* Café Oscuro (Usado para hover de botones) */
+  
+  /* Colores de soporte */
+  --card: #ffffff;
+  --border: rgba(104, 103, 99, 0.2);
+  --muted-foreground: #686763;
+  
+  /* Tipografía */
+  --font-weight-semibold: 600;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  
+  /* Bordes */
+  --radius: 0.75rem; 
+}
+
+/* ====================================================
+   ESTILOS GENERALES
+   ==================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--foreground);
+  background-color: var(--background);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', serif;
+}
+
+
+/*  BOTÓN PRINCIPAL DE BOOTSTRAP (.btn-primary) */
+
+.btn-primary {
+    /* Color principal: Terracota para más viveza */
+    --bs-btn-color: var(--secondary-foreground); /* Blanco */
+    --bs-btn-bg: var(--secondary); /* Terracota */
+    --bs-btn-border-color: var(--secondary);
+    
+    /* Hover/Focus: Café Oscuro para contraste */
+    --bs-btn-hover-color: var(--secondary-foreground);
+    --bs-btn-hover-bg: var(--footer-bg); /* Café Oscuro */
+    --bs-btn-hover-border-color: var(--footer-bg);
+    
+    /* Active: Un tono intermedio */
+    --bs-btn-active-color: var(--secondary-foreground);
+    --bs-btn-active-bg: var(--primary); /* Verde Olivo */
+    --bs-btn-active-border-color: var(--primary);
+    
+    /* General */
+    border-radius: var(--radius);
+    font-weight: var(--font-weight-semibold);
+    transition: all 0.3s ease;
+}
+
+/* Aplicar redondeo y padding al botón grande */
+.d-grid .btn-lg {
+    padding: 0.8rem 1.5rem;
+}
+
+/*  ESTILOS ESPECÍFICOS PARA MODALES  */
+
+/* Contenedor principal de los modales */
+.modal-content {
+    border-radius: var(--radius);
+    border: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.modal-body .col-md-6 {
+    background-color: transparent !important; 
+}
+
+#forgotPasswordModal .modal-body {
+    background-color: var(--card); 
+}
+
+/* Títulos dentro de los modales */
+.modal-body h2, .modal-body h4 {
+    color: var(--foreground);
+    font-weight: var(--font-weight-semibold);
+    font-family: 'Playfair Display', serif;
+}
+
+/* Estilo para inputs de formulario */
+.form-control {
+    border-radius: 0.5rem;
+    border-color: var(--border);
+    color: var(--foreground);
+    padding: 0.6rem 0.75rem;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    border-color: var(--primary); /* Borde Verde Olivo al enfocar */
+    box-shadow: 0 0 0 0.15rem rgba(165, 165, 141, 0.25); /* Sombra suave */
+}
+
+/* Etiqueta para el enlace "¿Olvidaste tu contraseña?" */
+.small.text-muted {
+    color: var(--muted-foreground) !important;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.small.text-muted:hover {
+    color: var(--secondary) !important; /* Terracota al pasar el ratón */
+}
+
+/* Estilo para enlaces de cambio de modal ("Regístrate", "Inicia Sesión", "Volver") */
+.text-center a {
+    color: var(--primary); /* Verde Olivo */
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.text-center a:hover {
+    color: var(--secondary); /* Terracota al pasar el ratón */
+    text-decoration: underline;
+}
+
+/* Estilo para el input-group (Contraseña con el ojo) */
+.input-group .btn-outline-secondary {
+    border-color: var(--border);
+    color: var(--foreground);
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    transition: all 0.3s;
+}
+
+.input-group .btn-outline-secondary:hover {
+    background-color: var(--accent); /* Verde claro */
+    border-color: var(--accent);
+    color: var(--foreground);
+}
+
+/* Estilo para la columna de video */
+.modal-video-col {
+    background-color: var(--footer-bg); 
+}
