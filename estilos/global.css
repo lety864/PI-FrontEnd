@@ -129,10 +129,10 @@ h4, h5, h6 {
 .navbar-dark {
     background-color: var(--primary) !important;
     padding: 0.5rem 2rem;
-    border-radius: 12px;
+    border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     max-width: none;
-    width: 97%;
+    width: 98%;
     margin: 10px auto 0 auto;
     transition: all 0.3s ease;
 }
@@ -262,7 +262,7 @@ h4, h5, h6 {
     /* Atributos: fondo, borde, sombra y dimensiones de la barra de categorías */
     .floating-nav-container .navbar {
         background: var(--background-white) !important;
-        border-radius: 12px;
+        border-radius: 8px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         padding: 0.5rem 0;
         max-width: 1320px;
@@ -410,7 +410,7 @@ h4, h5, h6 {
 /* ===================================
    7. BOTONES REUTILIZABLES
    =================================== */
-/* Atributos: fondo, color, espaciado, fuente, borde y transición */
+/* Atributos: fondo, color, espaciado, fuente, borde y transición. Color verde */
 .btn-custom-primary {
     background-color: var(--primary);
     color: var(--text-white);
@@ -430,7 +430,7 @@ h4, h5, h6 {
     text-decoration: none;
 }
 
-/* Atributos: fondo transparente, color, borde y transición */
+/* Atributos: fondo transparente, color, borde y transición. Color blanco y transparente*/
 .btn-custom-secondary {
     background-color: transparent;
     color: var(--text-white);
@@ -449,7 +449,7 @@ h4, h5, h6 {
     text-decoration: none;
 }
 
-/* Atributos: fondo, color, espaciado, fuente, sombra y transición */
+/* Atributos: fondo, color, espaciado, fuente, sombra y transición. Color terracota*/
 .cta-button {
     display: inline-block;
     background-color: var(--secondary);
