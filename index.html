@@ -6,8 +6,8 @@
     <meta name="description" content="Mueblería España - Muebles artesanales únicos y electrodomésticos de las mejores marcas. Encuentra el mueble perfecto para tu hogar.">
     <title>Inicio - Mueblería España</title>
 
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css">
@@ -24,8 +24,7 @@
     <link rel="stylesheet" href="estilos/index.css">
 </head>
 <body>
-
-    <!-- ========================================= -->
+<!-- ========================================= -->
     <!-- NAVBAR PRINCIPAL (Sticky, con búsqueda) -->
     <!-- ========================================= -->
     <div class="full-width-nav-container sticky-top">
@@ -48,13 +47,13 @@
 
                 <!-- Menú Desktop -->
                 <div class="collapse navbar-collapse" id="mainNavbarDesktop">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-3">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">Nosotros</a>
+                            <a class="nav-link" href="about.html">Sobre Nosotros</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#contacto">Contacto</a>
@@ -74,7 +73,7 @@
                         <li class="nav-item">
                             <a class="nav-link position-relative" href="#" aria-label="Carrito de compras">
                                 <i class="bi bi-cart-fill fs-4"></i>
-                                <!-- BADGE OCULTO - Desktop -->
+                                <!-- BADGE OCULTO DE NUM DE ITEMS DEL CARRITO - Desktop con d-none -->
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">
                                     2
                                     <span class="visually-hidden">productos en el carrito</span>
@@ -101,7 +100,8 @@
                         <li class="nav-item ms-3">
                             <a class="nav-link position-relative" href="#" aria-label="Carrito de compras">
                                 <i class="bi bi-cart-fill fs-3"></i>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    <!-- BADGE OCULTO DE NUM ITEMS DEL CARRITO - Movil con d-none -->
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">
                                     2
                                     <span class="visually-hidden">productos en el carrito</span>
                                 </span>
@@ -332,7 +332,7 @@
                     <div class="carousel-caption d-none d-md-block">
                         <h1>Muebles con alma, hogares con historia</h1>
                         <p>Descubre nuestra selección de muebles y electrodomésticos diseñados para durar.</p>
-                        <a href="#" class="cta-button">Explorar Catálogo</a>
+                        <a href="paginas/catalogo.html" class="cta-button">Explorar Catálogo</a>
                     </div>
                 </div>
 
@@ -497,7 +497,7 @@
                     <!-- Salas -->
                     <div class="col-md-6 col-lg-3">
                         <article class="category-card">
-                            <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500&q=80" 
+                            <img src="assets/inicio/inicio-sala.png" 
                                  alt="Sala moderna y elegante" 
                                  class="category-card-image" loading="lazy">
                             <div class="category-card-overlay">
@@ -514,7 +514,7 @@
                     <!-- Dormitorio -->
                     <div class="col-md-6 col-lg-3">
                         <article class="category-card">
-                            <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?w=500&q=80" 
+                            <img src="assets/inicio/inicio-cama.png" 
                                  alt="Dormitorio acogedor" 
                                  class="category-card-image" loading="lazy">
                             <div class="category-card-overlay">
@@ -531,7 +531,7 @@
                     <!-- Comedores -->
                     <div class="col-md-6 col-lg-3">
                         <article class="category-card">
-                            <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=500&q=80" 
+                            <img src="assets/inicio/inicio-comedor.png" 
                                  alt="Comedor elegante" 
                                  class="category-card-image" loading="lazy">
                             <div class="category-card-overlay">
@@ -548,7 +548,7 @@
                     <!-- Roperos -->
                     <div class="col-md-6 col-lg-3">
                         <article class="category-card">
-                            <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=500&q=80" 
+                            <img src="assets/inicio/inicio-ropero1.png" 
                                  alt="Ropero de madera artesanal" 
                                  class="category-card-image" loading="lazy">
                             <div class="category-card-overlay">
@@ -580,7 +580,7 @@
                     <!-- Refrigeradores -->
                     <div class="col-md-6 col-lg-3">
                         <article class="category-card">
-                            <img src="https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=500&q=80" 
+                            <img src="assets/inicio/inicio-refrigerador1.png" 
                                  alt="Refrigerador moderno" 
                                  class="category-card-image" loading="lazy">
                             <div class="category-card-overlay">
@@ -597,7 +597,7 @@
                     <!-- Estufas -->
                     <div class="col-md-6 col-lg-3">
                         <article class="category-card">
-                            <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=500&q=80" 
+                            <img src="assets/inicio/inicio-estufa1.png" 
                                  alt="Estufa de cocina" 
                                  class="category-card-image" loading="lazy">
                             <div class="category-card-overlay">
@@ -614,7 +614,7 @@
                     <!-- Lavadoras -->
                     <div class="col-md-6 col-lg-3">
                         <article class="category-card">
-                            <img src="https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=500&q=80" 
+                            <img src="assets/inicio/inicio-lavadora.png" 
                                  alt="Lavadora moderna" 
                                  class="category-card-image" loading="lazy">
                             <div class="category-card-overlay">
@@ -631,7 +631,7 @@
                     <!-- Microondas -->
                     <div class="col-md-6 col-lg-3">
                         <article class="category-card">
-                            <img src="https://images.unsplash.com/photo-1585659722983-3a675dabf23d?w=500&q=80" 
+                            <img src="assets/inicio/inicio-microondas.png" 
                                  alt="Microondas de acero inoxidable" 
                                  class="category-card-image" loading="lazy">
                             <div class="category-card-overlay">
@@ -696,7 +696,7 @@
                     <div class="col-md-6 col-lg-3">
                         <article class="product-card">
                             <div class="product-image-container">
-                                <img src="https://images.unsplash.com/photo-1594620302200-9a762244a156?w=500&q=80" 
+                                <img src="assets/inicio/inicio-ropero2.png" 
                                      alt="Ropero Artesanal de Roble" 
                                      class="product-image" loading="lazy">
                                 <span class="product-badge">Oferta</span>
@@ -732,7 +732,7 @@
                     <div class="col-md-6 col-lg-3">
                         <article class="product-card">
                             <div class="product-image-container">
-                                <img src="https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=500&q=80" 
+                                <img src="assets/inicio/inicio-refrigerador2.png" 
                                      alt="Refrigerador Samsung 18p³" 
                                      class="product-image" loading="lazy">
                                 <span class="product-badge">Oferta</span>
@@ -768,7 +768,7 @@
                     <div class="col-md-6 col-lg-3">
                         <article class="product-card">
                             <div class="product-image-container">
-                                <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=500&q=80" 
+                                <img src="assets/inicio/inicio-mesa.png" 
                                      alt="Mesa de Comedor Moderna" 
                                      class="product-image" loading="lazy">
                                 <button class="product-favorite" aria-label="Agregar a favoritos">
@@ -802,7 +802,7 @@
                     <div class="col-md-6 col-lg-3">
                         <article class="product-card">
                             <div class="product-image-container">
-                                <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=500&q=80" 
+                                <img src="assets/inicio/inicio-estufa2.png" 
                                      alt="Estufa Mabe 6 Quemadores" 
                                      class="product-image" loading="lazy">
                                 <span class="product-badge">Oferta</span>
@@ -844,7 +844,7 @@
             <div class="container">
                 <div class="row align-items-center g-5">
                     <div class="col-lg-6">
-                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" 
+                        <img src="assets/inicio/inicio-sucursal.png" 
                              alt="Interior de nuestra tienda" 
                              class="img-fluid rounded shadow-lg">
                     </div>
@@ -871,89 +871,80 @@
         </section>
     </main>
 
-    <!-- ========== FOOTER ========== -->
-<footer class="footer" style="margin-top: 80px;">
-    <div class="container">
-        <div class="row g-4">
-            <!-- Columna 1: Marca -->
-            <div class="col-lg-4">
-                <h4 class="mb-4">Mueblería España</h4>
-                <p class="mb-4">
-                    Creamos hogares combinando la tradición artesanal mexicana con las mejores 
-                    marcas de electrodomésticos del mercado.
-                </p>
-                <!-- Redes Sociales -->
-                <div class="d-flex gap-3">
-                    <a href="#" class="text-white-50" aria-label="Facebook">
-                        <i class="bi bi-facebook fs-5"></i>
-                    </a>
-                    <a href="#" class="text-white-50" aria-label="Instagram">
-                        <i class="bi bi-instagram fs-5"></i>
-                    </a>
+<!-- ========== NUEVO FOOTER ========== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <!-- Columna 1: Sobre Nosotros -->
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <div class="footer-widget">
+                        <h4 class="widget-title">Mueblería España</h4>
+                        <p>Creamos hogares combinando la tradición artesanal con las mejores marcas de electrodomésticos del mercado.</p>
+                        <div class="social-links mt-4">
+                            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-            <!-- Columna 2: Enlaces Rápidos -->
-            <div class="col-md-6 col-lg-2">
-                <h4 class="h6 mb-4">Enlaces Rápidos</h4>
-                <ul class="list-unstyled">
-                    <li class="mb-2"><a href="about.html">Sobre Nosotros</a></li>
-                    <li class="mb-2"><a href="#">Catálogo</a></li>
-                    <li class="mb-2"><a href="#">Productos Artesanales</a></li>
-                    <li class="mb-2"><a href="#">Marcas Comerciales</a></li>
-                    <li class="mb-2"><a href="#contacto">Contacto</a></li>
-                </ul>
-            </div>
-            
-            <!-- Columna 3: Atención al Cliente -->
-            <div class="col-md-6 col-lg-2">
-                <h4 class="h6 mb-4">Atención al Cliente</h4>
-                <ul class="list-unstyled">
-                    <li class="mb-2"><a href="#">Garantías y Políticas</a></li>
-                    <li class="mb-2"><a href="#">Preguntas Frecuentes</a></li>
-                    <li class="mb-2"><a href="#">Métodos de Pago</a></li>
-                </ul>
-            </div>
-            
-            <!-- Columna 4: Contacto -->
-            <div class="col-lg-4">
-                <h4 class="h6 mb-4">Contacto</h4>
-                
-              <!-- Dirección -->
-        <div class="mb-4">
-             <div class="d-flex gap-3 mb-2">
-               <i class="bi bi-geo-alt-fill"></i>
-                  <div>
-                   San Felipe del Progreso<br>
-                      Estado de México, 50640
+
+                <!-- Columna 2: Enlaces Rápidos -->
+                <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                    <div class="footer-widget">
+                        <h4 class="widget-title">Enlaces</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Sobre Nosotros</a></li>
+                            <li><a href="#">Catálogo</a></li>
+                            <li><a href="#">Contacto</a></li>
+                            <li><a href="#">Login</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-           <a href="#" class="small" style="margin-left: 36px;">
-              Ver en Google Maps →
-             </a>
-        </div>
-                
-                <!-- Info de contacto -->
-                <div class="d-flex gap-3 mb-3">
-                    <i class="bi bi-telephone-fill"></i>
-                    <div>
-                        Contáctanos vía WhatsApp o teléfono para una atención personalizada.
+
+                <!-- Columna 3: Atención al Cliente -->
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <div class="footer-widget">
+                        <h4 class="widget-title">Atención al Cliente</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Preguntas Frecuentes</a></li>
+                            <li><a href="#">Métodos de Pago</a></li>
+                            <!-- ETIQUETA <a> CORREGIDA AQUÍ -->
+                            <li><a href="#">Políticas y Garantías</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Columna 4: Contacto -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h4 class="widget-title">Contacto</h4>
+                        <ul class="list-unstyled contact-info">
+                            <li>
+                                <i class="bi bi-geo-alt-fill me-2"></i>
+                                <span>San Felipe del Progreso, Edo. de México, 50640</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-telephone-fill me-2"></i>
+                                <a href="tel:+527120000000">+52 (712) 000-0000</a>
+                            </li>
+                            <li>
+                                <i class="bi bi-envelope-fill me-2"></i>
+                                <a href="mailto:contacto@muebleria.com">contacto@muebleria.com</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
+    </footer>
+    <!-- ========== BARRA DE COPYRIGHT ========== -->
+    <div class="copyright-bar">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 Mueblería España. Todos los derechos reservados.</p>
+        </div>
     </div>
-</footer>
-
-<!-- Copyright -->
-<div class="copyright">
-    <div class="container">
-        <p class="mb-0">© 2025 Mueblería España. Todos los derechos reservados.</p>
-    </div>
-</div>
 
     <!-- Bootstrap 5 JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
     <!-- Smooth Scroll -->
     <script>

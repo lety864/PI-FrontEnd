@@ -1,299 +1,956 @@
-/* ================================
-   🏠 MUEBLERÍA ESPAÑA
-   Design System v1.0
-   ================================
- 
-   📋 INSTRUCCIONES PARA EL EQUIPO:
-   1. Enlazar ESTE archivo en TODAS las páginas con:
-      <link rel="stylesheet" href="styles/design-system.css">
-   2. NO modificar colores directamente en HTML (usar las variables)
-   3. SIEMPRE usar var(--nombre-variable) en vez de colores #HEX
-   4. Antes de crear un color nuevo, consultarlo con el equipo
-   
-   🎓 NOTA: Este archivo usa CSS avanzado (variables, transiciones).
-      Si algo no se entiende, revisar los comentarios o preguntar.
-   
-   ================================ */
+/*
+ * MUEBLERÍA ESPAÑA - SISTEMA DE DISEÑO GLOBAL
+ * Autor: Code&Coffee
+ * Última actualización: 9 de octubre de 2025
+ *
+ * Contiene: Variables, Resets, Navbar, Footer, Componentes Globales.
+ * No contiene: Estilos específicos de páginas (ej. index.css, about.css).
+ */
 
-/* ===== 1. RESET Y BASE ===== 
-   Esto elimina los estilos por defecto que cada navegador trae.
-   Chrome, Firefox, Safari tienen márgenes diferentes por defecto,
-   esto los resetea para que todos se vean igual. */
-
+/* ===================================
+   1. RESET Y BASE
+   =================================== */
+/* Atributos: reseteo de márgenes y padding, modelo de caja */
 * {
-  margin: 0;           /* Elimina todos los márgenes por defecto */
-  padding: 0;          /* Elimina todos los paddings por defecto */
-  box-sizing: border-box;  /* Hace que width incluya padding y border */
-  /*  Ejemplo: si un div tiene width: 100px y padding: 10px,
-     el ancho total será 100px (no 120px) */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* ===== 2. VARIABLES DE DISEÑO ===== 
-   CONCEPTO: Variables CSS (Custom Properties)
-   
-   Las variables se definen UNA vez aquí y se usan en TODO el sitio.
-   Si el cliente dice "cambia el verde", solo modificas UNA línea.
-   
-   Sintaxis:
-   - Definir:  --nombre-variable: valor;
-   - Usar:     var(--nombre-variable)
-   
-   ESTO ES AVANZADO: No lo vimos en el bootcamp, pero es estándar
-   en la industria. Los navegadores modernos lo soportan. */
-
+/* ===================================
+   2. VARIABLES DE DISEÑO
+   =================================== */
 :root {
-  /*  :root = selector que apunta al elemento <html>
-     Todo lo que esté aquí es GLOBAL (disponible en cualquier lugar) */
-  
   /* --- Colores principales --- */
-  --primary: #A5A58D;              /* Verde oliva - color principal del sitio */
-  --primary-hover: #8F8F7A;        /* Verde más oscuro para hover en botones */
-  --primary-light: #B7B7A4;        /* Verde claro para acentos suaves */
-  
-  --secondary: #CB997E;            /* Terracota - color secundario (botones, acentos) */
-  --secondary-hover: #B8856B;      /* Terracota oscuro para hover */
-  --secondary-light: rgba(203, 153, 126, 0.1);  /* Terracota transparente (10% opacidad) */
-  
+  /* Color primario: Verde nórdico. Usado en: navbar, botones, títulos. */
+  --primary: #73917A;
+  --primary-hover: #5E7665;
+  --primary-light: #8DAA94;
+
+  /* Color secundario: Terracota cálido. Usado en: CTAs, ofertas. */
+  --secondary: #CB997E;
+  --secondary-hover: #B8856B;
+  --secondary-light: rgba(203, 153, 126, 0.1);
+
   /* --- Fondos --- */
-  --background-light: #F5F4EF;     /* Beige claro - fondo general del sitio */
-  --background-white: #FFFFFF;     /* Blanco puro - cards, navbar */
-  --background-dark: #5E503F;      /* Café oscuro - footer */
-  --background-darker: #4A3C2E;    /* Café más oscuro - copyright del footer */
-  
+  --background-light: #F5F4EF;
+  --background-white: #FFFFFF;
+  --background-dark: #5E503F;
+  --background-darker: #4A3C2E;
+
   /* --- Textos --- */
-  --text-dark: #686763;            /* Gris oscuro - texto principal */
-  --text-medium: #757575;          /* Gris medio - texto secundario */
-  --text-light: #999999;           /* Gris claro - texto poco importante */
-  --text-white: #FFFFFF;           /* Blanco para texto sobre fondos oscuros */
-  --text-white-soft: rgba(255, 255, 255, 0.9);   /* Blanco casi opaco (90%) */
-  --text-white-muted: rgba(255, 255, 255, 0.7);  /* Blanco semi-transparente (70%) */
-  
+  --text-dark: #686763;
+  --text-medium: #757575;
+  --text-light: #999999;
+  --text-white: #FFFFFF;
+  --text-white-soft: rgba(255, 255, 255, 0.9);
+  --text-white-muted: rgba(255, 255, 255, 0.7);
+
   /* --- Bordes --- */
-  --border-light: #E5E5E5;         /* Gris muy claro - bordes sutiles */
-  --border-medium: rgba(104, 103, 99, 0.2);  /* Gris con 20% opacidad */
-  
-  /* --- Tipografía --- 
-     💡 TIP: Estas fuentes se cargan desde Google Fonts en el HTML */
-  --font-primary: 'Poppins', sans-serif;       /* Fuente para textos normales */
-  --font-display: 'Playfair Display', serif;   /* Fuente elegante para títulos */
-  
-  /* Pesos de fuente (font-weight) */
-  --font-weight-normal: 400;       /* Normal (texto común) */
-  --font-weight-medium: 500;       /* Medio (destacar sin exagerar) */
-  --font-weight-semibold: 600;     /* Semi-negrita (botones, subtítulos) */
-  --font-weight-bold: 700;         /* Negrita (títulos importantes) */
-  
-  /* --- Espaciado --- 
-     rem = unidad relativa al tamaño de fuente base (1rem = 16px por defecto) */
-  --space-xs: 0.25rem;   /* 4px - espacios muy pequeños */
-  --space-sm: 0.5rem;    /* 8px - espacios pequeños */
-  --space-md: 1rem;      /* 16px - espacios estándar */
-  --space-lg: 1.5rem;    /* 24px - espacios grandes */
-  --space-xl: 2rem;      /* 32px - espacios extra grandes */
-  --space-2xl: 3rem;     /* 48px - espacios muy grandes (secciones) */
-  
+  --border-light: #E5E5E5;
+  --border-medium: rgba(104, 103, 99, 0.2);
+
+  /* --- Tipografía --- */
+  /* Fuente principal para UI, cuerpo de texto */
+  --font-primary: 'Poppins', sans-serif;
+  /* Fuente de visualización para Títulos y marca */
+  --font-display: 'Playfair Display', serif;
+
+  /* --- Pesos de fuente --- */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* --- Espaciado (sistema basado en 4px) --- */
+  --space-xs: 0.25rem;  /* 4px */
+  --space-sm: 0.5rem;   /* 8px */
+  --space-md: 1rem;     /* 16px */
+  --space-lg: 1.5rem;   /* 24px */
+  --space-xl: 2rem;     /* 32px */
+  --space-2xl: 3rem;    /* 48px */
+
   /* --- Bordes redondeados --- */
-  --radius: 0.75rem;     /* 12px - esquinas redondeadas para botones, cards */
-  
-  /* --- Sombras --- 
-     Sintaxis: offset-x offset-y blur spread color */
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);      /* Sombra suave */
-  --shadow-md: 0 2px 10px rgba(0, 0, 0, 0.1);     /* Sombra mediana */
-  --shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.15);    /* Sombra pronunciada */
+  --radius: 0.75rem;    /* 12px */
+
+  /* --- Sombras --- */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* ===== 3. ESTILOS GLOBALES ===== 
-   Estos estilos se aplican a TODO el sitio automáticamente. */
-
+/* ===================================
+   3. ESTILOS GLOBALES
+   =================================== */
+/* Atributos: tipografía, color, fondo y altura de línea base */
 body {
-  font-family: var(--font-primary);        /* Usa Poppins para todo el texto */
-  color: var(--text-dark);                 /* Color de texto por defecto */
-  background-color: var(--background-light);  /* Fondo beige del sitio */
-  line-height: 1.6;  /* Espacio entre líneas = 1.6x el tamaño de fuente
-                        (mejora la legibilidad) */
+  font-family: var(--font-primary);
+  color: var(--text-dark);
+  background-color: var(--background-light);
+  line-height: 1.6;
 }
 
-/* Todos los títulos usan la fuente elegante */
+/* Atributos: tipografía para todos los títulos */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);  /* Playfair Display */
+  font-family: var(--font-display);
 }
 
-/* Títulos grandes (h1, h2, h3) en color primario */
+/* Atributos: color para títulos principales */
 h1, h2, h3 {
-  color: var(--primary);  /* Verde oliva */
+  color: var(--primary);
 }
 
-/* Títulos pequeños (h4, h5, h6) en color texto oscuro */
+/* Atributos: color para títulos secundarios */
 h4, h5, h6 {
   color: var(--text-dark);
 }
 
-/* ===== 4. COMPONENTES COMUNES ===== 
-   Estilos reutilizables para elementos que se repiten en el sitio. */
-
-/* --- Navbar --- */
-.navbar {
-  background-color: var(--background-white);  /* Fondo blanco */
-  box-shadow: var(--shadow-md);               /* Sombra para dar profundidad */
-  padding: 1rem 0;                            /* Espaciado interno arriba/abajo */
+/* ===================================
+   4. NAVBAR PRINCIPAL (FLOTANTE Y STICKY)
+   =================================== */
+/* Atributos: dimensiones y apilamiento (z-index) */
+.full-width-nav-container {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    z-index: 1000;
 }
 
-.navbar-brand {
-  font-family: var(--font-display);           /* Fuente elegante para el logo */
-  font-size: 1.5rem;                          /* Tamaño grande (24px) */
-  font-weight: var(--font-weight-bold);       /* Negrita */
-  color: var(--primary) !important;           /* Color primario 
-                                                 !important sobrescribe Bootstrap */
+/* Atributos: posicionamiento sticky, espaciado y z-index */
+.full-width-nav-container .sticky-top {
+    position: sticky;
+    top: 50px;
+    z-index: 1020;
+    padding: 0 40px;
 }
 
-.navbar-nav .nav-link {
-  color: var(--text-dark);                    /* Color texto por defecto */
-  font-weight: var(--font-weight-medium);     /* Un poco más pesado que normal */
-  margin: 0 0.5rem;                           /* Espacio horizontal entre links */
-  transition: color 0.3s ease;                /* Anima el cambio de color */
-  /* 👆 TRANSICIÓN: hace que el cambio de color tarde 0.3 segundos
-     en vez de ser instantáneo. "ease" = curva de animación suave */
+/* Atributos: fondo, padding, bordes, sombra, dimensiones y transición */
+.navbar-dark {
+    background-color: var(--primary) !important;
+    padding: 0.5rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-width: none;
+    width: 98%;
+    margin: 10px auto 0 auto;
+    transition: all 0.3s ease;
 }
 
-.navbar-nav .nav-link:hover {
-  color: var(--primary);  /* Al pasar el mouse, cambia a verde */
+/* Hover: aumenta la sombra */
+.navbar-dark:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* --- Botones Personalizados --- 
-   Bootstrap tiene botones, pero estos siguen nuestro diseño específico. */
+/* Atributos: ancho máximo y centrado del contenido */
+.navbar-dark .container-fluid {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0;
+}
 
-   /* Botón primario - Verde Oliva */
+/* Atributos: tipografía, color y sombra de texto del logo */
+.navbar-dark .navbar-brand {
+    color: var(--text-white) !important;
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-bold);
+    font-size: 1.4rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    padding: 0.25rem 0;
+}
+
+/* Atributos: altura de la imagen del logo */
+.navbar-dark .navbar-brand img {
+    height: 30px;
+}
+
+/* Atributos: color, transición, espaciado y grosor de fuente */
+.navbar-dark .nav-link {
+    color: var(--text-white) !important;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    padding: 0.4rem 0.75rem;
+    font-weight: var(--font-weight-medium);
+    font-size: 1rem;
+}
+
+/* Hover/Active: cambia el fondo y redondea bordes (efecto píldora) */
+.navbar-dark .nav-link:hover,
+.navbar-dark .nav-link.active {
+    color: var(--background-light) !important;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+}
+
+/* Atributos: fondo, borde, color y transición (efecto glassmorphism) */
+.navbar-dark .search-input,
+.navbar-dark .form-control {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: var(--text-white);
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    height: 38px;
+}
+
+/* Atributos: color y tamaño del texto placeholder */
+.navbar-dark .search-input::placeholder,
+.navbar-dark .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.85rem;
+}
+
+/* Focus: cambia fondo, borde y agrega sombra de realce */
+.navbar-dark .search-input:focus,
+.navbar-dark .form-control:focus {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: var(--background-light);
+    box-shadow: 0 0 0 0.2rem rgba(245, 244, 239, 0.25);
+    color: var(--text-white);
+    outline: none;
+}
+
+/* Atributos: color, sombra y tamaño de los iconos del nav */
+.navbar-dark .nav-link i {
+    color: var(--text-white);
+    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.3));
+    font-size: 1.25rem;
+}
+
+/* Atributos: color de fondo y tamaño de fuente del badge del carrito */
+.navbar-dark .badge {
+    background-color: var(--secondary) !important;
+    font-size: 0.7rem;
+}
+
+/* Atributos: borde, color y espaciado del botón hamburguesa */
+.navbar-dark .btn-outline-light {
+    border-color: var(--text-white);
+    color: var(--text-white);
+    padding: 0.35rem 0.75rem;
+    font-size: 0.9rem;
+}
+
+/* Hover: cambia el color de fondo */
+.navbar-dark .btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Atributos: tamaño del icono de hamburguesa */
+.navbar-dark .btn-outline-light i {
+    font-size: 1.5rem;
+}
+
+/* ===================================
+   5. NAVBAR SECUNDARIO (CATEGORÍAS)
+   =================================== */
+@media (min-width: 992px) {
+    /* Atributos: sombra del navbar principal en desktop */
+    .full-width-nav-container .navbar {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Atributos: margen, espaciado y z-index del contenedor flotante */
+    .floating-nav-container {
+        margin-top: 10px;
+        padding: 0 15px;
+        position: relative;
+        z-index: 999;
+    }
+    
+    /* Atributos: fondo, borde, sombra y dimensiones de la barra de categorías */
+    .floating-nav-container .navbar {
+        background: var(--background-white) !important;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        padding: 0.5rem 0;
+        max-width: 1320px;
+        margin: 0 auto;
+        display: block !important;
+    }
+    
+    /* Atributos: distribución uniforme de los links */
+    .floating-nav-container .navbar-nav {
+        width: 100%;
+        justify-content: space-around;
+    }
+}
+
+/* Atributos: color, fuente, espaciado y transición de los links */
+.floating-nav-container .nav-link {
+    color: var(--text-dark);
+    font-weight: var(--font-weight-medium);
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+}
+
+/* Hover: cambia el color de fondo */
+.floating-nav-container .nav-link:hover {
+    background-color: var(--secondary-light);
+}
+
+/* Atributos: color y fuente para el link de "Ofertas" */
+.floating-nav-container .nav-link.text-danger {
+    color: var(--secondary) !important;
+    font-weight: var(--font-weight-bold);
+}
+
+/* Atributos: fondo, borde, sombra y margen del menú desplegable */
+.floating-nav-container .dropdown-menu {
+    background-color: var(--background-white);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-md);
+    border-radius: 12px;
+    margin-top: 0.5rem;
+}
+
+/* Atributos: color, espaciado y transición de los items del dropdown */
+.floating-nav-container .dropdown-item {
+    color: var(--text-dark);
+    padding: 0.5rem 1rem;
+    transition: background-color 0.2s ease;
+}
+
+/* Hover: cambia el color de fondo */
+.floating-nav-container .dropdown-item:hover {
+    background-color: #e9ecef;
+}
+
+/* ===================================
+   6. OFFCANVAS (MENÚ MÓVIL)
+   =================================== */
+/* Atributos: color de fondo del panel */
+.offcanvas {
+    background-color: var(--background-light);
+}
+
+/* Atributos: fondo, borde y espaciado de la cabecera */
+.offcanvas-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid var(--border-light);
+    padding: 1.5rem;
+}
+
+/* Atributos: color y tipografía del título */
+.offcanvas-title {
+    color: var(--text-dark);
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-bold);
+}
+
+/* Atributos: reseteo de padding del cuerpo */
+.offcanvas-body {
+    padding: 0;
+}
+
+/* Atributos: reseteo de fondo y borde de los items */
+.offcanvas-body .list-group-item {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+/* Atributos: display, espaciado, color y transición de los links principales */
+.offcanvas-body .list-group-item > a {
+    display: block;
+    padding: 15px 25px;
+    color: var(--text-dark);
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    border-left: 4px solid transparent;
+}
+
+/* Hover: cambia fondo, color, posición y borde */
+.offcanvas-body .list-group-item > a:hover {
+    background-color: #e9ecef;
+    color: #000;
+    transform: translateX(8px);
+    border-left-color: var(--primary);
+}
+
+/* Atributos: estilos de lista, espaciado y fondo de subcategorías */
+.offcanvas-body .list-group-item ul {
+    list-style: none;
+    padding-left: 1rem;
+    background-color: #f8f9fa;
+}
+
+/* Atributos: display, espaciado, color y fuente de los links de subcategorías */
+.offcanvas-body .list-group-item ul li a {
+    display: block;
+    padding: 12px 25px 12px 40px;
+    color: var(--text-medium);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+/* Hover: cambia fondo, color y borde */
+.offcanvas-body .list-group-item ul li a:hover {
+    background-color: rgba(203, 153, 126, 0.1);
+    color: var(--secondary);
+    border-left-color: var(--secondary);
+}
+
+/* Atributos: borde y color del botón de búsqueda */
+.offcanvas .btn-outline-primary {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* Hover: invierte colores de fondo y texto */
+.offcanvas .btn-outline-primary:hover {
+    background-color: var(--primary);
+    color: var(--text-white);
+}
+
+/* ===================================
+   7. BOTONES REUTILIZABLES
+   =================================== */
+/* Atributos: fondo, color, espaciado, fuente, borde y transición. Color verde */
 .btn-custom-primary {
-  background-color: var(--primary);           /* Fondo verde oliva */
-  color: var(--text-white);                   /* Texto blanco */
-  border: none;                               /* Sin borde */
-  padding: 0.8rem 2rem;                       /* Espaciado interno (12.8px arriba/abajo, 32px izq/der) */
-  font-weight: var(--font-weight-semibold);   /* Texto semi-negrita */
-  border-radius: var(--radius);               /* Esquinas redondeadas */
-  transition: all 0.3s ease;                  /* Anima TODAS las propiedades */
+    background-color: var(--primary);
+    color: var(--text-white);
+    border: none;
+    padding: 0.8rem 2rem;
+    font-weight: var(--font-weight-semibold);
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+    text-decoration: none;
 }
 
+/* Hover: cambia fondo y escala el tamaño */
 .btn-custom-primary:hover {
-  background-color: var(--primary-hover);     /* Color más oscuro */
-  transform: scale(1.05);  /* ⚠️ AVANZADO: Agranda el botón al 105% 
-                              Esto crea un efecto de "crecer" al hacer hover */
+    background-color: var(--primary-hover);
+    transform: scale(1.05);
+    color: var(--text-white);
+    text-decoration: none;
 }
 
-/* Botón secundario (transparente con borde) */
+/* Atributos: fondo transparente, color, borde y transición. Color blanco y transparente*/
 .btn-custom-secondary {
-  background-color: transparent;              /* Fondo transparente */
-  color: var(--text-white);                   /* Texto blanco */
-  border: 2px solid var(--text-white);        /* Borde blanco de 2px */
-  padding: 0.8rem 2rem;                       /* Mismo padding que el primario */
-  font-weight: var(--font-weight-semibold);
-  border-radius: var(--radius);
-  transition: all 0.3s ease;
+    background-color: transparent;
+    color: var(--text-white);
+    border: 2px solid var(--text-white);
+    padding: 0.8rem 2rem;
+    font-weight: var(--font-weight-semibold);
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+    text-decoration: none;
 }
 
+/* Hover: invierte colores de fondo y texto */
 .btn-custom-secondary:hover {
-  background-color: var(--text-white);        /* Se rellena de blanco */
-  color: var(--primary);                      /* Texto cambia a verde */
+    background-color: var(--text-white);
+    color: var(--primary);
+    text-decoration: none;
 }
 
-.btn-custom-primary:hover {
-  background-color: var(--primary-hover);
-  transform: scale(1.05);
+/* Atributos: fondo, color, espaciado, fuente, sombra y transición. Color terracota*/
+.cta-button {
+    display: inline-block;
+    background-color: var(--secondary);
+    color: var(--text-white);
+    padding: 12px 28px;
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
 }
 
-/* Botón terracota - Para CTAs especiales (opcional) */
-.btn-custom-terracotta {
-  background-color: var(--secondary);
+/* Hover: cambia fondo, sombra y posición vertical (efecto elevación) */
+.cta-button:hover {
+    background-color: var(--secondary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    color: var(--text-white);
+    text-decoration: none;
+}
+
+/* ===================================
+   8. SECTION HEADERS (TÍTULOS DE SECCIONES)
+   =================================== */
+/* Atributos: alineación de texto y margen inferior */
+.section-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+/* Atributos: color, fuente y espaciado de letras para la etiqueta */
+.section-label {
+    color: var(--secondary);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: var(--space-sm);
+}
+
+/* Atributos: tipografía, tamaño y color del título principal */
+.section-header h2 {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: var(--space-md);
+}
+
+/* Atributos: color, ancho máximo y centrado de la descripción */
+.section-header p {
+    color: var(--text-medium);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Atributos: alineación y margen para la variante a la izquierda */
+.section-header.text-start {
+    text-align: left;
+    margin-bottom: var(--space-lg);
+}
+
+/* ===================================
+   9. TARJETAS DE CATEGORÍAS
+   =================================== */
+/* Atributos: posicionamiento, altura, borde, overflow, cursor y sombra */
+.category-card {
+    position: relative;
+    height: 340px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Hover: eleva la tarjeta y aumenta la sombra */
+.category-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Atributos: dimensiones, ajuste de objeto y transición de la imagen */
+.category-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+/* Hover: aplica zoom a la imagen */
+.category-card:hover .category-card-image {
+    transform: scale(1.05);
+}
+
+/* Atributos: posicionamiento, dimensiones y fondo degradado del overlay */
+.category-card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient( to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 100% );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--space-lg);
+}
+
+/* Atributos: tipografía, tamaño y color del título */
+.category-card-overlay h3 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--text-white);
+    margin-bottom: var(--space-sm);
+}
+
+/* Atributos: color, tamaño y margen de la descripción */
+.category-card-overlay p {
+    color: var(--text-white-muted);
+    font-size: 0.875rem;
+    margin-bottom: var(--space-md);
+}
+
+/* Atributos: fondo, color, borde, espaciado y fuente del botón */
+.btn-category {
+    background: transparent;
+    color: var(--text-white);
+    border: 2px solid var(--text-white);
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-semibold);
+    border-radius: 6px;
+    width: fit-content;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+/* Hover: invierte colores y eleva el botón */
+.btn-category:hover {
+    background: var(--text-white);
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* ===================================
+   10. TARJETAS DE PRODUCTOS
+   =================================== */
+/* Atributos: fondo, borde, sombra, transición y altura */
+.product-card {
+    background: var(--background-white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+/* Hover: eleva la tarjeta y aumenta la sombra */
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Atributos: posicionamiento y padding para forzar aspect-ratio 1:1 */
+.product-image-container {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    overflow: hidden;
+}
+
+/* Atributos: posicionamiento absoluto y ajuste de objeto para la imagen */
+.product-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Atributos: posicionamiento, fondo, color y espaciado del badge */
+.product-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--secondary);
+    color: var(--text-white);
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-semibold);
+}
+
+/* Atributos: posicionamiento, fondo, dimensiones y alineación del botón de favorito */
+.product-favorite {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--background-white);
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Hover: escala el tamaño y cambia el color */
+.product-favorite:hover {
+    transform: scale(1.1);
+    color: var(--secondary);
+}
+
+/* Atributos: espaciado del contenedor de información */
+.product-info {
+    padding: var(--space-md);
+}
+
+/* Atributos: fuente y color del título del producto */
+.product-title {
+    font-size: 1rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-dark);
+    margin-bottom: var(--space-sm);
+}
+
+/* Atributos: display, alineación y espaciado del rating */
+.product-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: var(--space-sm);
+}
+
+/* Atributos: color y tamaño de las estrellas */
+.stars {
+    color: #FFB800;
+    font-size: 0.875rem;
+}
+
+/* Atributos: color y tamaño del contador de reviews */
+.rating-count {
+    color: var(--text-light);
+    font-size: 0.875rem;
+}
+
+/* Atributos: display, alineación y espaciado de los precios */
+.product-price {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: var(--space-md);
+}
+
+/* Atributos: fuente y color del precio actual */
+.current-price {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--primary);
+}
+
+/* Atributos: fuente, color y decoración del precio anterior */
+.old-price {
+    font-size: 1rem;
+    color: var(--text-light);
+    text-decoration: line-through;
+}
+
+/* Atributos: dimensiones y alineación del botón "Agregar al carrito" */
+.btn-add-cart {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* ===================================
+   11. BANNERS Y PROMOCIONES
+   =================================== */
+/* Atributos: fondo, borde, overflow y sombra del banner */
+.promo-banner {
+    background: var(--background-white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+/* Atributos: dimensiones y ajuste de objeto para la imagen */
+.promo-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Atributos: reseteo de estilos de lista y margen */
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+/* Atributos: margen, display, alineación y fuente de los items */
+.features-list li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+/* Atributos: color y tamaño de los iconos de características */
+.features-list i {
+    color: var(--primary);
+    font-size: 1.25rem;
+}
+
+/* ===================================
+   12. SECCIÓN DE UBICACIONES
+   =================================== */
+/* Atributos: reseteo de estilos de lista y margen */
+.location-details {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+/* Atributos: margen, display, alineación y fuente de los items */
+.location-details li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+/* Atributos: color, tamaño y ancho fijo de los iconos */
+.location-details i {
+    color: var(--secondary);
+    font-size: 1.25rem;
+    width: 24px;
+}
+
+/* ===================================
+   13. CARDS GENÉRICAS
+   =================================== */
+/* Atributos: fondo, borde y transición para cards genéricas de Bootstrap */
+.card {
+    background-color: var(--background-white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover: eleva la tarjeta y aumenta la sombra */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+/* ===================================
+   14. FOOTER
+   =================================== */
+.site-footer {
+  background-color: var(--background-dark);
+  color: var(--text-white-muted);
+  padding: 60px 0;
+  font-family: var(--font-primary);
+}
+
+/* --- Widgets del Footer (cada columna) --- */
+.footer-widget .widget-title {
+  font-family: var(--font-display);
   color: var(--text-white);
-  border: none;
-  padding: 0.8rem 2rem;
-  font-weight: var(--font-weight-semibold);
-  border-radius: var(--radius);
+  font-size: 1.25rem;
+  margin-bottom: 25px;
+  position: relative;
+  padding-bottom: 10px;
+  display: inline-block; /* <-- AÑADIDO: Ajusta el contenedor al texto */
+}
+
+.footer-widget p {
+  line-height: 1.7;
+}
+
+/* --- Listas de Enlaces --- */
+.footer-widget ul li {
+  margin-bottom: 12px;
+}
+
+.footer-widget ul a {
+  color: var(--text-white-muted);
+  text-decoration: none;
   transition: all 0.3s ease;
 }
 
-.btn-custom-terracotta:hover {
-  background-color: var(--secondary-hover);
-  transform: scale(1.05);
+.footer-widget ul a:hover {
+  color: var(--text-white);
+  padding-left: 5px; /* Efecto sutil de desplazamiento */
 }
 
-/* --- Cards (Tarjetas de productos/contenido) --- */
-.card {
-  background-color: var(--background-white);  /* Fondo blanco */
-  border: 1px solid var(--border-light);      /* Borde gris claro */
-  border-radius: var(--radius);               /* Esquinas redondeadas */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;  
-  /* Anima 2 propiedades: transform Y box-shadow */
+/* --- Lista de Contacto (con iconos) --- */
+.contact-info li {
+  display: flex;
+  align-items: flex-start; /* Alinea al inicio por si el texto tiene varias líneas */
 }
 
-.card:hover {
-  transform: translateY(-5px);  /* AVANZADO: Mueve la card 5px hacia ARRIBA
-                                   Crea efecto de "levitar" */
-  box-shadow: var(--shadow-lg);  /* Sombra más pronunciada al hacer hover */
+.contact-info i {
+  color: var(--primary-light);
+  font-size: 1rem;
+  margin-top: 4px; /* Alineación vertical fina */
 }
 
-/* --- Footer --- */
-.footer {
-  background-color: var(--background-dark);   /* Fondo café oscuro */
-  color: var(--text-white-soft);              /* Texto blanco casi opaco */
-  padding: 3rem 0 1rem;                       /* 48px arriba, 16px abajo, 0 lados */
+/* --- Iconos de Redes Sociales --- */
+.social-links a {
+  color: var(--text-white-muted);
+  font-size: 1.5rem; /* 24px */
+  margin-right: 15px;
+  transition: all 0.3s ease;
 }
 
-.footer h4 {
-  color: var(--text-white);                   /* Títulos en blanco puro */
-  margin-bottom: 1.5rem;                      /* Espacio debajo de títulos */
+.social-links a:hover {
+  color: var(--primary-light);
+  transform: translateY(-3px); /* Efecto de elevación */
 }
 
-.footer a {
-  color: var(--text-white-muted);             /* Links semi-transparentes */
-  transition: color 0.3s ease;                /* Anima cambio de color */
-  text-decoration: none;                      /* Sin subrayado */
+
+/* --- Barra de Copyright --- */
+.copyright-bar {
+  background-color: var(--background-darker);
+  color: var(--text-white-muted);
+  padding: 20px 0;
+  font-size: 0.9rem;
 }
 
-.footer a:hover {
-  color: var(--primary-light);  /* Al pasar mouse, cambia a verde claro */
+
+/* ===================================
+   15. UTILIDADES GLOBALES
+   =================================== */
+/* Clases de utilidad para colores de texto */
+.text-primary { color: var(--primary); }
+.text-secondary { color: var(--secondary); }
+.text-medium { color: var(--text-medium); }
+.text-light { color: var(--text-light); }
+
+/* Clases de utilidad para colores de fondo */
+.bg-light { background-color: var(--background-light); }
+.bg-white { background-color: var(--background-white); }
+.bg-primary { background-color: var(--primary); }
+
+/* ===================================
+   16. RESPONSIVE (MÓVIL)
+   =================================== */
+@media (max-width: 991.98px) {
+    /* Atributos: posicionamiento absoluto y transformación para centrar el logo */
+    .navbar .navbar-brand {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    /* Atributos: posición superior y espaciado del navbar en móvil */
+    .full-width-nav-container .sticky-top {
+        top: 8px;
+        padding: 0 10px;
+    }
+    
+    /* Atributos: espaciado más compacto del navbar */
+    .navbar-dark {
+        padding: 0.5rem 0.75rem;
+    }
+    
+    /* Atributos: tamaño de los iconos en móvil */
+    .navbar-dark .nav-link i {
+        font-size: 1.5rem;
+    }
 }
 
-/* Copyright (banda inferior del footer) */
-.copyright {
-  background-color: var(--background-darker);  /* Café más oscuro */
-  color: var(--text-white-muted);              /* Texto semi-transparente */
-  text-align: center;                          /* Centrado */
-  padding: 1rem 0;                             /* Espaciado vertical */
-  margin: 0;                                   /* Sin márgenes */
+@media (max-width: 768px) {
+    /* Atributos: tamaño de fuente para títulos en pantallas pequeñas */
+    .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    /* Atributos: altura de las tarjetas de categoría */
+    .category-card {
+        height: 280px;
+    }
+    
+    /* Atributos: espaciado más compacto en móvil pequeño */
+    .full-width-nav-container .sticky-top {
+        padding: 0 8px;
+    }
 }
-
-/* ===== 5. UTILIDADES ===== 
-   Clases de un solo propósito que se aplican directamente en el HTML.
-   Ejemplo: <p class="text-primary">Texto verde</p> */
-
-/* --- Colores de texto --- */
-.text-primary { color: var(--primary); }      /* Texto verde */
-.text-secondary { color: var(--secondary); }  /* Texto terracota */
-.text-medium { color: var(--text-medium); }   /* Texto gris medio */
-.text-light { color: var(--text-light); }     /* Texto gris claro */
-
-/* --- Colores de fondo --- */
-.bg-light { background-color: var(--background-light); }    /* Fondo beige */
-.bg-white { background-color: var(--background-white); }    /* Fondo blanco */
-.bg-primary { background-color: var(--primary); }           /* Fondo verde */
-
-/* ===== FIN DEL DESIGN SYSTEM ===== 
-
-   GUÍA RÁPIDA PARA USAR ESTE ARCHIVO:
-   
-   1. COLORES: Siempre usa var(--nombre) en tu CSS
-      Ejemplo: color: var(--primary);
-   
-   2. BOTONES: Usa las clases .btn-custom-primary o .btn-custom-secondary
-      Ejemplo: <button class="btn-custom-primary">Comprar</button>
-   
-   3. CARDS: Agrega la clase .card a tus tarjetas
-      Ejemplo: <div class="card">...</div>
-   
-   4. ESPACIADO: Usa las variables --space-* en tu CSS
-      Ejemplo: margin-bottom: var(--space-lg);
-   
-   5. Si necesitas un color nuevo, PREGUNTA AL EQUIPO antes de agregarlo.
-      Mantener la consistencia es clave para un proyecto profesional.
-   
-   ================================ */
