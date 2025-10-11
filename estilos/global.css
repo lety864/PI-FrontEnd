@@ -132,7 +132,7 @@ h4, h5, h6 {
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     max-width: none;
-    width: 98%;
+    width: 83%;
     margin: 10px auto 0 auto;
     transition: all 0.3s ease;
 }
