@@ -99,16 +99,17 @@ document.addEventListener("DOMContentLoaded", ()=>{
       resultado.innerHTML="";
       
       const nombre = form.name.value.trim();
-      const telefono = form.phone.value.trim();
+      const telefono = +form.phone.value.trim();
       const email = form.email.value.trim();
       const mensaje = form.mensaje.value.trim();
 
       let valido = true;
+      const numeroValido = /^[0-9]{10}$/; //regex
 
       // Validar nombre
       nombre === "" ? (form.name.classList.add("is-invalid"), valido = false) : form.name.classList.remove("is-invalid");
       // Validar telefono
-      telefono === "" ? (form.phone.classList.add("is-invalid"), valido = false) : form.phone.classList.remove("is-invalid");
+      (!(numeroValido.test(telefono))) ? (form.phone.classList.add("is-invalid"), valido = false) : form.phone.classList.remove("is-invalid");
       // Validar correo
       email === "" ? (form.email.classList.add("is-invalid"), valido = false) : form.email.classList.remove("is-invalid");
       // Validar mensaje
@@ -116,7 +117,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
       if (!valido) {
         const mensajeAlert = `
-            <p class="text-danger text-center">Por favor completa todos los campos correctamente.</p>
+            <h5 class="text-danger text-center">Por favor completa todos los campos correctamente.</h5>
         `
         resultado.insertAdjacentHTML("afterbegin",mensajeAlert);
         return;
@@ -131,13 +132,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
         });
 
         if (response.ok) {
-          resultado.innerHTML = '<p class="text-success text-center">¡Gracias! Tu mensaje ha sido enviado correctamente.</p>';
+          resultado.innerHTML = '<h5 class="text-success text-center">¡Gracias! Tu mensaje ha sido enviado correctamente.</h5>';
           form.reset();
         } else {
-          resultado.innerHTML = '<p class="text-danger text-center">Ocurrió un error al enviar el mensaje.</p>';
+          resultado.innerHTML = '<h5 class="text-danger text-center">Ocurrió un error al enviar el mensaje.</h5>';
         }
       } catch (error) {
-        resultado.innerHTML = '<p class="text-danger text-center">Error de conexión. Intenta de nuevo.</p>';
+        resultado.innerHTML = '<h5 class="text-danger text-center">Error de conexión. Intenta de nuevo.</h5>';
       }
     });
 });
