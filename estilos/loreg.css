@@ -1,6 +1,4 @@
-/* ====================================================
-   VARIABLES DE COLOR - Mueblería España
-   ==================================================== */
+/*  VARIABLES DE COLOR - Mueblería España */
 :root {
   /* Colores principales */
   --background: #F5F4EF;        /* Blanco */
@@ -27,9 +25,7 @@
   --radius: 0.75rem; 
 }
 
-/* ====================================================
-   ESTILOS GENERALES
-   ==================================================== */
+/*  ESTILOS GENERALES */
 * {
   margin: 0;
   padding: 0;
@@ -61,7 +57,6 @@ h1, h2, h3, h4 {
     --bs-btn-hover-bg: var(--footer-bg); /* Café Oscuro */
     --bs-btn-hover-border-color: var(--footer-bg);
     
-    /* Active: Un tono intermedio */
     --bs-btn-active-color: var(--secondary-foreground);
     --bs-btn-active-bg: var(--primary); /* Verde Olivo */
     --bs-btn-active-border-color: var(--primary);
@@ -123,7 +118,7 @@ h1, h2, h3, h4 {
 }
 
 .small.text-muted:hover {
-    color: var(--secondary) !important; /* Terracota al pasar el ratón */
+    color: var(--secondary) !important; /* Terracota al hacer click */
 }
 
 /* Estilo para enlaces de cambio de modal ("Regístrate", "Inicia Sesión", "Volver") */
@@ -135,11 +130,11 @@ h1, h2, h3, h4 {
 }
 
 .text-center a:hover {
-    color: var(--secondary); /* Terracota al pasar el ratón */
+    color: var(--secondary); /* Terracota al hacer click */
     text-decoration: underline;
 }
 
-/* Estilo para el input-group (Contraseña con el ojo) */
+/* Estilo para la (Contraseña con el ojo) */
 .input-group .btn-outline-secondary {
     border-color: var(--border);
     color: var(--foreground);
@@ -155,6 +150,64 @@ h1, h2, h3, h4 {
 }
 
 /* Estilo para la columna de video */
-.modal-video-col {
-    background-color: var(--footer-bg); 
+/*Hace que el video ocupe todo el espacio de su columna */
+.video-fill {
+    width: 100%;
+    height: 100%;
+    /*Ajusta el video para que cubra completamente el contenedor */
+    object-fit: cover; 
 }
+
+/* Asegura que el contenedor de la columna tenga una altura definida */
+.modal-video-col {
+    /* Ocupa toda la altura disponible en la fila */
+    min-height: 100%; 
+    /* Asegura que la columna tenga la misma altura que el contenido de la columna de login */
+}
+
+/* Esto es para que las columnas (el row) tengan una altura a la cual el video se pueda ajustar. */
+.modal-body.p-0,
+.container-fluid,
+.row {
+    height: 100%;
+}
+/* Solo afecta al video del modal de registro */
+.modal-video-col {
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-video-col video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+/* Fondo difuminado detrás del video en pantallas grandes */
+@media (min-width: 768px) {
+    .modal-video-col::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.2);
+    }
+}
+
+/* Ajusta altura del modal */
+.modal-lg .modal-content {
+    min-height: 500px;
+}
+
+/* Estilo del formulario */
+#registerModal .col-md-6.p-4.p-md-5 {
+    background-color: #fff;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    padding: 2rem;
+}
+
