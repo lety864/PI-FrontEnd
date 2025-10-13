@@ -1,3 +1,9 @@
+/* ===================================
+   NOSOTROS.CSS - ESTILOS ESPECÍFICOS
+   Página: Sobre Nosotros
+   Nota: Footer y Navbar están en global.css
+   =================================== */
+
 /* =======HERO SECTION============= */
 
 .hero {
@@ -33,30 +39,40 @@
 .hero-content {
   position: relative;
   z-index: 2;
-  color: white; /* Color del texto */
+  color: white;
 }
 
+/* OVERRIDE: Título blanco sobre fondo oscuro (sobrescribe global.css) */
 .hero-content h1 {
+  color: var(--text-white) !important;
   font-size: 4rem;
   font-weight: 700;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+  font-family: var(--font-display);
 }
+
 #hero-title {
   opacity: 0; /* Empieza invisible al cargar página */
   transition: opacity 1.5s ease-in-out; /* animación de opacidad */
 }
-/* ======ABOUT SECTION (Texto principal sobre nosotros============= */
+
+/* ======ABOUT SECTION (Texto principal sobre nosotros)============= */
 .about-section {
-  background-color: var(--background);
+  background-color: var(--background-light);
   padding: 5rem 0;
+}
+
+.about-section h2 {
+  /* Hereda color verde de global.css - está bien */
 }
 
 .about-section p {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: var(--foreground);
+  color: var(--text-dark);
 }
-/* ==========Datos visuales de estadisticas de la mueblería=============== */
+
+/* ==========ESTADÍSTICAS=============== */
 .stats-section {
   background-color: var(--primary);
   padding: 4rem 0;
@@ -67,10 +83,10 @@
 }
 
 .stat-number {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 700;
-  color: var(--primary-foreground);
+  color: var(--text-white);
   margin-bottom: 0.5rem;
 }
 
@@ -80,25 +96,15 @@
   font-weight: var(--font-weight-medium);
 }
 
-@media (max-width: 768px) {
-  .stat-number {
-    font-size: 2.5rem;
-  }
-  
-  .stat-label {
-    font-size: 1rem;
-  }
-}
-
-/* ==========FEATURES(Características)=============== */
+/* ==========FEATURES (Características)=============== */
 .features-section {
   padding: 5rem 0;
-  background-color: var(--card);
+  background-color: var(--background-white);
 }
 
 .features-section h2 {
   font-size: 2rem;
-  color: var(--primary);
+  /* Hereda color verde de global.css - está bien */
   margin-bottom: 2rem;
   font-weight: var(--font-weight-semibold);
 }
@@ -112,7 +118,7 @@
 
 .feature-card:hover {
   transform: translateY(-10px);
-  background-color: var(--background);
+  background-color: var(--background-light);
 }
 
 .feature-icon {
@@ -129,28 +135,34 @@
   margin: 0 auto 1.5rem;
   transition: background-color 0.3s ease;
 }
+
 .feature-card:hover .feature-icon {
   background-color: rgba(203, 153, 126, 0.2);
 }
+
 .feature-card h3 {
-  color: var(--primary);
+  /* Hereda color verde de global.css - está bien */
   margin-bottom: 1rem;
   font-size: 1.5rem;
   font-weight: var(--font-weight-semibold);
 }
+
 .feature-card p {
-  color: var(--foreground);
+  color: var(--text-dark);
   font-size: 1rem;
 }
+
 /* ========CTA SECTION (Call to Action - Botones)================== */
 .cta-section {
   background-color: var(--primary);
-  color: var(--primary-foreground);
+  color: var(--text-white);
   padding: 5rem 0;
   text-align: center;
 }
 
+/* OVERRIDE: Título blanco sobre fondo verde (sobrescribe global.css) */
 .cta-section h2 {
+  color: var(--text-white) !important;
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
   font-weight: var(--font-weight-semibold);
@@ -168,7 +180,8 @@
   gap: 1rem;
 }
 
-.btn-custom-primary {
+/* NOTA: Estos botones sobrescriben los de global.css para esta página específica */
+.cta-section .btn-custom-primary {
   background-color: var(--secondary);  /* Terracota #CB997E */
   color: white;
   border: none;
@@ -180,13 +193,13 @@
   display: inline-block;
 }
 
-.btn-custom-primary:hover {
-  background-color: #B8856B;  /* Terracota más oscuro */
+.cta-section .btn-custom-primary:hover {
+  background-color: var(--secondary-hover);  /* Terracota más oscuro */
   color: white;
   transform: scale(1.05);
 }
 
-.btn-custom-secondary {
+.cta-section .btn-custom-secondary {
   background-color: transparent;
   color: white;
   border: 2px solid white;
@@ -198,11 +211,12 @@
   display: inline-block;
 }
 
-.btn-custom-secondary:hover {
+.cta-section .btn-custom-secondary:hover {
   background-color: white;
-  color: var(--primary);  /* Verde Olivo */
+  color: var(--primary);  /* Verde */
 }
-/*==========TEAMC CODE&COFFEE==============*/
+
+/* ==========TEAM CODE&COFFEE============== */
 .card-img-top {
   width: 150px !important;      /* Ancho fijo */
   height: 150px !important;     /* Alto fijo */
@@ -210,68 +224,11 @@
   object-position: center;      /* Centra la imagen */
 }
 
-/* =============FOOTER======================== */
-.footer {
-  background-color: var(--footer-bg);
-  color: var(--primary-foreground);
-  padding: 3rem 0 1rem;
-}
-
-.footer h4 {
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
-  font-weight: var(--font-weight-semibold);
-}
-
-.footer p {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
-.footer a {
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.footer a:hover {
-  color: var(--accent);
-}
-
-.footer ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer ul li {
-  margin-bottom: 0.5rem;
-}
-
-.social-icons a {
-  font-size: 1.5rem;
-  margin-right: 1rem;
-  display: inline-block;
-}
-
-.social-icons a:hover {
-  color: var(--accent);
-}
-
-/* ==========COPYRIGHT============= */
-.copyright {
-  background-color: #4A3C2E;
-  color: rgba(255, 255, 255, 0.7);
-  text-align: center;
-  padding: 1rem 0;
-  font-size: 0.9rem;
-}
-
 /* ==========RESPONSIVE DESIGN============= */
 
 /* Tabletas y pantallas medianas */
 @media (max-width: 992px) {
-  .hero h1 {
+  .hero-content h1 {
     font-size: 2.5rem;
   }
   
@@ -290,7 +247,7 @@
     min-height: 400px;
   }
   
-  .hero h1 {
+  .hero-content h1 {
     font-size: 2rem;
     padding: 0 1rem;
   }
@@ -311,10 +268,6 @@
     font-size: 1.8rem;
   }
   
-  .navbar-icons i {
-    margin-left: 0.8rem;
-  }
-  
   .feature-card {
     padding: 1.5rem;
   }
@@ -324,21 +277,25 @@
     align-items: center;
   }
   
-  .btn-custom-primary,
-  .btn-custom-secondary {
+  .cta-section .btn-custom-primary,
+  .cta-section .btn-custom-secondary {
     width: 100%;
     max-width: 250px;
+  }
+  
+  .stat-number {
+    font-size: 2.5rem;
+  }
+  
+  .stat-label {
+    font-size: 1rem;
   }
 }
 
 /* Móviles pequeños */
 @media (max-width: 576px) {
-  .hero h1 {
+  .hero-content h1 {
     font-size: 1.5rem;
-  }
-  
-  .navbar-brand {
-    font-size: 1.2rem;
   }
   
   .features-section h2 {
