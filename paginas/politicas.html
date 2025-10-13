@@ -16,18 +16,183 @@
   
   <!-- CSS-->
    <link rel="stylesheet" href="../estilos/politicas.css">
+      <link rel="stylesheet" href="../estilos/global.css">
+
 </head>
 <body>
 
-  <!-- NAVBAR AQUI SE MOSTRARAN EL LOGO, EL NOMBRE, INICIO, PRODUCTOS, COLECCIONES, SOBRE NOSOTROS Y CONTACTO -->
-  <nav class="navbar navbar-expand-lg sticky-top">
+    <!-- ========================================= -->
+    <!-- NAVBAR PRINCIPAL (Sticky, con búsqueda) -->
+    <!-- ========================================= -->
+    <div class="full-width-nav-container sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Navegación principal">
+
+            <div class="container-fluid">
+                
+                <!-- Botón de menú móvil (Offcanvas) -->
+                <button class="btn btn-outline-light d-lg-none me-2" type="button" 
+                        data-bs-toggle="offcanvas" data-bs-target="#offcanvasProducts" 
+                        aria-controls="offcanvasProducts" aria-label="Abrir menú de productos">
+                    <i class="bi bi-list fs-4"></i>
+                </button>
+
+                <!-- Logo/Brand -->
+                <a class="navbar-brand d-flex align-items-center" href="/index.html">
+                    <img src="/assets/mundo.png" alt="Logo Mueblería España" height="30" class="me-2">
+                    Mueblería España
+                </a>
+
+                <!-- Menú Desktop -->
+                <div class="collapse navbar-collapse" id="mainNavbarDesktop">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-3">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/paginas/nosotros.html">Sobre Nosotros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/paginas/contacto.html">Contacto</a>
+                        </li>
+                    </ul>
+                    
+                    <!-- Barra de búsqueda (Desktop) -->
+                    <form class="d-flex me-3" role="search">
+                        <input class="form-control search-input" type="search" 
+                               placeholder="Buscar en la tienda" aria-label="Buscar productos">
+                    </form>
+                    
+                     <!-- Iconos de acción (Desktop) -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link position-relative" href="#" aria-label="Carrito de compras">
+                                <i class="bi bi-cart-fill fs-4"></i>
+                                <!-- BADGE OCULTO DE NUM DE ITEMS DEL CARRITO - Desktop con d-none -->
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">
+                                    2
+                                    <span class="visually-hidden">productos en el carrito</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" aria-label="Mi cuenta">
+                                <i class="bi bi-person-fill fs-4"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Iconos de acción (Móvil) -->
+                <div class="d-flex align-items-center d-lg-none">
+                    <ul class="navbar-nav flex-row">
+                        <li class="nav-item ms-3">
+                            <a class="nav-link position-relative" href="#" aria-label="Carrito de compras">
+                                <i class="bi bi-cart-fill fs-3"></i>
+                                    <!-- BADGE OCULTO DE NUM ITEMS DEL CARRITO - Movil con d-none -->
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">
+                                    2
+                                    <span class="visually-hidden">productos en el carrito</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ms-3">
+                            <a class="nav-link" href="#" aria-label="Mi cuenta">
+                                <i class="bi bi-person-fill fs-3"></i>
+                            </a>
+                        </li>
+
+                          <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                              <i class="bi bi-person-fill fs-3"></i>
+                          </a>
+                      </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- NAVBAR SECUNDARIO (Categorías - Desktop) -->
+    <!-- ========================================= -->
     <div class="container">
-      <a class="navbar-brand" href="#">Mueblería España</a>
-      
-      <!-- Botón hamburguesa para móvil -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <div class="floating-nav-container">
+            <nav class="navbar navbar-expand-lg navbar-light d-none d-lg-block" aria-label="Navegación de categorías">
+                <div class="container-fluid">
+                    <ul class="navbar-nav">
+                        <!-- Salas -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" 
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Salas
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/paginas/salas.html">Ver todo</a></li>
+                                <li><a class="dropdown-item" href="/paginas/salas.html">Modulares de 4 piezas</a></li>
+                                <li><a class="dropdown-item" href="/paginas/salas.html">Modulares de 5 piezas</a></li>
+                                <li><a class="dropdown-item" href="/paginas/salas.html">Sofacamas</a></li>
+                                <li><a class="dropdown-item" href="/paginas/salas.html">Reclinables</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Dormitorio -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" 
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Dormitorio
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/paginas/dormitorios.html">Ver todo</a></li>
+                                <li><a class="dropdown-item" href="/paginas/dormitorios.html">Recámaras king size y matrimonial</a></li>
+                                <li><a class="dropdown-item" href="/paginas/dormitorios.html">Cabeceras</a></li>
+                                <li><a class="dropdown-item" href="/paginas/dormitorios.html">Bases</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Comedores -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" 
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Comedores
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/paginas/comedores.html">Ver todo</a></li>
+                                <li><a class="dropdown-item" href="/paginas/comedores.html">4 sillas</a></li>
+                                <li><a class="dropdown-item" href="/paginas/comedores.html">6 sillas</a></li>
+                                <li><a class="dropdown-item" href="/paginas/comedores.html">8 sillas</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/paginas/roperos.html">Roperos</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="/paginas/colchones.html">Colchones</a>
+                        </li>
+
+                        <!-- Línea Blanca -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="paginas/catalogo.html" role="button" 
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Línea blanca
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/paginas/lineaBlanca.html">Ver todo</a></li>
+                                <li><a class="dropdown-item" href="/paginas/lineaBlanca.html">Lavadoras</a></li>
+                                <li><a class="dropdown-item" href="/paginas/lineaBlanca.html">Estufas</a></li>
+                                <li><a class="dropdown-item" href="/paginas/lineaBlanca.html">Refrigeradores</a></li>
+                                <li><a class="dropdown-item" href="/paginas/lineaBlanca.html">Microondas</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold text-danger" href="/paginas/ofertas.html">Ofertas</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
       
       <!-- Links a las páginas -->
       <div class="collapse navbar-collapse" id="navbarNav">
@@ -285,17 +450,17 @@
                 <div class="policy-card">
                     <div class="policy-header">
                      
-                        </div>
-                         <h2 class="text-center mb-5">Política de Devoluciones<i class="bi bi-arrow-repeat"></i>  </h2>
-                    </div>
+                      <div>
+    <h4 class="text-center mb-5" style="font-size: 2.5rem;">Política de Devoluciones<i class="bi bi-arrow-repeat"></i></h4>
+</div>
                     
                     <div class="policy-content">
                        <div class="guarantee-badge">
-    <div class="guarantee-item">
-        <i class="bi bi-shield-check"></i>
-        <span>Garantía de 1 año en lavadoras, estufas y refrigeradores</span>
-    </div>
-    <div class="guarantee-item">
+    <div class="guarantee-item text-center">
+    <i class="bi bi-shield-check"></i>
+    <span>Garantía de 1 año en lavadoras, estufas y refrigeradores</span>
+</div>
+    <div class="guarantee-item text-center">
         <i class="bi bi-shield-check"></i>
         <span>Garantía de 3 meses en planchas, licuadoras y hornos de microondas</span>
     </div>
@@ -306,8 +471,9 @@
                          <br>
                           <div class="policy-content">
                         <p class="lead-text"></p>
-                        <div class="content-block">
-                            <h3>Condiciones para Devoluciones</h3>
+                         <div>
+    <h4 class="mb-5" style="font-size: 2.5rem;">Condiciones para devoluciones</i></h4>
+</div>
                             <br>
                                 <li>El producto debe estar en su estado original, sin usar y con todos sus accesorios</li>
                                 <li>Debe conservar el embalaje original en buen estado</li>
@@ -405,7 +571,7 @@
                         <br>
                         <div class="financing-box">
                             <h4><i class="bi bi-calendar-check me-2"></i>Financiación Disponible</h4>
-                            <p>Ofrecemos opciones de financiación flexibles para compras superiores a 300€:</p>
+                            <p>Ofrecemos opciones de financiación flexibles</p>
                         </div>
 
                                 <div><span><strong>3 meses sin intereses</strong> </span></div>

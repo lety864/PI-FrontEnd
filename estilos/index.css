@@ -1,0 +1,126 @@
+/* ================================================================== 
+   MUEBLERÍA ESPAÑA - PÁGINA DE INICIO
+   
+   CONTIENE SOLO:
+    Hero Section / Carousel (único de inicio)
+    Responsive del carousel
+   
+   ================================================================== */
+
+/* ===== HERO SECTION (CAROUSEL) ===== */
+#heroCarousel {
+    margin-top: -1px; /* Ajusta que el hero inicie despues del navbar secundario */
+}
+.carousel {
+    margin-top: -80px;
+    position: relative;
+    z-index: 1;
+}
+
+.carousel-item {
+    height: 650px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.carousel-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.carousel-caption {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    width: 90%;
+    max-width: 900px;
+}
+
+.carousel-caption h1 {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    color: var(--text-white);
+    margin-bottom: var(--space-lg);
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-caption p {
+    font-size: 1.125rem;
+    color: var(--text-white-soft);
+    margin-bottom: var(--space-xl);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Controles del carousel */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    opacity: 1;
+}
+
+.carousel-indicators {
+    bottom: 30px;
+}
+
+.carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--text-white);
+    background-color: transparent;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.carousel-indicators button.active {
+    width: 30px;
+    border-radius: 6px;
+    background-color: var(--text-white);
+    opacity: 1;
+}
+
+/* ===== RESPONSIVE (SOLO CAROUSEL) ===== */
+
+@media (max-width: 768px) {
+    .carousel {
+        margin-top: 0;
+    }
+    
+    .carousel-item {
+        height: 500px;
+    }
+    
+    .carousel-caption {
+        bottom: 15%;
+        width: 95%;
+    }
+    
+    .carousel-caption h1 {
+        font-size: 2rem;
+    }
+    
+    .carousel-caption p {
+        font-size: 1rem;
+    }
+    
+    .carousel-control-prev,
+    .carousel-control-next {
+        display: none;
+    }
+}
