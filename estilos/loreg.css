@@ -1,78 +1,4 @@
-/*  VARIABLES DE COLOR - Mueblería España */
-:root {
-  /* Colores principales */
-  --background: #F5F4EF;        /* Blanco */
-  --foreground: #686763;        /* Gris Oscuro */
-  --primary: #A5A58D;           /* Verde Olivo (Usado para acentos/hover) */
-  --primary-foreground: #ffffff;
-  --secondary: #CB997E;         /* Terracota (NUEVO COLOR PRINCIPAL DE BOTONES) */
-  --secondary-foreground: #ffffff;
-  --accent: #B7B7A4;            /* Verde Claro - Hover secundario */
-  --accent-foreground: #686763;
-  --footer-bg: #5E503F;         /* Café Oscuro (Usado para hover de botones) */
-  
-  /* Colores de soporte */
-  --card: #ffffff;
-  --border: rgba(104, 103, 99, 0.2);
-  --muted-foreground: #686763;
-  
-  /* Tipografía */
-  --font-weight-semibold: 600;
-  --font-weight-medium: 500;
-  --font-weight-normal: 400;
-  
-  /* Bordes */
-  --radius: 0.75rem; 
-}
-
-/*  ESTILOS GENERALES */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
-  color: var(--foreground);
-  background-color: var(--background);
-  line-height: 1.6;
-}
-
-h1, h2, h3, h4 {
-  font-family: 'Playfair Display', serif;
-}
-
-
-/*  BOTÓN PRINCIPAL DE BOOTSTRAP (.btn-primary) */
-
-.btn-primary {
-    /* Color principal: Terracota para más viveza */
-    --bs-btn-color: var(--secondary-foreground); /* Blanco */
-    --bs-btn-bg: var(--secondary); /* Terracota */
-    --bs-btn-border-color: var(--secondary);
-    
-    /* Hover/Focus: Café Oscuro para contraste */
-    --bs-btn-hover-color: var(--secondary-foreground);
-    --bs-btn-hover-bg: var(--footer-bg); /* Café Oscuro */
-    --bs-btn-hover-border-color: var(--footer-bg);
-    
-    --bs-btn-active-color: var(--secondary-foreground);
-    --bs-btn-active-bg: var(--primary); /* Verde Olivo */
-    --bs-btn-active-border-color: var(--primary);
-    
-    /* General */
-    border-radius: var(--radius);
-    font-weight: var(--font-weight-semibold);
-    transition: all 0.3s ease;
-}
-
-/* Aplicar redondeo y padding al botón grande */
-.d-grid .btn-lg {
-    padding: 0.8rem 1.5rem;
-}
-
-/*  ESTILOS ESPECÍFICOS PARA MODALES  */
+/* ===== ESTILOS ESPECÍFICOS PARA MODALES ===== */
 
 /* Contenedor principal de los modales */
 .modal-content {
@@ -107,34 +33,46 @@ h1, h2, h3, h4 {
 
 .form-control:focus {
     border-color: var(--primary); /* Borde Verde Olivo al enfocar */
-    box-shadow: 0 0 0 0.15rem rgba(165, 165, 141, 0.25); /* Sombra suave */
+    box-shadow: 0 0 0 0.15rem rgba(112, 141, 129, 0.25); /* Sombra suave verde */
 }
 
-/* Etiqueta para el enlace "¿Olvidaste tu contraseña?" */
-.small.text-muted {
-    color: var(--muted-foreground) !important;
-    text-decoration: none;
-    transition: color 0.3s;
+/* ===== BOTONES VERDES (para toda la web, incluyendo modales) ===== */
+.btn,
+.btn-custom-primary {
+    background-color: #708D81; /* Verde Olivo */
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.8rem 2rem;
+    font-weight: var(--font-weight-semibold);
+    transition: all 0.3s ease;
+    display: inline-block;
 }
 
-.small.text-muted:hover {
-    color: var(--secondary) !important; /* Terracota al hacer click */
+.btn:hover,
+.btn-custom-primary:hover {
+    background-color: #5B7269; /* Verde más oscuro */
+    transform: scale(1.05);
 }
 
-/* Estilo para enlaces de cambio de modal ("Regístrate", "Inicia Sesión", "Volver") */
-.text-center a {
-    color: var(--primary); /* Verde Olivo */
-    font-weight: var(--font-weight-medium);
-    text-decoration: none;
-    transition: color 0.3s;
+/* Botón secundario (borde verde) */
+.btn-custom-secondary {
+    background-color: transparent;
+    color: #708D81;
+    border: 2px solid #708D81;
+    border-radius: 0.5rem;
+    padding: 0.8rem 2rem;
+    font-weight: var(--font-weight-semibold);
+    transition: all 0.3s ease;
+    display: inline-block;
 }
 
-.text-center a:hover {
-    color: var(--secondary); /* Terracota al hacer click */
-    text-decoration: underline;
+.btn-custom-secondary:hover {
+    background-color: #708D81;
+    color: white;
 }
 
-/* Estilo para la (Contraseña con el ojo) */
+/* Botón del "ojo" de contraseña */
 .input-group .btn-outline-secondary {
     border-color: var(--border);
     color: var(--foreground);
@@ -144,37 +82,45 @@ h1, h2, h3, h4 {
 }
 
 .input-group .btn-outline-secondary:hover {
-    background-color: var(--accent); /* Verde claro */
-    border-color: var(--accent);
+    background-color: #A5BBAF; /* Verde más claro */
+    border-color: #A5BBAF;
     color: var(--foreground);
 }
 
-/* Estilo para la columna de video */
-/*Hace que el video ocupe todo el espacio de su columna */
+/* ===== ENLACES Y TEXTOS ===== */
+.small.text-muted {
+    color: var(--muted-foreground) !important;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.small.text-muted:hover {
+    color: #708D81 !important; /* Verde Olivo */
+}
+
+.text-center a {
+    color: #708D81; /* Verde Olivo */
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.text-center a:hover {
+    color: #5B7269; /* Verde más oscuro */
+    text-decoration: underline;
+}
+
+/* ===== VIDEO EN MODALES ===== */
 .video-fill {
     width: 100%;
     height: 100%;
-    /*Ajusta el video para que cubra completamente el contenedor */
     object-fit: cover; 
 }
 
-/* Asegura que el contenedor de la columna tenga una altura definida */
-.modal-video-col {
-    /* Ocupa toda la altura disponible en la fila */
-    min-height: 100%; 
-    /* Asegura que la columna tenga la misma altura que el contenido de la columna de login */
-}
-
-/* Esto es para que las columnas (el row) tengan una altura a la cual el video se pueda ajustar. */
-.modal-body.p-0,
-.container-fluid,
-.row {
-    height: 100%;
-}
-/* Solo afecta al video del modal de registro */
 .modal-video-col {
     position: relative;
     overflow: hidden;
+    min-height: 100%;
 }
 
 .modal-video-col video {
@@ -185,7 +131,7 @@ h1, h2, h3, h4 {
     border-bottom-right-radius: 0.5rem;
 }
 
-/* Fondo difuminado detrás del video en pantallas grandes */
+/* Fondo difuminado detrás del video */
 @media (min-width: 768px) {
     .modal-video-col::before {
         content: "";
@@ -203,11 +149,10 @@ h1, h2, h3, h4 {
     min-height: 500px;
 }
 
-/* Estilo del formulario */
+/* Fondo blanco del formulario del registro */
 #registerModal .col-md-6.p-4.p-md-5 {
     background-color: #fff;
     border-top-left-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
     padding: 2rem;
 }
-
