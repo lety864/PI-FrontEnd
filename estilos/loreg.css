@@ -1,0 +1,158 @@
+/* ===== ESTILOS ESPECÍFICOS PARA MODALES ===== */
+
+/* Contenedor principal de los modales */
+.modal-content {
+    border-radius: var(--radius);
+    border: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.modal-body .col-md-6 {
+    background-color: transparent !important; 
+}
+
+#forgotPasswordModal .modal-body {
+    background-color: var(--card); 
+}
+
+/* Títulos dentro de los modales */
+.modal-body h2, .modal-body h4 {
+    color: var(--foreground);
+    font-weight: var(--font-weight-semibold);
+    font-family: 'Playfair Display', serif;
+}
+
+/* Estilo para inputs de formulario */
+.form-control {
+    border-radius: 0.5rem;
+    border-color: var(--border);
+    color: var(--foreground);
+    padding: 0.6rem 0.75rem;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    border-color: var(--primary); /* Borde Verde Olivo al enfocar */
+    box-shadow: 0 0 0 0.15rem rgba(112, 141, 129, 0.25); /* Sombra suave verde */
+}
+
+/* ===== BOTONES VERDES (para toda la web, incluyendo modales) ===== */
+.btn,
+.btn-custom-primary {
+    background-color: #708D81; /* Verde Olivo */
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.8rem 2rem;
+    font-weight: var(--font-weight-semibold);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn:hover,
+.btn-custom-primary:hover {
+    background-color: #5B7269; /* Verde más oscuro */
+    transform: scale(1.05);
+}
+
+/* Botón secundario (borde verde) */
+.btn-custom-secondary {
+    background-color: transparent;
+    color: #708D81;
+    border: 2px solid #708D81;
+    border-radius: 0.5rem;
+    padding: 0.8rem 2rem;
+    font-weight: var(--font-weight-semibold);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-custom-secondary:hover {
+    background-color: #708D81;
+    color: white;
+}
+
+/* Botón del "ojo" de contraseña */
+.input-group .btn-outline-secondary {
+    border-color: var(--border);
+    color: var(--foreground);
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    transition: all 0.3s;
+}
+
+.input-group .btn-outline-secondary:hover {
+    background-color: #A5BBAF; /* Verde más claro */
+    border-color: #A5BBAF;
+    color: var(--foreground);
+}
+
+/* ===== ENLACES Y TEXTOS ===== */
+.small.text-muted {
+    color: var(--muted-foreground) !important;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.small.text-muted:hover {
+    color: #708D81 !important; /* Verde Olivo */
+}
+
+.text-center a {
+    color: #708D81; /* Verde Olivo */
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.text-center a:hover {
+    color: #5B7269; /* Verde más oscuro */
+    text-decoration: underline;
+}
+
+/* ===== VIDEO EN MODALES ===== */
+.video-fill {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+.modal-video-col {
+    position: relative;
+    overflow: hidden;
+    min-height: 100%;
+}
+
+.modal-video-col video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+/* Fondo difuminado detrás del video */
+@media (min-width: 768px) {
+    .modal-video-col::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.2);
+    }
+}
+
+/* Ajusta altura del modal */
+.modal-lg .modal-content {
+    min-height: 500px;
+}
+
+/* Fondo blanco del formulario del registro */
+#registerModal .col-md-6.p-4.p-md-5 {
+    background-color: #fff;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    padding: 2rem;
+}

@@ -9,6 +9,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     
+
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css">
     
@@ -22,6 +23,8 @@
     
     <!-- Page-Specific Styles -->
     <link rel="stylesheet" href="estilos/index.css">
+   <!--Page-Specific Styles 
+    <link rel="stylesheet" href="/estilos/loreg.css">-->
 </head>
 <body>
     <!-- ========================================= -->
@@ -43,6 +46,7 @@
                 <a class="navbar-brand d-flex align-items-center" href="index.html">
                     <img src="./assets/mundo.png" alt="Logo Mueblería España" height="30" class="me-2">
                     Mueblería España
+
                 </a>
 
                 <!-- Menú Desktop -->
@@ -59,8 +63,7 @@
                             <a class="nav-link" href="/paginas/contacto.html">Contacto</a>
                         </li>
 
-                    </ul>
-                    
+                    </ul>                    
                     <!-- Barra de búsqueda (Desktop) -->
                     <form class="d-flex me-3" role="search">
                         <input class="form-control search-input" type="search" 
@@ -163,7 +166,6 @@
                                 <li><a class="dropdown-item" href="./paginas/comedores.html">8 sillas</a></li>
                             </ul>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link" href="./paginas/roperos.html">Roperos</a>
                         </li>
@@ -291,7 +293,6 @@
                     <a href="./paginas/ofertas.html" class="fw-bold text-danger">Ofertas</a>
                 </li>
             </ul>
-
             <hr class="my-3">
 
             <!-- Enlaces adicionales -->
@@ -301,6 +302,7 @@
             </ul>
         </div>
     </div>
+
 
     <!-- ========== MAIN CONTENT ========== -->
     <main>
@@ -823,7 +825,179 @@
         </div>
     </div>
 
-    <!-- Bootstrap 5 JS Bundle -->
+   
+    <!--SECCION DEL FORMULARIO DEL LOGIN -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 d-none d-md-block p-0 modal-video-col">
+                            <video autoplay loop muted playsinline class="video-fill">
+                                <source src="assets/LOG.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="col-md-6 p-4 p-md-5">
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <h2 class="mb-4">Bienvenido</h2>
+                            
+                            <div id="alertMessage" class="alert alert-danger d-none" role="alert">
+                            </div>
+                            <form id="loginForm">
+                                <div class="mb-3">
+                                    <label for="emailInput" class="form-label">Correo Electrónico</label>
+                                    <input type="email" class="form-control" id="emailInput" placeholder="tu@email.com" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="passwordInput" class="form-label">Contraseña</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="passwordInput" required>
+                                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                            <i class="bi bi-eye-slash" id="eyeIconLogin"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3 text-end">
+                                    <a href="#" class="small text-muted" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal" data-bs-dismiss="modal">
+                                        ¿Olvidaste tu contraseña?
+                                    </a>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary btn-lg">Ingresar</button>
+                                </div>
+                            </form>
+                            
+                            <hr class="my-4">
+
+                            <div class="text-center">
+                                <p>¿No tienes una cuenta? 
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Regístrate</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--SECCION DEL FORMULARIO DE REGISTRO-->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <div class="container-fluid">
+          <div class="row">
+            
+            <div class="col-md-6 p-4 p-md-5" id="registerFormCol">
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+
+              <h2 class="mb-4">Crea tu Cuenta</h2>
+
+              <div id="successMessage" class="alert alert-success text-center" style="display: none;"></div>
+
+              <form id="registerForm">
+                <div class="mb-3">
+                  <label for="fullname" class="form-label">Nombre Completo</label>
+                  <input type="text" class="form-control" id="fullname" placeholder="Tu nombre" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="email" class="form-label">Correo Electrónico</label>
+                  <input type="email" class="form-control" id="email" placeholder="tu@email.com" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="phone" class="form-label">Número de Teléfono</label>
+                  <input type="tel" class="form-control" id="phone" placeholder="Ej: 55 1234 5678">
+                </div>
+
+                <div class="mb-3">
+                  <label for="password" class="form-label">Crea una Contraseña</label>
+                  <div class="input-group">
+                    <input type="password" class="form-control" id="password" required>
+                    <button class="btn btn-outline-secondary" type="button" id="toggleRegisterPassword">
+                      <i class="bi bi-eye-slash" id="eyeIconPassword"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+                  <div class="input-group">
+                    <input type="password" class="form-control" id="confirmPassword" required>
+                    <button class="btn btn-outline-secondary" type="button" id="toggleConfirmRegisterPassword">
+                      <i class="bi bi-eye-slash" id="eyeIconConfirmPassword"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                  <button type="submit" class="btn btn-primary btn-lg">Registrarme</button>
+                </div>
+              </form>
+
+              <hr class="my-4">
+
+              <div class="text-center">
+                <p>¿Ya tienes una cuenta? 
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Inicia Sesión</a>
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6 d-none d-md-block p-0 modal-video-col">
+              <video autoplay loop muted playsinline>
+                <source src="assets/1000025343.mp4" type="video/mp4">
+                Tu navegador no soporta la etiqueta de video.
+              </video>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--SECCION DE RECUPERACION DE CONTRASEÑA-->
+<div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel">
+        <div class="modal-dialog modal-md modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body p-4">
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <h4 class="mb-4 text-center" id="forgotPasswordModalLabel">Recuperar Contraseña</h4>
+                    <p class="text-muted text-center small">Ingresa tu correo electrónico para enviarte un enlace de recuperación.</p>
+                    <form id="forgotPasswordForm">
+                        <div class="mb-4">
+                            <label for="recoveryEmail" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="recoveryEmail" placeholder="tu@email.com" required>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
+                        </div>
+                    </form>
+                    <hr class="my-4">
+
+                    <div class="text-center">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">
+                            <i class="bi bi-arrow-left"></i> Volver al inicio de sesión
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+     <script src="scripts/registro.js"></script>
+    <script src="scripts/login.js"></script>
+     <!-- Bootstrap 5 JS Bundle -->
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
     <!-- Smooth Scroll -->
@@ -838,5 +1012,7 @@
             });
         });
     </script>
+  <!--VINCULACION DE LOS SCRIPTS DE LOGIN Y REGISTRO-->
+
 </body>
 </html>
