@@ -2,7 +2,7 @@
 /* ==========HERO SECTION=================== */
 .hero {
   background: url('/assets/contacto6.jpg') no-repeat center/cover;
-  height: 650px;
+  height: 760px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,7 +16,7 @@
   content: '';
   position: absolute;
   width: 98%;
-  height: 650px;
+  height: 760px;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 8px;
 }
