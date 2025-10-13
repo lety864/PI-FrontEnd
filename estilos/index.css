@@ -7,23 +7,35 @@
    
    ================================================================== */
 
+/* ===== CONTENEDOR DEL HERO (estilo similar al navbar) ===== */
+.hero-carousel-container {
+    width: 98%;
+    margin: 10px auto 0 auto;
+    border-radius: 8px;
+    overflow: hidden; /* Para que las imágenes respeten el border-radius */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 1;
+}
+
 /* ===== HERO SECTION (CAROUSEL) ===== */
 #heroCarousel {
-    margin-top: -1px; /* Ajusta que el hero inicie despues del navbar secundario */
+    margin-top: 0; /* Ya no necesitamos margin negativo */
 }
+
 .carousel {
-    margin-top: -80px;
     position: relative;
     z-index: 1;
 }
 
 .carousel-item {
-    height: 650px;
+    height: 800px;
     background-size: cover;
     background-position: center;
     position: relative;
 }
 
+/* Overlay oscuro sobre las imágenes */
 .carousel-item::before {
     content: '';
     position: absolute;
@@ -35,6 +47,7 @@
     z-index: 1;
 }
 
+/* Contenido del carousel (texto y botón) */
 .carousel-caption {
     position: absolute;
     bottom: 20%;
@@ -61,7 +74,7 @@
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/* Controles del carousel */
+/* Controles del carousel (flechas) */
 .carousel-control-prev,
 .carousel-control-next {
     width: 5%;
@@ -74,6 +87,7 @@
     opacity: 1;
 }
 
+/* Indicadores (bolitas) del carousel */
 .carousel-indicators {
     bottom: 30px;
 }
@@ -98,12 +112,15 @@
 /* ===== RESPONSIVE (SOLO CAROUSEL) ===== */
 
 @media (max-width: 768px) {
-    .carousel {
-        margin-top: 0;
+    /* Ajustes para el contenedor en móvil */
+    .hero-carousel-container {
+        width: 98%;
+        margin: 8px auto 0 auto;
+        border-radius: 6px; /* Bordes un poco menos redondeados en móvil */
     }
     
     .carousel-item {
-        height: 500px;
+        height: 550px;
     }
     
     .carousel-caption {
@@ -119,8 +136,24 @@
         font-size: 1rem;
     }
     
+    /* Ocultamos las flechas en móvil para mejor UX */
     .carousel-control-prev,
     .carousel-control-next {
         display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-carousel-container {
+        width: 96%; /* Un poco más estrecho en móviles muy pequeños */
+        margin: 6px auto 0 auto;
+    }
+    
+    .carousel-item {
+        height: 400px;
+    }
+    
+    .carousel-caption h1 {
+        font-size: 1.5rem;
     }
 }
