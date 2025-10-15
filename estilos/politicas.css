@@ -20,6 +20,8 @@
   --font-weight-semibold: 600;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
+
+  
   
   /* Bordes */
   --radius: 0.75rem; /* 12px */
@@ -31,6 +33,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -82,21 +85,49 @@ h1, h2, h3, h4 {
 
 /* =======HERO SECTION============= */
 .hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
-              url('https://images.unsplash.com/photo-1556228720') center/cover;
-  min-height: 500px;
+  position: relative;
+  min-height: 80vh;
+  
+  /* --- Propiedades del fondo --- */
+  background-image: url('/assets/contacto5.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* --- Centrado del contenido de texto --- */
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
   text-align: center;
 }
 
-.hero h1 {
-  font-size: 3.5rem;
+/* --- Overlay --- */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+/* --- Estilos para el contenido del Hero --- */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: white; /* Color del texto */
+}
+
+.hero-content h1 {
+  font-size: 4rem;
   font-weight: 700;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  margin: 0;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+}
+.hero-title {
+  opacity: 0; /* Empieza invisible al cargar página */
+  transition: opacity 2s ease-in-out; /* animación de opacidad */
 }
 
 /* ======ABOUT SECTION (Texto principal sobre nosotros============= */
@@ -159,7 +190,7 @@ h1, h2, h3, h4 {
   background-color: var(--primary);
   color: var(--primary-foreground);
   padding: 5rem 0;
-  text-align: center;
+  
 }
 
 .cta-section h2 {
@@ -358,10 +389,73 @@ h1, h2, h3, h4 {
 
     /* Cambia solo el color del texto en Privacidad */
     .custom-privacidad {
-    color: white !important; 
-     --font-weight-normal: 700;
+    color: black !important; 
 }
     .nav-link{
         color: white;
          --font-weight-normal: 700;
     }
+
+    .p-3 {
+   border: 3px solid #CB997E; /* grosor, tipo y color del borde */
+  border-radius: 15px;       /* redondea las esquinas */
+  padding: 20px;             /* separa el contenido del borde */
+  background-color: transparent; /* sin fondo */
+}
+
+/* ==========SOLO CAMBIO DE TAMAÑOS DE FUENTE ====== */
+/* Aplicar mismo tamaño de fuente a TODO el contenido de políticas */
+
+.policy-content p,
+.content-block p,
+.info-box p,
+.payment-card p,
+.financing-box p,
+.lead-text,
+.zone-description,
+.delivery-time,
+.service-item span,
+.alert-box,
+.timeline-item p,
+.step-card p {
+  font-size: 1rem !important;
+}
+
+.policy-content ul li,
+.content-block ul li,
+.financing-box ul li {
+  font-size: 1rem !important;
+}
+
+.guarantee-badge span {
+  font-size: 1rem !important;
+}
+
+/* ==========ALINEACIÓN TÉRMINOS Y CONDICIONES ====== */
+#terminos .policy-content {
+    text-align: left !important;
+}
+
+#terminos .policy-content .lead-text {
+    text-align: left !important;
+}
+
+#terminos .content-block {
+    text-align: left !important;
+}
+
+#terminos .content-block p,
+#terminos .content-block ul {
+    text-align: left !important;
+}
+
+#terminos .content-block h3 {
+    text-align: left !important;
+    margin-left: 0 !important;
+}
+
+/* El título principal se mantiene centrado */
+#terminos .policy-header h2 {
+    text-align: center !important;
+}
+

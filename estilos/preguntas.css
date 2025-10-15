@@ -1,0 +1,259 @@
+/* ==========ENCABEZADOS=================== */
+.encabezado {
+  display: flex;
+  margin-top: 12px;
+  height: 138px;
+  font-size: 3rem;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--foreground);
+  background-color: var(--background);
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* ===== UTILIDADES ===== */
+.margin {
+  margin: 20px;
+}
+
+/* ===== ESTILOS FAQ ===== */
+.faq-section {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: var(--card);
+  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+h2 {
+  text-align: center;
+  color: var(--foreground);
+  margin-bottom: 35px;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 10px;
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Acordeón personalizado */
+.accordion-button {
+  background-color: var(--card);
+  color: var(--primary);
+  font-weight: var(--font-weight-semibold);
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.accordion-button:hover {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+}
+
+/* Cambio del ícono del acordeón */
+.accordion-button::after {
+  font-size: 20px;
+  color: var(--primary);
+}
+
+.accordion-button.collapsed::after {
+  transform: rotate(0deg);
+}
+
+.accordion-button:not(.collapsed)::after {
+  transform: rotate(180deg);
+  color: var(--secondary);
+}
+
+/* Texto del acordeón */
+.accordion-body {
+  color: var(--muted-foreground);
+  padding: 15px 10px;
+  background-color: var(--background);
+}
+
+/* ===== FORMULARIO DE CONTACTO ===== */
+.contact-form {
+  margin-top: 50px;
+  padding: 30px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--background);
+}
+
+.contact-form h3 {
+  color: var(--primary);
+  margin-top: 0;
+  font-weight: var(--font-weight-semibold);
+}
+
+.contact-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground);
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+.submit-btn {
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: var(--font-weight-medium);
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: var(--footer-bg);
+}
+
+.faq-form-bg {
+  background-size: cover;       
+  background-position: center;  
+  background-repeat: no-repeat; 
+  color: #fff;                  
+}
+
+.faq-form-bg form {
+  background-color: rgba(0,0,0,0.6);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* =============FOOTER======================== */
+.footer {
+  background-color: #4A3C2E; /* Color café unificado */
+  color: rgba(255, 255, 255, 0.9);
+  padding: 3rem 0 1rem;
+}
+
+.footer h4 {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  font-weight: var(--font-weight-semibold);
+  color: #fff;
+}
+
+.footer p {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.footer a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: #d2b48c; /* tono beige suave */
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer ul li {
+  margin-bottom: 0.5rem;
+}
+
+.social-icons a {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.85);
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #d2b48c; /* beige dorado */
+}
+
+/* ==========COPYRIGHT============= */
+.copyright {
+  background-color: #4A3C2E; /* mismo café */
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+}
+
+/* ==========RESPONSIVE DESIGN============= */
+@media (max-width: 992px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .encabezado {
+    font-size: 2rem;
+    height: auto;
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 400px;
+  }
+
+  .hero::before {
+    height: 400px;
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+    padding: 0 1rem;
+  }
+  
+  .container-fondo {
+    min-height: auto;
+    padding: 1rem;
+  }
+  
+  .encabezado {
+    font-size: 1.5rem;
+  }
+
+  .btn-formato-position {
+    margin-left: 200px;
+  }
+  
+  footer {
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+  
+  .footer-col {
+    margin-bottom: 1.5rem;
+  }
+}

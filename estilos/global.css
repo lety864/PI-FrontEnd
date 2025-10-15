@@ -1,0 +1,1114 @@
+/*
+ * MUEBLERÍA ESPAÑA - SISTEMA DE DISEÑO GLOBAL
+ * Autor: Code&Coffee
+ * Última actualización: 9 de octubre de 2025
+ *
+ * Contiene: Variables, Resets, Navbar, Footer, Componentes Globales.
+ * No contiene: Estilos específicos de páginas (ej. index.css, about.css).
+ */
+
+/* ===================================
+   1. RESET Y BASE
+   =================================== */
+/* Atributos: reseteo de márgenes y padding, modelo de caja */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===================================
+   2. VARIABLES DE DISEÑO
+   =================================== */
+:root {
+  /* --- Colores principales --- */
+  /* Color primario: Verde nórdico. Usado en: navbar, botones, títulos. */
+  --primary: #73917A;
+  --primary-hover: #5E7665;
+  --primary-light: #8DAA94;
+
+  /* Color secundario: Terracota cálido. Usado en: CTAs, ofertas. */
+  --secondary: #CB997E;
+  --secondary-hover: #B8856B;
+  --secondary-light: rgba(203, 153, 126, 0.1);
+
+  /* --- Fondos --- */
+  --background-light: #F5F4EF;
+  --background-white: #FFFFFF;
+  --background-dark: #5E503F;
+  --background-darker: #4A3C2E;
+
+  /* --- Textos --- */
+  --text-dark: #686763;
+  --text-medium: #757575;
+  --text-light: #999999;
+  --text-white: #FFFFFF;
+  --text-white-soft: rgba(255, 255, 255, 0.9);
+  --text-white-muted: rgba(255, 255, 255, 0.7);
+
+  /* --- Bordes --- */
+  --border-light: #E5E5E5;
+  --border-medium: rgba(104, 103, 99, 0.2);
+
+  /* --- Tipografía --- */
+  /* Fuente principal para UI, cuerpo de texto */
+  --font-primary: 'Poppins', sans-serif;
+  /* Fuente de visualización para Títulos y marca */
+  --font-display: 'Playfair Display', serif;
+
+  /* --- Pesos de fuente --- */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* --- Espaciado (sistema basado en 4px) --- */
+  --space-xs: 0.25rem;  /* 4px */
+  --space-sm: 0.5rem;   /* 8px */
+  --space-md: 1rem;     /* 16px */
+  --space-lg: 1.5rem;   /* 24px */
+  --space-xl: 2rem;     /* 32px */
+  --space-2xl: 3rem;    /* 48px */
+
+  /* --- Bordes redondeados --- */
+  --radius: 0.75rem;    /* 12px */
+
+  /* --- Sombras --- */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ===================================
+   3. ESTILOS GLOBALES
+   =================================== */
+/* Atributos: tipografía, color, fondo y altura de línea base */
+body {
+  font-family: var(--font-primary);
+  color: var(--text-dark);
+  background-color: var(--background-light);
+  line-height: 1.6;
+}
+
+/* Atributos: tipografía para todos los títulos */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
+
+/* Atributos: color para títulos principales */
+h1, h2, h3 {
+  color: var(--primary);
+}
+
+/* Atributos: color para títulos secundarios */
+h4, h5, h6 {
+  color: var(--text-dark);
+}
+
+/* ===================================
+   4. NAVBAR PRINCIPAL (FLOTANTE Y STICKY)
+   =================================== */
+/* Atributos: dimensiones y apilamiento (z-index) */
+.full-width-nav-container {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    z-index: 1000;
+}
+
+/* Atributos: posicionamiento sticky, espaciado y z-index */
+.full-width-nav-container .sticky-top {
+    position: sticky;
+    top: 50px;
+    z-index: 1020;
+    padding: 0 40px;
+}
+
+/* Atributos: fondo, padding, bordes, sombra, dimensiones y transición */
+.navbar-dark {
+    background-color: var(--primary) !important;
+    padding: 0.5rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-width: none;
+    width: 98%;
+    margin: 10px auto 0 auto;
+    transition: all 0.3s ease;
+}
+
+/* Hover: aumenta la sombra */
+.navbar-dark:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Atributos: ancho máximo y centrado del contenido */
+.navbar-dark .container-fluid {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* Atributos: tipografía, color y sombra de texto del logo */
+.navbar-dark .navbar-brand {
+    color: var(--text-white) !important;
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-bold);
+    font-size: 1.4rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    padding: 0.25rem 0;
+}
+
+/* Atributos: altura de la imagen del logo */
+.navbar-dark .navbar-brand img {
+    height: 30px;
+}
+
+/* Atributos: color, transición, espaciado y grosor de fuente */
+.navbar-dark .nav-link {
+    color: var(--text-white) !important;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    padding: 0.4rem 0.75rem;
+    font-weight: var(--font-weight-medium);
+    font-size: 1rem;
+}
+
+/* Hover/Active: cambia el fondo y redondea bordes (efecto píldora) */
+.navbar-dark .nav-link:hover,
+.navbar-dark .nav-link.active {
+    color: var(--background-light) !important;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+}
+
+/* Atributos: fondo, borde, color y transición (efecto glassmorphism) */
+.navbar-dark .search-input,
+.navbar-dark .form-control {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: var(--text-white);
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    height: 38px;
+}
+
+/* Atributos: color y tamaño del texto placeholder */
+.navbar-dark .search-input::placeholder,
+.navbar-dark .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.85rem;
+}
+
+/* Focus: cambia fondo, borde y agrega sombra de realce */
+.navbar-dark .search-input:focus,
+.navbar-dark .form-control:focus {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: var(--background-light);
+    box-shadow: 0 0 0 0.2rem rgba(245, 244, 239, 0.25);
+    color: var(--text-white);
+    outline: none;
+}
+
+/* Atributos: color, sombra y tamaño de los iconos del nav */
+.navbar-dark .nav-link i {
+    color: var(--text-white);
+    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.3));
+    font-size: 1.25rem;
+}
+
+/* Atributos: color de fondo y tamaño de fuente del badge del carrito */
+.navbar-dark .badge {
+    background-color: var(--secondary) !important;
+    font-size: 0.7rem;
+}
+
+/* Atributos: borde, color y espaciado del botón hamburguesa */
+.navbar-dark .btn-outline-light {
+    border-color: var(--text-white);
+    color: var(--text-white);
+    padding: 0.35rem 0.75rem;
+    font-size: 0.9rem;
+}
+
+/* Hover: cambia el color de fondo */
+.navbar-dark .btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Atributos: tamaño del icono de hamburguesa */
+.navbar-dark .btn-outline-light i {
+    font-size: 1.5rem;
+}
+
+/* ===================================
+   5. NAVBAR SECUNDARIO (CATEGORÍAS)
+   =================================== */
+@media (min-width: 992px) {
+    /* Atributos: sombra del navbar principal en desktop */
+    .full-width-nav-container .navbar {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Atributos: margen, espaciado y z-index del contenedor flotante */
+    .floating-nav-container {
+        margin-top: 10px;
+        padding: 0 15px;
+        position: relative;
+        z-index: 999;
+    }
+    
+    /* Atributos: fondo, borde, sombra y dimensiones de la barra de categorías */
+    .floating-nav-container .navbar {
+        background: var(--background-white) !important;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        padding: 0.5rem 0;
+        max-width: 1320px;
+        margin: 0 auto;
+        display: block !important;
+    }
+    
+    /* Atributos: distribución uniforme de los links */
+    .floating-nav-container .navbar-nav {
+        width: 100%;
+        justify-content: space-around;
+    }
+}
+
+/* Atributos: color, fuente, espaciado y transición de los links */
+.floating-nav-container .nav-link {
+    color: var(--text-dark);
+    font-weight: var(--font-weight-medium);
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+}
+
+/* Hover: cambia el color de fondo */
+.floating-nav-container .nav-link:hover {
+    background-color: var(--secondary-light);
+}
+
+/* Atributos: color y fuente para el link de "Ofertas" */
+.floating-nav-container .nav-link.text-danger {
+    color: var(--secondary) !important;
+    font-weight: var(--font-weight-bold);
+}
+
+/* Atributos: fondo, borde, sombra y margen del menú desplegable */
+.floating-nav-container .dropdown-menu {
+    background-color: var(--background-white);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-md);
+    border-radius: 12px;
+    margin-top: 0.5rem;
+}
+
+/* Atributos: color, espaciado y transición de los items del dropdown */
+.floating-nav-container .dropdown-item {
+    color: var(--text-dark);
+    padding: 0.5rem 1rem;
+    transition: background-color 0.2s ease;
+}
+
+/* Hover: cambia el color de fondo */
+.floating-nav-container .dropdown-item:hover {
+    background-color: #e9ecef;
+}
+
+/* ===================================
+   6. OFFCANVAS (MENÚ MÓVIL)
+   =================================== */
+/* Atributos: color de fondo del panel */
+.offcanvas {
+    background-color: var(--background-light);
+}
+
+/* Atributos: fondo, borde y espaciado de la cabecera */
+.offcanvas-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid var(--border-light);
+    padding: 1.5rem;
+}
+
+/* Atributos: color y tipografía del título */
+.offcanvas-title {
+    color: var(--text-dark);
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-bold);
+}
+
+/* Atributos: reseteo de padding del cuerpo */
+.offcanvas-body {
+    padding: 0;
+}
+
+/* Atributos: reseteo de fondo y borde de los items */
+.offcanvas-body .list-group-item {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+/* Atributos: display, espaciado, color y transición de los links principales */
+.offcanvas-body .list-group-item > a {
+    display: block;
+    padding: 15px 25px;
+    color: var(--text-dark);
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    border-left: 4px solid transparent;
+}
+
+/* Hover: cambia fondo, color, posición y borde */
+.offcanvas-body .list-group-item > a:hover {
+    background-color: #e9ecef;
+    color: #000;
+    transform: translateX(8px);
+    border-left-color: var(--primary);
+}
+
+/* Atributos: estilos de lista, espaciado y fondo de subcategorías */
+.offcanvas-body .list-group-item ul {
+    list-style: none;
+    padding-left: 1rem;
+    background-color: #f8f9fa;
+}
+
+/* Atributos: display, espaciado, color y fuente de los links de subcategorías */
+.offcanvas-body .list-group-item ul li a {
+    display: block;
+    padding: 12px 25px 12px 40px;
+    color: var(--text-medium);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+/* Hover: cambia fondo, color y borde */
+.offcanvas-body .list-group-item ul li a:hover {
+    background-color: rgba(203, 153, 126, 0.1);
+    color: var(--secondary);
+    border-left-color: var(--secondary);
+}
+
+/* Atributos: borde y color del botón de búsqueda */
+.offcanvas .btn-outline-primary {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* Hover: invierte colores de fondo y texto */
+.offcanvas .btn-outline-primary:hover {
+    background-color: var(--primary);
+    color: var(--text-white);
+}
+
+/* ===================================
+   7. BOTONES REUTILIZABLES
+   =================================== */
+/* Atributos: fondo, color, espaciado, fuente, borde y transición. Color verde */
+.btn-custom-primary {
+    background-color: var(--primary);
+    color: var(--text-white);
+    border: none;
+    padding: 0.8rem 2rem;
+    font-weight: var(--font-weight-semibold);
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+/* Hover: cambia fondo y escala el tamaño */
+.btn-custom-primary:hover {
+    background-color: var(--primary-hover);
+    transform: scale(1.05);
+    color: var(--text-white);
+    text-decoration: none;
+}
+
+/* Atributos: fondo transparente, color, borde y transición. Color blanco y transparente*/
+.btn-custom-secondary {
+    background-color: transparent;
+    color: var(--text-white);
+    border: 2px solid var(--text-white);
+    padding: 0.8rem 2rem;
+    font-weight: var(--font-weight-semibold);
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+/* Hover: invierte colores de fondo y texto */
+.btn-custom-secondary:hover {
+    background-color: var(--text-white);
+    color: var(--primary);
+    text-decoration: none;
+}
+
+/* Atributos: fondo, color, espaciado, fuente, sombra y transición. Color terracota*/
+.cta-button {
+    display: inline-block;
+    background-color: var(--secondary);
+    color: var(--text-white);
+    padding: 12px 28px;
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+}
+
+/* Hover: cambia fondo, sombra y posición vertical (efecto elevación) */
+.cta-button:hover {
+    background-color: var(--secondary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    color: var(--text-white);
+    text-decoration: none;
+}
+
+/* ===================================
+   8. SECTION HEADERS (TÍTULOS DE SECCIONES)
+   =================================== */
+/* Atributos: alineación de texto y margen inferior */
+.section-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+/* Atributos: color, fuente y espaciado de letras para la etiqueta */
+.section-label {
+    color: var(--secondary);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: var(--space-sm);
+}
+
+/* Atributos: tipografía, tamaño y color del título principal */
+.section-header h2 {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: var(--space-md);
+}
+
+/* Atributos: color, ancho máximo y centrado de la descripción */
+.section-header p {
+    color: var(--text-medium);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Atributos: alineación y margen para la variante a la izquierda */
+.section-header.text-start {
+    text-align: left;
+    margin-bottom: var(--space-lg);
+}
+
+/* ===================================
+   9. TARJETAS DE CATEGORÍAS
+   =================================== */
+/* Atributos: posicionamiento, altura, borde, overflow, cursor y sombra */
+.category-card {
+    position: relative;
+    height: 340px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Hover: eleva la tarjeta y aumenta la sombra */
+.category-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Atributos: dimensiones, ajuste de objeto y transición de la imagen */
+.category-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+/* Hover: aplica zoom a la imagen */
+.category-card:hover .category-card-image {
+    transform: scale(1.05);
+}
+
+/* Atributos: posicionamiento, dimensiones y fondo degradado del overlay */
+.category-card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient( to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 100% );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--space-lg);
+}
+
+/* Atributos: tipografía, tamaño y color del título */
+.category-card-overlay h3 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--text-white);
+    margin-bottom: var(--space-sm);
+}
+
+/* Atributos: color, tamaño y margen de la descripción */
+.category-card-overlay p {
+    color: var(--text-white-muted);
+    font-size: 0.875rem;
+    margin-bottom: var(--space-md);
+}
+
+/* Atributos: fondo, color, borde, espaciado y fuente del botón */
+.btn-category {
+    background: transparent;
+    color: var(--text-white);
+    border: 2px solid var(--text-white);
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-semibold);
+    border-radius: 6px;
+    width: fit-content;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+/* Hover: invierte colores y eleva el botón */
+.btn-category:hover {
+    background: var(--text-white);
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* ===================================
+   10. TARJETAS DE PRODUCTOS
+   =================================== */
+/* Atributos: fondo, borde, sombra, transición y altura */
+.product-card {
+    background: var(--background-white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+/* Hover: eleva la tarjeta y aumenta la sombra */
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Atributos: posicionamiento y padding para forzar aspect-ratio 1:1 */
+.product-image-container {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    overflow: hidden;
+}
+
+/* Atributos: posicionamiento absoluto y ajuste de objeto para la imagen */
+.product-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Atributos: posicionamiento, fondo, color y espaciado del badge */
+.product-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--secondary);
+    color: var(--text-white);
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-semibold);
+}
+
+/* Atributos: posicionamiento, fondo, dimensiones y alineación del botón de favorito */
+.product-favorite {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--background-white);
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Hover: escala el tamaño y cambia el color */
+.product-favorite:hover {
+    transform: scale(1.1);
+    color: var(--secondary);
+}
+
+/* Atributos: espaciado del contenedor de información */
+.product-info {
+    padding: var(--space-md);
+}
+
+/* Atributos: fuente y color del título del producto */
+.product-title {
+    font-size: 1rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-dark);
+    margin-bottom: var(--space-sm);
+}
+
+/* Atributos: display, alineación y espaciado del rating */
+.product-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: var(--space-sm);
+}
+
+/* Atributos: color y tamaño de las estrellas */
+.stars {
+    color: #FFB800;
+    font-size: 0.875rem;
+}
+
+/* Atributos: color y tamaño del contador de reviews */
+.rating-count {
+    color: var(--text-light);
+    font-size: 0.875rem;
+}
+
+/* Atributos: display, alineación y espaciado de los precios */
+.product-price {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: var(--space-md);
+}
+
+/* Atributos: fuente y color del precio actual */
+.current-price {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--primary);
+}
+
+/* Atributos: fuente, color y decoración del precio anterior */
+.old-price {
+    font-size: 1rem;
+    color: var(--text-light);
+    text-decoration: line-through;
+}
+
+/* Atributos: dimensiones y alineación del botón "Agregar al carrito" */
+.btn-add-cart {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* ===================================
+   11. BANNERS Y PROMOCIONES
+   =================================== */
+/* Atributos: fondo, borde, overflow y sombra del banner */
+.promo-banner {
+    background: var(--background-white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+/* Atributos: dimensiones y ajuste de objeto para la imagen */
+.promo-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Atributos: reseteo de estilos de lista y margen */
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+/* Atributos: margen, display, alineación y fuente de los items */
+.features-list li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+/* Atributos: color y tamaño de los iconos de características */
+.features-list i {
+    color: var(--primary);
+    font-size: 1.25rem;
+}
+
+/* ===================================
+   12. SECCIÓN DE UBICACIONES
+   =================================== */
+/* Atributos: reseteo de estilos de lista y margen */
+.location-details {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+/* Atributos: margen, display, alineación y fuente de los items */
+.location-details li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+/* Atributos: color, tamaño y ancho fijo de los iconos */
+.location-details i {
+    color: var(--secondary);
+    font-size: 1.25rem;
+    width: 24px;
+}
+
+/* ===================================
+   13. CARDS GENÉRICAS
+   =================================== */
+/* Atributos: fondo, borde y transición para cards genéricas de Bootstrap */
+.card {
+    background-color: var(--background-white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover: eleva la tarjeta y aumenta la sombra */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+/* ===================================
+   14. FOOTER
+   =================================== */
+.site-footer {
+  background-color: var(--background-dark);
+  color: var(--text-white-muted);
+  padding: 60px 0;
+  font-family: var(--font-primary);
+}
+
+/* --- Widgets del Footer (cada columna) --- */
+.footer-widget .widget-title {
+  font-family: var(--font-display);
+  color: var(--text-white);
+  font-size: 1.25rem;
+  margin-bottom: 25px;
+  position: relative;
+  padding-bottom: 10px;
+  display: inline-block; /* <-- AÑADIDO: Ajusta el contenedor al texto */
+}
+
+.footer-widget p {
+  line-height: 1.7;
+}
+
+/* --- Listas de Enlaces --- */
+.footer-widget ul li {
+  margin-bottom: 12px;
+}
+
+.footer-widget ul a {
+  color: var(--text-white-muted);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-widget ul a:hover {
+  color: var(--text-white);
+  padding-left: 5px; /* Efecto sutil de desplazamiento */
+}
+
+/* --- Lista de Contacto (con iconos) --- */
+.contact-info li {
+  display: flex;
+  align-items: flex-start; /* Alinea al inicio por si el texto tiene varias líneas */
+}
+
+.contact-info i {
+  color: var(--primary-light);
+  font-size: 1rem;
+  margin-top: 4px; /* Alineación vertical fina */
+}
+
+/* --- Iconos de Redes Sociales --- */
+.social-links a {
+  color: var(--text-white-muted);
+  font-size: 1.5rem; /* 24px */
+  margin-right: 15px;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--primary-light);
+  transform: translateY(-3px); /* Efecto de elevación */
+}
+
+
+/* --- Barra de Copyright --- */
+.copyright-bar {
+  background-color: var(--background-darker);
+  color: var(--text-white-muted);
+  padding: 20px 0;
+  font-size: 0.9rem;
+}
+
+
+/* ===================================
+   15. UTILIDADES GLOBALES
+   =================================== */
+/* Clases de utilidad para colores de texto */
+.text-primary { color: var(--primary); }
+.text-secondary { color: var(--secondary); }
+.text-medium { color: var(--text-medium); }
+.text-light { color: var(--text-light); }
+
+/* Clases de utilidad para colores de fondo */
+.bg-light { background-color: var(--background-light); }
+.bg-white { background-color: var(--background-white); }
+.bg-primary { background-color: var(--primary); }
+
+/* ===================================
+   16. RESPONSIVE (MÓVIL)
+   =================================== */
+@media (max-width: 991.98px) {
+    /* Atributos: posicionamiento absoluto y transformación para centrar el logo */
+    .navbar .navbar-brand {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    /* Atributos: posición superior y espaciado del navbar en móvil */
+    .full-width-nav-container .sticky-top {
+        top: 8px;
+        padding: 0 10px;
+    }
+    
+    /* Atributos: espaciado más compacto del navbar */
+    .navbar-dark {
+        padding: 0.5rem 0.75rem;
+    }
+    
+    /* Atributos: tamaño de los iconos en móvil */
+    .navbar-dark .nav-link i {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Atributos: tamaño de fuente para títulos en pantallas pequeñas */
+    .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    /* Atributos: altura de las tarjetas de categoría */
+    .category-card {
+        height: 280px;
+    }
+    
+    /* Atributos: espaciado más compacto en móvil pequeño */
+    .full-width-nav-container .sticky-top {
+        padding: 0 8px;
+    }
+}
+/* ===== SE AGREGO  AL GLOBAL LOS ESTILOS ESPECÍFICOS PARA MODALES ===== */
+
+/* Contenedor principal de los modales */
+.modal-content {
+    border-radius: var(--radius);
+    border: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.modal-body .col-md-6 {
+    background-color: transparent !important; 
+}
+
+#forgotPasswordModal .modal-body {
+    background-color: var(--card); 
+}
+
+/* Títulos dentro de los modales */
+.modal-body h2, .modal-body h4 {
+    color: var(--foreground);
+    font-weight: var(--font-weight-semibold);
+    font-family: 'Playfair Display', serif;
+}
+
+/* Estilo para inputs de formulario */
+.form-control {
+    border-radius: 0.5rem;
+    border-color: var(--border);
+    color: var(--foreground);
+    padding: 0.6rem 0.75rem;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    border-color: var(--primary); /* Borde Verde Olivo al enfocar */
+    box-shadow: 0 0 0 0.15rem rgba(112, 141, 129, 0.25); /* Sombra suave verde */
+}
+
+/* ===== BOTONES VERDES (para toda la web, incluyendo modales) ===== */
+.btn,
+.btn-custom-primary {
+    background-color: #708D81; /* Verde Olivo */
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.8rem 2rem;
+    font-weight: var(--font-weight-semibold);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn:hover,
+.btn-custom-primary:hover {
+    background-color: #5B7269; /* Verde más oscuro */
+    transform: scale(1.05);
+}
+
+/* Botón secundario (borde verde) */
+.btn-custom-secondary {
+    background-color: transparent;
+    color: #708D81;
+    border: 2px solid #708D81;
+    border-radius: 0.5rem;
+    padding: 0.8rem 2rem;
+    font-weight: var(--font-weight-semibold);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-custom-secondary:hover {
+    background-color: #708D81;
+    color: white;
+}
+
+/* Botón del "ojo" de contraseña */
+.input-group .btn-outline-secondary {
+    border-color: var(--border);
+    color: var(--foreground);
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    transition: all 0.3s;
+}
+
+.input-group .btn-outline-secondary:hover {
+    background-color: #A5BBAF; /* Verde más claro */
+    border-color: #A5BBAF;
+    color: var(--foreground);
+}
+
+/* ===== ENLACES Y TEXTOS ===== */
+.small.text-muted {
+    color: var(--muted-foreground) !important;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.small.text-muted:hover {
+    color: #708D81 !important; /* Verde Olivo */
+}
+
+.text-center a {
+    color: #708D81; /* Verde Olivo */
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.text-center a:hover {
+    color: #5B7269; /* Verde más oscuro */
+    text-decoration: underline;
+}
+
+/* ===== VIDEO EN MODALES ===== */
+.video-fill {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+.modal-video-col {
+    position: relative;
+    overflow: hidden;
+    min-height: 100%;
+}
+
+.modal-video-col video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+/* Fondo difuminado detrás del video */
+@media (min-width: 768px) {
+    .modal-video-col::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.2);
+    }
+}
+
+/* Ajusta altura del modal */
+.modal-lg .modal-content {
+    min-height: 500px;
+}
+
+/* Fondo blanco del formulario del registro */
+#registerModal .col-md-6.p-4.p-md-5 {
+    background-color: #fff;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    padding: 2rem;
+}
