@@ -1,0 +1,45 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.list-group-item img {
+  width: 100px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.quantity-control button {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  border: none;
+  background-color: #b2b09b;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.quantity-control button:hover {
+  background-color: #9c9a85;
+}
+
+@media (max-width: 576px) {
+  .list-group-item {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .list-group-item img {
+    margin-bottom: 10px;
+  }
+
+  .quantity-control {
+    justify-content: center;
+  }
+}
