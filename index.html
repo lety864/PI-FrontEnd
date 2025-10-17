@@ -23,6 +23,8 @@
     
     <!-- Page-Specific Styles -->
     <link rel="stylesheet" href="estilos/index.css">
+
+    
 </head>
 <body>
     <!-- ========================================= -->
@@ -93,13 +95,24 @@
                 <div class="d-flex align-items-center d-lg-none">
                     <ul class="navbar-nav flex-row">
                         <li class="nav-item ms-3">
+                            <a class="nav-link position-relative" href="#" aria-label="Carrito de compras">
+                                <i class="bi bi-cart-fill fs-3"></i>
+                                    <!-- BADGE OCULTO DE NUM ITEMS DEL CARRITO - Movil con d-none -->
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">
+                                    2
+                                    <span class="visually-hidden">productos en el carrito</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ms-3">
                             <a class="nav-link" href="#" aria-label="Mi cuenta">
                                 <i class="bi bi-person-fill fs-3"></i>
                             </a>
                         </li>
-                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+
+                          <!-- <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
                               <i class="bi bi-person-fill fs-3"></i>
-                          </a> 
+                          </a> -->
                       </li>
                     </ul>
                 </div>
@@ -322,6 +335,120 @@
                         <a href="paginas/catalogo.html" class="cta-button">Explorar Catálogo</a>
                     </div>
                 </div>
+
+    <!-- Incio de sesion -->
+    <!-- <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body p-0">
+            <div class="container-fluid">
+              <div class="row">
+
+                <div class="col-md-6 d-none d-md-block p-0 modal-video-col">
+                  <video autoplay muted playsinline>
+                    <source src="./assets/inicio.mp4" type="video/mp4">
+                    Tu navegador no soporta la etiqueta de video.
+                  </video>
+                </div>
+
+                <div class="col-md-6 p-4 p-md-5">
+                  
+                  <div class="d-flex justify-content-end">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+
+                  <h2 class="mb-4">Bienvenido</h2>
+                  
+                  <form>
+                    <div class="mb-3">
+                      <label for="emailInput" class="form-label">Correo Electrónico</label>
+                      <input type="email" class="form-control" id="emailInput" placeholder="tu@email.com">
+                    </div>
+                    <div class="mb-3">
+                      <label for="passwordInput" class="form-label">Contraseña</label>
+                      <input type="password" class="form-control" id="passwordInput">
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-primary btn-lg">Ingresar</button>
+                    </div>
+                  </form>
+
+                  <hr class="my-4">
+
+                  <div class="text-center">
+                    <p>¿No tienes una cuenta? 
+                      <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Regístrate</a>
+                    </p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- Fin de inicio de sesion -->
+
+    <!-- Form de registro -->
+    <!-- <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body p-0">
+            <div class="container-fluid">
+              <div class="row">
+
+                <div class="col-md-6 p-4 p-md-5">
+
+                  <div class="d-flex justify-content-end">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+
+                  <h2 class="mb-4">Crea tu Cuenta</h2>
+                  
+                  <form>
+                    <div class="mb-3">
+                      <label for="regName" class="form-label">Nombre Completo</label>
+                      <input type="text" class="form-control" id="regName" placeholder="Tu nombre">
+                    </div>
+                    <div class="mb-3">
+                      <label for="regEmail" class="form-label">Correo Electrónico</label>
+                      <input type="email" class="form-control" id="regEmail" placeholder="tu@email.com">
+                    </div>
+                    <div class="mb-3">
+                      <label for="regPassword" class="form-label">Crea una Contraseña</label>
+                      <input type="password" class="form-control" id="regPassword">
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-primary btn-lg">Registrarme</button>
+                    </div>
+                  </form>
+
+                  <hr class="my-4">
+
+                  <div class="text-center">
+                    <p>¿Ya tienes una cuenta? 
+                      <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Inicia Sesión</a>
+                    </p>
+                  </div>
+
+                </div>
+
+                <div class="col-md-6 d-none d-md-block p-0 modal-video-col">
+                  <video autoplay muted playsinline>
+                    <source src="./assets/registro.mp4" type="video/mp4">
+                    Tu navegador no soporta la etiqueta de video.
+                  </video>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- Fin de form de registro -->
+
 
                 <!-- Slide 2: Ofertas -->
                 <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1617806118233-18e1de247200?w=1600&q=80');">
@@ -818,194 +945,139 @@
         </div>
     </div>
 
-   
-    <!--SECCION DEL FORMULARIO DEL LOGIN -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+     <!-- Incio de sesion -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-body p-0">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6 d-none d-md-block p-0 modal-video-col">
-                            <video autoplay loop muted playsinline class="video-fill">
-                                <source src="assets/LOG.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="col-md-6 p-4 p-md-5">
-                            <div class="d-flex justify-content-end">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <h2 class="mb-4">Bienvenido</h2>
-                            
-                            <div id="alertMessage" class="alert alert-danger d-none" role="alert">
-                            </div>
-                            <form id="loginForm">
-                                <div class="mb-3">
-                                    <label for="emailInput" class="form-label">Correo Electrónico</label>
-                                    <input type="email" class="form-control" id="emailInput" placeholder="tu@email.com" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="passwordInput" class="form-label">Contraseña</label>
-                                    <div class="input-group">
-                                        <input type="password" class="form-control" id="passwordInput" required>
-                                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                                            <i class="bi bi-eye-slash" id="eyeIconLogin"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                <div class="mb-3 text-end">
-                                    <a href="#" class="small text-muted" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal" data-bs-dismiss="modal">
-                                        ¿Olvidaste tu contraseña?
-                                    </a>
-                                </div>
-                                <div class="d-grid gap-2">
-                                    <button type="submit" class="btn btn-primary btn-lg">Ingresar</button>
-                                </div>
-                            </form>
-                            
-                            <hr class="my-4">
+          <div class="modal-body p-0">
+            <div class="container-fluid">
+              <div class="row">
 
-                            <div class="text-center">
-                                <p>¿No tienes una cuenta? 
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Regístrate</a>
-                                </p>
-                            </div>
-                        </div>
+                <div class="col-md-6 d-none d-md-block p-0 modal-video-col">
+                  <video id="loginVideo" autoplay muted playsinline>
+                    <source src="./assets/inicio.mp4" type="video/mp4">
+                    Tu navegador no soporta la etiqueta de video.
+                  </video>
+                </div>
+
+                <div class="col-md-6 p-4 p-md-5">
+                  
+                  <div class="d-flex justify-content-end">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+
+                  <h2 class="mb-4">Bienvenido</h2>
+                  
+                  <form>
+                    <div class="mb-3">
+                      <label for="emailInput" class="form-label">Correo Electrónico</label>
+                      <input type="email" class="form-control" id="emailInput" placeholder="tu@email.com">
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--SECCION DEL FORMULARIO DE REGISTRO-->
-<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-body p-0">
-        <div class="container-fluid">
-          <div class="row">
-            
-            <div class="col-md-6 p-4 p-md-5" id="registerFormCol">
-              <div class="d-flex justify-content-end">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
+                    <div class="mb-3">
+                      <label for="passwordInput" class="form-label">Contraseña</label>
+                      <input type="password" class="form-control" id="passwordInput">
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-primary btn-lg">Ingresar</button>
+                    </div>
+                  </form>
 
-              <h2 class="mb-4">Crea tu Cuenta</h2>
+                  <hr class="my-4">
 
-              <div id="successMessage" class="alert alert-success text-center" style="display: none;"></div>
-
-              <form id="registerForm">
-                <div class="mb-3">
-                  <label for="fullname" class="form-label">Nombre Completo</label>
-                  <input type="text" class="form-control" id="fullname" placeholder="Tu nombre" required>
-                </div>
-
-                <div class="mb-3">
-                  <label for="email" class="form-label">Correo Electrónico</label>
-                  <input type="email" class="form-control" id="email" placeholder="tu@email.com" required>
-                </div>
-
-                <div class="mb-3">
-                  <label for="phone" class="form-label">Número de Teléfono</label>
-                  <input type="tel" class="form-control" id="phone" placeholder="Ej: 55 1234 5678">
-                </div>
-
-                <div class="mb-3">
-                  <label for="password" class="form-label">Crea una Contraseña</label>
-                  <div class="input-group">
-                    <input type="password" class="form-control" id="password" required>
-                    <button class="btn btn-outline-secondary" type="button" id="toggleRegisterPassword">
-                      <i class="bi bi-eye-slash" id="eyeIconPassword"></i>
-                    </button>
+                  <div class="text-center">
+                    <p>¿No tienes una cuenta? 
+                      <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Regístrate</a>
+                    </p>
                   </div>
+
                 </div>
-
-                <div class="mb-3">
-                  <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
-                  <div class="input-group">
-                    <input type="password" class="form-control" id="confirmPassword" required>
-                    <button class="btn btn-outline-secondary" type="button" id="toggleConfirmRegisterPassword">
-                      <i class="bi bi-eye-slash" id="eyeIconConfirmPassword"></i>
-                    </button>
-                  </div>
-                </div>
-
-                <div class="d-grid gap-2">
-                  <button type="submit" class="btn btn-primary btn-lg">Registrarme</button>
-                </div>
-              </form>
-
-              <hr class="my-4">
-
-              <div class="text-center">
-                <p>¿Ya tienes una cuenta? 
-                  <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Inicia Sesión</a>
-                </p>
               </div>
             </div>
-
-            <div class="col-md-6 d-none d-md-block p-0 modal-video-col">
-              <video autoplay loop muted playsinline>
-                <source src="assets/1000025343.mp4" type="video/mp4">
-                Tu navegador no soporta la etiqueta de video.
-              </video>
-            </div>
-
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-<!--SECCION DE RECUPERACION DE CONTRASEÑA-->
-<div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel">
-        <div class="modal-dialog modal-md modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body p-4">
-                    <div class="d-flex justify-content-end">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <h4 class="mb-4 text-center" id="forgotPasswordModalLabel">Recuperar Contraseña</h4>
-                    <p class="text-muted text-center small">Ingresa tu correo electrónico para enviarte un enlace de recuperación.</p>
-                    <form id="forgotPasswordForm">
-                        <div class="mb-4">
-                            <label for="recoveryEmail" class="form-label">Correo Electrónico</label>
-                            <input type="email" class="form-control" id="recoveryEmail" placeholder="tu@email.com" required>
-                        </div>
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
-                        </div>
-                    </form>
-                    <hr class="my-4">
+    </div> 
+    <!-- Fin de inicio de sesion -->
 
-                    <div class="text-center">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">
-                            <i class="bi bi-arrow-left"></i> Volver al inicio de sesión
-                        </a>
+    <!-- Form de registro -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body p-0">
+            <div class="container-fluid">
+              <div class="row">
+
+                <div class="col-md-6 p-4 p-md-5">
+
+                  <div class="d-flex justify-content-end">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+
+                  <h2 class="mb-4">Crea tu Cuenta</h2>
+                  
+                  <form id="loginForm"> 
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="username" placeholder="tu@email.com">
                     </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <div class="input-group"> <input type="password" class="form-control" id="password">
+                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                            <i class="bi bi-eye" id="eyeIcon"></i>
+                        </button>
+                        </div>
+                    </div>
+                    <div id="alertMessage" class="alert alert-danger d-none" role="alert"></div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">Ingresar</button> </div>
+                </form>
+
+                  <hr class="my-4">
+
+                  <div class="text-center">
+                    <p>¿Ya tienes una cuenta? 
+                      <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Inicia Sesión</a>
+                    </p>
+                  </div>
+
                 </div>
+
+                <div class="col-md-6 d-none d-md-block p-0 modal-video-col">
+                  <video id="registerVideo" autoplay muted playsinline>
+                    <source src="./assets/registro.mp4" type="video/mp4">
+                    Tu navegador no soporta la etiqueta de video.
+                  </video>
+                </div>
+
+              </div>
             </div>
+          </div>
         </div>
-     </div>
-     <script src="scripts/registro.js"></script>
-    <script src="scripts/login.js"></script>
-     <!-- Bootstrap 5 JS Bundle -->
+      </div>
+    </div> 
+    <!-- Fin de form de registro -->
+
+    <!-- Bootstrap 5 JS Bundle -->
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
     <!-- Smooth Scroll -->
-    <script>
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+   <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+
+            // Verificamos que el href no sea solo '#'
+            if (href !== '#') { 
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const target = document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
-            });
+            }
         });
+    });
     </script>
-  <!--VINCULACION DE LOS SCRIPTS DE LOGIN Y REGISTRO-->
-
 </body>
 </html>
