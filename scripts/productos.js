@@ -13,7 +13,9 @@ export const products = [
         materiales: ['Acero inoxidable', 'Plástico', 'Cristal templado'], 
         dimensiones: { alto: 171, ancho: 67, profundidad: 66, unidad: 'cm' }, 
         img: 'https://www.muebleriaejemplo.com/ref_samsung_t400.jpg', 
-        stock: 8
+        stock: 8,
+        
+
     },
     {
         id: 202, 
