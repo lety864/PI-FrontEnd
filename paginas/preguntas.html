@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preguntas Frecuentes - Mueblería España</title>
+
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-  
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Design System CSS (SIEMPRE PRIMERO) -->
-    <link rel="stylesheet" href="../estilos/global.css">
-      <!--Vinculacion del CSS-->
+
+    <!-- CSS Global y local -->
+    <link rel="stylesheet" href="/estilos/global.css">
+    <!-- Page-Specific Styles -->
     <link rel="stylesheet" href="/estilos/preguntas.css">
-    
+
 </head>
 <body>
 <!-- ========================================= -->
@@ -448,32 +449,19 @@
         </div>
 
     </div>
+ <!-- Formulario de preguntas -->
 
-    <!-- FORMULARIO -->
-    <div class="contact-form mt-5">
-        <h3>¿Tienes otra pregunta?</h3>
-        <p>Si tu duda no se resolvió con la información anterior, envíanos tu pregunta y nos pondremos en contacto contigo.</p>
-        <form action="/enviar-pregunta" method="POST">
-            <div class="mb-3">
-                <label for="nombre" class="form-label">Tu Nombre:</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" required>
+<div class="contact-form mt-5"> <h3>¿Tienes otra pregunta?</h3> 
+    <p>Si tu duda no se resolvió con la información anterior, envíanos tu pregunta y nos pondremos en contacto contigo.</p> 
+    <form action="/enviar-pregunta" method="POST"> <div class="mb-3">
+         <label for="nombre" class="form-label">Tu Nombre:</label> 
+         <input type="text" class="form-control" id="nombre" name="nombre" required> 
+        </div> <div class="mb-3"> <label for="email" class="form-label">Tu Correo Electrónico:</label>
+             <input type="email" class="form-control" id="email" name="email" required> </div> 
+             <div class="mb-3"> <label for="pregunta" class="form-label">Tu Pregunta:</label> <textarea class="form-control" id="pregunta" name="pregunta" rows="4" required></textarea>
+             </div> <button type="submit" class="submit-btn">Enviar Pregunta</button> </form> 
             </div>
-            
-            <div class="mb-3">
-                <label for="email" class="form-label">Tu Correo Electrónico:</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            
-            <div class="mb-3">
-                <label for="pregunta" class="form-label">Tu Pregunta:</label>
-                <textarea class="form-control" id="pregunta" name="pregunta" rows="4" required></textarea>
-            </div>
-            
-            <button type="submit" class="submit-btn">Enviar Pregunta</button>
-        </form>
-    </div>
-
-</div>
+         </div>
  <!-- Footer -->
 <footer class="footer">
   <div class="container">
@@ -529,8 +517,9 @@
 </div>
 
 <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-<script src="/scripts/preguntas.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
+<!-- Script  -->
+<script src="/scripts/preguntas.js"></script>
 </body>
 </html>
