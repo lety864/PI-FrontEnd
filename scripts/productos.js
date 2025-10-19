@@ -1,5 +1,3 @@
-//modelo JSON 
-
 export const products = [
     {
         id: 201, 
@@ -12,10 +10,8 @@ export const products = [
         moneda: 'MXN', 
         materiales: ['Acero inoxidable', 'Plástico', 'Cristal templado'], 
         dimensiones: { alto: 171, ancho: 67, profundidad: 66, unidad: 'cm' }, 
-        img: 'https://www.muebleriaejemplo.com/ref_samsung_t400.jpg', 
+        img: '../assets/catalogos/linea_blanca/refrimabe_1.png', 
         stock: 8,
-        
-
     },
     {
         id: 202, 
@@ -28,7 +24,7 @@ export const products = [
         moneda: 'MXN', 
         materiales: ['Acero inoxidable', 'Hierro fundido'], 
         dimensiones: { alto: 97, ancho: 76, profundidad: 70, unidad: 'cm' }, 
-        img: 'https://www.muebleriaejemplo.com/est_mabe_em76.jpg', 
+        img: '../assets/catalogos/linea_blanca/estufa_2.png', 
         stock: 15
     },
     {
@@ -42,7 +38,7 @@ export const products = [
         moneda: 'MXN', 
         materiales: ['Acero', 'Plástico reforzado'], 
         dimensiones: { alto: 111, ancho: 66, profundidad: 66, unidad: 'cm' }, 
-        img: 'https://www.muebleriaejemplo.com/lav_whp_cs22.jpg', 
+        img: '../assets/catalogos/linea_blanca/lavadora_3.png', 
         stock: 10
     },
     {
@@ -56,7 +52,7 @@ export const products = [
         moneda: 'MXN', 
         materiales: ['Acero', 'Cristal', 'Cerámica'], 
         dimensiones: { alto: 30, ancho: 54, profundidad: 42, unidad: 'cm' }, 
-        img: 'https://www.muebleriaejemplo.com/mic_lg_n32.jpg', 
+        img: '../assets/catalogos/linea_blanca/micro_4.png', 
         stock: 25
     },
     {
@@ -70,7 +66,7 @@ export const products = [
         moneda: 'MXN', 
         materiales: ['Acero inoxidable', 'Plástico'], 
         dimensiones: { alto: 179, ancho: 91, profundidad: 73, unidad: 'cm' }, 
-        img: 'https://www.muebleriaejemplo.com/ref_lg_f25.jpg', 
+        img: '../assets/catalogos/linea_blanca/refrifrench_5.png',
         stock: 5
     },
     {
@@ -84,7 +80,7 @@ export const products = [
         moneda: 'MXN', 
         materiales: ['Acero', 'Aluminio'], 
         dimensiones: { alto: 109, ancho: 69, profundidad: 74, unidad: 'cm' }, 
-        img: 'https://www.muebleriaejemplo.com/sec_may_g18.jpg', 
+        img: '../assets/catalogos/linea_blanca/secadora_6.png', 
         stock: 9
     },
     {
@@ -98,7 +94,7 @@ export const products = [
         moneda: 'MXN', 
         materiales: ['Acero inoxidable'], 
         dimensiones: { alto: 85, ancho: 60, profundidad: 60, unidad: 'cm' }, 
-        img: 'https://www.muebleriaejemplo.com/lav_sam_f20.jpg', 
+        img: 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&h=600&fit=crop', 
         stock: 11
     },
     {
@@ -112,7 +108,7 @@ export const products = [
         moneda: 'MXN', 
         materiales: ['Cristal templado', 'Hierro fundido'], 
         dimensiones: { alto: 10, ancho: 76, profundidad: 52, unidad: 'cm' }, 
-        img: 'https://www.muebleriaejemplo.com/est_io_p76.jpg', 
+        img: 'https://images.unsplash.com/photo-1600489000022-c2086d79f9d4?w=600&h=600&fit=crop', 
         stock: 18
     },
     {
@@ -126,7 +122,7 @@ export const products = [
         moneda: 'MXN', 
         materiales: ['Acero inoxidable', 'Aluminio'], 
         dimensiones: { alto: 80, ancho: 60, profundidad: 50, unidad: 'cm' }, 
-        img: 'https://www.muebleriaejemplo.com/cam_tek_d60.jpg', 
+        img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=600&h=600&fit=crop', 
         stock: 22
     },
     {
@@ -140,7 +136,7 @@ export const products = [
         moneda: 'MXN', 
         materiales: ['Acero', 'Plástico'], 
         dimensiones: { alto: 85, ancho: 112, profundidad: 63, unidad: 'cm' }, 
-        img: 'https://www.muebleriaejemplo.com/con_his_v10.jpg', 
+        img: 'https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=600&h=600&fit=crop&sat=-100', 
         stock: 14
     }
 ];

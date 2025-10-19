@@ -1,30 +1,37 @@
 import { products as initialProducts } from "../scripts/productos.js";
 
-// 1. Obtenemos el contenedor donde se mostrarán los productos.
+// Versión de productos - se cambia este número cuando se actualice el productos.js
+const PRODUCTS_VERSION = '1.1';
+
 const productsContainer = document.getElementById("productInfo");
 
-// Función para obtener los productos: desde localStorage o desde el archivo inicial.
+// Obtiene productos desde localStorage o carga los iniciales si hay cambios
 function getProducts() {
-  // Intentamos obtener los productos de localStorage.
   const productsFromStorage = localStorage.getItem('productos');
+  const versionFromStorage = localStorage.getItem('productosVersion');
+
+  // Si la versión de product.js cambió, actualiza los productos
+  if (versionFromStorage !== PRODUCTS_VERSION) {
+    console.log("Nueva versión detectada. Actualizando productos...");
+    localStorage.setItem('productos', JSON.stringify(initialProducts));
+    localStorage.setItem('productosVersion', PRODUCTS_VERSION);
+    return initialProducts;
+  }
 
   if (productsFromStorage) {
-    // Si existen en localStorage, los convertimos de string a objeto y los retornamos.
-    console.log("Cargando productos desde localStorage... 📦");
+    console.log("Cargando productos desde localStorage...");
     return JSON.parse(productsFromStorage);
   } else {
-    // Si no existen, usamos los productos importados del archivo JS.
-    console.log("Cargando productos por primera vez y guardando en localStorage... ✨");
-    // Los guardamos en localStorage para futuras visitas. Deben ser guardados como string.
+    console.log("✨ Primera carga: guardando productos en localStorage...");
     localStorage.setItem('productos', JSON.stringify(initialProducts));
+    localStorage.setItem('productosVersion', PRODUCTS_VERSION);
     return initialProducts;
   }
 }
-
-// 2. Obtenemos los productos a mostrar.
+//Obtenemos los productos a mostrar.
 const productsToShow = getProducts();
 
-// 3. Creamos la función para cargar los artículos en el HTML.
+// Creamos la función para cargar los artículos en el HTML.
 function cargarArticulos() {
   if (!productsContainer) {
     console.error("No se encontró el elemento con el id 'productInfo'");
@@ -32,13 +39,11 @@ function cargarArticulos() {
   }
 
   const productsHTML = productsToShow.map((producto) => {
-    // Formateamos el precio para que se vea bien
     const precioFormateado = producto.precio.toLocaleString('es-MX', {
       style: 'currency',
-      currency: producto.moneda || 'MXN' // Usa la moneda del producto o MXN por defecto
+      currency: producto.moneda || 'MXN'
     });
-
-    // 👇 AQUÍ ESTÁ LA NUEVA ESTRUCTURA HTML 👇
+//NUEVA ESTRUCTURA DEL HTML PARA MOSTRAR PRODUCTOS
     return `
       <div class="col-md-6 col-lg-3">
         <article class="product-card">
@@ -64,11 +69,12 @@ function cargarArticulos() {
                     <i class="bi bi-star-fill"></i>
                     <i class="bi bi-star-half"></i>
                 </div>
-                <span class="rating-count">(${producto.stock * 5 + 12})</span> </div>
+                <span class="rating-count">(${producto.stock * 5 + 12})</span>
+            </div>
 
             <div class="product-price">
                 <span class="current-price">${precioFormateado}</span>
-                </div>
+            </div>
 
             <button class="btn btn-custom-primary btn-add-cart" data-id="${producto.id}">
                 <i class="bi bi-cart-plus"></i>
@@ -83,5 +89,4 @@ function cargarArticulos() {
   productsContainer.innerHTML = productsHTML;
 }
 
-// No olvides llamar a la función al final de tu script
 cargarArticulos();
