@@ -1,73 +1,65 @@
-const form = document.getElementById('registerForm');
-const successMessage = document.getElementById('successMessage');
 
-//  Función principal de envío de formulario 
-form.addEventListener('submit', function(e) {
-  e.preventDefault(); // Evita recargar la página
+document.getElementById("registerForm").addEventListener("submit", function(event) {
+  event.preventDefault(); // Evita el envío normal del formulario
 
-  // Obtener valores de los campos
-  const fullname = document.getElementById('fullname').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value;
-  const confirmPassword = document.getElementById('confirmPassword').value;
-  const phone = document.getElementById('phone').value.trim();
+  const fullname = document.getElementById("fullname").value.trim();
+  const email = document.getElementById("username").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const confirmPassword = document.getElementById("confirmPassword").value.trim();
+  const alertMessage = document.getElementById("alertMessage");
 
-  // Validar contraseñas
-  if (password !== confirmPassword) {
-    alert('Las contraseñas no coinciden. Intenta nuevamente.');
+  // Validar número de teléfono (exactamente 10 dígitos)
+  const phoneRegex = /^[0-9]{10}$/;
+  if (!phoneRegex.test(phone)) {
+    alertMessage.classList.remove("d-none", "alert-success");
+    alertMessage.classList.add("alert-danger");
+    alertMessage.textContent = "Ingrese un número de teléfono válido (10 dígitos).";
     return;
   }
 
-  // Crear objeto con los datos
-  const ObjectData = {
-    nombreCompleto: fullname,
-    correoElectronico: email,
-    contraseña: password,
-    telefono: phone
+  // Validar contraseñas iguales
+  if (password !== confirmPassword) {
+    alertMessage.classList.remove("d-none", "alert-success");
+    alertMessage.classList.add("alert-danger");
+    alertMessage.textContent = "Ingrese la contraseña correcta.";
+    return;
+  }
+
+  // Si todo está correcto, guardar en localStorage
+  const userData = {
+    nombre: fullname,
+    correo: email,
+    telefono: phone,
+    contraseña: password
   };
 
+  localStorage.setItem("usuarioRegistrado", JSON.stringify(userData));
+
   // Mostrar mensaje de éxito
-  successMessage.style.display = 'block';
-  successMessage.textContent = 'Registro exitoso. ¡Bienvenido!';
+  alertMessage.classList.remove("d-none", "alert-danger");
+  alertMessage.classList.add("alert-success");
+  alertMessage.textContent = "¡Su registro fue exitoso! Redirigiendo...";
 
-  // Ocultar mensaje de éxito después de 5 segundos
+  // Redirigir después de 2 segundos
   setTimeout(() => {
-    successMessage.style.display = 'none';
-  }, 5000);
-
-  // Mostrar datos en consola como JSON
-  console.log("Datos del registro:", JSON.stringify(ObjectData, null, 2));
-
-  // Limpiar formulario
-  form.reset();
+    window.location.href = "index.html";
+  }, 2000);
 });
 
-// --- Función para Mostrar/Ocultar contraseñas (ícono de ojo) ---
-function setupPasswordToggle(toggleButtonId, passwordInputId, eyeIconId) {
-  const toggleButton = document.getElementById(toggleButtonId);
-  const passwordInput = document.getElementById(passwordInputId);
-  const eyeIcon = document.getElementById(eyeIconId);
+// Mostrar/ocultar contraseña
+document.getElementById("togglePassword").addEventListener("click", () => {
+  const passwordInput = document.getElementById("password");
+  const eyeIcon = document.getElementById("eyeIcon");
+  const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+  passwordInput.setAttribute("type", type);
+  eyeIcon.classList.toggle("bi-eye-slash");
+});
 
-  if (toggleButton && passwordInput && eyeIcon) {
-    toggleButton.addEventListener('click', () => {
-      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-      passwordInput.setAttribute('type', type);
-
-      // Cambia el ícono según el estado
-      if (type === 'text') {
-        eyeIcon.classList.remove('bi-eye-slash');
-        eyeIcon.classList.add('bi-eye');
-      } else {
-        eyeIcon.classList.remove('bi-eye');
-        eyeIcon.classList.add('bi-eye-slash');
-      }
-    });
-  }
-}
-
-
-//  Contraseña principal (Crea una Contraseña)
-setupPasswordToggle('toggleRegisterPassword', 'password', 'eyeIconPassword');
-
-//  Confirmar Contraseña
-setupPasswordToggle('toggleConfirmRegisterPassword', 'confirmPassword', 'eyeIconConfirmPassword');
+document.getElementById("toggleConfirmPassword").addEventListener("click", () => {
+  const confirmInput = document.getElementById("confirmPassword");
+  const eyeIcon = document.getElementById("eyeIconConfirm");
+  const type = confirmInput.getAttribute("type") === "password" ? "text" : "password";
+  confirmInput.setAttribute("type", type);
+  eyeIcon.classList.toggle("bi-eye-slash");
+});
