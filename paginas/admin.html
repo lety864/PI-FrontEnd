@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Panel de administración - Gestión de inventario Mueblería España">
+    <title>Admin - Gestión de Inventario | Mueblería España</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Design System CSS (SIEMPRE PRIMERO) -->
+    <link rel="stylesheet" href="../estilos/global.css">
+    
+    <!-- Page-Specific Styles -->
+    <link rel="stylesheet" href="../estilos/admin.css">
+</head>
+<body>
+
+    <!-- ========================================= -->
+    <!-- NAVBAR DE ADMINISTRACIÓN                  -->
+    <!-- ========================================= -->
+    <div class="full-width-nav-container sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Navegación de administración">
+            <div class="container-fluid">
+                
+                <!-- Botón de menú móvil -->
+                <button class="btn btn-outline-light d-lg-none me-2" type="button" 
+                        data-bs-toggle="collapse" data-bs-target="#adminNavbar" 
+                        aria-controls="adminNavbar" aria-label="Abrir menú">
+                    <i class="bi bi-list fs-4"></i>
+                </button>
+
+                <!-- Logo/Brand con Badge de Admin -->
+                <a class="navbar-brand d-flex align-items-center" href="../index.html">
+                    <img src="../assets/mundo.png" alt="Logo Mueblería España" height="30" class="me-2">
+                    Mueblería España
+                    <span class="badge bg-warning text-dark ms-2">ADMIN</span>
+                </a>
+
+                <!-- Menú Desktop -->
+                <div class="collapse navbar-collapse" id="adminNavbar">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-3">
+                        <!-- Gestión de Productos (página actual) -->
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="admin.html">
+                                <i class="bi bi-box-seam me-1"></i>
+                                Gestión de Productos
+                            </a>
+                        </li>
+                        
+                        <!-- Volver al sitio -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html">
+                                <i class="bi bi-globe me-1"></i>
+                                Ver Sitio
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <!-- Iconos de acción (Desktop) -->
+                    <ul class="navbar-nav">
+                        <!-- Perfil de Admin -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" 
+                               data-bs-toggle="dropdown" aria-expanded="false" aria-label="Perfil">
+                                <i class="bi bi-person-circle fs-4 me-2"></i>
+                                <span class="d-none d-lg-inline">Admin</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">
+                                    <i class="bi bi-person me-2"></i>Mi Perfil
+                                </a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="../index.html">
+                                    <i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión
+                                </a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Iconos de acción (Móvil) -->
+                <div class="d-flex align-items-center d-lg-none">
+                    <div class="nav-item dropdown">
+                        <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Mi cuenta">
+                            <i class="bi bi-person-circle fs-3"></i>
+                        </a>
+                        <!-- Dropdown móvil -->
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">
+                                <i class="bi bi-person me-2"></i>Mi Perfil
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="../index.html">
+                                <i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión
+                            </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- MAIN CONTENT - FORMULARIO ADMIN          -->
+    <!-- ========================================= -->
+    <main class="admin-panel">
+        <div class="container">
+            <div class="admin-card">
+                
+                <!-- Header del Formulario -->
+                <header class="admin-header">
+                    <h1 class="admin-title">Gestión de Productos</h1>
+                    <p class="admin-subtitle">Agrega, edita y administra el inventario de tu tienda</p>
+                </header>
+
+                <!-- Alerta de Bootstrap (inicialmente oculta) -->
+                <div id="alertContainer" class="alert-container" style="display: none;">
+                    <!-- Las alertas se insertarán aquí dinámicamente -->
+                </div>
+
+                <!-- Formulario -->
+                <form id="productForm" class="product-form" novalidate>
+                    
+                    <!-- Sección: Identificación -->
+                    <section class="form-section">
+                        <div class="mb-4">
+                            <label for="sku" class="form-label">Código SKU</label>
+                            <input type="text" 
+                                   class="form-control form-input" 
+                                   id="sku" 
+                                   placeholder="Ej: SAL-MOD-001"
+                                   required>
+                            <div class="invalid-feedback">El código SKU es obligatorio</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="nombre" class="form-label">Nombre del Producto</label>
+                            <input type="text" 
+                                   class="form-control form-input" 
+                                   id="nombre" 
+                                   placeholder="Ej: Sala modular 5 piezas"
+                                   required>
+                            <div class="invalid-feedback">El nombre del producto es obligatorio</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="descripcion" class="form-label">Descripción</label>
+                            <textarea class="form-control form-textarea" 
+                                      id="descripcion" 
+                                      rows="5"
+                                      placeholder="Describe las características principales del producto..."
+                                      required></textarea>
+                            <div class="invalid-feedback">La descripción es obligatoria</div>
+                        </div>
+                    </section>
+
+                    <!-- Sección: Clasificación -->
+                    <section class="form-section">
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-6">
+                                <label for="categoria" class="form-label">Categoría</label>
+                                <select class="form-select form-input" id="categoria" required>
+                                    <option value="" selected disabled>Selecciona una categoría</option>
+                                    <option value="salas">Salas</option>
+                                    <option value="dormitorio">Dormitorio</option>
+                                    <option value="comedores">Comedores</option>
+                                    <option value="roperos">Roperos</option>
+                                    <option value="colchones">Colchones</option>
+                                    <option value="linea-blanca">Línea Blanca</option>
+                                </select>
+                                <div class="invalid-feedback">Selecciona una categoría</div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="subcategoria" class="form-label">Subcategoría</label>
+                                <input type="text" 
+                                       class="form-control form-input" 
+                                       id="subcategoria" 
+                                       placeholder="Ej: Modular, Reclinable">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Sección: Precio y Stock -->
+                    <section class="form-section">
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-6">
+                                <label for="precio" class="form-label">Precio</label>
+                                <div class="input-group">
+                                    <span class="input-group-text input-prefix">$</span>
+                                    <input type="number" 
+                                           class="form-control form-input" 
+                                           id="precio" 
+                                           placeholder="0.00"
+                                           step="0.01"
+                                           min="0"
+                                           required>
+                                    <span class="input-group-text input-suffix">MXN</span>
+                                </div>
+                                <div class="invalid-feedback">El precio es obligatorio</div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="stock" class="form-label">Stock disponible</label>
+                                <input type="number" 
+                                       class="form-control form-input" 
+                                       id="stock" 
+                                       placeholder="0"
+                                       min="0"
+                                       required>
+                                <small class="form-text">Unidades disponibles en inventario</small>
+                                <div class="invalid-feedback">El stock es obligatorio</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Sección: Detalles Físicos -->
+                    <section class="form-section">
+                        <div class="mb-4">
+                            <label for="materiales" class="form-label">Materiales</label>
+                            <input type="text" 
+                                   class="form-control form-input" 
+                                   id="materiales" 
+                                   placeholder="Ej: Madera de pino, Tela poliéster, Metal cromado">
+                            <small class="form-text">Separa con comas</small>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">
+                                Dimensiones (cm)
+                                <span class="badge-optional">Opcional</span>
+                            </label>
+                            <div class="row g-3">
+                                <div class="col">
+                                    <input type="number" 
+                                           class="form-control form-input-sm" 
+                                           id="alto" 
+                                           placeholder="Alto"
+                                           min="0">
+                                </div>
+                                <div class="col">
+                                    <input type="number" 
+                                           class="form-control form-input-sm" 
+                                           id="ancho" 
+                                           placeholder="Ancho"
+                                           min="0">
+                                </div>
+                                <div class="col">
+                                    <input type="number" 
+                                           class="form-control form-input-sm" 
+                                           id="profundo" 
+                                           placeholder="Profundo"
+                                           min="0">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Sección: Imagen -->
+                    <section class="form-section">
+                        <div class="mb-5">
+                            <label for="imagen" class="form-label">URL de la Imagen</label>
+                            <div class="input-group">
+                                <span class="input-group-text input-icon">
+                                    <i class="bi bi-link-45deg"></i>
+                                </span>
+                                <input type="url" 
+                                       class="form-control form-input" 
+                                       id="imagen" 
+                                       placeholder="https://ejemplo.com/imagen-producto.jpg"
+                                       required>
+                            </div>
+                            <div class="invalid-feedback">Ingresa una URL válida para la imagen</div>
+                        </div>
+                    </section>
+
+                    <!-- Botones de Acción -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-guardar" id="btnGuardar">
+                            <i class="bi bi-check-circle me-2"></i>
+                            Guardar Producto
+                        </button>
+                        <button type="button" class="btn btn-cancelar" id="btnCancelar">
+                            Cancelar
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <!-- Script personalizado -->
+    <script src="../scripts/admin.js"></script>
+
+</body>
+</html>

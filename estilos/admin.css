@@ -1,0 +1,449 @@
+/* ================================================================== 
+   MUEBLERÍA ESPAÑA - PÁGINA DE ADMINISTRACIÓN
+   
+   CONTIENE:
+    - Layout del panel admin
+    - Estilos del formulario de inventario
+    - Alertas personalizadas
+    - Estados de validación
+   
+   ================================================================== */
+
+/* ===================================
+   1. LAYOUT GENERAL
+   =================================== */
+.admin-panel {
+    background-color: var(--background-light);
+    min-height: calc(100vh - 80px);
+    padding: 3rem 0;
+}
+
+/* ===================================
+   1.1 ESTILOS ESPECÍFICOS DEL NAVBAR ADMIN
+   =================================== */
+/* Badge de Admin en el navbar */
+.navbar-dark .navbar-brand .badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.25rem 0.5rem;
+    letter-spacing: 0.5px;
+}
+
+/* Estilos para los dropdowns del navbar admin */
+.navbar-dark .dropdown-menu {
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin-top: 0.5rem;
+}
+
+.navbar-dark .dropdown-item {
+    padding: 0.5rem 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.navbar-dark .dropdown-item:hover {
+    background-color: var(--background-light);
+}
+
+.navbar-dark .dropdown-item i {
+    width: 20px;
+    text-align: center;
+}
+
+.navbar-dark .dropdown-item.text-danger {
+    color: var(--secondary) !important;
+}
+
+.navbar-dark .dropdown-item.text-danger:hover {
+    background-color: rgba(203, 153, 126, 0.1);
+}
+
+/* Badge de notificaciones */
+.navbar-dark .badge {
+    font-size: 0.7rem;
+}
+
+.admin-panel .container {
+    max-width: 900px;
+}
+
+.admin-card {
+    background-color: var(--background-white);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 3rem;
+    margin-top: 2rem;
+}
+
+/* ===================================
+   2. HEADER DEL FORMULARIO
+   =================================== */
+.admin-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.admin-title {
+    font-family: var(--font-display);
+    font-size: 2.25rem;
+    color: var(--primary);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: 0.5rem;
+}
+
+.admin-subtitle {
+    font-size: 1rem;
+    color: var(--text-medium);
+    margin-bottom: 0;
+}
+
+/* ===================================
+   3. ALERTAS DE BOOTSTRAP (PERSONALIZADAS)
+   =================================== */
+.alert-container {
+    margin-bottom: 2rem;
+}
+
+/* Personalización de alertas de Bootstrap para mantener consistencia visual */
+.alert {
+    border-radius: 6px;
+    border-left: 4px solid;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Alert Success - usar colores del Design System */
+.alert-success {
+    background-color: rgba(115, 145, 122, 0.1);
+    border-left-color: var(--primary);
+    color: var(--text-dark);
+}
+
+.alert-success i {
+    color: var(--primary);
+    font-size: 1.25rem;
+}
+
+/* Alert Danger - usar colores del Design System */
+.alert-danger {
+    background-color: rgba(203, 153, 126, 0.1);
+    border-left-color: var(--secondary);
+    color: var(--text-dark);
+}
+
+.alert-danger i {
+    color: var(--secondary);
+    font-size: 1.25rem;
+}
+
+/* Botón de cerrar */
+.alert .btn-close {
+    margin-left: auto;
+}
+
+/* ===================================
+   4. ESTILOS DEL FORMULARIO
+   =================================== */
+.product-form {
+    margin-top: 2rem;
+}
+
+.form-section {
+    margin-bottom: 2rem;
+}
+
+.form-label {
+    font-family: var(--font-primary);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+/* Badge "Opcional" */
+.badge-optional {
+    background-color: #E5E5E5;
+    color: var(--text-light);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-normal);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    margin-left: 0.5rem;
+}
+
+/* ===================================
+   5. INPUTS Y TEXTAREAS
+   =================================== */
+.form-input,
+.form-textarea,
+.form-select {
+    height: 48px;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+}
+
+.form-textarea {
+    height: auto;
+    resize: vertical;
+}
+
+/* Input pequeño para dimensiones */
+.form-input-sm {
+    height: 48px;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    padding: 0.75rem;
+    font-size: 0.95rem;
+    text-align: center;
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+}
+
+/* Estado: Focus */
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus,
+.form-input-sm:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(115, 145, 122, 0.1);
+    outline: none;
+}
+
+/* Placeholder */
+.form-input::placeholder,
+.form-textarea::placeholder,
+.form-input-sm::placeholder {
+    color: #B8B8B8;
+}
+
+/* Texto de ayuda */
+.form-text {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-top: 0.375rem;
+}
+
+/* ===================================
+   6. INPUT GROUPS (Precio, URL)
+   =================================== */
+.input-group-text {
+    background-color: transparent;
+    border: 1px solid var(--border-light);
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+.input-prefix {
+    border-right: none;
+    border-radius: 6px 0 0 6px;
+}
+
+.input-suffix {
+    border-left: none;
+    border-radius: 0 6px 6px 0;
+}
+
+.input-icon {
+    border-right: none;
+    border-radius: 6px 0 0 6px;
+}
+
+.input-icon i {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+/* Ajuste del input dentro del input-group */
+.input-group .form-input {
+    border-left: none;
+    border-right: none;
+}
+
+.input-group .form-input:focus {
+    border-color: var(--primary);
+    box-shadow: none;
+}
+
+.input-group:focus-within .input-group-text {
+    border-color: var(--primary);
+}
+
+/* ===================================
+   7. VALIDACIÓN DE FORMULARIO
+   =================================== */
+/* Estado: Inválido */
+.form-input.is-invalid,
+.form-textarea.is-invalid,
+.form-select.is-invalid {
+    border-color: var(--secondary);
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23CB997E'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23CB997E' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.form-input.is-invalid:focus,
+.form-textarea.is-invalid:focus,
+.form-select.is-invalid:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(203, 153, 126, 0.1);
+}
+
+.invalid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: 0.375rem;
+    font-size: 0.875rem;
+    color: var(--secondary);
+}
+
+.form-input.is-invalid ~ .invalid-feedback,
+.form-textarea.is-invalid ~ .invalid-feedback,
+.form-select.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
+/* ===================================
+   8. BOTONES DE ACCIÓN
+   =================================== */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+}
+
+.btn-guardar {
+    flex: 1;
+    background-color: var(--primary);
+    color: var(--text-white);
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: var(--font-weight-semibold);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-guardar:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(115, 145, 122, 0.3);
+}
+
+.btn-guardar:active {
+    transform: translateY(0);
+}
+
+/* Estado: Loading */
+.btn-guardar.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.btn-guardar.loading i {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.btn-cancelar {
+    flex: 0 0 30%;
+    background-color: transparent;
+    color: var(--text-medium);
+    border: 2px solid var(--border-light);
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: var(--font-weight-semibold);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.btn-cancelar:hover {
+    background-color: var(--background-light);
+    border-color: var(--text-medium);
+    color: var(--text-dark);
+}
+
+/* ===================================
+   9. RESPONSIVE
+   =================================== */
+@media (max-width: 768px) {
+    .admin-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .admin-title {
+        font-size: 1.75rem;
+    }
+
+    .admin-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn-cancelar {
+        flex: 1;
+    }
+
+    .row.g-4 {
+        gap: 1rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .admin-panel {
+        padding: 1.5rem 0;
+    }
+
+    .admin-card {
+        margin-top: 1rem;
+        padding: 1.5rem 1rem;
+        border-radius: 8px;
+    }
+
+    .admin-title {
+        font-size: 1.5rem;
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select,
+    .form-input-sm {
+        font-size: 0.875rem;
+    }
+}
