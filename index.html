@@ -998,67 +998,98 @@
       </div>
     </div> 
     <!-- Fin de inicio de sesion -->
+<!-- Form de registro --> 
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <div class="container-fluid">
+          <div class="row">
 
-    <!-- Form de registro -->
-    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-body p-0">
-            <div class="container-fluid">
-              <div class="row">
+            <div class="col-md-6 p-4 p-md-5">
 
-                <div class="col-md-6 p-4 p-md-5">
-
-                  <div class="d-flex justify-content-end">
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-
-                  <h2 class="mb-4">Crea tu Cuenta</h2>
-                  
-                  <form id="loginForm"> 
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="username" placeholder="tu@email.com">
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Contraseña</label>
-                        <div class="input-group"> <input type="password" class="form-control" id="password">
-                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                            <i class="bi bi-eye" id="eyeIcon"></i>
-                        </button>
-                        </div>
-                    </div>
-                    <div id="alertMessage" class="alert alert-danger d-none" role="alert"></div>
-
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary btn-lg">Ingresar</button> </div>
-                </form>
-
-                  <hr class="my-4">
-
-                  <div class="text-center">
-                    <p>¿Ya tienes una cuenta? 
-                      <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Inicia Sesión</a>
-                    </p>
-                  </div>
-
-                </div>
-
-                <div class="col-md-6 d-none d-md-block p-0 modal-video-col">
-                  <video id="registerVideo" autoplay muted playsinline>
-                    <source src="./assets/registro.mp4" type="video/mp4">
-                    Tu navegador no soporta la etiqueta de video.
-                  </video>
-                </div>
-
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
+
+              <h2 class="mb-4">Crea tu Cuenta</h2>
+              
+              <form id="registerForm"> 
+                
+                <!-- Nombre completo -->
+                <div class="mb-3">
+                  <label for="fullname" class="form-label">Nombre Completo</label>
+                  <input type="text" class="form-control" id="fullname" placeholder="Ej. Alan Uriel García Campos" required>
+                </div>
+
+                <!-- Correo -->
+                <div class="mb-3">
+                  <label for="username" class="form-label">Correo Electrónico</label>
+                  <input type="email" class="form-control" id="username" placeholder="tu@email.com" required>
+                </div>
+
+                <!-- Teléfono -->
+                <div class="mb-3">
+                  <label for="phone" class="form-label">Número de Teléfono</label>
+                  <input type="tel" class="form-control" id="phone" placeholder="Ej. 7221234567" pattern="[0-9]{10}" required>
+                </div>
+
+                <!-- Contraseña -->
+                <div class="mb-3">
+                  <label for="password" class="form-label">Contraseña</label>
+                  <div class="input-group"> 
+                    <input type="password" class="form-control" id="password" required>
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                      <i class="bi bi-eye" id="eyeIcon"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Confirmar Contraseña -->
+                <div class="mb-3">
+                  <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+                  <div class="input-group"> 
+                    <input type="password" class="form-control" id="confirmPassword" required>
+                    <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
+                      <i class="bi bi-eye" id="eyeIconConfirm"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div id="alertMessage" class="alert alert-danger d-none" role="alert"></div>
+
+                <div class="d-grid gap-2">
+                  <button type="submit" class="btn btn-primary btn-lg">Registrarse</button>
+                </div>
+              </form>
+
+              <hr class="my-4">
+
+              <div class="text-center">
+                <p>¿Ya tienes una cuenta? 
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Inicia Sesión</a>
+                </p>
+              </div>
+
             </div>
+
+            <!-- Video del lado derecho -->
+            <div class="col-md-6 d-none d-md-block p-0 modal-video-col">
+              <video id="registerVideo" autoplay muted playsinline>
+                <source src="./assets/registro.mp4" type="video/mp4">
+                Tu navegador no soporta la etiqueta de video.
+              </video>
+            </div>
+
           </div>
         </div>
       </div>
-    </div> 
-    <!-- Fin de form de registro -->
+    </div>
+  </div>
+</div> 
+<!-- Fin de form de registro -->
 
+    
     <!-- Bootstrap 5 JS Bundle -->
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
