@@ -215,6 +215,11 @@ function clearValidationStates() {
     const field = document.getElementById(fieldId);
     if (field) {
       field.classList.remove("is-invalid", "is-valid");
+      // Limpiar mensajes de error personalizados
+      const errorMsg = field.parentElement.querySelector('.email-error-msg, .phone-error-msg');
+      if (errorMsg) {
+        errorMsg.style.display = 'none';
+      }
     }
   });
 }
@@ -239,26 +244,74 @@ document.getElementById("fullname").addEventListener("blur", function() {
 });
 
 // Validar correo electrónico
-document.getElementById("username").addEventListener("blur", function() {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (this.value && !emailRegex.test(this.value.trim())) {
+document.getElementById("username").addEventListener("input", function() {
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const invalidCharsRegex = /[^a-zA-Z0-9@._-]/;
+  
+  // Crear o obtener el mensaje de error
+  let errorMsg = this.parentElement.querySelector('.email-error-msg');
+  if (!errorMsg) {
+    errorMsg = document.createElement('div');
+    errorMsg.className = 'email-error-msg text-danger small mt-1';
+    errorMsg.style.display = 'none';
+    this.parentElement.appendChild(errorMsg);
+  }
+  
+  if (this.value && invalidCharsRegex.test(this.value)) {
+    errorMsg.textContent = '⚠️ El correo solo puede contener letras, números, puntos, guiones y guión bajo';
+    errorMsg.style.display = 'block';
+    this.classList.add("is-invalid");
+    this.classList.remove("is-valid");
+  } else if (this.value && !emailRegex.test(this.value.trim())) {
+    errorMsg.style.display = 'none';
     this.classList.add("is-invalid");
     this.classList.remove("is-valid");
   } else if (this.value) {
+    errorMsg.style.display = 'none';
     this.classList.add("is-valid");
     this.classList.remove("is-invalid");
+  } else {
+    errorMsg.style.display = 'none';
+    this.classList.remove("is-invalid", "is-valid");
   }
 });
 
 // Validar teléfono
-document.getElementById("phone").addEventListener("blur", function() {
-  const phoneRegex = /^[0-9]{10}$/;
-  if (this.value && !phoneRegex.test(this.value.trim())) {
+document.getElementById("phone").addEventListener("input", function() {
+  const phoneRegex = /^[0-9]{0,10}$/;
+  const onlyNumbers = /^[0-9]*$/;
+  
+  // Crear o obtener el mensaje de error
+  let errorMsg = this.parentElement.querySelector('.phone-error-msg');
+  if (!errorMsg) {
+    errorMsg = document.createElement('div');
+    errorMsg.className = 'phone-error-msg text-danger small mt-1';
+    errorMsg.style.display = 'none';
+    this.parentElement.appendChild(errorMsg);
+  }
+  
+  // Limitar la entrada a 10 dígitos
+  if (this.value.length > 10) {
+    this.value = this.value.substring(0, 10);
+  }
+  
+  if (this.value && !onlyNumbers.test(this.value)) {
+    errorMsg.textContent = '⚠️ Solo puede contener números, máximo 10 dígitos';
+    errorMsg.style.display = 'block';
     this.classList.add("is-invalid");
     this.classList.remove("is-valid");
-  } else if (this.value) {
+  } else if (this.value && this.value.length < 10) {
+    errorMsg.textContent = '⚠️ Solo puede contener números, máximo 10 dígitos';
+    errorMsg.style.display = 'block';
+    this.classList.add("is-invalid");
+    this.classList.remove("is-valid");
+  } else if (this.value && this.value.length === 10) {
+    errorMsg.style.display = 'none';
     this.classList.add("is-valid");
     this.classList.remove("is-invalid");
+  } else {
+    errorMsg.style.display = 'none';
+    this.classList.remove("is-invalid", "is-valid");
   }
 });
 
