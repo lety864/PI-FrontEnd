@@ -13,7 +13,7 @@
    1. LAYOUT GENERAL
    =================================== */
 .admin-panel {
-    background-color: var(--background-light);
+    background-color: var(--background-light, #F8F9FA);
     min-height: calc(100vh - 80px);
     padding: 3rem 0;
 }
@@ -43,7 +43,7 @@
 }
 
 .navbar-dark .dropdown-item:hover {
-    background-color: var(--background-light);
+    background-color: var(--background-light, #F8F9FA);
 }
 
 .navbar-dark .dropdown-item i {
@@ -52,7 +52,7 @@
 }
 
 .navbar-dark .dropdown-item.text-danger {
-    color: var(--secondary) !important;
+    color: var(--secondary, #CB997E) !important;
 }
 
 .navbar-dark .dropdown-item.text-danger:hover {
@@ -69,8 +69,8 @@
 }
 
 .admin-card {
-    background-color: var(--background-white);
-    border-radius: var(--radius);
+    background-color: var(--background-white, #FFFFFF);
+    border-radius: var(--radius, 8px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     padding: 3rem;
     margin-top: 2rem;
@@ -85,17 +85,25 @@
 }
 
 .admin-title {
-    font-family: var(--font-display);
+    font-family: var(--font-display, 'Playfair Display', serif);
     font-size: 2.25rem;
-    color: var(--primary);
-    font-weight: var(--font-weight-semibold);
+    color: var(--primary, #73917A);
+    font-weight: var(--font-weight-semibold, 600);
     margin-bottom: 0.5rem;
 }
 
 .admin-subtitle {
     font-size: 1rem;
-    color: var(--text-medium);
+    color: var(--text-medium, #6C757D);
     margin-bottom: 0;
+}
+
+/* Contador de productos nuevos */
+.contador-nuevo {
+    color: var(--secondary, #CB997E);
+    font-weight: var(--font-weight-semibold, 600);
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
 }
 
 /* ===================================
@@ -129,24 +137,36 @@
 /* Alert Success - usar colores del Design System */
 .alert-success {
     background-color: rgba(115, 145, 122, 0.1);
-    border-left-color: var(--primary);
-    color: var(--text-dark);
+    border-left-color: var(--primary, #73917A);
+    color: var(--text-dark, #333333);
 }
 
 .alert-success i {
-    color: var(--primary);
+    color: var(--primary, #73917A);
     font-size: 1.25rem;
 }
 
 /* Alert Danger - usar colores del Design System */
 .alert-danger {
     background-color: rgba(203, 153, 126, 0.1);
-    border-left-color: var(--secondary);
-    color: var(--text-dark);
+    border-left-color: var(--secondary, #CB997E);
+    color: var(--text-dark, #333333);
 }
 
 .alert-danger i {
-    color: var(--secondary);
+    color: var(--secondary, #CB997E);
+    font-size: 1.25rem;
+}
+
+/* Alert Info - para mensajes informativos */
+.alert-info {
+    background-color: rgba(115, 145, 122, 0.1);
+    border-left-color: var(--primary-light, #B4C7B9);
+    color: var(--text-dark, #333333);
+}
+
+.alert-info i {
+    color: var(--primary-light, #B4C7B9);
     font-size: 1.25rem;
 }
 
@@ -167,19 +187,19 @@
 }
 
 .form-label {
-    font-family: var(--font-primary);
+    font-family: var(--font-primary, 'Poppins', sans-serif);
     font-size: 0.875rem;
-    font-weight: var(--font-weight-medium);
-    color: var(--text-dark);
+    font-weight: var(--font-weight-medium, 500);
+    color: var(--text-dark, #333333);
     margin-bottom: 0.5rem;
 }
 
 /* Badge "Opcional" */
 .badge-optional {
     background-color: #E5E5E5;
-    color: var(--text-light);
+    color: var(--text-light, #A9A9A9);
     font-size: 0.75rem;
-    font-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-normal, 400);
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
     margin-left: 0.5rem;
@@ -192,11 +212,11 @@
 .form-textarea,
 .form-select {
     height: 48px;
-    border: 1px solid var(--border-light);
+    border: 1px solid var(--border-light, #DEE2E6);
     border-radius: 6px;
     padding: 0.75rem 1rem;
     font-size: 0.95rem;
-    color: var(--text-dark);
+    color: var(--text-dark, #333333);
     transition: all 0.3s ease;
 }
 
@@ -208,12 +228,12 @@
 /* Input pequeño para dimensiones */
 .form-input-sm {
     height: 48px;
-    border: 1px solid var(--border-light);
+    border: 1px solid var(--border-light, #DEE2E6);
     border-radius: 6px;
     padding: 0.75rem;
     font-size: 0.95rem;
     text-align: center;
-    color: var(--text-dark);
+    color: var(--text-dark, #333333);
     transition: all 0.3s ease;
 }
 
@@ -222,7 +242,7 @@
 .form-textarea:focus,
 .form-select:focus,
 .form-input-sm:focus {
-    border-color: var(--primary);
+    border-color: var(--primary, #73917A);
     box-shadow: 0 0 0 3px rgba(115, 145, 122, 0.1);
     outline: none;
 }
@@ -238,7 +258,7 @@
 .form-text {
     display: block;
     font-size: 0.75rem;
-    color: var(--text-light);
+    color: var(--text-light, #A9A9A9);
     margin-top: 0.375rem;
 }
 
@@ -247,8 +267,8 @@
    =================================== */
 .input-group-text {
     background-color: transparent;
-    border: 1px solid var(--border-light);
-    color: var(--text-light);
+    border: 1px solid var(--border-light, #DEE2E6);
+    color: var(--text-light, #A9A9A9);
     font-size: 0.95rem;
 }
 
@@ -268,7 +288,7 @@
 }
 
 .input-icon i {
-    color: var(--text-light);
+    color: var(--text-light, #A9A9A9);
     font-size: 1.1rem;
 }
 
@@ -279,12 +299,12 @@
 }
 
 .input-group .form-input:focus {
-    border-color: var(--primary);
+    border-color: var(--primary, #73917A);
     box-shadow: none;
 }
 
 .input-group:focus-within .input-group-text {
-    border-color: var(--primary);
+    border-color: var(--primary, #73917A);
 }
 
 /* ===================================
@@ -294,7 +314,7 @@
 .form-input.is-invalid,
 .form-textarea.is-invalid,
 .form-select.is-invalid {
-    border-color: var(--secondary);
+    border-color: var(--secondary, #CB997E);
     padding-right: calc(1.5em + 0.75rem);
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23CB997E'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23CB997E' stroke='none'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
@@ -305,7 +325,7 @@
 .form-input.is-invalid:focus,
 .form-textarea.is-invalid:focus,
 .form-select.is-invalid:focus {
-    border-color: var(--secondary);
+    border-color: var(--secondary, #CB997E);
     box-shadow: 0 0 0 3px rgba(203, 153, 126, 0.1);
 }
 
@@ -314,7 +334,7 @@
     width: 100%;
     margin-top: 0.375rem;
     font-size: 0.875rem;
-    color: var(--secondary);
+    color: var(--secondary, #CB997E);
 }
 
 .form-input.is-invalid ~ .invalid-feedback,
@@ -334,12 +354,12 @@
 
 .btn-guardar {
     flex: 1;
-    background-color: var(--primary);
-    color: var(--text-white);
+    background-color: var(--primary, #73917A);
+    color: var(--text-white, #FFFFFF);
     border: none;
     padding: 1rem 2rem;
     font-size: 1rem;
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold, 600);
     border-radius: 6px;
     display: flex;
     align-items: center;
@@ -349,13 +369,23 @@
 }
 
 .btn-guardar:hover {
-    background-color: var(--primary-hover);
+    background-color: var(--primary-hover, #5A7461);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(115, 145, 122, 0.3);
 }
 
 .btn-guardar:active {
     transform: translateY(0);
+}
+
+/* Estado: Actualizar (modo edición) */
+.btn-guardar.btn-actualizar {
+    background-color: var(--secondary, #CB997E);
+}
+
+.btn-guardar.btn-actualizar:hover {
+    background-color: var(--secondary-hover, #B58469);
+    box-shadow: 0 4px 12px rgba(203, 153, 126, 0.3);
 }
 
 /* Estado: Loading */
@@ -381,19 +411,19 @@
 .btn-cancelar {
     flex: 0 0 30%;
     background-color: transparent;
-    color: var(--text-medium);
-    border: 2px solid var(--border-light);
+    color: var(--text-medium, #6C757D);
+    border: 2px solid var(--border-light, #DEE2E6);
     padding: 1rem 2rem;
     font-size: 1rem;
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold, 600);
     border-radius: 6px;
     transition: all 0.3s ease;
 }
 
 .btn-cancelar:hover {
-    background-color: var(--background-light);
-    border-color: var(--text-medium);
-    color: var(--text-dark);
+    background-color: var(--background-light, #F8F9FA);
+    border-color: var(--text-medium, #6C757D);
+    color: var(--text-dark, #333333);
 }
 
 /* ===================================
@@ -445,5 +475,265 @@
     .form-select,
     .form-input-sm {
         font-size: 0.875rem;
+    }
+}
+
+/* ===================================
+   10. TABLA DE PRODUCTOS
+   =================================== */
+.table-responsive {
+    margin-top: 1.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.table-productos {
+    margin-bottom: 0;
+    background-color: var(--background-white, #FFFFFF);
+}
+
+.table-productos thead {
+    background-color: var(--primary, #73917A);
+    color: var(--text-white, #FFFFFF);
+}
+
+.table-productos thead th {
+    font-weight: var(--font-weight-semibold, 600);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 1rem;
+    border: none;
+    white-space: nowrap;
+}
+
+.table-productos tbody tr {
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid var(--border-light, #DEE2E6);
+}
+
+.table-productos tbody tr:hover {
+    background-color: rgba(115, 145, 122, 0.05);
+}
+
+/* Fila en edición */
+.table-productos tbody tr.fila-en-edicion {
+    background-color: rgba(203, 153, 126, 0.15);
+    border-left: 4px solid var(--secondary, #CB997E);
+}
+
+.table-productos tbody tr.fila-en-edicion:hover {
+    background-color: rgba(203, 153, 126, 0.2);
+}
+
+.table-productos tbody td {
+    padding: 1rem;
+    vertical-align: middle;
+    font-size: 0.9rem;
+    color: var(--text-dark, #333333);
+}
+
+/* Imagen en la tabla */
+.producto-img-table {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Badge de categoría */
+.badge-categoria {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-medium, 500);
+    border-radius: 4px;
+    background-color: var(--primary-light, #B4C7B9);
+    color: var(--text-dark, #333); /* Cambiado a oscuro para mejor contraste */
+    text-transform: capitalize;
+}
+
+/* Badge de "Nuevo" */
+.badge-nuevo {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.65rem;
+    font-weight: var(--font-weight-bold, 700);
+    border-radius: 3px;
+    background-color: var(--secondary, #CB997E);
+    color: var(--text-white, #FFFFFF);
+    margin-left: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    animation: pulseNew 2s ease-in-out infinite;
+}
+
+@keyframes pulseNew {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(0.98);
+    }
+}
+
+/* Badge de "Editando" */
+.badge-editando {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.65rem;
+    font-weight: var(--font-weight-bold, 700);
+    border-radius: 3px;
+    background-color: var(--primary-light, #B4C7B9);
+    color: var(--text-dark, #333); /* Cambiado a oscuro */
+    margin-left: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Precio */
+.precio-tabla {
+    font-weight: var(--font-weight-semibold, 600);
+    color: var(--primary, #73917A);
+    font-size: 1rem;
+}
+
+/* Stock */
+.stock-badge {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-semibold, 600);
+    border-radius: 4px;
+    min-width: 60px;
+    text-align: center;
+}
+
+.stock-badge.stock-ok {
+    background-color: rgba(115, 145, 122, 0.1);
+    color: var(--primary, #73917A);
+}
+
+.stock-badge.stock-bajo {
+    background-color: rgba(203, 153, 126, 0.1);
+    color: var(--secondary, #CB997E);
+}
+
+.stock-badge.stock-agotado {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+}
+
+/* Botones de acción en tabla */
+.btn-action {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-right: 0.25rem;
+}
+
+.btn-editar {
+    background-color: var(--primary-light, #B4C7B9);
+    color: var(--text-dark, #333);
+}
+
+.btn-editar:hover {
+    background-color: var(--primary, #73917A);
+    color: var(--text-white, #FFFFFF);
+    transform: translateY(-2px);
+}
+
+.btn-eliminar {
+    background-color: rgba(203, 153, 126, 0.2);
+    color: var(--secondary, #CB997E);
+}
+
+.btn-eliminar:hover {
+    background-color: var(--secondary, #CB997E);
+    color: var(--text-white, #FFFFFF);
+    transform: translateY(-2px);
+}
+
+/* ===================================
+   11. ESTADO VACÍO
+   =================================== */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-light, #A9A9A9);
+}
+
+.empty-state i {
+    font-size: 4rem;
+    color: var(--border-light, #DEE2E6);
+    margin-bottom: 1.5rem;
+}
+
+.empty-state h3 {
+    font-size: 1.5rem;
+    color: var(--text-medium, #6C757D);
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    font-size: 1rem;
+    color: var(--text-light, #A9A9A9);
+}
+
+/* ===================================
+   12. MODAL DE CONFIRMACIÓN
+   =================================== */
+.modal-confirm .modal-header {
+    border-bottom: none;
+}
+.modal-confirm .modal-footer {
+    border-top: 1px solid var(--border-light, #DEE2E6);
+}
+.modal-confirm .modal-body {
+    font-size: 1rem;
+    color: var(--text-medium, #6C757D);
+    /* Permite saltos de línea */
+    white-space: pre-wrap; 
+}
+.modal-confirm .btn-danger {
+    /* Asignamos el color secundario para "eliminar" */
+    background-color: var(--secondary, #CB997E);
+    border-color: var(--secondary, #CB997E);
+}
+.modal-confirm .btn-danger:hover {
+    background-color: var(--secondary-hover, #B58469);
+    border-color: var(--secondary-hover, #B58469);
+}
+
+
+/* ===================================
+   13. RESPONSIVE - TABLA
+   =================================== */
+@media (max-width: 768px) {
+    .table-productos thead th {
+        font-size: 0.75rem;
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .table-productos tbody td {
+        font-size: 0.8rem;
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .producto-img-table {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .btn-action {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
     }
 }
