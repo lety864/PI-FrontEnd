@@ -1,7 +1,63 @@
+// ========================================
+// MODELO DE USUARIO
+// ========================================
+class UsuarioModel {
+  constructor(data) {
+    this.id = this.generarId();
+    this.nombre = data.nombre || '';
+    this.correo = data.correo || '';
+    this.telefono = data.telefono || '';
+    this.contraseña = data.contraseña || '';
+    this.fechaRegistro = data.fechaRegistro || new Date().toISOString();
+    this.activo = data.activo !== undefined ? data.activo : true;
+  }
+
+  // Generar ID único
+  generarId() {
+    return 'USER_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+  }
+
+  // Convertir a JSON
+  toJSON() {
+    return {
+      id: this.id,
+      nombre: this.nombre,
+      correo: this.correo,
+      telefono: this.telefono,
+      contraseña: this.contraseña,
+      fechaRegistro: this.fechaRegistro,
+      activo: this.activo
+    };
+  }
+
+  // Mostrar en consola con formato
+  mostrarEnConsola() {
+    console.log('═══════════════════════════════════════════════════');
+    console.log('NUEVO USUARIO REGISTRADO');
+    console.log('═══════════════════════════════════════════════════');
+    console.log('ID:', this.id);
+    console.log('Nombre:', this.nombre);
+    console.log('Correo:', this.correo);
+    console.log('Teléfono:', this.telefono);
+    console.log('Contraseña:', '*'.repeat(this.contraseña.length) + ' (oculta por seguridad)');
+    console.log('Fecha de Registro:', new Date(this.fechaRegistro).toLocaleString('es-MX'));
+    console.log('Estado:', this.activo ? 'Activo' : 'Inactivo');
+    console.log('═══════════════════════════════════════════════════');
+    console.log('Objeto JSON Completo:');
+    console.log(JSON.stringify(this.toJSON(), null, 2));
+    console.log('═══════════════════════════════════════════════════');
+  }
+}
+
+// ========================================
+// VALIDACIÓN Y REGISTRO DEL FORMULARIO
+// ========================================
 document.getElementById("registerForm").addEventListener("submit", function(event) {
   event.preventDefault();
 
-  // Obtener valores
+  console.log('Procesando registro...');
+
+  // Obtener valores del formulario
   const fullname = document.getElementById("fullname").value.trim();
   const email = document.getElementById("username").value.trim();
   const phone = document.getElementById("phone").value.trim();
@@ -12,90 +68,119 @@ document.getElementById("registerForm").addEventListener("submit", function(even
   // Limpiar estados anteriores
   clearValidationStates();
 
-  // Validar nombre completo ( solo letras y espacios)
+  // ========== VALIDACIONES ==========
+
+  // 1. Validar nombre completo (solo letras y espacios)
   const nameRegex = /^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]{3,}$/;
   const nameWords = fullname.split(' ').filter(word => word.length > 0);
   
   if (!nameRegex.test(fullname) || nameWords.length < 2) {
     showError(alertMessage, "Ingrese su nombre completo (nombre y apellido, mínimo 3 caracteres).");
     markFieldInvalid("fullname");
+    console.error('Validación fallida: Nombre incompleto');
     return;
   }
 
-  // Validar correo electrónico
+  // 2. Validar correo electrónico
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     showError(alertMessage, "Ingrese un correo electrónico válido.");
     markFieldInvalid("username");
+    console.error('Validación fallida: Email inválido');
     return;
   }
 
-  // Validar número de teléfono (exactamente 10 dígitos)
+  // 3. Validar número de teléfono (exactamente 10 dígitos)
   const phoneRegex = /^[0-9]{10}$/;
   if (!phoneRegex.test(phone)) {
     showError(alertMessage, "Ingrese un número de teléfono válido (10 dígitos).");
     markFieldInvalid("phone");
+    console.error('Validación fallida: Teléfono inválido');
     return;
   }
 
-  // Validar longitud de contraseña (mínimo 8 caracteres)
+  // 4. Validar longitud de contraseña (mínimo 8 caracteres)
   if (password.length < 8) {
     showError(alertMessage, "La contraseña debe tener al menos 8 caracteres.");
     markFieldInvalid("password");
+    console.error('Validación fallida: Contraseña muy corta');
     return;
   }
 
-  // Validar fortaleza de contraseña (mayúscula, minúscula, número)
+  // 5. Validar fortaleza de contraseña (mayúscula, minúscula, número)
   const passwordStrength = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
   if (!passwordStrength.test(password)) {
     showError(alertMessage, "La contraseña debe contener al menos una mayúscula, una minúscula y un número.");
     markFieldInvalid("password");
+    console.error('Validación fallida: Contraseña débil');
     return;
   }
 
-  // Validar que las contraseñas coincidan
+  // 6. Validar que las contraseñas coincidan
   if (password !== confirmPassword) {
     showError(alertMessage, "Las contraseñas no coinciden.");
     markFieldInvalid("confirmPassword");
+    console.error('Validación fallida: Contraseñas no coinciden');
     return;
   }
 
-  // Validar que el correo no esté registrado
+  // 7. Validar que el correo no esté registrado
   const existingUser = localStorage.getItem("usuarioRegistrado");
   if (existingUser) {
     const userData = JSON.parse(existingUser);
     if (userData.correo === email) {
       showError(alertMessage, "Este correo electrónico ya está registrado.");
       markFieldInvalid("username");
+      console.error('Validación fallida: Email ya registrado');
       return;
     }
   }
 
-  // Si todas las validaciones pasan, guardar datos
-  const newUserData = {
+  console.log('Todas las validaciones pasadas');
+
+  // ========== CREAR MODELO DE USUARIO ==========
+  const nuevoUsuario = new UsuarioModel({
     nombre: fullname,
     correo: email,
     telefono: phone,
-    contraseña: password,
-    fechaRegistro: new Date().toISOString()
-  };
+    contraseña: password
+  });
 
-  localStorage.setItem("usuarioRegistrado", JSON.stringify(newUserData));
+  // ========== MOSTRAR EN CONSOLA ==========
+  console.log('\n');
+  nuevoUsuario.mostrarEnConsola();
+  
+  // También mostrar como tabla
+  console.log('\nVista en Tabla:');
+  console.table([{
+    'ID': nuevoUsuario.id,
+    'Nombre': nuevoUsuario.nombre,
+    'Correo': nuevoUsuario.correo,
+    'Teléfono': nuevoUsuario.telefono,
+    'Fecha': new Date(nuevoUsuario.fechaRegistro).toLocaleString('es-MX'),
+    'Estado': nuevoUsuario.activo ? 'Activo' : 'Inactivo'
+  }]);
+
+  // Guardar en localStorage
+  localStorage.setItem("usuarioRegistrado", JSON.stringify(nuevoUsuario.toJSON()));
+  console.log('Usuario guardado en localStorage');
 
   // Mostrar mensaje de éxito
-  showSuccess(alertMessage, "¡Registro exitoso! Redirigiendo al inicio de sesión...");
+  showSuccess(alertMessage, "¡Registro exitoso! Redirigiendo a la página principal...");
 
   // Limpiar formulario
   document.getElementById("registerForm").reset();
 
-  // Redirigir después de 2 segundos
+  // Redirigir a la página principal después de 2 segundos
   setTimeout(() => {
-    const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-    const registerModal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
-    registerModal.hide();
-    loginModal.show();
+    console.log('Redirigiendo...');
+    window.location.href = "index.html";
   }, 2000);
 });
+
+// ========================================
+// FUNCIONES AUXILIARES
+// ========================================
 
 // Función para mostrar errores
 function showError(element, message) {
@@ -127,11 +212,18 @@ function markFieldInvalid(fieldId) {
 function clearValidationStates() {
   const fields = ["fullname", "username", "phone", "password", "confirmPassword"];
   fields.forEach(fieldId => {
-    document.getElementById(fieldId).classList.remove("is-invalid", "is-valid");
+    const field = document.getElementById(fieldId);
+    if (field) {
+      field.classList.remove("is-invalid", "is-valid");
+    }
   });
 }
 
-// Validación en tiempo real
+// ========================================
+// VALIDACIÓN EN TIEMPO REAL
+// ========================================
+
+// Validar nombre completo
 document.getElementById("fullname").addEventListener("blur", function() {
   const value = this.value.trim();
   const nameWords = value.split(' ').filter(word => word.length > 0);
@@ -146,6 +238,7 @@ document.getElementById("fullname").addEventListener("blur", function() {
   }
 });
 
+// Validar correo electrónico
 document.getElementById("username").addEventListener("blur", function() {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (this.value && !emailRegex.test(this.value.trim())) {
@@ -157,6 +250,7 @@ document.getElementById("username").addEventListener("blur", function() {
   }
 });
 
+// Validar teléfono
 document.getElementById("phone").addEventListener("blur", function() {
   const phoneRegex = /^[0-9]{10}$/;
   if (this.value && !phoneRegex.test(this.value.trim())) {
@@ -168,6 +262,7 @@ document.getElementById("phone").addEventListener("blur", function() {
   }
 });
 
+// Validar contraseña
 document.getElementById("password").addEventListener("input", function() {
   const password = this.value;
   const passwordStrength = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
@@ -181,6 +276,7 @@ document.getElementById("password").addEventListener("input", function() {
   }
 });
 
+// Validar confirmación de contraseña
 document.getElementById("confirmPassword").addEventListener("input", function() {
   const password = document.getElementById("password").value;
   const confirmPassword = this.value;
@@ -194,7 +290,10 @@ document.getElementById("confirmPassword").addEventListener("input", function() 
   }
 });
 
-// Mostrar/ocultar contraseña
+// ========================================
+// MOSTRAR/OCULTAR CONTRASEÑA
+// ========================================
+
 document.getElementById("togglePassword").addEventListener("click", () => {
   const passwordInput = document.getElementById("password");
   const eyeIcon = document.getElementById("eyeIcon");
@@ -212,9 +311,17 @@ document.getElementById("toggleConfirmPassword").addEventListener("click", () =>
   eyeIcon.classList.toggle("bi-eye");
   eyeIcon.classList.toggle("bi-eye-slash");
 });
-// Limpiar formulario y mensajes cuando se abre/cierra el modal
+
+// ========================================
+// LIMPIAR MODAL AL CERRAR/ABRIR
+// ========================================
+
 const registerModal = document.getElementById('registerModal');
+
+// Limpiar al cerrar
 registerModal.addEventListener('hidden.bs.modal', function () {
+  console.log('Modal de registro cerrado');
+  
   // Limpiar formulario
   document.getElementById("registerForm").reset();
   
@@ -228,8 +335,11 @@ registerModal.addEventListener('hidden.bs.modal', function () {
   clearValidationStates();
 });
 
+// Limpiar al abrir
 registerModal.addEventListener('show.bs.modal', function () {
-  // Limpiar mensaje de alerta al abrir el modal
+  console.log('Modal de registro abierto');
+  
+  // Limpiar mensaje de alerta
   const alertMessage = document.getElementById("alertMessage");
   alertMessage.classList.add("d-none");
   alertMessage.classList.remove("alert-success", "alert-danger");
@@ -238,3 +348,64 @@ registerModal.addEventListener('show.bs.modal', function () {
   // Limpiar estados de validación
   clearValidationStates();
 });
+
+// ========================================
+// CONTROLAR VIDEO DEL MODAL
+// ========================================
+
+registerModal.addEventListener('shown.bs.modal', function () {
+  const video = document.getElementById('registerVideo');
+  if (video) {
+    video.play().catch(err => console.log('Video autoplay prevented:', err));
+  }
+});
+
+registerModal.addEventListener('hidden.bs.modal', function () {
+  const video = document.getElementById('registerVideo');
+  if (video) {
+    video.pause();
+    video.currentTime = 0;
+  }
+});
+
+// ========================================
+// FUNCIONES DE UTILIDAD PARA CONSOLA
+// ========================================
+
+// Ver usuarios registrados
+function verUsuariosRegistrados() {
+  const usuario = localStorage.getItem("usuarioRegistrado");
+  if (usuario) {
+    console.log('USUARIO EN LOCALSTORAGE:');
+    const usuarioObj = JSON.parse(usuario);
+    console.log(usuarioObj);
+    console.table([usuarioObj]);
+  } else {
+    console.log('No hay usuarios registrados');
+  }
+}
+
+// Limpiar localStorage
+function limpiarUsuarios() {
+  localStorage.removeItem("usuarioRegistrado");
+  console.log('LocalStorage limpiado correctamente');
+}
+
+// ========================================
+// INICIALIZACIÓN AL CARGAR LA PÁGINA
+// ========================================
+
+window.addEventListener('DOMContentLoaded', () => {
+  console.log('═══════════════════════════════════════════════════');
+  console.log('SISTEMA DE REGISTRO CARGADO');
+  console.log('═══════════════════════════════════════════════════');
+  console.log('Comandos disponibles en consola:');
+  console.log('  - verUsuariosRegistrados() - Ver usuarios guardados en localStorage');
+  console.log('  - limpiarUsuarios() - Limpiar todos los usuarios de localStorage');
+  console.log('═══════════════════════════════════════════════════');
+  
+  // Mostrar usuario existente si hay
+  verUsuariosRegistrados();
+});
+
+console.log('Script de registro cargado correctamente');
