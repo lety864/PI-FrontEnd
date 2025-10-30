@@ -77,10 +77,10 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" aria-label="Mi cuenta">
+                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
                                 <i class="bi bi-person-fill fs-4"></i>
                             </a>
-                        </li>
+                        </li> 
                     </ul>
                 </div>
 
@@ -386,7 +386,7 @@
                     <div class="footer-widget">
                         <h4 class="widget-title">Atención al Cliente</h4>
                         <ul class="list-unstyled">
-                            <li><a href="#">Preguntas Frecuentes</a></li>
+                            <li><a href="/paginas/preguntas.html">Preguntas Frecuentes</a></li>
                             <li><a href="#">Métodos de Pago</a></li>
                             <li><a href="paginas/garantia.html">Políticas y Garantías</a></li>
                         </ul>
@@ -422,8 +422,226 @@
             <p class="mb-0">&copy; 2025 Mueblería España. Todos los derechos reservados.</p>
         </div>
     </div>
+    <!-- Incio de sesion -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body p-0">
+            <div class="container-fluid">
+              <div class="row">
+
+                <div class="col-md-6 d-none d-md-block p-0 modal-video-col">
+                  <video id="loginVideo" autoplay muted playsinline>
+                    <source src="/assets/inicio.mp4" type="video/mp4">
+                    Tu navegador no soporta la etiqueta de video.
+                  </video>
+                </div>
+
+                <div class="col-md-6 p-4 p-md-5">
+                  
+                  <div class="d-flex justify-content-end">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+
+                  <h2 class="mb-4">Bienvenido</h2>
+                  
+                  <form>
+    <div class="mb-3">
+        <label for="emailInput" class="form-label">Correo Electrónico</label>
+        <input type="email" class="form-control" id="emailInput" placeholder="tu@email.com">
+    </div>
+    
+    <div class="mb-3">
+        <label for="passwordInput" class="form-label">Contraseña</label>
+        <div class="position-relative">
+            <input 
+                type="password" 
+                class="form-control" 
+                id="passwordInput" 
+                placeholder="Ingresa tu contraseña"
+                required
+            >
+            <button 
+                type="button" 
+                id="toggleLoginPassword"
+                class="btn position-absolute top-0 end-0 h-100"
+            >
+                <i class="bi bi-eye"></i>
+            </button>
+        </div>
+        <div class="invalid-feedback">
+            La contraseña debe tener 8 caracteres como mínimo.
+        </div>
+    </div>
+</form>
+                   <!-- Enlace de recuperación de contraseña -->
+                   <div class="mb-3 text-end">
+                   <a href="#" class="text-decoration-none" style="color: #CB997E;" data-bs-toggle="modal" data-bs-target="#recoveryModal" data-bs-dismiss="modal">
+                     ¿Olvidaste tu contraseña? </a></div>
+
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-primary btn-lg">Ingresar</button>
+                </div>
+              </form>
+
+              <hr class="my-4">
+
+              <div class="text-center">
+                <p>¿No tienes una cuenta? 
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Regístrate</a>
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+<!-- Fin de inicio de sesion -->
+
+<!-- Modal de Recuperación de Contraseña -->
+<div class="modal fade" id="recoveryModal" tabindex="-1" aria-labelledby="recoveryModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body p-4 p-md-5">
+        
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="text-center mb-4">
+        <i class="bi bi-key fs-1" style="color: #CB997E;"></i>
+         <h2 class="mt-3">Recuperar Contraseña</h2>
+          <p class="text-muted">Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.</p>
+        </div>
+        
+        <form id="recoveryForm">
+          <div class="mb-3">
+            <label for="recoveryEmail" class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control" id="recoveryEmail" placeholder="tu@email.com" required>
+          </div>
+
+          <!-- Mensaje de alerta -->
+          <div id="recoveryAlertMessage" class="alert d-none" role="alert"></div>
+
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary btn-lg">Enviar Enlace</button>
+          </div>
+        </form>
+
+        <hr class="my-4">
+
+        <div class="text-center">
+          <p>¿Recordaste tu contraseña? 
+            <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Inicia Sesión</a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin de Modal de Recuperación de Contraseña -->
+                    
+<!-- Form de registro --> 
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <div class="container-fluid">
+          <div class="row">
+
+            <div class="col-md-6 p-4 p-md-5">
+
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+
+              <h2 class="mb-4">Crea tu Cuenta</h2>
+              
+              <form id="registerForm"> 
+                
+                <!-- Nombre completo -->
+                <div class="mb-3">
+                  <label for="fullname" class="form-label">Nombre Completo</label>
+                  <input type="text" class="form-control" id="fullname" placeholder="Ej. Nombre Apellido 1 Apellido 2" required>
+                </div>
+
+                <!-- Correo -->
+                <div class="mb-3">
+                  <label for="username" class="form-label">Correo Electrónico</label>
+                  <input type="email" class="form-control" id="username" placeholder="tu@email.com" required>
+                </div>
+
+                <!-- Teléfono -->
+                <div class="mb-3">
+                  <label for="phone" class="form-label">Número de Teléfono</label>
+                  <input type="tel" class="form-control" id="phone" placeholder="Ej. 7221234567" pattern="[0-9]{10}" required>
+                </div>
+
+                <!-- Contraseña -->
+                <div class="mb-3">
+                  <label for="password" class="form-label">Contraseña</label>
+                  <div class="input-group"> 
+                    <input type="password" class="form-control" id="password" required>
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                      <i class="bi bi-eye" id="eyeIcon"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Confirmar Contraseña -->
+                <div class="mb-3">
+                  <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+                  <div class="input-group"> 
+                    <input type="password" class="form-control" id="confirmPassword" required>
+                    <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
+                      <i class="bi bi-eye" id="eyeIconConfirm"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Mensajes de alerta -->
+                <div id="alertMessage" class="alert d-none" role="alert"></div>
+
+                <div class="d-grid gap-2">
+                  <button type="submit" class="btn btn-primary btn-lg">Registrarse</button>
+                </div>
+              </form>
+
+              <hr class="my-4">
+
+              <div class="text-center">
+                <p>¿Ya tienes una cuenta? 
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Inicia Sesión</a>
+                </p>
+              </div>
+
+            </div>
+
+            <!-- Video del lado derecho -->
+            <div class="col-md-6 d-none d-md-block p-0 modal-video-col">
+              <video id="registerVideo" autoplay muted playsinline>
+                <source src="/assets/registro.mp4" type="video/mp4">
+                Tu navegador no soporta la etiqueta de video.
+              </video>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+<!-- Fin de form de registro -->
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <!-- Enlazar el archivo JavaScript -->
+<script src="/scripts/registro.js"></script>
+    <script src="/scripts/login.js"></script>
+        <script src="/scripts/recuperacion.js"></script>
 </body>
 </html>

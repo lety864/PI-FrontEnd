@@ -1,13 +1,9 @@
-// ========================================
 // SISTEMA DE LOGIN - VERSIÓN OPTIMIZADA SIN ERRORES
-// ========================================
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('✓ Sistema de login inicializado');
 
-    // =====================================================
     // ELEMENTOS DEL DOM
-    // =====================================================
     const loginModal = document.getElementById('loginModal');
     const emailInput = document.getElementById('emailInput');
     const passwordInput = document.getElementById('passwordInput');
@@ -20,9 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // =====================================================
     // BOTÓN DE MOSTRAR/OCULTAR CONTRASEÑA
-    // =====================================================
     const togglePasswordButton = document.getElementById('toggleLoginPassword');
     
     if (togglePasswordButton) {
@@ -39,9 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // =====================================================
     // CORRECCIÓN: Eliminar aria-hidden de modales
-    // =====================================================
     function corregirAccesibilidadModales() {
         const modales = document.querySelectorAll('.modal[aria-hidden="true"]');
         modales.forEach(modal => {
@@ -55,9 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Ejecutar corrección al cargar
     corregirAccesibilidadModales();
 
-    // =====================================================
+    
     // CREACIÓN DE ELEMENTO DE ALERTA
-    // =====================================================
     function crearAlertaLogin() {
         let alertMessage = document.getElementById('loginAlertMessage');
 
@@ -75,9 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return alertMessage;
     }
 
-    // =====================================================
     // FUNCIONES DE UTILIDAD
-    // =====================================================
     function limpiarCamposLogin() {
         emailInput.value = '';
         passwordInput.value = '';
@@ -140,9 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return emailRegex.test(email);
     }
 
-    // =====================================================
     // EVENTO: PROCESO DE LOGIN
-    // =====================================================
     loginButton.addEventListener('click', (event) => {
         event.preventDefault();
         console.log('→ Procesando inicio de sesión...');
@@ -257,9 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 5000);
     });
 
-    // =====================================================
     // VALIDACIÓN EN TIEMPO REAL
-    // =====================================================
     emailInput.addEventListener('input', function () {
         const email = this.value.trim();
         
@@ -301,9 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // =====================================================
     // EVENTOS DEL MODAL
-    // =====================================================
     loginModal.addEventListener('hidden.bs.modal', () => {
         console.log('→ Modal de login cerrado');
         limpiarCamposLogin();
@@ -319,6 +302,9 @@ document.addEventListener('DOMContentLoaded', () => {
     loginModal.addEventListener('shown.bs.modal', () => {
         console.log('→ Modal de login abierto');
         
+        //LIMPIEZA INMEDIATA: Limpiar campos al abrir el modal
+    limpiarCamposLogin();
+    
         // Reproducir video si existe
         const video = document.getElementById('loginVideo');
         if (video) {
@@ -334,9 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     });
 
-    // =====================================================
     // OBSERVADOR: Corregir aria-hidden dinámicamente
-    // =====================================================
     const observer = new MutationObserver(() => {
         corregirAccesibilidadModales();
     });
@@ -347,9 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
         subtree: true
     });
 
-    // =====================================================
     // UTILIDADES DE CONSOLA
-    // =====================================================
     window.verSesionActiva = function () {
         const sesion = localStorage.getItem('sesionActiva');
         if (sesion) {
