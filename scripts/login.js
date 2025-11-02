@@ -1,4 +1,4 @@
-// SISTEMA DE LOGIN - VERSIÓN OPTIMIZADA SIN ERRORES
+// SISTEMA DE LOGIN - MULTI-USUARIO
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('✓ Sistema de login inicializado');
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Validación de elementos críticos
     if (!loginModal || !emailInput || !passwordInput || !loginButton) {
-        console.error(' Error: Elementos del login no encontrados. Verifica los IDs en el HTML.');
+        console.error('Error: Elementos del login no encontrados. Verifica los IDs en el HTML.');
         return;
     }
 
@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordInput.setAttribute('type', type);
             
-            // Cambiar el ícono
             const icon = this.querySelector('i');
             if (icon) {
                 icon.classList.toggle('bi-eye');
@@ -33,21 +32,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // FUNCIONES PARA MANEJAR USUARIOS
+    function obtenerUsuarios() {
+        try {
+            const usuarios = localStorage.getItem("usuarios");
+            return usuarios ? JSON.parse(usuarios) : [];
+        } catch (e) {
+            console.error('Error al obtener usuarios:', e);
+            return [];
+        }
+    }
+
+    function buscarUsuarioPorCorreo(correo) {
+        const usuarios = obtenerUsuarios();
+        return usuarios.find(usuario => usuario.correo === correo);
+    }
+
     // CORRECCIÓN: Eliminar aria-hidden de modales
     function corregirAccesibilidadModales() {
         const modales = document.querySelectorAll('.modal[aria-hidden="true"]');
         modales.forEach(modal => {
-            // Si el modal tiene tabindex, removemos aria-hidden para evitar conflictos
             if (modal.hasAttribute('tabindex')) {
                 modal.removeAttribute('aria-hidden');
             }
         });
     }
 
-    // Ejecutar corrección al cargar
     corregirAccesibilidadModales();
 
-    
     // CREACIÓN DE ELEMENTO DE ALERTA
     function crearAlertaLogin() {
         let alertMessage = document.getElementById('loginAlertMessage');
@@ -72,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
         passwordInput.value = '';
         clearLoginValidationStates();
         
-        // Restaurar visibilidad de los campos
         emailInput.style.display = '';
         passwordInput.parentElement.style.display = '';
         const loginBtn = loginModal?.querySelector('button.btn-primary');
@@ -116,7 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
-        // Ocultar mensaje de error de contraseña
         const parentDiv = passwordInput.parentElement;
         const feedback = parentDiv?.nextElementSibling;
         if (feedback && feedback.classList.contains('invalid-feedback')) {
@@ -168,28 +178,22 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Verificar si existe usuario registrado
-        const usuarioGuardado = localStorage.getItem('usuarioRegistrado');
-        if (!usuarioGuardado) {
-            showLoginError(alertMessage, 'No existe una cuenta registrada. Por favor, regístrese primero.');
+        // CORREGIDO: Buscar en el array de usuarios
+        const usuarios = obtenerUsuarios();
+        
+        if (usuarios.length === 0) {
+            showLoginError(alertMessage, 'No hay usuarios registrados. Por favor, regístrese primero.');
             markLoginFieldInvalid('emailInput');
             return;
         }
 
-        // Parsear datos del usuario
-        let usuario;
-        try {
-            usuario = JSON.parse(usuarioGuardado);
-        } catch (error) {
-            console.error('Error al parsear datos del usuario:', error);
-            showLoginError(alertMessage, 'Error al procesar los datos. Intente nuevamente.');
-            return;
-        }
+        // Buscar el usuario por correo
+        const usuario = buscarUsuarioPorCorreo(email);
 
-        // Validación: correo incorrecto
-        if (usuario.correo !== email) {
-            showLoginError(alertMessage, 'Correo electrónico incorrecto.');
+        if (!usuario) {
+            showLoginError(alertMessage, 'Correo electrónico no registrado.');
             markLoginFieldInvalid('emailInput');
+            console.log('❌ Usuario no encontrado con el correo:', email);
             return;
         }
 
@@ -197,21 +201,24 @@ document.addEventListener('DOMContentLoaded', () => {
         if (usuario.contraseña !== password) {
             showLoginError(alertMessage, 'Contraseña incorrecta.');
             markLoginFieldInvalid('passwordInput');
+            console.log('❌ Contraseña incorrecta para:', email);
             return;
         }
 
         // ✓ LOGIN EXITOSO
-        console.log(' Login exitoso:', usuario.nombre);
+        console.log('✓ Login exitoso:', usuario.nombre);
 
         const sesion = {
             usuarioId: usuario.id || Date.now(),
             nombre: usuario.nombre,
             correo: usuario.correo,
+            telefono: usuario.telefono,
             fechaLogin: new Date().toISOString()
         };
 
         try {
             localStorage.setItem('sesionActiva', JSON.stringify(sesion));
+            console.log('✓ Sesión guardada:', sesion);
         } catch (error) {
             console.error('Error al guardar sesión:', error);
             showLoginError(alertMessage, 'Error al iniciar sesión. Intente nuevamente.');
@@ -220,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const nombreUsuario = usuario.nombre.split(' ')[0];
         
-        // Ocultar los campos del formulario para dar protagonismo al mensaje
+        // Ocultar los campos del formulario
         emailInput.style.display = 'none';
         passwordInput.parentElement.style.display = 'none';
         loginButton.style.display = 'none';
@@ -228,8 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Mostrar el mensaje de éxito
         showLoginSuccess(alertMessage, `¡Bienvenido a Mueblería España, ${nombreUsuario}!`);
 
-        // CAMBIO: Dar tiempo suficiente para que el usuario vea bien el mensaje de éxito
-        // Esperar 5 segundos antes de cerrar el modal
+        // Cerrar modal y redirigir
         setTimeout(() => {
             if (typeof bootstrap !== 'undefined') {
                 const modalInstance = bootstrap.Modal.getInstance(loginModal) || new bootstrap.Modal(loginModal);
@@ -237,11 +243,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             console.log('→ Redirigiendo a la página principal...');
             
-            // Redirigir 1 segundo después de cerrar el modal
             setTimeout(() => {
                 window.location.href = 'index.html';
             }, 1000);
-        }, 5000);
+        }, 3000);
     });
 
     // VALIDACIÓN EN TIEMPO REAL
@@ -261,7 +266,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     passwordInput.addEventListener('input', function () {
         const password = this.value;
-        // Buscar el div de feedback que está después del div contenedor
         const parentDiv = this.parentElement;
         const feedback = parentDiv.nextElementSibling;
         
@@ -291,7 +295,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('→ Modal de login cerrado');
         limpiarCamposLogin();
 
-        // Detener video si existe
         const video = document.getElementById('loginVideo');
         if (video) {
             video.pause();
@@ -301,20 +304,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loginModal.addEventListener('shown.bs.modal', () => {
         console.log('→ Modal de login abierto');
+        limpiarCamposLogin();
         
-        //LIMPIEZA INMEDIATA: Limpiar campos al abrir el modal
-    limpiarCamposLogin();
-    
-        // Reproducir video si existe
         const video = document.getElementById('loginVideo');
         if (video) {
             video.currentTime = 0;
-            video.play().catch(() => {
-                // Silenciar error de autoplay bloqueado
-            });
+            video.play().catch(() => {});
         }
 
-        // Focus en el campo de email
         setTimeout(() => {
             emailInput.focus();
         }, 300);
@@ -337,19 +334,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (sesion) {
             try {
                 const obj = JSON.parse(sesion);
+                console.log('Sesión activa:');
                 console.table([obj]);
                 return obj;
             } catch (error) {
-                console.error(' Error al leer sesión:', error);
+                console.error('Error al leer sesión:', error);
             }
         } else {
-            console.log(' No hay sesión activa');
+            console.log('No hay sesión activa');
         }
     };
 
     window.cerrarSesion = function () {
         localStorage.removeItem('sesionActiva');
-        console.log(' Sesión cerrada correctamente');
+        console.log('✓ Sesión cerrada correctamente');
         window.location.reload();
     };
 
@@ -358,10 +356,20 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('✓ Campos de login limpiados');
     };
 
+    window.verTodosLosUsuarios = function() {
+        const usuarios = obtenerUsuarios();
+        if (usuarios.length > 0) {
+            console.log('Total de usuarios:', usuarios.length);
+            console.table(usuarios);
+        } else {
+            console.log('No hay usuarios registrados');
+        }
+    };
+
     // Mostrar sesión activa al cargar (si existe)
     const sesionActual = localStorage.getItem('sesionActiva');
     if (sesionActual) {
-        console.log('✓ Sesión activa encontrada:');
+        console.log('✓ Sesión activa encontrada');
         verSesionActiva();
     }
 });
