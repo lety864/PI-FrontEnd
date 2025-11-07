@@ -19,7 +19,7 @@
     <!-- Page-Specific Styles -->
     <link rel="stylesheet" href="/estilos/carrito.css">
 
-    <title>Carrito</title>
+    <title>Checkout</title>
 
 </head>
 <body>
@@ -300,57 +300,174 @@
     </div>
     <!--FIN DE NAVBAR-->
 
-    <!--AQUI VA EL CODIGO DEL CARRITO-->
+    <!--AQUI VA EL CODIGO DEL CHECKOUT-->
     <!-- ========================================= -->
 <!-- SECCIÓN DEL CARRITO DE COMPRAS -->
 <!-- ========================================= -->
 <main class="container my-5">
-  <h1 class="mb-4 text-center">Tu Carrito de Compras</h1>
-
-  <!-- Tabla de productos -->
-  <div class="table-responsive">
-    <table class="table align-middle text-center">
-      <thead class="table-dark">
-        <tr>
-          <th>Producto</th>
-          <th>Precio</th>
-          <th>Cantidad</th>
-          <th>Subtotal</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody id="cart-items">
-        <!-- Productos dinámicos -->
-      </tbody>
-    </table>
-  </div>
-  <!-- Resumen del carrito -->
-<div class="card mt-4 p-3 shadow-sm" id="cart-summary">
-  <h4 class="mb-3">Resumen de la compra</h4>
-  <div class="d-flex justify-content-between mb-2">
-    <span>Subtotal:</span>
-    <span id="summary-subtotal">$0.00</span>
-  </div>
-  <div class="d-flex justify-content-between mb-2">
-    <span>Costo de envío:</span>
-    <span id="summary-shipping">$000.00</span> <!-- ejemplo de envío fijo -->
-  </div>
-  <hr>
-  <div class="d-flex justify-content-between fw-bold fs-5">
-    <span>Total:</span>
-    <span id="summary-total">$0.00</span>
-  </div>
-</div>
-
-  <!-- Total -->
-  <div class="d-flex justify-content-between align-items-center mt-4 flex-wrap">
-    <h3 class="Totaltotal">Total: <span id="cart-total">$0.00</span></h3>
-    <div>
-      <button id="clear-cart" class="btn btn-outline-danger me-2">Vaciar Carrito</button>
-      <a href="/paginas/checkout.html" class="btn btn-success">Finalizar Compra</a>
+    <div class="text-center mb-4">
+        <h2>Finalizar Compra</h2>
     </div>
-  </div>
-</main>
+
+    <div class="row g-5">
+        
+        <div class="col-lg-7">
+            
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-brown text-white">
+                    <h4 class="mb-0">1. Dirección de Envío y Facturación</h4>
+                </div>
+                <div class="card-body">
+                    <form id="checkout-form" class="row g-3">
+                        
+                        <div class="col-md-6">
+                            <label for="checkout-nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="checkout-nombre" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="checkout-apellidos" class="form-label">Apellidos</label>
+                            <input type="text" class="form-control" id="checkout-apellidos" required>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="checkout-calle" class="form-label">Calle y Número</label>
+                            <input type="text" class="form-control" id="checkout-calle" placeholder="Av. Siempre Viva 123" required>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="checkout-interior" class="form-label">Departamento, Interior, etc. (Opcional)</label>
+                            <input type="text" class="form-control" id="checkout-interior" placeholder="Depto. 5A">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="checkout-colonia" class="form-label">Colonia</label>
+                            <input type="text" class="form-control" id="checkout-colonia" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="checkout-cp" class="form-label">Código Postal</label>
+                            <input type="text" class="form-control" id="checkout-cp" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="checkout-ciudad" class="form-label">Municipio</label>
+                            <input type="text" class="form-control" id="checkout-ciudad" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="checkout-estado" class="form-label">Estado</label>
+                            <select id="checkout-estado" class="form-select" required>
+                                <option value="" selected disabled>Elegir...</option>
+                                <option value="EDOMEX">Estado de México</option>
+                                </select>
+                        </div>
+                        
+                        <hr class="my-3">
+
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="requiere-factura" data-bs-toggle="collapse" data-bs-target="#datos-facturacion">
+                                <label class="form-check-label" for="requiere-factura">
+                                    <strong>¿Requieres factura?</strong>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-12 collapse" id="datos-facturacion">
+                            <div class="row g-3 p-3 border rounded mt-2 bg-light">
+                                <h5 class="mb-2">Datos de Facturación</h5>
+                                <div class="col-md-6">
+                                    <label for="checkout-rfc" class="form-label">RFC</label>
+                                    <input type="text" class="form-control" id="checkout-rfc" placeholder="ABCD123456XYZ">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="checkout-razon-social" class="form-label">Razón Social</label>
+                                    <input type="text" class="form-control" id="checkout-razon-social" placeholder="Nombre de la Empresa S.A. de C.V.">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="checkout-cfdi" class="form-label">Uso de CFDI</label>
+                                    <select id="checkout-cfdi" class="form-select">
+                                        <option value="" selected disabled>Elegir...</option>
+                                        <option value="G01">G01 - Adquisición de mercancías</option>
+                                        <option value="G03">G03 - Gastos en general</option>
+                                        <option value="I08">I08 - Otra maquinaria y equipo</option>
+                                        <option value="P01">P01 - Por definir</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="checkout-cp-fiscal" class="form-label">C.P. Domicilio Fiscal</label>
+                                    <input type="text" class="form-control" id="checkout-cp-fiscal" placeholder="Tu código postal fiscal">
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                </div>
+            </div> <div class="card shadow-sm mb-4">
+                <div class="card-header">
+                    <h4 class="mb-0">2. Método de Envío</h4>
+                </div>
+                <div class="card-body">
+                    <p>Las opciones de envío aparecerán aquí cuando ingreses tu dirección.</p>
+                </div>
+            </div> <div class="card shadow-sm mb-4">
+                <div class="card-header">
+                    <h4 class="mb-0">3. Método de Pago</h4>
+                </div>
+                <div class="card-body">
+                    <p>Elige tu método de pago.</p>
+                </div>
+            </div> <div class="d-grid">
+                <button type="submit" form="checkout-form" class="btn btn-success btn-lg">Realizar Pedido</button>
+            </div>
+
+        </div> <div class="col-lg-5">
+            <div class="card shadow-sm" style="position: sticky; top: 20px;">
+                <div class="card-header">
+                    <h4 class="mb-0">Resumen del Pedido</h4>
+                </div>
+                <div class="card-body">
+                    
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <h6 class="mb-0">Nombre del Producto 1</h6>
+                                <small class="text-muted">Cantidad: 1</small>
+                            </div>
+                        </div>
+                        <span class="fw-bold">$150.00</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                         <div class="d-flex align-items-center">
+                            <div>
+                                <h6 class="mb-0">Nombre del Producto 2</h6>
+                                <small class="text-muted">Cantidad: 2</small>
+                            </div>
+                        </div>
+                        <span class="fw-bold">$100.00</span>
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal:</span>
+                        <span id="summary-subtotal">$250.00</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Envío:</span>
+                        <span id="summary-shipping">$50.00</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between fw-bold fs-5">
+                        <span>Total:</span>
+                        <span id="summary-total">$300.00</span>
+                    </div>
+
+                </div>
+            </div>
+        </div> </div> </main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- ========== NUEVO FOOTER ========== -->
     <footer class="site-footer">
