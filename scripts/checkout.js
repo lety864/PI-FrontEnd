@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 5. Calcular y mostrar los totales
     // Usamos $50.00 como en tu ejemplo HTML. Puedes cambiar esta lógica.
-    const costoEnvio = subtotalCalculado > 0 ? 50.00 : 0.00; 
+    const costoEnvio = subtotalCalculado > 0 ? 0.00 : 0.00; 
     const totalCalculado = subtotalCalculado + costoEnvio;
 
     subtotalSpan.textContent = `$${subtotalCalculado.toFixed(2)}`;

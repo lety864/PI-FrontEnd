@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function actualizarTotales(subtotal) {
         // Obtener costo de envío. Asumamos un valor fijo o 0 si es gratis.
         // Voy a poner $100.00 como ejemplo, puedes cambiarlo.
-        const costoEnvio = 100.00; 
+        const costoEnvio = 0.00; 
         
         // Si el subtotal es 0, el envío también es 0
         const envioFinal = subtotal > 0 ? costoEnvio : 0;
