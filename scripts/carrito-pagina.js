@@ -45,7 +45,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 </td>
                 <td>$${producto.precio.toFixed(2)} MXN</td>
                 <td>
-                    ${producto.cantidad}
+                    <div class="btn-group" role="group" aria-label="Cantidad">
+                        <button class="btn btn-outline-secondary btn-sm btn-disminuir" data-id="${producto.id}">
+                            <i class="bi bi-dash"></i>
+                        </button>
+                        <span class="btn btn-sm disabled" style="min-width: 50px;">${producto.cantidad}</span>
+                        <button class="btn btn-outline-secondary btn-sm btn-aumentar" data-id="${producto.id}">
+                            <i class="bi bi-plus"></i>
+                        </button>
+                    </div>
                 </td>
                 <td>$${subtotalProducto.toFixed(2)} MXN</td>
                 <td>
@@ -64,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Función para actualizar los resúmenes de total
     function actualizarTotales(subtotal) {
         // Obtener costo de envío. Asumamos un valor fijo o 0 si es gratis.
-        // Voy a poner $100.00 como ejemplo, puedes cambiarlo.
         const costoEnvio = 0.00; 
         
         // Si el subtotal es 0, el envío también es 0
@@ -95,25 +102,65 @@ document.addEventListener('DOMContentLoaded', () => {
     tbody.addEventListener('click', (e) => {
         // Buscar si el clic fue en un botón de eliminar o en su ícono
         const botonEliminar = e.target.closest('.btn-eliminar-item');
-        
+        const botonAumentar = e.target.closest('.btn-aumentar');
+        const botonDisminuir = e.target.closest('.btn-disminuir');
+
         if (botonEliminar) {
             const productoId = botonEliminar.dataset.id;
             eliminarProductoDelCarrito(productoId);
+        } else if (botonAumentar) {
+            const productoId = botonAumentar.dataset.id;
+            cambiarCantidad(productoId, 1);
+        } else if (botonDisminuir) {
+            const productoId = botonDisminuir.dataset.id;
+            cambiarCantidad(productoId, -1);
         }
     });
 
     function eliminarProductoDelCarrito(id) {
         let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-        
+
         // Filtra el carrito, dejando fuera el producto con el id a eliminar
         carrito = carrito.filter(producto => producto.id !== id);
-        
+
         // Guardar el carrito actualizado
         localStorage.setItem('carrito', JSON.stringify(carrito));
-        
+
         // Re-renderizar la tabla
         renderizarCarrito();
-        
+
+        // Actualizar el badge global
+        actualizarBadgeCarrito();
+    }
+
+    /**
+     * Cambia la cantidad de un producto en el carrito
+     * @param {string} id - ID del producto
+     * @param {number} delta - Cambio en cantidad (+1 o -1)
+     */
+    function cambiarCantidad(id, delta) {
+        let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+        // Buscar el producto
+        const producto = carrito.find(p => p.id === id);
+
+        if (!producto) return;
+
+        // Cambiar la cantidad
+        producto.cantidad += delta;
+
+        // Si la cantidad llega a 0, eliminar el producto
+        if (producto.cantidad <= 0) {
+            eliminarProductoDelCarrito(id);
+            return;
+        }
+
+        // Guardar el carrito actualizado
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+
+        // Re-renderizar la tabla
+        renderizarCarrito();
+
         // Actualizar el badge global
         actualizarBadgeCarrito();
     }
