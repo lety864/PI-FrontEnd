@@ -1,0 +1,20 @@
+const RUTAS = {
+    INICIO: 'index.html',
+    ADMIN: "paginas/admin.html",            
+    CARRITO: 'paginas/carrito',
+    CATALOGO: 'paginas/catalogo',
+    CHECKOUT: 'paginas/checkout',    
+    COLCHONES: 'paginas/colchones',
+    COMEDORES: 'paginas/comedores',
+    CONTACTO: 'paginas/contacto',  
+    PRODUCTOS: '/productos',
+    PRODUCTO_DETALLE: '/productos/:id',
+    PEDIDOS: '/pedidos',
+    PEDIDO_DETALLE: '/pedidos/:id',
+    BUSQUEDA: '/busqueda',
+    CATEGORIA: '/categoria/:nombre',
+    SUBCATEGORIA: '/categoria/:categoria/:subcategoria',
+    OFERTAS: '/ofertas',
+    CONTACTO: '/contacto',
+    AYUDA: '/ayuda'
+};
