@@ -11,6 +11,8 @@
  * - CRUD completo
  */
 
+import { proveedorAPI } from './api/api-admin.js';
+
 // ===================================
 // 1. ELEMENTOS DEL DOM
 // ===================================
@@ -321,7 +323,7 @@ async function guardarProveedor() {
         const datosProveedor = crearObjetoProveedor();
         
         console.log('📤 Datos a enviar:', datosProveedor);
-        
+
         let resultado;
         
         if (modoEdicion) {

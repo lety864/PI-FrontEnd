@@ -1,27 +1,14 @@
-/**
- * ============================================
- * API ADMIN - MUEBLERÍA ESPAÑA
- * ============================================
- * Este archivo contiene todas las funciones para comunicarse
- * con el backend de Spring Boot.
- * 
- * URL BASE del backend:
- */
+// /**
+//  * ============================================
+//  * API ADMIN - MUEBLERÍA ESPAÑA
+//  * ============================================
+//  * Este archivo contiene todas las funciones para comunicarse
+//  * con el backend de Spring Boot.
+//  * 
+//  * URL BASE del backend:
+//  */
 
 const API_BASE_URL = 'http://localhost:8080/api';
-
-/**
- * ============================================
- * UTILIDADES
- * ============================================
- */
-
-/**
- * Maneja errores de las peticiones fetch
- * @param {Response} response - Respuesta del fetch
- * @returns {Promise} - Promesa con la data o error
- */
-
 
 async function manejarRespuesta(response) {
     if (!response.ok) {
@@ -125,7 +112,7 @@ export const proveedorAPI = {
  * ============================================
  */
 
-const categoriaAPI = {
+export const categoriaAPI = {
     /**
      * Obtiene todas las categorías
      * GET /api/categorias/admin/todos
@@ -201,7 +188,7 @@ const categoriaAPI = {
  * ============================================
  */
 
-const productoAPI = {
+export const productoAPI = {
     /**
      * Obtiene todos los productos (activos e inactivos)
      * GET /api/productos/admin/todos
@@ -282,7 +269,7 @@ const productoAPI = {
  * ============================================
  */
 
-const imagenAPI = {
+export const imagenAPI = {
     /**
      * Añade una imagen a un producto existente
      * POST /api/imagenes/admin/add
@@ -325,7 +312,7 @@ const imagenAPI = {
  * @param {string|null} urlImagen - URL de la imagen (opcional)
  * @returns {Object} - { producto, imagen }
  */
-async function crearProductoConImagen(datosProducto, urlImagen) {
+export async function crearProductoConImagen(datosProducto, urlImagen) {
     try {
         // PASO 1: Crear el producto
         const productoCreado = await productoAPI.crear(datosProducto);

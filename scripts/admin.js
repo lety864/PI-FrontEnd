@@ -11,6 +11,7 @@
  * - Flujo de dos pasos: producto + imagen
  */
 
+import { productoAPI, categoriaAPI, proveedorAPI, crearProductoConImagen } from './api/api-admin.js';
 // ===================================
 // 1. ELEMENTOS DEL DOM
 // ===================================
@@ -787,12 +788,12 @@ function traducirNombrePadreAId(nombrePadre) {
     );
     
     if (categoriaEncontrada) {
-        console.log(`✅ Traducción: "${nombrePadre}" → ID ${categoriaEncontrada.idCategoria}`);
+        console.log(`Traducción: "${nombrePadre}" → ID ${categoriaEncontrada.idCategoria}`);
         return categoriaEncontrada.idCategoria;
     }
     
     // Si no se encontró, retornar -1 (código de error)
-    console.warn(`⚠️ No se encontró la categoría principal: "${nombrePadre}"`);
+    console.warn(`No se encontró la categoría principal: "${nombrePadre}"`);
     return -1;
 }
 
