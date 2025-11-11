@@ -1,7 +1,7 @@
-// SISTEMA DE LOGIN - MULTI-USUARIO
+// SISTEMA DE LOGIN - CON ROLES (ADMINISTRADOR/CLIENTE)
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('✓ Sistema de login inicializado');
+    console.log('Sistema de login con roles inicializado');
 
     // ELEMENTOS DEL DOM
     const loginModal = document.getElementById('loginModal');
@@ -10,13 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginButton = loginModal?.querySelector('button.btn-primary');
     const loginForm = loginModal?.querySelector('form');
 
-    // Validación de elementos críticos
+    // Validacion de elementos criticos
     if (!loginModal || !emailInput || !passwordInput || !loginButton) {
         console.error('Error: Elementos del login no encontrados. Verifica los IDs en el HTML.');
         return;
     }
 
-    // BOTÓN DE MOSTRAR/OCULTAR CONTRASEÑA
+    // BOTON DE MOSTRAR/OCULTAR CONTRASENA
     const togglePasswordButton = document.getElementById('toggleLoginPassword');
     
     if (togglePasswordButton) {
@@ -48,7 +48,33 @@ document.addEventListener('DOMContentLoaded', () => {
         return usuarios.find(usuario => usuario.correo === correo);
     }
 
-    // CORRECCIÓN: Eliminar aria-hidden de modales
+    // CREAR USUARIO ADMINISTRADOR POR DEFECTO (si no existe)
+    function crearAdminPorDefecto() {
+        const usuarios = obtenerUsuarios();
+        const adminExiste = usuarios.some(u => u.rol === 'admin');
+        
+        if (!adminExiste) {
+            const adminPorDefecto = {
+                id: 'admin-001',
+                nombre: 'Administrador',
+                correo: 'admin@muebleria.com',
+                telefono: '7221234567',
+                contraseña: 'admin123',
+                rol: 'admin',
+                fechaRegistro: new Date().toISOString()
+            };
+            
+            usuarios.push(adminPorDefecto);
+            localStorage.setItem('usuarios', JSON.stringify(usuarios));
+            console.log('Usuario administrador creado por defecto');
+            console.log('Email: admin@muebleria.com');
+            console.log('Contraseña: admin123');
+        }
+    }
+
+    crearAdminPorDefecto();
+
+    // CORRECCION: Eliminar aria-hidden de modales
     function corregirAccesibilidadModales() {
         const modales = document.querySelectorAll('.modal[aria-hidden="true"]');
         modales.forEach(modal => {
@@ -60,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     corregirAccesibilidadModales();
 
-    // CREACIÓN DE ELEMENTO DE ALERTA
+    // CREACION DE ELEMENTO DE ALERTA
     function crearAlertaLogin() {
         let alertMessage = document.getElementById('loginAlertMessage');
 
@@ -101,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!element) return;
         element.classList.remove('d-none', 'alert-success');
         element.classList.add('alert-danger');
-        element.innerHTML = `<i class="bi bi-exclamation-triangle-fill me-2"></i>${message}`;
+        element.innerHTML = '<i class="bi bi-exclamation-triangle-fill me-2"></i>' + message;
         setTimeout(() => element.classList.add('d-none'), 5000);
     }
 
@@ -109,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!element) return;
         element.classList.remove('d-none', 'alert-danger');
         element.classList.add('alert-success');
-        element.innerHTML = `<i class="bi bi-check-circle-fill me-2"></i>${message}`;
+        element.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i>' + message;
     }
 
     function markLoginFieldInvalid(id) {
@@ -139,10 +165,22 @@ document.addEventListener('DOMContentLoaded', () => {
         return emailRegex.test(email);
     }
 
+    // DETERMINAR RUTA DE REDIRECCION SEGUN ROL Y UBICACION
+    function obtenerRutaSegunRol(rol) {
+        const currentPath = window.location.pathname;
+        const estamosEnRaiz = currentPath === '/' || currentPath.endsWith('index.html') || currentPath.endsWith('/');
+        
+        if (rol === 'admin') {
+            return estamosEnRaiz ? 'paginas/admin.html' : 'admin.html';
+        } else {
+            return estamosEnRaiz ? 'index.html' : '../index.html';
+        }
+    }
+
     // EVENTO: PROCESO DE LOGIN
     loginButton.addEventListener('click', (event) => {
         event.preventDefault();
-        console.log('→ Procesando inicio de sesión...');
+        console.log('Procesando inicio de sesion...');
 
         const email = emailInput.value.trim();
         const password = passwordInput.value.trim();
@@ -150,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         clearLoginValidationStates();
 
-        // Validación: campos vacíos
+        // Validacion: campos vacios
         if (!email || !password) {
             showLoginError(alertMessage, 'Por favor, complete todos los campos.');
             if (!email) markLoginFieldInvalid('emailInput');
@@ -158,31 +196,31 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Validación: formato de email
+        // Validacion: formato de email
         if (!validarEmail(email)) {
-            showLoginError(alertMessage, 'Ingrese un correo electrónico válido.');
+            showLoginError(alertMessage, 'Ingrese un correo electronico valido.');
             markLoginFieldInvalid('emailInput');
             return;
         }
 
-        // Validación: longitud de contraseña
+        // Validacion: longitud de contraseña
         if (password.length < 8) {
-            showLoginError(alertMessage, 'La contraseña debe tener 8 caracteres como mínimo.');
+            showLoginError(alertMessage, 'La contraseña debe tener 8 caracteres como minimo.');
             markLoginFieldInvalid('passwordInput');
             const parentDiv = passwordInput.parentElement;
             const feedback = parentDiv?.nextElementSibling;
             if (feedback && feedback.classList.contains('invalid-feedback')) {
-                feedback.textContent = 'La contraseña debe tener 8 caracteres como mínimo.';
+                feedback.textContent = 'La contraseña debe tener 8 caracteres como minimo.';
                 feedback.style.display = 'block';
             }
             return;
         }
 
-        // CORREGIDO: Buscar en el array de usuarios
+        // Buscar en el array de usuarios
         const usuarios = obtenerUsuarios();
         
         if (usuarios.length === 0) {
-            showLoginError(alertMessage, 'No hay usuarios registrados. Por favor, regístrese primero.');
+            showLoginError(alertMessage, 'No hay usuarios registrados. Por favor, registrese primero.');
             markLoginFieldInvalid('emailInput');
             return;
         }
@@ -191,37 +229,41 @@ document.addEventListener('DOMContentLoaded', () => {
         const usuario = buscarUsuarioPorCorreo(email);
 
         if (!usuario) {
-            showLoginError(alertMessage, 'Correo electrónico no registrado.');
+            showLoginError(alertMessage, 'Correo electronico no registrado.');
             markLoginFieldInvalid('emailInput');
-            console.log('❌ Usuario no encontrado con el correo:', email);
+            console.log('Usuario no encontrado con el correo:', email);
             return;
         }
 
-        // Validación: contraseña incorrecta
+        // Validacion: contraseña incorrecta
         if (usuario.contraseña !== password) {
             showLoginError(alertMessage, 'Contraseña incorrecta.');
             markLoginFieldInvalid('passwordInput');
-            console.log('❌ Contraseña incorrecta para:', email);
+            console.log('Contraseña incorrecta para:', email);
             return;
         }
 
-        // ✓ LOGIN EXITOSO
-        console.log('✓ Login exitoso:', usuario.nombre);
+        // LOGIN EXITOSO
+        console.log('Login exitoso:', usuario.nombre);
+        console.log('Rol del usuario:', usuario.rol || 'cliente');
 
         const sesion = {
             usuarioId: usuario.id || Date.now(),
             nombre: usuario.nombre,
             correo: usuario.correo,
             telefono: usuario.telefono,
+            rol: usuario.rol || 'cliente',
             fechaLogin: new Date().toISOString()
         };
 
         try {
             localStorage.setItem('sesionActiva', JSON.stringify(sesion));
-            console.log('✓ Sesión guardada:', sesion);
+            console.log('Sesion guardada en localStorage');
+            console.log('Datos de la sesion activa:');
+            console.table([sesion]);
         } catch (error) {
-            console.error('Error al guardar sesión:', error);
-            showLoginError(alertMessage, 'Error al iniciar sesión. Intente nuevamente.');
+            console.error('Error al guardar sesion:', error);
+            showLoginError(alertMessage, 'Error al iniciar sesion. Intente nuevamente.');
             return;
         }
 
@@ -232,24 +274,27 @@ document.addEventListener('DOMContentLoaded', () => {
         passwordInput.parentElement.style.display = 'none';
         loginButton.style.display = 'none';
         
-        // Mostrar el mensaje de éxito
-        showLoginSuccess(alertMessage, `¡Bienvenido a Mueblería España, ${nombreUsuario}!`);
+        // Mostrar el mensaje de exito
+        showLoginSuccess(alertMessage, 'Bienvenido a Muebleria España, ' + nombreUsuario + '!');
 
-        // Cerrar modal y redirigir
+        // Obtener la ruta correcta segun el rol del usuario
+        const rutaDestino = obtenerRutaSegunRol(sesion.rol);
+        console.log('Redirigiendo a:', rutaDestino);
+
+        // Cerrar modal y redirigir segun el rol
         setTimeout(() => {
             if (typeof bootstrap !== 'undefined') {
                 const modalInstance = bootstrap.Modal.getInstance(loginModal) || new bootstrap.Modal(loginModal);
                 modalInstance.hide();
             }
-            console.log('→ Redirigiendo a la página principal...');
             
             setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 1000);
-        }, 3000);
+                window.location.href = rutaDestino;
+            }, 500);
+        }, 2000);
     });
 
-    // VALIDACIÓN EN TIEMPO REAL
+    // VALIDACION EN TIEMPO REAL
     emailInput.addEventListener('input', function () {
         const email = this.value.trim();
         
@@ -279,7 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.classList.add('is-invalid');
             this.classList.remove('is-valid');
             if (feedback && feedback.classList.contains('invalid-feedback')) {
-                feedback.textContent = 'La contraseña debe tener 8 caracteres como mínimo.';
+                feedback.textContent = 'La contraseña debe tener 8 caracteres como minimo.';
                 feedback.style.display = 'block';
             }
         } else {
@@ -292,7 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // EVENTOS DEL MODAL
     loginModal.addEventListener('hidden.bs.modal', () => {
-        console.log('→ Modal de login cerrado');
+        console.log('Modal de login cerrado');
         limpiarCamposLogin();
 
         const video = document.getElementById('loginVideo');
@@ -303,7 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     loginModal.addEventListener('shown.bs.modal', () => {
-        console.log('→ Modal de login abierto');
+        console.log('Modal de login abierto');
         limpiarCamposLogin();
         
         const video = document.getElementById('loginVideo');
@@ -317,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     });
 
-    // OBSERVADOR: Corregir aria-hidden dinámicamente
+    // OBSERVADOR: Corregir aria-hidden dinamicamente
     const observer = new MutationObserver(() => {
         corregirAccesibilidadModales();
     });
@@ -334,26 +379,28 @@ document.addEventListener('DOMContentLoaded', () => {
         if (sesion) {
             try {
                 const obj = JSON.parse(sesion);
-                console.log('Sesión activa:');
+                console.log('Sesion activa:');
                 console.table([obj]);
                 return obj;
             } catch (error) {
-                console.error('Error al leer sesión:', error);
+                console.error('Error al leer sesion:', error);
+                return null;
             }
         } else {
-            console.log('No hay sesión activa');
+            console.log('No hay sesion activa');
+            return null;
         }
     };
 
     window.cerrarSesion = function () {
         localStorage.removeItem('sesionActiva');
-        console.log('✓ Sesión cerrada correctamente');
+        console.log('Sesion cerrada correctamente');
         window.location.reload();
     };
 
     window.limpiarLogin = function () {
         limpiarCamposLogin();
-        console.log('✓ Campos de login limpiados');
+        console.log('Campos de login limpiados');
     };
 
     window.verTodosLosUsuarios = function() {
@@ -361,15 +408,46 @@ document.addEventListener('DOMContentLoaded', () => {
         if (usuarios.length > 0) {
             console.log('Total de usuarios:', usuarios.length);
             console.table(usuarios);
+            return usuarios;
         } else {
             console.log('No hay usuarios registrados');
+            return [];
         }
     };
 
-    // Mostrar sesión activa al cargar (si existe)
+    window.crearUsuarioAdmin = function(nombre, correo, contraseña) {
+        const usuarios = obtenerUsuarios();
+        const nuevoAdmin = {
+            id: 'admin-' + Date.now(),
+            nombre: nombre,
+            correo: correo,
+            telefono: '0000000000',
+            contraseña: contraseña,
+            rol: 'admin',
+            fechaRegistro: new Date().toISOString()
+        };
+        usuarios.push(nuevoAdmin);
+        localStorage.setItem('usuarios', JSON.stringify(usuarios));
+        console.log('Administrador creado:');
+        console.table([nuevoAdmin]);
+        return nuevoAdmin;
+    };
+
+    // Mostrar sesion activa al cargar (si existe)
     const sesionActual = localStorage.getItem('sesionActiva');
     if (sesionActual) {
-        console.log('✓ Sesión activa encontrada');
-        verSesionActiva();
+        try {
+            const sesionObj = JSON.parse(sesionActual);
+            console.log('Sesion activa encontrada');
+            console.log('Datos de la sesion:');
+            console.table([sesionObj]);
+        } catch (error) {
+            console.error('Error al leer sesion activa:', error);
+        }
     }
+
+    // Mostrar credenciales de admin en consola
+    console.log('CREDENCIALES DE ADMINISTRADOR');
+    console.log('Email: admin@muebleria.com');
+    console.log('Contraseña: admin123');
 });
