@@ -21,6 +21,8 @@ const API_BASE_URL = 'http://localhost:8080/api';
  * @param {Response} response - Respuesta del fetch
  * @returns {Promise} - Promesa con la data o error
  */
+
+
 async function manejarRespuesta(response) {
     if (!response.ok) {
         // Intentar leer el mensaje de error del backend
@@ -52,17 +54,19 @@ async function manejarRespuesta(response) {
  * ============================================
  */
 
-const proveedorAPI = {
+export const proveedorAPI = {
     /**
      * Obtiene todos los proveedores (activos e inactivos)
      * GET /api/proveedores/admin/todos
      */
-    async obtenerTodos() {
+    obtenerTodos : async () => {
         try {
             const response = await fetch(`${API_BASE_URL}/proveedores/admin/todos`);
-            return await manejarRespuesta(response);
+            const data = await manejarRespuesta(response);
+            return data;
+            
         } catch (error) {
-            console.error('Error al obtener proveedores:', error);
+            console.error('Error en getAllProveedores: ', error);
             throw error;
         }
     },

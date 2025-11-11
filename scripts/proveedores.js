@@ -120,18 +120,18 @@ function mostrarModalConfirmacion(mensaje, onConfirm) {
  */
 async function cargarProveedores() {
     try {
-        console.log('📥 Cargando proveedores...');
+        console.log('Cargando proveedores...');
         
         const proveedores = await proveedorAPI.obtenerTodos();
         proveedoresEnMemoria = proveedores;
         
-        console.log('✅ Proveedores cargados:', proveedores.length);
+        console.log('Proveedores cargados:', proveedores.length);
         
         // Actualizar tabla
         renderizarTabla();
         
     } catch (error) {
-        console.error('❌ Error al cargar proveedores:', error);
+        console.error('Error al cargar proveedores:', error);
         mostrarAlerta('danger', `No se pudieron cargar los proveedores: ${error.message}`);
     }
 }
