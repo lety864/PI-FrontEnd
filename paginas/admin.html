@@ -320,6 +320,160 @@
                     </table>
                 </div>
             </div>
+
+            <!-- ========================================= -->
+            <!-- GESTIÓN DE CATEGORÍAS                     -->
+            <!-- ========================================= -->
+            <div class="admin-card mt-5" id="categoriasSection">
+                <header class="admin-header">
+                    <h2 class="admin-title">Gestión de Categorías</h2>
+                    <p class="admin-subtitle">Administra las categorías y subcategorías del catálogo</p>
+                </header>
+
+                <!-- Alerta de categorías -->
+                <div id="alertContainerCategorias" class="alert-container" style="display: none;">
+                    <!-- Las alertas se insertarán aquí dinámicamente -->
+                </div>
+
+                <!-- ============================================ -->
+                <!-- INSTRUCCIONES UX CLARAS (NUEVO)             -->
+                <!-- ============================================ -->
+                <div class="alert alert-info mb-4" role="alert">
+                    <div class="d-flex align-items-start">
+                        <i class="bi bi-info-circle-fill fs-5 me-2 flex-shrink-0" style="color: #0dcaf0;"></i>
+                        <div>
+                            <strong class="d-block mb-2">¿Cómo funciona?</strong>
+                            
+                            <div class="mb-2">
+                                <strong class="text-primary">Para crear una Categoría Principal:</strong>
+                                <ol class="mb-0 ps-3 small">
+                                    <li>Escribe el nombre (Ej: "Salas", "Comedores", "Roperos")</li>
+                                    <li>Deja el segundo campo <strong>VACÍO</strong></li>
+                                    <li>Clic en "Guardar"</li>
+                                </ol>
+                            </div>
+                            
+                            <div>
+                                <strong class="text-success">Para crear una Subcategoría:</strong>
+                                <ol class="mb-0 ps-3 small">
+                                    <li>Escribe el nombre (Ej: "Sofacamas", "Reclinables")</li>
+                                    <li>En el segundo campo, escribe a qué pertenece (Ej: "Salas")</li>
+                                    <li>Clic en "Guardar"</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulario de Categorías -->
+                <form id="categoriaForm" class="product-form" novalidate>
+                    
+                    <!-- Nombre de la Categoría -->
+                    <div class="mb-4">
+                        <label for="nombreCategoria" class="form-label">
+                            <i class="bi bi-tag me-1"></i>
+                            Nombre de la Categoría o Subcategoría
+                        </label>
+                        <input type="text" 
+                               class="form-control form-input" 
+                               id="nombreCategoria" 
+                               placeholder="Ejemplos: Salas, Sofacamas, Roperos, Reclinables..."
+                               required>
+                        <div class="invalid-feedback">El nombre es obligatorio</div>
+                    </div>
+
+                    <!-- Categoría Principal (Opcional) - CON DATALIST -->
+                    <div class="mb-4">
+                        <label for="categoriaPadreNombre" class="form-label">
+                            <i class="bi bi-folder me-1"></i>
+                            ¿A qué categoría pertenece? 
+                            <span class="badge badge-optional">Opcional</span>
+                        </label>
+                        <input type="text" 
+                               class="form-control form-input" 
+                               id="categoriaPadreNombre" 
+                               list="listaCategoriasPadre"
+                               placeholder="Empieza a escribir: Salas, Comedores, Dormitorio..."
+                               autocomplete="off">
+                        
+                        <!-- Lista invisible de sugerencias -->
+                        <datalist id="listaCategoriasPadre">
+                            <!-- Se llenará dinámicamente con JS -->
+                        </datalist>
+                        
+                        <small class="form-text text-muted">
+                            <i class="bi bi-lightbulb me-1"></i>
+                            <strong>Déjalo vacío</strong> para crear una categoría principal. 
+                            <strong>Escribe un nombre</strong> para crear una subcategoría.
+                        </small>
+                        <div class="invalid-feedback" id="errorCategoriaPadre">
+                            <!-- Error personalizado de validación -->
+                        </div>
+                    </div>
+
+                    <!-- Estado -->
+                    <div class="mb-4">
+                        <div class="form-check">
+                            <input class="form-check-input" 
+                                   type="checkbox" 
+                                   id="categoriaActiva" 
+                                   checked>
+                            <label class="form-check-label" for="categoriaActiva">
+                                <strong>Categoría activa</strong>
+                                <br>
+                                <small class="text-muted">Las categorías inactivas no aparecen en la tienda</small>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-guardar" id="btnGuardarCategoria">
+                            <i class="bi bi-check-circle me-2"></i>
+                            Guardar Categoría
+                        </button>
+                        <button type="button" class="btn btn-cancelar" id="btnCancelarCategoria">
+                            Cancelar
+                        </button>
+                    </div>
+
+                </form>
+
+                <!-- Tabla de Categorías -->
+                <div class="mt-5" id="tablaCategorias">
+                    <header class="admin-header">
+                        <h3 class="admin-title">Categorías Guardadas</h3>
+                        <p class="admin-subtitle">
+                            <span id="contadorCategorias"><strong>0</strong> categorías</span>
+                        </p>
+                    </header>
+
+                    <!-- Empty State -->
+                    <div id="emptyStateCategorias" class="empty-state">
+                        <i class="bi bi-tags"></i>
+                        <h3>No hay categorías aún</h3>
+                        <p>Las categorías que agregues aparecerán aquí</p>
+                    </div>
+
+                    <!-- Tabla -->
+                    <div id="tablaContainerCategorias" class="table-responsive" style="display: none;">
+                        <table class="table table-productos">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Tipo</th>
+                                    <th>Categoría Padre</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="categoriasTableBody">
+                                <!-- Las categorías se insertan aquí dinámicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
