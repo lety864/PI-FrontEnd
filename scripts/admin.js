@@ -35,6 +35,13 @@ const btnConfirmarModal = document.getElementById('btnConfirmarModal');
 let modoEdicion = false;
 let productoEnEdicionId = null;
 
+// Variables de control de edición para categorías
+let modoEdicionCategoria = false;
+let categoriaEnEdicionId = null;
+
+// Variable GLOBAL para almacenar todas las categorías cargadas
+let todasCategorias = [];
+
 // Campos del formulario (actualizados según el HTML actual)
 const campos = {
     nombre: document.getElementById('nombre'),
@@ -46,6 +53,30 @@ const campos = {
     activo: document.getElementById('activo'),
     imagen: document.getElementById('imagen')
 };
+
+// ===================================
+// ELEMENTOS DEL DOM - GESTIÓN DE CATEGORÍAS
+// ===================================
+const categoriaForm = document.getElementById('categoriaForm');
+const btnGuardarCategoria = document.getElementById('btnGuardarCategoria');
+const btnCancelarCategoria = document.getElementById('btnCancelarCategoria');
+const alertContainerCategorias = document.getElementById('alertContainerCategorias');
+
+// Campos del formulario de categorías
+const camposCategoria = {
+    nombreCategoria: document.getElementById('nombreCategoria'),
+    categoriaPadreNombre: document.getElementById('categoriaPadreNombre'), // Input del nombre
+    categoriaActiva: document.getElementById('categoriaActiva')
+};
+
+// Elementos de la tabla de categorías
+const emptyStateCategorias = document.getElementById('emptyStateCategorias');
+const tablaContainerCategorias = document.getElementById('tablaContainerCategorias');
+const categoriasTableBody = document.getElementById('categoriasTableBody');
+const contadorCategorias = document.getElementById('contadorCategorias');
+
+// Datalist para autocompletar categorías padre
+const listaCategoriasPadre = document.getElementById('listaCategoriasPadre');
 
 // ===================================
 // 2. SISTEMA DE ALERTAS (BOOTSTRAP)
@@ -140,14 +171,23 @@ async function cargarSelects() {
             proveedorAPI.obtenerTodos()
         ]);
         
+        // GUARDAR CATEGORÍAS GLOBALMENTE (para traducción nombre->ID)
+        todasCategorias = categorias;
+        
         console.log('✅ Categorías cargadas:', categorias.length);
         console.log('✅ Proveedores cargados:', proveedores.length);
         
-        // Llenar select de categorías con jerarquía
+        // Llenar select de categorías con jerarquía (para formulario de productos)
         llenarSelectCategorias(categorias);
         
         // Llenar select de proveedores
         llenarSelectProveedores(proveedores);
+        
+        // Llenar datalist de categorías padre (para formulario de categorías)
+        llenarDatalistCategoriasPadre(categorias);
+        
+        // Actualizar tabla de categorías
+        actualizarTablaCategorias();
         
     } catch (error) {
         console.error('Error al cargar selects:', error);
@@ -572,4 +612,347 @@ document.addEventListener('DOMContentLoaded', async () => {
  */
 window.editarProducto = function(idProducto) {
     activarModoEdicion(idProducto);
+};
+
+// ===================================
+// GESTIÓN DE CATEGORÍAS
+// ===================================
+
+/**
+ * Llena el datalist con categorías PRINCIPALES ACTIVAS (para el formulario de categorías)
+ * @param {Array} categorias - Array de todas las categorías
+ */
+function llenarDatalistCategoriasPadre(categorias) {
+    // Filtrar solo categorías principales activas (sin padre)
+    const categoriasPrincipales = categorias.filter(cat => 
+        !cat.idCategoriaPadre && cat.activo
+    );
+    
+    // Limpiar datalist
+    listaCategoriasPadre.innerHTML = '';
+    
+    // Agregar cada categoría principal como opción
+    categoriasPrincipales.forEach(categoria => {
+        const option = document.createElement('option');
+        option.value = categoria.nombreCategoria;
+        listaCategoriasPadre.appendChild(option);
+    });
+    
+    console.log(`✅ Datalist llenado con ${categoriasPrincipales.length} categorías principales`);
+}
+
+/**
+ * Actualiza la tabla de categorías
+ */
+async function actualizarTablaCategorias() {
+    try {
+        // Usar las categorías ya cargadas globalmente
+        const categorias = todasCategorias;
+        
+        // Actualizar contador
+        const total = categorias.length;
+        const activas = categorias.filter(c => c.activo).length;
+        
+        contadorCategorias.innerHTML = `
+            <strong>${total}</strong> categoría${total !== 1 ? 's' : ''} 
+            <span class="text-muted">(${activas} activa${activas !== 1 ? 's' : ''})</span>
+        `;
+        
+        // Mostrar/ocultar empty state
+        if (total === 0) {
+            emptyStateCategorias.style.display = 'flex';
+            tablaContainerCategorias.style.display = 'none';
+            return;
+        }
+        
+        emptyStateCategorias.style.display = 'none';
+        tablaContainerCategorias.style.display = 'block';
+        
+        // Limpiar tbody
+        categoriasTableBody.innerHTML = '';
+        
+        // Renderizar categorías
+        categorias.forEach(categoria => {
+            const fila = crearFilaCategoria(categoria);
+            categoriasTableBody.appendChild(fila);
+        });
+        
+    } catch (error) {
+        console.error('Error al actualizar tabla de categorías:', error);
+    }
+}
+
+/**
+ * Crea una fila de la tabla para una categoría
+ * @param {Object} categoria - Datos de la categoría
+ * @returns {HTMLElement} - Fila <tr>
+ */
+function crearFilaCategoria(categoria) {
+    const tr = document.createElement('tr');
+    
+    // Determinar si es principal o subcategoría
+    const tipo = categoria.idCategoriaPadre 
+        ? '<span class="badge bg-info">Subcategoría</span>' 
+        : '<span class="badge bg-primary">Principal</span>';
+    
+    // Buscar el nombre de la categoría padre
+    let nombrePadre = '-';
+    if (categoria.idCategoriaPadre) {
+        const padre = todasCategorias.find(c => c.idCategoria === categoria.idCategoriaPadre);
+        nombrePadre = padre ? padre.nombreCategoria : 'No encontrada';
+    }
+    
+    // Badge de estado
+    const badgeEstado = categoria.activo 
+        ? '<span class="badge bg-success">Activa</span>'
+        : '<span class="badge bg-secondary">Inactiva</span>';
+    
+    tr.innerHTML = `
+        <td><strong>${categoria.nombreCategoria}</strong></td>
+        <td>${tipo}</td>
+        <td>${nombrePadre}</td>
+        <td class="text-center">${badgeEstado}</td>
+        <td class="text-center">
+            <button onclick="editarCategoria(${categoria.idCategoria})" 
+                    class="btn btn-sm btn-primary" 
+                    title="Editar categoría">
+                <i class="bi bi-pencil"></i>
+            </button>
+        </td>
+    `;
+    
+    return tr;
+}
+
+/**
+ * Muestra una alerta específica para categorías
+ */
+function mostrarAlertaCategoria(tipo, mensaje) {
+    alertContainerCategorias.innerHTML = '';
+    
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert alert-${tipo} alert-dismissible fade show`;
+    alertDiv.setAttribute('role', 'alert');
+    
+    let icono = '';
+    let titulo = '';
+    
+    if (tipo === 'success') {
+        icono = '<i class="bi bi-check-circle-fill me-2"></i>';
+        titulo = '¡Éxito!';
+    } else if (tipo === 'danger') {
+        icono = '<i class="bi bi-exclamation-triangle-fill me-2"></i>';
+        titulo = 'Error:';
+    } else if (tipo === 'info') {
+        icono = '<i class="bi bi-info-circle-fill me-2"></i>';
+        titulo = 'Información:';
+    }
+    
+    alertDiv.innerHTML = `
+        ${icono}
+        <strong>${titulo}</strong> ${mensaje}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+    
+    alertContainerCategorias.appendChild(alertDiv);
+    alertContainerCategorias.style.display = 'block';
+    alertContainerCategorias.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    
+    setTimeout(() => {
+        try {
+            const bsAlert = new bootstrap.Alert(alertDiv);
+            bsAlert.close();
+        } catch (e) {
+            // Alerta ya cerrada
+        }
+    }, 5000);
+}
+
+/**
+ * FUNCIÓN CLAVE: Traduce el nombre de categoría padre a su ID
+ * @param {string} nombrePadre - Nombre escrito por el admin
+ * @returns {number|null} - ID de la categoría o null
+ */
+function traducirNombrePadreAId(nombrePadre) {
+    // Si el campo está vacío, es una categoría principal
+    if (!nombrePadre || nombrePadre.trim() === '') {
+        return null;
+    }
+    
+    // Buscar la categoría en el array global (case-insensitive)
+    const categoriaEncontrada = todasCategorias.find(cat => 
+        cat.nombreCategoria.toLowerCase() === nombrePadre.trim().toLowerCase() &&
+        !cat.idCategoriaPadre && // Solo buscar en categorías principales
+        cat.activo // Solo activas
+    );
+    
+    if (categoriaEncontrada) {
+        console.log(`✅ Traducción: "${nombrePadre}" → ID ${categoriaEncontrada.idCategoria}`);
+        return categoriaEncontrada.idCategoria;
+    }
+    
+    // Si no se encontró, retornar -1 (código de error)
+    console.warn(`⚠️ No se encontró la categoría principal: "${nombrePadre}"`);
+    return -1;
+}
+
+/**
+ * Guarda o actualiza una categoría
+ */
+async function guardarCategoria(e) {
+    e.preventDefault();
+    
+    // Obtener valores del formulario
+    const nombreCategoria = camposCategoria.nombreCategoria.value.trim();
+    const nombrePadre = camposCategoria.categoriaPadreNombre.value.trim();
+    const activo = camposCategoria.categoriaActiva.checked;
+    
+    // Validación básica
+    if (!nombreCategoria) {
+        camposCategoria.nombreCategoria.classList.add('is-invalid');
+        mostrarAlertaCategoria('danger', 'El nombre de la categoría es obligatorio');
+        return;
+    }
+    
+    // TRADUCCIÓN: Convertir nombre a ID (o null)
+    const idCategoriaPadre = traducirNombrePadreAId(nombrePadre);
+    
+    // Si la traducción falló (retornó -1), mostrar error
+    if (idCategoriaPadre === -1) {
+        camposCategoria.categoriaPadreNombre.classList.add('is-invalid');
+        document.getElementById('errorCategoriaPadre').textContent = 
+            `La categoría principal "${nombrePadre}" no existe. Créala primero como categoría principal.`;
+        mostrarAlertaCategoria('danger', `La categoría "${nombrePadre}" no existe`);
+        return;
+    }
+    
+    // Construir objeto para el backend
+    const datosCategoria = {
+        nombreCategoria: nombreCategoria,
+        idCategoriaPadre: idCategoriaPadre, // Puede ser null o un número
+        activo: activo
+    };
+    
+    // Cambiar botón a estado de carga
+    const textoOriginal = btnGuardarCategoria.innerHTML;
+    btnGuardarCategoria.disabled = true;
+    btnGuardarCategoria.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Guardando...';
+    
+    try {
+        let resultado;
+        
+        if (modoEdicionCategoria) {
+            // ACTUALIZAR
+            resultado = await categoriaAPI.actualizar(categoriaEnEdicionId, datosCategoria);
+            mostrarAlertaCategoria('success', `Categoría actualizada: ${nombreCategoria}`);
+        } else {
+            // CREAR
+            resultado = await categoriaAPI.crear(datosCategoria);
+            mostrarAlertaCategoria('success', `Categoría creada: ${nombreCategoria}`);
+        }
+        
+        console.log('Categoría guardada:', resultado);
+        
+        // Recargar categorías y actualizar UI
+        todasCategorias = await categoriaAPI.obtenerTodas();
+        llenarSelectCategorias(todasCategorias);
+        llenarDatalistCategoriasPadre(todasCategorias);
+        actualizarTablaCategorias();
+        
+        // Limpiar formulario
+        limpiarFormularioCategoria();
+        
+    } catch (error) {
+        console.error('Error al guardar categoría:', error);
+        mostrarAlertaCategoria('danger', `Error: ${error.message}`);
+    } finally {
+        btnGuardarCategoria.disabled = false;
+        btnGuardarCategoria.innerHTML = textoOriginal;
+    }
+}
+
+/**
+ * Limpia el formulario de categorías
+ */
+function limpiarFormularioCategoria() {
+    categoriaForm.reset();
+    
+    // Quitar clases de validación
+    Object.values(camposCategoria).forEach(campo => {
+        campo.classList.remove('is-invalid');
+    });
+    
+    // Desactivar modo edición
+    if (modoEdicionCategoria) {
+        modoEdicionCategoria = false;
+        categoriaEnEdicionId = null;
+        btnGuardarCategoria.innerHTML = '<i class="bi bi-check-circle me-2"></i>Guardar Categoría';
+    }
+    
+    // Scroll al inicio
+    categoriaForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/**
+ * Activa el modo edición para una categoría
+ * @param {number} idCategoria - ID de la categoría a editar
+ */
+async function activarModoEdicionCategoria(idCategoria) {
+    try {
+        // Buscar la categoría en el array global
+        const categoria = todasCategorias.find(c => c.idCategoria === idCategoria);
+        
+        if (!categoria) {
+            mostrarAlertaCategoria('danger', 'Categoría no encontrada');
+            return;
+        }
+        
+        // Activar modo edición
+        modoEdicionCategoria = true;
+        categoriaEnEdicionId = idCategoria;
+        
+        // Cargar datos en el formulario
+        camposCategoria.nombreCategoria.value = categoria.nombreCategoria;
+        camposCategoria.categoriaActiva.checked = categoria.activo;
+        
+        // Si tiene padre, buscar su NOMBRE (traducción inversa: ID → Nombre)
+        if (categoria.idCategoriaPadre) {
+            const padre = todasCategorias.find(c => c.idCategoria === categoria.idCategoriaPadre);
+            camposCategoria.categoriaPadreNombre.value = padre ? padre.nombreCategoria : '';
+        } else {
+            camposCategoria.categoriaPadreNombre.value = '';
+        }
+        
+        // Cambiar texto del botón
+        btnGuardarCategoria.innerHTML = '<i class="bi bi-save me-2"></i>Actualizar Categoría';
+        
+        // Scroll al formulario
+        categoriaForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        mostrarAlertaCategoria('info', `Editando: ${categoria.nombreCategoria}`);
+        
+    } catch (error) {
+        console.error('Error al activar modo edición:', error);
+        mostrarAlertaCategoria('danger', `Error: ${error.message}`);
+    }
+}
+
+// Event listeners para gestión de categorías
+categoriaForm.addEventListener('submit', guardarCategoria);
+
+btnCancelarCategoria.addEventListener('click', () => {
+    const mensaje = modoEdicionCategoria 
+        ? '¿Deseas cancelar la edición? Los cambios no guardados se perderán.'
+        : '¿Deseas cancelar? Se borrarán los datos del formulario.';
+    
+    mostrarModalConfirmacion(mensaje, () => {
+        limpiarFormularioCategoria();
+    });
+});
+
+/**
+ * Función global para editar categoría (llamada desde onclick)
+ */
+window.editarCategoria = function(idCategoria) {
+    activarModoEdicionCategoria(idCategoria);
 };

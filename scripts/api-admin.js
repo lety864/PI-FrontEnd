@@ -150,6 +150,8 @@ const categoriaAPI = {
      */
     async crear(categoria) {
         try {
+            console.log('📤 Enviando categoría al backend:', categoria);
+            
             const response = await fetch(`${API_BASE_URL}/categorias/admin/add`, {
                 method: 'POST',
                 headers: {
@@ -157,9 +159,37 @@ const categoriaAPI = {
                 },
                 body: JSON.stringify(categoria)
             });
-            return await manejarRespuesta(response);
+            
+            const categoriaCreada = await manejarRespuesta(response);
+            console.log('✅ Categoría creada:', categoriaCreada);
+            return categoriaCreada;
         } catch (error) {
             console.error('Error al crear categoría:', error);
+            throw error;
+        }
+    },
+
+    /**
+     * Actualiza una categoría existente
+     * PUT /api/categorias/admin/update/{id}
+     */
+    async actualizar(id, categoria) {
+        try {
+            console.log(`📤 Actualizando categoría ${id}:`, categoria);
+            
+            const response = await fetch(`${API_BASE_URL}/categorias/admin/update/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(categoria)
+            });
+            
+            const categoriaActualizada = await manejarRespuesta(response);
+            console.log('✅ Categoría actualizada:', categoriaActualizada);
+            return categoriaActualizada;
+        } catch (error) {
+            console.error('Error al actualizar categoría:', error);
             throw error;
         }
     }
