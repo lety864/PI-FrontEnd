@@ -134,6 +134,8 @@
         });*/
 // URL DE TU API DE SPRING
 const API_URL = 'http://localhost:8080/api/productos';
+const token = localStorage.getItem('token');
+console.log(token);
 
 // =========================================
 // 1. LÓGICA DE CARRITO (localStorage)
@@ -224,7 +226,13 @@ document.addEventListener('DOMContentLoaded', () => {
     
     updateCartBadges();
 
-    fetch(API_URL)
+    fetch(API_URL,{
+                method: 'GET',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                 }
+            })
         .then(respuesta => {
             if (!respuesta.ok) {
                 throw new Error(`Error HTTP: ${respuesta.status}`);
