@@ -477,7 +477,7 @@
             <p class="mb-0">&copy; 2025 Mueblería España. Todos los derechos reservados.</p>
         </div>
     </div>
- <!-- Incio de sesion -->
+  <!-- Incio de sesion -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
@@ -618,10 +618,14 @@
               
               <form id="registerForm"> 
                 
-                <!-- Nombre completo -->
+               <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre(s)</label>
+                  <input type="text" class="form-control" id="nombre" placeholder="Ej. Ana María" required>
+                </div>
+
                 <div class="mb-3">
-                  <label for="fullname" class="form-label">Nombre Completo</label>
-                  <input type="text" class="form-control" id="fullname" placeholder="Ej. Nombre Apellido 1 Apellido 2" required>
+                  <label for="apellidos" class="form-label">Apellidos</label>
+                  <input type="text" class="form-control" id="apellidos" placeholder="Ej. Pérez López" required>
                 </div>
 
                 <!-- Correo -->
