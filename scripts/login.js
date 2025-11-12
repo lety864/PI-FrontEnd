@@ -178,121 +178,114 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // EVENTO: PROCESO DE LOGIN
-    loginButton.addEventListener('click', (event) => {
-        event.preventDefault();
-        console.log('Procesando inicio de sesion...');
+  // ==========================================================
+// EVENTO: PROCESO DE LOGIN (Modificado para API con boolean)
+// ==========================================================
+loginButton.addEventListener('click', async (event) => {
+    event.preventDefault();
+    console.log('Procesando inicio de sesion (API - boolean)...');
 
-        const email = emailInput.value.trim();
-        const password = passwordInput.value.trim();
-        const alertMessage = crearAlertaLogin();
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+    const alertMessage = crearAlertaLogin();
 
-        clearLoginValidationStates();
+    clearLoginValidationStates();
 
-        // Validacion: campos vacios
-        if (!email || !password) {
-            showLoginError(alertMessage, 'Por favor, complete todos los campos.');
-            if (!email) markLoginFieldInvalid('emailInput');
-            if (!password) markLoginFieldInvalid('passwordInput');
-            return;
+    // Validacion: campos vacios
+    if (!email || !password) {
+        showLoginError(alertMessage, 'Por favor, complete todos los campos.');
+        if (!email) markLoginFieldInvalid('emailInput');
+        if (!password) markLoginFieldInvalid('passwordInput');
+        return;
+    }
+
+    // Validacion: formato de email
+    if (!validarEmail(email)) {
+        showLoginError(alertMessage, 'Ingrese un correo electronico valido.');
+        markLoginFieldInvalid('emailInput');
+        return;
+    }
+
+    // 1. Crear el Payload para el backend
+    const loginPayload = {
+        correo: email,
+        password: password
+    };
+
+    console.log('Enviando payload de login:', loginPayload);
+
+    try {
+        // --- LLAMADA 1: VALIDAR CREDENCIALES ---
+        console.log('Llamada 1: Validando credenciales en /api/auth/login...');
+        const loginResponse = await fetch('http://localhost:8080/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(loginPayload)
+        });
+
+        // Si la respuesta NO es OK (ej. 404, 500)
+        // Esto captura el "IllegalArgumentException" (correo no encontrado)
+        if (!loginResponse.ok) {
+            console.log('Llamada 1 Fallida: El correo no existe o error del servidor.');
+            throw new Error("Credenciales incorrectas"); // Lanzamos un error
         }
 
-        // Validacion: formato de email
-        if (!validarEmail(email)) {
-            showLoginError(alertMessage, 'Ingrese un correo electronico valido.');
-            markLoginFieldInvalid('emailInput');
-            return;
-        }
+        // Si la respuesta es OK (200), leemos el cuerpo (que es "true" o "false")
+        const esValido = await loginResponse.text();
 
-        // Validacion: longitud de contraseña
-        if (password.length < 8) {
-            showLoginError(alertMessage, 'La contraseña debe tener 8 caracteres como minimo.');
-            markLoginFieldInvalid('passwordInput');
-            const parentDiv = passwordInput.parentElement;
-            const feedback = parentDiv?.nextElementSibling;
-            if (feedback && feedback.classList.contains('invalid-feedback')) {
-                feedback.textContent = 'La contraseña debe tener 8 caracteres como minimo.';
-                feedback.style.display = 'block';
-            }
-            return;
-        }
-
-        // Buscar en el array de usuarios
-        const usuarios = obtenerUsuarios();
-        
-        if (usuarios.length === 0) {
-            showLoginError(alertMessage, 'No hay usuarios registrados. Por favor, registrese primero.');
-            markLoginFieldInvalid('emailInput');
-            return;
-        }
-
-        // Buscar el usuario por correo
-        const usuario = buscarUsuarioPorCorreo(email);
-
-        if (!usuario) {
-            showLoginError(alertMessage, 'Correo electronico no registrado.');
-            markLoginFieldInvalid('emailInput');
-            console.log('Usuario no encontrado con el correo:', email);
-            return;
-        }
-
-        // Validacion: contraseña incorrecta
-        if (usuario.contraseña !== password) {
-            showLoginError(alertMessage, 'Contraseña incorrecta.');
-            markLoginFieldInvalid('passwordInput');
-            console.log('Contraseña incorrecta para:', email);
-            return;
-        }
-
-        // LOGIN EXITOSO
-        console.log('Login exitoso:', usuario.nombre);
-        console.log('Rol del usuario:', usuario.rol || 'cliente');
-
-        const sesion = {
-            usuarioId: usuario.id || Date.now(),
-            nombre: usuario.nombre,
-            correo: usuario.correo,
-            telefono: usuario.telefono,
-            rol: usuario.rol || 'cliente',
-            fechaLogin: new Date().toISOString()
-        };
-
-        try {
-            localStorage.setItem('sesionActiva', JSON.stringify(sesion));
-            console.log('Sesion guardada en localStorage');
-            console.log('Datos de la sesion activa:');
-            console.table([sesion]);
-        } catch (error) {
-            console.error('Error al guardar sesion:', error);
-            showLoginError(alertMessage, 'Error al iniciar sesion. Intente nuevamente.');
-            return;
-        }
-
-        const nombreUsuario = usuario.nombre.split(' ')[0];
-        
-        // Ocultar los campos del formulario
-        emailInput.style.display = 'none';
-        passwordInput.parentElement.style.display = 'none';
-        loginButton.style.display = 'none';
-        
-        // Mostrar el mensaje de exito
-        showLoginSuccess(alertMessage, 'Bienvenido a Muebleria España, ' + nombreUsuario + '!');
-
-        // Obtener la ruta correcta segun el rol del usuario
-        const rutaDestino = obtenerRutaSegunRol(sesion.rol);
-        console.log('Redirigiendo a:', rutaDestino);
-
-        // Cerrar modal y redirigir segun el rol
-        setTimeout(() => {
-            if (typeof bootstrap !== 'undefined') {
-                const modalInstance = bootstrap.Modal.getInstance(loginModal) || new bootstrap.Modal(loginModal);
-                modalInstance.hide();
-            }
+        // Si el backend devuelve "true" (contraseña correcta)
+        if (esValido === "true") {
+            console.log('Llamada 1 Exitosa: Contraseña correcta.');
             
+            // --- LLAMADA 2: OBTENER DATOS DEL USUARIO ---
+            console.log('Llamada 2: Buscando datos del usuario en /api/users/by-email...');
+            const userResponse = await fetch(`http://localhost:8080/api/users/by-email?correo=${email}`);
+            
+            if (!userResponse.ok) {
+                // Esto no debería pasar si el login fue OK, pero es una protección
+                throw new Error("No se pudieron cargar los datos del usuario después del login.");
+            }
+
+            const usuario = await userResponse.json(); // Este es el UsuarioResponse
+            
+            // --- LÓGICA DE ÉXITO (Igual que antes) ---
+            console.log('Llamada 2 Exitosa. Bienvenido:', usuario.nombre);
+            localStorage.setItem('sesionActiva', JSON.stringify(usuario));
+
+            const nombreUsuario = usuario.nombre.split(' ')[0];
+            
+            emailInput.style.display = 'none';
+            passwordInput.parentElement.style.display = 'none';
+            loginButton.style.display = 'none';
+            
+            showLoginSuccess(alertMessage, '¡Bienvenido, ' + nombreUsuario + '!');
+
+            // Usamos la info de la Llamada 2 para redirigir
+            const rutaDestino = obtenerRutaSegunRol(usuario.rol.nombreRol);
+            console.log('Redirigiendo a:', rutaDestino);
+
             setTimeout(() => {
-                window.location.href = rutaDestino;
-            }, 500);
-        }, 2000);
-    });
+                const modalInstance = bootstrap.Modal.getInstance(loginModal);
+                if (modalInstance) modalInstance.hide();
+                setTimeout(() => { window.location.href = rutaDestino; }, 500);
+            }, 2000);
+
+        } else {
+            // Si el backend devuelve "false" (contraseña incorrecta)
+            console.log('Llamada 1 Fallida: Contraseña incorrecta.');
+            throw new Error("Credenciales incorrectas");
+        }
+
+    } catch (error) {
+        // Captura errores de red Y los errores que lanzamos (Credenciales incorrectas)
+        console.error('Error en el proceso de login:', error.message);
+        showLoginError(alertMessage, 'Correo o contraseña incorrectos.');
+        markLoginFieldInvalid('emailInput');
+        markLoginFieldInvalid('passwordInput');
+    }
+});
 
     // VALIDACION EN TIEMPO REAL
     emailInput.addEventListener('input', function () {
