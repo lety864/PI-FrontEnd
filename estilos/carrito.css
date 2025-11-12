@@ -1,0 +1,155 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.list-group-item img {
+  width: 100px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.quantity-control button {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  border: none;
+  background-color: #b2b09b;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.quantity-control button:hover {
+  background-color: #9c9a85;
+}
+
+@media (max-width: 576px) {
+  .list-group-item {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .list-group-item img {
+    margin-bottom: 10px;
+  }
+
+  .quantity-control {
+    justify-content: center;
+  }
+}
+/* ========================================= */
+/*   ESTILOS DEL CARRITO DE COMPRAS          */
+/*   Archivo: /estilos/carrito.css            */
+/* ========================================= */
+
+/* Tipografía general */
+/* Tabla del carrito */
+.tablee{
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Encabezado */
+.table thead th {
+  background-color: #73917a;
+  color: #ffffff;
+  font-weight: 600;
+}
+/* Filas */
+.table tbody tr {
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s ease;
+}
+
+.table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Imagen del producto */
+.table img {
+  border-radius: 8px;
+  object-fit: cover;
+  border: 2px solid #f0f0f0;
+}
+
+/* Input de cantidad */
+.quantity-input {
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s;
+}
+
+.quantity-input:focus {
+  border-color: #c82333;
+  box-shadow: 0 0 3px rgba(200, 35, 51, 0.4);
+}
+
+/* Botón eliminar */
+.btn-danger {
+  background-color: #5e503fc4;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.btn-danger:hover {
+  background-color: #5E503F;
+}
+
+/* Botón vaciar */
+#clear-cart.btn-outline-danger {
+  border-color: rgb(38, 38, 38);
+  color: rgb(38, 38, 38);
+}
+
+#clear-cart.btn-outline-danger:hover {
+  background-color: rgb(38, 38, 38);
+  color: #fff;
+}
+
+/* Botón comprar */
+.btn-success {
+  background-color: #73917A;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.btn-success:hover {
+  background-color: #435547;
+}
+
+/* Total */
+.Totaltotal{
+  font-weight: 700;
+  color: rgb(38, 38, 38);
+}
+#cart-total {
+  font-weight: 750;
+  color: rgb(38, 38, 38);
+}
+
+
+
+/* Responsividad */
+/* @media (max-width: 768px) {
+  main h1 {
+    font-size: 1.5rem;
+  }
+
+  .table img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .quantity-input {
+    width: 60px !important;
+  }
+} */

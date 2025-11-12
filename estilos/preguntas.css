@@ -8,11 +8,85 @@
   align-items: center;
   justify-content: center;
   color: var(--primary);
+  padding: 0 1rem;
+}
+
+/* ====== IMAGEN HERO FAQ CON TEXTO ====== */
+.faq-hero-image {
+  position: relative;
+  margin-top: 20px !important;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 0 !important;
+  width: calc(100% - 32px);
+  max-width: 100%;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.faq-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 12px;
+  display: block;
+}
+
+/* Overlay oscuro para mejorar legibilidad del texto */
+.faq-hero-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+/* Texto sobre la imagen */
+.faq-hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  color: white;
+  width: 90%;
+  max-width: 1200px;
+  padding: 0 1rem;
+}
+
+.faq-hero-text h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  margin: 0;
+  font-family: var(--font-primary);
+  color: white;
+}
+
+/* Eliminar margen del container después del navbar */
+.floating-nav-container ~ .container:first-of-type {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.full-width-nav-container {
+  margin-bottom: 0 !important;
+}
+
+.floating-nav-container {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 /* =============FOOTER======================== */
 .footer {
-  background-color: #5e4c39; /* Color café igual que en Contacto */
+  background-color: #5e4c39;
   color: #fff;
   padding: 3rem 0 1rem;
   font-family: var(--font-primary);
@@ -38,7 +112,7 @@
 }
 
 .footer a:hover {
-  color: #c7b299; /* Tono beige claro para el hover */
+  color: #c7b299;
 }
 
 .footer ul {
@@ -63,63 +137,13 @@
 
 /* ==========COPYRIGHT============= */
 .copyright {
-  background-color: #3B3026;
+  background-color: #4A3C2E;
   color: rgba(255, 255, 255, 0.7);
   text-align: center;
   padding: 1rem 0;
   font-size: 0.9rem;
 }
 
-/* ==========RESPONSIVE DESIGN============= */
-@media (max-width: 992px) {
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-  
-  .encabezado {
-    font-size: 2rem;
-    height: auto;
-    padding: 2rem 1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero {
-    height: 400px;
-  }
-
-  .hero::before{
-    height: 400px;
-  }
-  
-  .hero h1 {
-    font-size: 2rem;
-    padding: 0 1rem;
-  }
-  
-  .container-fondo {
-    min-height: auto;
-    padding: 1rem;
-  }
-  
-  .encabezado {
-    font-size: 1.5rem;
-  }
-
-  .btn-formato-position{
-    margin-left: 200px;
-  }
-  
-  footer {
-    flex-direction: column;
-    padding: 2rem 1.5rem;
-    text-align: center;
-  }
-  
-  .footer-col {
-    margin-bottom: 1.5rem;
-  }
-}
 /* ======== BOTÓN DE FORMULARIO ======== */
 .submit-btn {
   background-color: var(--primary);
@@ -131,6 +155,8 @@
   font-size: 1rem;
   font-weight: 500;
   transition: all 0.3s ease;
+  width: 100%;
+  max-width: 200px;
 }
 
 .submit-btn:hover {
@@ -139,16 +165,30 @@
 }
 
 /* ====== ACCORDION BOTONES ====== */
+.accordion {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+.accordion-item {
+  margin-bottom: 1.5rem;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
 .accordion-button {
-  background-color: var(--primary); /* Color base igual que el botón enviar */
+  background-color: var(--primary);
   color: white;
   font-family: var(--font-primary);
   font-weight: 500;
   transition: all 0.3s ease;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
 }
 
 .accordion-button:hover {
-  background-color: var(--secondary); /* Verde del hover como botón enviar */
+  background-color: var(--secondary);
   transform: translateY(-2px);
 }
 
@@ -157,28 +197,47 @@
 }
 
 .accordion-button:not(.collapsed) {
-  background-color: var(--secondary); /* Mantener verde cuando esté activo */
+  background-color: var(--secondary);
   color: white;
   transform: translateY(-2px);
 }
 
-/*  hace que el texto del contenido se vea bien */
 .accordion-body {
   font-family: var(--font-primary);
   color: #333;
   line-height: 1.6;
+  padding: 1.5rem;
 }
+
 /* ====== TITULO FAQ ====== */
+.faq-section {
+  padding: 2rem 1rem;
+}
+
 .faq-section h2 {
   font-size: 3rem; 
   font-weight: 700;
   color: var(--primary);
   text-align: center;
+  margin-top: 3rem;
   margin-bottom: 2rem;
 }
 
-/* ====== ESTILOS DEL FORM ====== */
+/* Espaciado para el contenido después de la imagen hero */
+.faq-content-section {
+  padding-top: 4rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 
+/* Espaciado para el formulario de preguntas */
+.faq-form-section {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  padding: 3rem 1rem;
+}
+
+/* ====== ESTILOS DEL FORM ====== */
 .label-formato{
   font-family: var(--font-primary);
   font-size: 24px;
@@ -208,8 +267,17 @@
 
 .input-formato{
   margin-bottom: 25px;
-  border: solid var(--background-light);
-  background-color: var(--background-light);
+  border: 2px solid #7a9b7e !important;
+  background-color: #ffffff !important;
+  padding: 12px;
+  font-family: var(--font-primary);
+  width: 100%;
+}
+
+.input-formato:focus{
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 0.2rem rgba(122, 155, 126, 0.25) !important;
+  background-color: #ffffff !important;
 }
 
 .item-color.active{
@@ -225,3 +293,283 @@
   color: var(--text-dark);
 }
 
+/* Estilos específicos para el formulario de FAQ */
+.contact-form h3 {
+  color: var(--primary);
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-family: var(--font-primary);
+}
+
+.contact-form p {
+  color: var(--text-dark);
+  margin-bottom: 2rem;
+  font-family: var(--font-primary);
+}
+
+/* ==========RESPONSIVE DESIGN============= */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 992px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .encabezado {
+    font-size: 2rem;
+    height: auto;
+    padding: 2rem 1rem;
+  }
+
+  .faq-hero-text h1 {
+    font-size: 2.8rem;
+  }
+
+  .faq-section h2 {
+    font-size: 2.5rem;
+  }
+
+  .accordion {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .label-formato {
+    font-size: 20px;
+  }
+
+  .faq-form-section {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    padding: 2rem 1rem;
+  }
+}
+
+/* Móviles grandes */
+@media (max-width: 768px) {
+  .hero {
+    height: 400px;
+  }
+
+  .hero::before{
+    height: 400px;
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+    padding: 0 1rem;
+  }
+  
+  .container-fondo {
+    min-height: auto;
+    padding: 1rem;
+  }
+  
+  .encabezado {
+    font-size: 1.75rem;
+    height: auto;
+    padding: 1.5rem 1rem;
+  }
+
+  .btn-formato-position{
+    margin-left: 0;
+    text-align: center;
+  }
+  
+  footer {
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+  
+  .footer-col {
+    margin-bottom: 1.5rem;
+  }
+
+  .faq-hero-image {
+    height: 350px;
+    width: calc(100% - 20px);
+    border-radius: 8px;
+  }
+
+  .faq-hero-text h1 {
+    font-size: 2.2rem;
+  }
+
+  .faq-section h2 {
+    font-size: 2rem;
+    margin-top: 2rem;
+  }
+
+  .accordion-button {
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .accordion-body {
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .accordion {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .contact-form h3 {
+    font-size: 1.75rem;
+  }
+
+  .label-formato {
+    font-size: 18px;
+  }
+
+  .faq-content-section {
+    padding-top: 2rem;
+  }
+
+  .faq-form-section {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .submit-btn {
+    max-width: 100%;
+  }
+}
+
+/* Móviles pequeños */
+@media (max-width: 576px) {
+  .faq-hero-image {
+    height: 280px;
+    width: calc(100% - 16px);
+    margin-top: 15px !important;
+  }
+
+  .faq-hero-text h1 {
+    font-size: 1.65rem;
+    padding: 0 0.5rem;
+  }
+
+  .encabezado {
+    font-size: 1.5rem;
+    padding: 1rem 0.5rem;
+    margin-top: 8px;
+  }
+
+  .faq-section {
+    padding: 1rem 0.5rem;
+  }
+
+  .faq-section h2 {
+    font-size: 1.75rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .accordion {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .accordion-item {
+    margin-bottom: 1rem;
+  }
+
+  .accordion-button {
+    padding: 0.875rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .accordion-body {
+    padding: 0.875rem;
+    font-size: 0.9rem;
+  }
+
+  .contact-form h3 {
+    font-size: 1.5rem;
+  }
+
+  .contact-form p {
+    font-size: 0.95rem;
+  }
+
+  .label-formato {
+    font-size: 16px;
+  }
+
+  .input-formato {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .faq-content-section {
+    padding-top: 1.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .faq-form-section {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem 0.5rem;
+  }
+
+  .submit-btn {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+
+  .footer {
+    padding: 2rem 1rem 1rem;
+  }
+
+  .footer h4 {
+    font-size: 1.1rem;
+  }
+
+  .social-icons a {
+    font-size: 1.3rem;
+    margin-right: 0.75rem;
+  }
+}
+
+/* Móviles muy pequeños */
+@media (max-width: 375px) {
+  .faq-hero-image {
+    height: 250px;
+  }
+
+  .faq-hero-text h1 {
+    font-size: 1.4rem;
+  }
+
+  .faq-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .accordion-button {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .accordion-body {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+}
+/* ====== ICONOS DE CONTACTO ====== */
+.bi-geo-alt,
+.bi-whatsapp,
+.bi-telephone {
+  color: #5a8f7b !important;
+}
+
+/* Para asegurar que funcione dentro del footer */
+.footer .bi-geo-alt,
+.footer .bi-whatsapp,
+.footer .bi-telephone {
+  color: #5a8f7b !important;
+}

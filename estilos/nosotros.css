@@ -4,11 +4,21 @@
    Nota: Footer y Navbar están en global.css
    =================================== */
 
-/* =======HERO SECTION============= */
+/* ===== CONTENEDOR DEL HERO (estilo similar al navbar) ===== */
+.hero-container {
+    width: 98%;
+    margin: 10px auto 0 auto;
+    border-radius: 8px;
+    overflow: hidden; /* Para que las imágenes respeten el border-radius */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 1;
+}
 
+/* =======HERO SECTION============= */
 .hero {
   position: relative;
-  min-height: 80vh;
+  height: 760px; /* Altura fija como el carousel del index */
   
   /* --- Propiedades del fondo --- */
   background-image: url('../assets/images/hero-muebleria.png');
@@ -243,8 +253,14 @@
 
 /* Móviles */
 @media (max-width: 768px) {
+  .hero-container {
+      width: 98%;
+      margin: 8px auto 0 auto;
+      border-radius: 6px;
+  }
+
   .hero {
-    min-height: 400px;
+    height: 550px;
   }
   
   .hero-content h1 {
@@ -294,6 +310,15 @@
 
 /* Móviles pequeños */
 @media (max-width: 576px) {
+  .hero-container {
+      width: 96%;
+      margin: 6px auto 0 auto;
+  }
+
+  .hero {
+      height: 400px;
+  }
+
   .hero-content h1 {
     font-size: 1.5rem;
   }

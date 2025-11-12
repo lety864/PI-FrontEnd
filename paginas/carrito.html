@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Registro - Mueblería España</title>
-     <!-- Bootstrap CSS -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     
     <!-- Bootstrap Icons -->
@@ -17,12 +16,10 @@
     
     <!-- Design System CSS (SIEMPRE PRIMERO) -->
     <link rel="stylesheet" href="/estilos/global.css">
-    
     <!-- Page-Specific Styles -->
-    <link rel="stylesheet" href="/estilos/registro.css">
+    <link rel="stylesheet" href="/estilos/carrito.css">
 
-    <script defer src="/scripts/registro.js"></script>
-    <title>Contacto</title>
+    <title>Carrito</title>
 
 </head>
 <body>
@@ -42,7 +39,7 @@
                 </button>
 
                 <!-- Logo/Brand -->
-                <a class="navbar-brand d-flex align-items-center" href="/index.html">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
                     <img src="/assets/mundo.png" alt="Logo Mueblería España" height="30" class="me-2">
                     Mueblería España
                 </a>
@@ -74,16 +71,15 @@
                                 <i class="bi bi-cart-fill fs-4"></i>
                                 <!-- BADGE OCULTO DE NUM DE ITEMS DEL CARRITO - Desktop con d-none -->
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">
-                                    2
                                     <span class="visually-hidden">productos en el carrito</span>
                                 </span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" aria-label="Mi cuenta">
+                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
                                 <i class="bi bi-person-fill fs-4"></i>
                             </a>
-                        </li>
+                        </li> 
                     </ul>
                 </div>
 
@@ -95,7 +91,6 @@
                                 <i class="bi bi-cart-fill fs-3"></i>
                                     <!-- BADGE OCULTO DE NUM ITEMS DEL CARRITO - Movil con d-none -->
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">
-                                    2
                                     <span class="visually-hidden">productos en el carrito</span>
                                 </span>
                             </a>
@@ -177,7 +172,7 @@
 
                         <!-- Línea Blanca -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="paginas/catalogo.html" role="button" 
+                            <a class="nav-link dropdown-toggle" href="/paginas/catalogo.html" role="button" 
                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Línea blanca
                             </a>
@@ -296,56 +291,363 @@
 
             <!-- Enlaces adicionales -->
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><a href="/paginas/nosotros.html">Nosotros</a></li>
-                <li class="list-group-item"><a href="/paginas/contacto.html">Contacto</a></li>
+                <li class="list-group-item"><a href="paginas/nosotros.html">Nosotros</a></li>
+                <li class="list-group-item"><a href="paginas/contacto.html">Contacto</a></li>
             </ul>
         </div>
     </div>
     <!--FIN DE NAVBAR-->
 
-  <!-- FORMULARIO DEL REGISTRO-->
-  <main class="container-fluid main-registro d-grid align-items-center justify-content-center">
-    <section class="registro-grid">
-      <div class="grid-column"></div>
-      <div class="form-section d-flex align-items-center justify-content-center">
-        <div class="form-container p-5 rounded shadow-lg bg-card">
-          <h2 class="mb-4 fw-semibold text-secondary text-center">Registro</h2>
-          <form id="registerForm">
-            <div class="mb-3">
-              <label for="fullName" class="form-label text-muted">Nombre</label>
-              <input type="text" class="form-control" id="fullName" required />
+    <!--AQUI VA EL CODIGO DEL CARRITO-->
+    <!-- ========================================= -->
+<!-- SECCIÓN DEL CARRITO DE COMPRAS -->
+<!-- ========================================= -->
+<main class="container my-5">
+  <h1 class="mb-4 text-center">Tu Carrito de Compras</h1>
+
+  <!-- Tabla de productos -->
+  <div class="table-responsive">
+    <table class="table align-middle text-center">
+      <thead class="table-dark">
+        <tr>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Subtotal</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="cart-items">
+        <!-- Productos dinámicos -->
+      </tbody>
+    </table>
+  </div>
+  <!-- Resumen del carrito -->
+<div class="card mt-4 p-3 shadow-sm" id="cart-summary">
+  <h4 class="mb-3">Resumen de la compra</h4>
+  <div class="d-flex justify-content-between mb-2">
+    <span>Subtotal:</span>
+    <span id="summary-subtotal">$0.00</span>
+  </div>
+  <div class="d-flex justify-content-between mb-2">
+    <span>Costo de envío:</span>
+    <span id="summary-shipping">$000.00</span> <!-- ejemplo de envío fijo -->
+  </div>
+  <hr>
+  <div class="d-flex justify-content-between fw-bold fs-5">
+    <span>Total:</span>
+    <span id="summary-total">$0.00</span>
+  </div>
+</div>
+
+  <!-- Total -->
+  <div class="d-flex justify-content-between align-items-center mt-4 flex-wrap">
+    <h3 class="Totaltotal">Total: <span id="cart-total">$0.00</span></h3>
+    <div>
+      <button id="clear-cart" class="btn btn-outline-danger me-2">Vaciar Carrito</button>
+      <a href="/paginas/checkout.html" class="btn btn-success">Finalizar Compra</a>
+    </div>
+  </div>
+</main>
+
+    <!-- ========== NUEVO FOOTER ========== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <!-- Columna 1: Sobre Nosotros -->
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <div class="footer-widget">
+                        <h4 class="widget-title">Mueblería España</h4>
+                        <p>Creamos hogares combinando la tradición artesanal con las mejores marcas de electrodomésticos del mercado.</p>
+                        <div class="social-links mt-4">
+                            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna 2: Enlaces Rápidos -->
+                <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                    <div class="footer-widget">
+                        <h4 class="widget-title">Enlaces</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="paginas/nosotros.html">Sobre Nosotros</a></li>
+                            <li><a href="paginas/catalogo.html">Catálogo</a></li>
+                            <li><a href="paginas/contacto.html">Contacto</a></li>
+                            <li><a href="paginas/login.html">Login</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Columna 3: Atención al Cliente -->
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <div class="footer-widget">
+                        <h4 class="widget-title">Atención al Cliente</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="/paginas/preguntas.html">Preguntas Frecuentes</a></li>
+                            <li><a href="#">Métodos de Pago</a></li>
+                            <li><a href="paginas/garantia.html">Políticas y Garantías</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Columna 4: Contacto -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h4 class="widget-title">Contacto</h4>
+                        <ul class="list-unstyled contact-info">
+                            <li>
+                                <i class="bi bi-geo-alt-fill me-2"></i>
+                                <span>San Felipe del Progreso, Edo. de México, 50640</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-telephone-fill me-2"></i>
+                                <a href="tel:+527120000000">+52 (712) 000-0000</a>
+                            </li>
+                            <li>
+                                <i class="bi bi-envelope-fill me-2"></i>
+                                <a href="mailto:contacto@muebleria.com">contacto@muebleria.com</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-              <label for="email" class="form-label text-muted">Correo electrónico</label>
-              <input type="email" class="form-control" id="email" required />
+        </div>
+    </footer>
+    <!-- ========== BARRA DE COPYRIGHT ========== -->
+    <div class="copyright-bar">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 Mueblería España. Todos los derechos reservados.</p>
+        </div>
+    </div>
+    <!-- Incio de sesion -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body p-0">
+            <div class="container-fluid">
+              <div class="row">
+
+                <div class="col-md-6 d-none d-md-block p-0 modal-video-col">
+                  <video id="loginVideo" autoplay muted playsinline>
+                    <source src="/assets/inicio.mp4" type="video/mp4">
+                    Tu navegador no soporta la etiqueta de video.
+                  </video>
+                </div>
+
+                <div class="col-md-6 p-4 p-md-5">
+                  
+                  <div class="d-flex justify-content-end">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+
+                  <h2 class="mb-4">Bienvenido</h2>
+                  
+                  <form>
+    <div class="mb-3">
+        <label for="emailInput" class="form-label">Correo Electrónico</label>
+        <input type="email" class="form-control" id="emailInput" placeholder="tu@email.com">
+    </div>
+    
+    <div class="mb-3">
+        <label for="passwordInput" class="form-label">Contraseña</label>
+        <div class="position-relative">
+            <input 
+                type="password" 
+                class="form-control" 
+                id="passwordInput" 
+                placeholder="Ingresa tu contraseña"
+                required
+            >
+            <button 
+                type="button" 
+                id="toggleLoginPassword"
+                class="btn position-absolute top-0 end-0 h-100"
+            >
+                <i class="bi bi-eye"></i>
+            </button>
+        </div>
+        <div class="invalid-feedback">
+            La contraseña debe tener 8 caracteres como mínimo.
+        </div>
+    </div>
+</form>
+                   <!-- Enlace de recuperación de contraseña -->
+                   <div class="mb-3 text-end">
+                   <a href="#" class="text-decoration-none" style="color: #CB997E;" data-bs-toggle="modal" data-bs-target="#recoveryModal" data-bs-dismiss="modal">
+                     ¿Olvidaste tu contraseña? </a></div>
+
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-primary btn-lg">Ingresar</button>
+                </div>
+              </form>
+
+              <hr class="my-4">
+
+              <div class="text-center">
+                <p>¿No tienes una cuenta? 
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Regístrate</a>
+                </p>
+              </div>
+
             </div>
-            <div class="mb-3">
-              <label for="password" class="form-label text-muted">Contraseña</label>
-              <input type="password" class="form-control" id="password" required />
-            </div>
-            <div class="mb-4">
-              <label for="confirmPassword" class="form-label text-muted">Confirmar contraseña</label>
-              <input type="password" class="form-control" id="confirmPassword" required />
-            </div>
-            <div class="mb-3">
-              <label for="phone" class="form-label text-muted">Número de teléfono</label>
-              <input type="tel" class="form-control" id="phone" pattern="[0-9]{10}" placeholder="Ej. 5512345678" required />
-            </div>
-            <button type="submit" class="btn btn-secondary w-100 fw-medium">Regístrate</button>
-            <p class="mt-3 text-center text-muted">
-              ¿Ya eres miembro? <a href="login.html" class="text-accent fw-medium">Inicia sesión</a>
-            </p>
-          </form>
+          </div>
         </div>
       </div>
-      <div class="image-section d-none d-md-block">
-        <img src="photo/inicio.jpg" alt="Decoración moderna" class="img-fluid h-100 w-100" />
+    </div>
+  </div>
+</div> 
+<!-- Fin de inicio de sesion -->
+
+<!-- Modal de Recuperación de Contraseña -->
+<div class="modal fade" id="recoveryModal" tabindex="-1" aria-labelledby="recoveryModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body p-4 p-md-5">
+        
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="text-center mb-4">
+        <i class="bi bi-key fs-1" style="color: #CB997E;"></i>
+         <h2 class="mt-3">Recuperar Contraseña</h2>
+          <p class="text-muted">Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.</p>
+        </div>
+        
+        <form id="recoveryForm">
+          <div class="mb-3">
+            <label for="recoveryEmail" class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control" id="recoveryEmail" placeholder="tu@email.com" required>
+          </div>
+
+          <!-- Mensaje de alerta -->
+          <div id="recoveryAlertMessage" class="alert d-none" role="alert"></div>
+
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary btn-lg">Enviar Enlace</button>
+          </div>
+        </form>
+
+        <hr class="my-4">
+
+        <div class="text-center">
+          <p>¿Recordaste tu contraseña? 
+            <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Inicia Sesión</a>
+          </p>
+        </div>
+
       </div>
-      <div class="grid-column"></div>
-    </section>
-  </main>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- VINCULAR EL CSS -->
-  <script src="/scripts/registro.js"></script>
+    </div>
+  </div>
+</div>
+<!-- Fin de Modal de Recuperación de Contraseña -->
+                    
+<!-- Form de registro --> 
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <div class="container-fluid">
+          <div class="row">
+
+            <div class="col-md-6 p-4 p-md-5">
+
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+
+              <h2 class="mb-4">Crea tu Cuenta</h2>
+              
+              <form id="registerForm"> 
+                
+                <!-- Nombre completo -->
+                <div class="mb-3">
+                  <label for="fullname" class="form-label">Nombre Completo</label>
+                  <input type="text" class="form-control" id="fullname" placeholder="Ej. Nombre Apellido 1 Apellido 2" required>
+                </div>
+
+                <!-- Correo -->
+                <div class="mb-3">
+                  <label for="username" class="form-label">Correo Electrónico</label>
+                  <input type="email" class="form-control" id="username" placeholder="tu@email.com" required>
+                </div>
+
+                <!-- Teléfono -->
+                <div class="mb-3">
+                  <label for="phone" class="form-label">Número de Teléfono</label>
+                  <input type="tel" class="form-control" id="phone" placeholder="Ej. 7221234567" pattern="[0-9]{10}" required>
+                </div>
+
+                <!-- Contraseña -->
+                <div class="mb-3">
+                  <label for="password" class="form-label">Contraseña</label>
+                  <div class="input-group"> 
+                    <input type="password" class="form-control" id="password" required>
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                      <i class="bi bi-eye" id="eyeIcon"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Confirmar Contraseña -->
+                <div class="mb-3">
+                  <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+                  <div class="input-group"> 
+                    <input type="password" class="form-control" id="confirmPassword" required>
+                    <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
+                      <i class="bi bi-eye" id="eyeIconConfirm"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Mensajes de alerta -->
+                <div id="alertMessage" class="alert d-none" role="alert"></div>
+
+                <div class="d-grid gap-2">
+                  <button type="submit" class="btn btn-primary btn-lg">Registrarse</button>
+                </div>
+              </form>
+
+              <hr class="my-4">
+
+              <div class="text-center">
+                <p>¿Ya tienes una cuenta? 
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Inicia Sesión</a>
+                </p>
+              </div>
+
+            </div>
+
+            <!-- Video del lado derecho -->
+            <div class="col-md-6 d-none d-md-block p-0 modal-video-col">
+              <video id="registerVideo" autoplay muted playsinline>
+                <source src="/assets/registro.mp4" type="video/mp4">
+                Tu navegador no soporta la etiqueta de video.
+              </video>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+<!-- Fin de form de registro -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <!-- Helper para rutas dinámicas del navbar -->
+    <script src="../scripts/navbar-helper.js"></script>
+    <!-- Script del carrito -->
+    <script src="../scripts/carrito-global.js" defer></script>
+    <script src="../scripts/carrito-pagina.js" defer></script>
+    <!-- Enlazar el archivo JavaScript -->
+    <script src="../scripts/registro.js"></script>
+    <script src="../scripts/login.js"></script>
+    <script src="../scripts/recuperacion.js"></script>
+    <!-- En carrito.html -->
+<script src="/scripts/api/apilineablanca.js"></script>
+
 </body>
 </html>

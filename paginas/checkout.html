@@ -1,26 +1,29 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preguntas Frecuentes - Mueblería España</title>
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css">
+    
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
- <!-- Page-Specific Styles -->
-    <link rel="stylesheet" href="/estilos/preguntas.css">
-    <!-- CSS Global y local -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Design System CSS (SIEMPRE PRIMERO) -->
     <link rel="stylesheet" href="/estilos/global.css">
-   
+    <!-- Page-Specific Styles -->
+    <link rel="stylesheet" href="/estilos/carrito.css">
+
+    <title>Checkout</title>
 
 </head>
 <body>
-<!-- ========================================= -->
+    <!-- ========================================= -->
     <!-- NAVBAR PRINCIPAL (Sticky, con búsqueda) -->
     <!-- ========================================= -->
     <div class="full-width-nav-container sticky-top">
@@ -51,9 +54,8 @@
                             <a class="nav-link" href="/paginas/nosotros.html">Sobre Nosotros</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/paginas/contacto.html">Contacto</a>
+                            <a class="nav-link active" href="/paginas/contacto.html">Contacto</a>
                         </li>
-
                     </ul>
                     
                     <!-- Barra de búsqueda (Desktop) -->
@@ -64,18 +66,16 @@
                     
                      <!-- Iconos de acción (Desktop) -->
                     <ul class="navbar-nav">
-
                         <li class="nav-item">
                             <a class="nav-link position-relative" href="/paginas/carrito.html" aria-label="Carrito de compras">
                                 <i class="bi bi-cart-fill fs-4"></i>
                                 <!-- BADGE OCULTO DE NUM DE ITEMS DEL CARRITO - Desktop con d-none -->
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">
-                                    2
                                     <span class="visually-hidden">productos en el carrito</span>
                                 </span>
                             </a>
                         </li>
-                       <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
                                 <i class="bi bi-person-fill fs-4"></i>
                             </a>
@@ -87,7 +87,7 @@
                 <div class="d-flex align-items-center d-lg-none">
                     <ul class="navbar-nav flex-row">
                         <li class="nav-item ms-3">
-                            <a class="nav-link position-relative" href="/paginas/carrito.html" aria-label="Carrito de compras">
+                            <a class="nav-link position-relative" href="#" aria-label="Carrito de compras">
                                 <i class="bi bi-cart-fill fs-3"></i>
                                     <!-- BADGE OCULTO DE NUM ITEMS DEL CARRITO - Movil con d-none -->
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">
@@ -101,6 +101,11 @@
                                 <i class="bi bi-person-fill fs-3"></i>
                             </a>
                         </li>
+
+                          <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                              <i class="bi bi-person-fill fs-3"></i>
+                          </a>
+                      </li>
                     </ul>
                 </div>
             </div>
@@ -122,11 +127,11 @@
                                 Salas
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/paginas/salas.html">Ver todo</a></li>
-                                <li><a class="dropdown-item" href="/paginas/salas.html">Modulares de 4 piezas</a></li>
-                                <li><a class="dropdown-item" href="/paginas/salas.html">Modulares de 5 piezas</a></li>
-                                <li><a class="dropdown-item" href="/paginas/salas.html">Sofacamas</a></li>
-                                <li><a class="dropdown-item" href="/paginas/salas.html">Reclinables</a></li>
+                                <li><a class="dropdown-item" href="/paginas/catalogo.html">Ver todo</a></li>
+                                <li><a class="dropdown-item" href="/paginas/catalogo.html">Modulares de 4 piezas</a></li>
+                                <li><a class="dropdown-item" href="/paginas/catalogo.html">Modulares de 5 piezas</a></li>
+                                <li><a class="dropdown-item" href="/paginas/catalogo.html">Sofacamas</a></li>
+                                <li><a class="dropdown-item" href="/paginas/catalogo.html">Reclinables</a></li>
                             </ul>
                         </li>
 
@@ -137,10 +142,10 @@
                                 Dormitorio
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/paginas/dormitorios.html">Ver todo</a></li>
-                                <li><a class="dropdown-item" href="/paginas/dormitorios.html">Recámaras king size y matrimonial</a></li>
-                                <li><a class="dropdown-item" href="/paginas/dormitorios.html">Cabeceras</a></li>
-                                <li><a class="dropdown-item" href="/paginas/dormitorios.html">Bases</a></li>
+                                <li><a class="dropdown-item" href="paginas/catalogo.html">Ver todo</a></li>
+                                <li><a class="dropdown-item" href="paginas/catalogo.html">Recámaras king size y matrimonial</a></li>
+                                <li><a class="dropdown-item" href="paginas/catalogo.html">Cabeceras</a></li>
+                                <li><a class="dropdown-item" href="paginas/catalogo.html">Bases</a></li>
                             </ul>
                         </li>
 
@@ -151,19 +156,19 @@
                                 Comedores
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/paginas/comedores.html">Ver todo</a></li>
-                                <li><a class="dropdown-item" href="/paginas/comedores.html">4 sillas</a></li>
-                                <li><a class="dropdown-item" href="/paginas/comedores.html">6 sillas</a></li>
-                                <li><a class="dropdown-item" href="/paginas/comedores.html">8 sillas</a></li>
+                                <li><a class="dropdown-item" href="paginas/catalogo.html">Ver todo</a></li>
+                                <li><a class="dropdown-item" href="paginas/catalogo.html">4 sillas</a></li>
+                                <li><a class="dropdown-item" href="paginas/catalogo.html">6 sillas</a></li>
+                                <li><a class="dropdown-item" href="paginas/catalogo.html">8 sillas</a></li>
                             </ul>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/paginas/roperos.html">Roperos</a>
+                            <a class="nav-link" href="paginas/catalogo.html">Roperos</a>
                         </li>
                         
                         <li class="nav-item">
-                            <a class="nav-link" href="/paginas/colchones.html">Colchones</a>
+                            <a class="nav-link" href="paginas/catalogo.html">Colchones</a>
                         </li>
 
                         <!-- Línea Blanca -->
@@ -173,16 +178,16 @@
                                 Línea blanca
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/paginas/lineaBlanca.html">Ver todo</a></li>
-                                <li><a class="dropdown-item" href="/paginas/lineaBlanca.html">Lavadoras</a></li>
-                                <li><a class="dropdown-item" href="/paginas/lineaBlanca.html">Estufas</a></li>
-                                <li><a class="dropdown-item" href="/paginas/lineaBlanca.html">Refrigeradores</a></li>
-                                <li><a class="dropdown-item" href="/paginas/lineaBlanca.html">Microondas</a></li>
+                                <li><a class="dropdown-item" href="paginas/catalogo.html">Ver todo</a></li>
+                                <li><a class="dropdown-item" href="paginas/catalogo.html">Lavadoras</a></li>
+                                <li><a class="dropdown-item" href="paginas/catalogo.html">Estufas</a></li>
+                                <li><a class="dropdown-item" href="paginas/catalogo.html">Refrigeradores</a></li>
+                                <li><a class="dropdown-item" href="paginas/catalogo.html">Microondas</a></li>
                             </ul>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link fw-bold text-danger" href="/paginas/ofertas.html">Ofertas</a>
+                            <a class="nav-link fw-bold text-danger" href="#ofertas">Ofertas</a>
                         </li>
                     </ul>
                 </div>
@@ -217,11 +222,11 @@
                     </a>
                     <div class="collapse" id="collapseSalas">
                         <ul class="list-unstyled ps-3 mt-2">
-                            <li><a href="/paginas/salas.html">Ver todo</a></li>
-                            <li><a href="/paginas/salas.html">Modulares de 4 piezas</a></li>
-                            <li><a href="/paginas/salas.html">Modulares de 5 piezas</a></li>
-                            <li><a href="/paginas/salas.html">Sofacamas</a></li>
-                            <li><a href="/paginas/salas.html">Reclinables</a></li>
+                            <li><a href="paginas/catalogo.html">Ver todo</a></li>
+                            <li><a href="paginas/catalogo.html">Modulares de 4 piezas</a></li>
+                            <li><a href="paginas/catalogo.html">Modulares de 5 piezas</a></li>
+                            <li><a href="paginas/catalogo.html">Sofacamas</a></li>
+                            <li><a href="paginas/catalogo.html">Reclinables</a></li>
                         </ul>
                     </div>
                 </li>
@@ -234,10 +239,10 @@
                     </a>
                     <div class="collapse" id="collapseDormitorio">
                         <ul class="list-unstyled ps-3 mt-2">
-                            <li><a href="/paginas/dormitorios.html">Ver todo</a></li>
-                            <li><a href="/paginas/dormitorios.html">Recámaras king size y matrimonial</a></li>
-                            <li><a href="/paginas/dormitorios.html">Cabeceras</a></li>
-                            <li><a href="/paginas/dormitorios.html">Bases</a></li>
+                            <li><a href="paginas/catalogo.html">Ver todo</a></li>
+                            <li><a href="paginas/catalogo.html">Recámaras king size y matrimonial</a></li>
+                            <li><a href="paginas/catalogo.html">Cabeceras</a></li>
+                            <li><a href="paginas/catalogo.html">Bases</a></li>
                         </ul>
                     </div>
                 </li>
@@ -250,16 +255,16 @@
                     </a>
                     <div class="collapse" id="collapseComedores">
                         <ul class="list-unstyled ps-3 mt-2">
-                            <li><a href="/paginas/comedores.html">Ver todo</a></li>
-                            <li><a href="/paginas/comedores.html">4 sillas</a></li>
-                            <li><a href="/paginas/comedores.html">6 sillas</a></li>
-                            <li><a href="/paginas/comedores.html">8 sillas</a></li>
+                            <li><a href="paginas/catalogo.html">Ver todo</a></li>
+                            <li><a href="paginas/catalogo.html">4 sillas</a></li>
+                            <li><a href="paginas/catalogo.html">6 sillas</a></li>
+                            <li><a href="paginas/catalogo.html">8 sillas</a></li>
                         </ul>
                     </div>
                 </li>
 
-                <li class="list-group-item"><a href="/paginas/roperos.html">Roperos</a></li>
-                <li class="list-group-item"><a href="/paginas/colchones.html">Colchones</a></li>
+                <li class="list-group-item"><a href="paginas/catalogo.html">Roperos</a></li>
+                <li class="list-group-item"><a href="paginas/catalogo.html">Colchones</a></li>
 
                 <!-- Línea Blanca -->
                 <li class="list-group-item">
@@ -269,17 +274,17 @@
                     </a>
                     <div class="collapse" id="collapseLineaBlanca">
                         <ul class="list-unstyled ps-3 mt-2">
-                            <li><a href="/paginas/lineaBlanca.html">Ver todo</a></li>
-                            <li><a href="/paginas/lineaBlanca.html">Lavadoras</a></li>
-                            <li><a href="/paginas/lineaBlanca.html">Estufas</a></li>
-                            <li><a href="/paginas/lineaBlanca.html">Refrigeradores</a></li>
-                            <li><a href="/paginas/lineaBlanca.html">Microondas</a></li>
+                            <li><a href="paginas/catalogo.html">Ver todo</a></li>
+                            <li><a href="paginas/catalogo.html">Lavadoras</a></li>
+                            <li><a href="paginas/catalogo.html">Estufas</a></li>
+                            <li><a href="paginas/catalogo.html">Refrigeradores</a></li>
+                            <li><a href="paginas/catalogo.html">Microondas</a></li>
                         </ul>
                     </div>
                 </li>
 
                 <li class="list-group-item">
-                    <a href="/paginas/ofertas.html" class="fw-bold text-danger">Ofertas</a>
+                    <a href="#ofertas" class="fw-bold text-danger">Ofertas</a>
                 </li>
             </ul>
 
@@ -287,246 +292,251 @@
 
             <!-- Enlaces adicionales -->
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><a href="/paginas/nosotros.html">Nosotros</a></li>
-                <li class="list-group-item"><a href="/paginas/contacto.html">Contacto</a></li>
+                <li class="list-group-item"><a href="paginas/nosotros.html">Nosotros</a></li>
+                <li class="list-group-item"><a href="paginas/contacto.html">Contacto</a></li>
             </ul>
         </div>
     </div>
     <!--FIN DE NAVBAR-->
 
+    <!--AQUI VA EL CODIGO DEL CHECKOUT-->
     <!-- ========================================= -->
-    <!-- HERO IMAGE CON TÍTULO -->
-    <!-- ========================================= -->
-    <div class="faq-hero-image">
-    <img src="/assets/comedor.jpg" alt="Preguntas Frecuentes de Muebleria España">
-    <div class="faq-hero-text">
-        <h1>Preguntas Frecuentes (FAQ)</h1>
+<!-- SECCIÓN DEL CARRITO DE COMPRAS -->
+<!-- ========================================= -->
+<main class="container my-5">
+    <div class="text-center mb-4">
+        <h2>Finalizar Compra</h2>
     </div>
-</div>
 
-    <!-- ========================================= -->
-    <!-- SECCIÓN DE ACCORDION CON PREGUNTAS -->
-    <!-- ========================================= -->
-    <div class="container faq-content-section">
-        <div class="accordion" id="faqAccordion">
+    <div class="row g-5">
+        
+        <div class="col-lg-7">
             
-            <!-- Pregunta 1 -->
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        ¿Qué productos tienen garantía y de cuánto tiempo es?
-                    </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        <p>Solo los productos de <strong>línea blanca</strong> cuentan con garantía.</p>
-                        <ul>
-                            <li>1 año de garantía: Estufas, lavadoras y refrigeradores.</li>
-                            <li>3 meses de garantía: Planchas, microondas y licuadoras.</li>
-                        </ul>
-                        <p>Los productos artesanales no cuentan con garantía. Esta información se comunica en las especificaciones del producto online.</p>
-                    </div>
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-brown text-white">
+                    <h4 class="mb-0">1. Dirección de Envío y Facturación</h4>
                 </div>
+                <div class="card-body">
+                    <form id="checkout-form" class="row g-3">
+                        
+                        <div class="col-md-6">
+                            <label for="checkout-nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="checkout-nombre" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="checkout-apellidos" class="form-label">Apellidos</label>
+                            <input type="text" class="form-control" id="checkout-apellidos" required>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="checkout-calle" class="form-label">Calle y Número</label>
+                            <input type="text" class="form-control" id="checkout-calle" placeholder="Av. Siempre Viva 123" required>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="checkout-interior" class="form-label">Departamento, Interior, etc. (Opcional)</label>
+                            <input type="text" class="form-control" id="checkout-interior" placeholder="Depto. 5A">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="checkout-colonia" class="form-label">Colonia</label>
+                            <input type="text" class="form-control" id="checkout-colonia" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="checkout-cp" class="form-label">Código Postal</label>
+                            <input type="text" class="form-control" id="checkout-cp" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="checkout-ciudad" class="form-label">Municipio</label>
+                            <input type="text" class="form-control" id="checkout-ciudad" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="checkout-estado" class="form-label">Estado</label>
+                            <select id="checkout-estado" class="form-select" required>
+                                <option value="" selected disabled>Elegir...</option>
+                                <option value="EDOMEX">Estado de México</option>
+                                </select>
+                        </div>
+                        
+                        <hr class="my-3">
+
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="requiere-factura" data-bs-toggle="collapse" data-bs-target="#datos-facturacion">
+                                <label class="form-check-label" for="requiere-factura">
+                                    <strong>¿Requieres factura?</strong>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-12 collapse" id="datos-facturacion">
+                            <div class="row g-3 p-3 border rounded mt-2 bg-light">
+                                <h5 class="mb-2">Datos de Facturación</h5>
+                                <div class="col-md-6">
+                                    <label for="checkout-rfc" class="form-label">RFC</label>
+                                    <input type="text" class="form-control" id="checkout-rfc" placeholder="ABCD123456XYZ">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="checkout-razon-social" class="form-label">Razón Social</label>
+                                    <input type="text" class="form-control" id="checkout-razon-social" placeholder="Nombre de persona física o moral">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="checkout-cfdi" class="form-label">Uso de CFDI</label>
+                                    <select id="checkout-cfdi" class="form-select">
+                                        <option value="" selected disabled>Elegir...</option>
+                                        <option value="G01">G01 - Adquisición de mercancías</option>
+                                        <option value="G03">G03 - Gastos en general</option>
+                                        <option value="I08">I08 - Otra maquinaria y equipo</option>
+                                        <option value="P01">P01 - Por definir</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="checkout-cp-fiscal" class="form-label">C.P. Domicilio Fiscal</label>
+                                    <input type="text" class="form-control" id="checkout-cp-fiscal" placeholder="Tu código postal fiscal">
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                </div>
+            </div> <div class="card shadow-sm mb-4">
+                <div class="card-header">
+                    <h4 class="mb-0">2. Método de Envío</h4>
+                </div>
+                <div class="card-body">
+                    <p>Las opciones de envío aparecerán aquí cuando ingreses tu dirección.</p>
+                </div>
+            </div> <div class="card shadow-sm mb-4">
+                <div class="card-header">
+                    <h4 class="mb-0">3. Método de Pago</h4>
+                </div>
+                <div class="card-body">
+                    <p>Elige tu método de pago.</p>
+                </div>
+            </div> <div class="d-grid">
+                <button type="submit" form="checkout-form" class="btn btn-success btn-lg">Realizar Pedido</button>
             </div>
 
-            <!-- Pregunta 2 -->
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        ¿Cuáles son los pasos para hacer válida una garantía?
-                    </button>
-                </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        <p>Debe poseer el <strong>recibo de compra</strong> y la <strong>póliza de garantía</strong> que viene dentro del producto.</p>
-                        <p>El proceso es el siguiente:</p>
-                        <ol>
-                            <li>Comuníquese con el <strong>servicio técnico de la marca</strong> vía telefónica o en línea.</li>
-                            <li>Se le solicitarán datos como el nombre del producto, número de serie, fecha de compra y su domicilio.</li>
-                            <li>Un técnico especializado acudirá a su domicilio en un plazo no mayor a <strong>5 días hábiles</strong>.</li>
-                        </ol>
+        </div> <div class="col-lg-5">
+            <div class="card shadow-sm" style="position: sticky; top: 20px;">
+                <div class="card-header">
+                    <h4 class="mb-0">Resumen del Pedido</h4>
+                </div>
+                <div class="card-body">
+                    
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <h6 class="mb-0">Nombre del Producto 1</h6>
+                                <small class="text-muted">Cantidad: 1</small>
+                            </div>
+                        </div>
+                        <span class="fw-bold">$150.00</span>
                     </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                         <div class="d-flex align-items-center">
+                            <div>
+                                <h6 class="mb-0">Nombre del Producto 2</h6>
+                                <small class="text-muted">Cantidad: 2</small>
+                            </div>
+                        </div>
+                        <span class="fw-bold">$100.00</span>
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal:</span>
+                        <span id="summary-subtotal">$250.00</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Envío:</span>
+                        <span id="summary-shipping">$50.00</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between fw-bold fs-5">
+                        <span>Total:</span>
+                        <span id="summary-total">$300.00</span>
+                    </div>
+
                 </div>
             </div>
+        </div> </div> </main>
 
-            <!-- Pregunta 3 -->
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingThree">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        ¿Cuál es su zona de cobertura para las entregas?
-                    </button>
-                </h2>
-                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        <p>Realizamos entregas en una zona radial de hasta máximo <strong>20 km del centro de San Felipe del Progreso, Estado de México</strong>.</p>
-                        <p><strong>Importante:</strong> Si en el trayecto a la zona de entrega hay casetas, se debe notificar a la empresa.</p>
-                    </div>
-                </div>
-            </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-            <!-- Pregunta 4 -->
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingFour">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        ¿El envío tiene un costo adicional?
-                    </button>
-                </h2>
-                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        <p>No, el envío <strong>ya viene incluido en el costo del producto</strong>, siempre y cuando la dirección de entrega no se encuentre a una distancia mayor a 20 km del centro de San Felipe del Progreso.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pregunta 5 -->
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingFive">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                        ¿Cuánto tiempo tardan en realizar una entrega?
-                    </button>
-                </h2>
-                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        <p>Por lo regular, la entrega a domicilio se realiza <strong>un día posterior a la compra</strong> (exceptuando los días jueves).</p>
-                        <p>El tiempo final puede variar dependiendo de la cantidad de pedidos a entregar y de la distancia al domicilio del cliente.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pregunta 6 -->
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingSix">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                        ¿Cuáles son sus direcciones y horarios de atención?
-                    </button>
-                </h2>
-                <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        <p>Contamos con dos ubicaciones con el <strong>mismo horario</strong> para ambos locales:</p>
-                        <ul>
-                            <li><strong>Horario:</strong> 09:30 am a 18:00 pm, todos los días <strong>menos los jueves</strong>.</li>
-                            <li><strong>Bodega:</strong> Atlacomulco-San Felipe del Progreso, Manzana 003, 50640, Ejido San Juan Jalpa, Estado de México.</li>
-                            <li><strong>Sucursal del Centro:</strong> Agustín Iturbide S/N, Centro, 50640, San Felipe del Progreso, Estado de México.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pregunta 7 -->
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingSeven">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                        ¿Qué métodos de pago y tarjetas aceptan?
-                    </button>
-                </h2>
-                <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        <p>Aceptamos pagos con las siguientes tarjetas: <strong>Visa, Mastercard, American Express y Mercado Pago</strong>.</p>
-                        <p>Actualmente, <strong>no</strong> manejamos pagos con transferencia bancaria. Todos los pagos se realizan de manera presencial.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pregunta 8 -->
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingEight">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                        ¿Manejan meses sin intereses?
-                    </button>
-                </h2>
-                <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        <p>Sí. Los meses sin intereses son gestionados <strong>directo con el banco</strong> asociado a la tarjeta de crédito.</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- ========================================= -->
-    <!-- FORMULARIO DE PREGUNTAS -->
-    <!-- ========================================= -->
-    <div class="container faq-form-section">
-        <div class="contact-form">
-            <h3>¿Tienes otra pregunta?</h3> 
-            <p>Si tu duda no se resolvió con la información anterior, envíanos tu pregunta y nos pondremos en contacto contigo.</p> 
-            
-            <form action="/enviar-pregunta" method="POST">
-                <div class="mb-3">
-                    <label for="nombre" class="form-label label-formato">Tu Nombre:</label> 
-                    <input type="text" class="form-control input-formato" id="nombre" name="nombre" required> 
-                </div>
-                
-                <div class="mb-3">
-                    <label for="email" class="form-label label-formato">Tu Correo Electrónico:</label>
-                    <input type="email" class="form-control input-formato" id="email" name="email" required>
-                </div>
-                
-                <div class="mb-3">
-                    <label for="pregunta" class="form-label label-formato">Tu Pregunta:</label>
-                    <textarea class="form-control input-formato" id="pregunta" name="pregunta" rows="4" required></textarea>
-                </div>
-                
-                <button type="submit" class="submit-btn">Enviar Pregunta</button>
-            </form> 
-        </div>
-    </div>
-
-    <!-- ========================================= -->
-    <!-- FOOTER -->
-    <!-- ========================================= -->
-    <footer class="footer">
+    <!-- ========== NUEVO FOOTER ========== -->
+    <footer class="site-footer">
         <div class="container">
             <div class="row">
-                <!-- Primera columna del footer -->
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <h4>Mueblería España</h4>
-                    <p>
-                        Creando hogares combinando la tradición artesanal de México con la confianza de las mejores marcas. Cada pieza está elegida con pasión y dedicación.
-                    </p>
-                    <!-- Redes sociales con links -->
-                    <div class="social-icons mt-3">
-                        <a href="#" target="_blank"><i class="bi bi-instagram"></i></a>
-                        <a href="#" target="_blank"><i class="bi bi-facebook"></i></a>
+                <!-- Columna 1: Sobre Nosotros -->
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <div class="footer-widget">
+                        <h4 class="widget-title">Mueblería España</h4>
+                        <p>Creamos hogares combinando la tradición artesanal con las mejores marcas de electrodomésticos del mercado.</p>
+                        <div class="social-links mt-4">
+                            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Segunda columna del footer -->
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <h4>Enlaces Rápidos</h4>
-                    <ul>
-                        <li><a href="nosotros.html">Sobre Nosotros</a></li>
-                        <li><a href="catalogo.html">Catálogo</a></li>
-                        <li><a href="catalogo.html#artesanales">Muebles Artesanales</a></li>
-                        <li><a href="catalogo.html#comerciales">Marcas Comerciales</a></li>
-                    </ul>
+
+                <!-- Columna 2: Enlaces Rápidos -->
+                <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                    <div class="footer-widget">
+                        <h4 class="widget-title">Enlaces</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="paginas/nosotros.html">Sobre Nosotros</a></li>
+                            <li><a href="paginas/catalogo.html">Catálogo</a></li>
+                            <li><a href="paginas/contacto.html">Contacto</a></li>
+                            <li><a href="paginas/login.html">Login</a></li>
+                        </ul>
+                    </div>
                 </div>
-                
-                <!-- Tercera columna del footer -->
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <h4>Atención al Cliente</h4>
-                    <ul>
-                        <li><a href="/paginas/politicas.html">Garantías y Políticas</a></li>
-                        <li><a href="garantia.html#faq">Preguntas Frecuentes</a></li>
-                        <li><a href="politicas.html">Métodos de Pago</a></li>
-                    </ul>
+
+                <!-- Columna 3: Atención al Cliente -->
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <div class="footer-widget">
+                        <h4 class="widget-title">Atención al Cliente</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="/paginas/preguntas.html">Preguntas Frecuentes</a></li>
+                            <li><a href="#">Métodos de Pago</a></li>
+                            <li><a href="paginas/garantia.html">Políticas y Garantías</a></li>
+                        </ul>
+                    </div>
                 </div>
-                
-                <!-- Cuarta columna del footer -->
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <h4>Contacto</h4>
-                    <p><i class="bi bi-geo-alt me-2"></i>San Felipe del Progreso, Edo. Méx.</p>
-                    <p><i class="bi bi-whatsapp me-2"></i>WhatsApp disponible</p>
-                    <p><i class="bi bi-telephone me-2"></i>Teléfono disponible</p>
+
+                <!-- Columna 4: Contacto -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h4 class="widget-title">Contacto</h4>
+                        <ul class="list-unstyled contact-info">
+                            <li>
+                                <i class="bi bi-geo-alt-fill me-2"></i>
+                                <span>San Felipe del Progreso, Edo. de México, 50640</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-telephone-fill me-2"></i>
+                                <a href="tel:+527120000000">+52 (712) 000-0000</a>
+                            </li>
+                            <li>
+                                <i class="bi bi-envelope-fill me-2"></i>
+                                <a href="mailto:contacto@muebleria.com">contacto@muebleria.com</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
-
-    <!-- Parte de copyright -->
-    <div class="copyright">
-        © 2025 Mueblería España. Todos los derechos reservados.
+    <!-- ========== BARRA DE COPYRIGHT ========== -->
+    <div class="copyright-bar">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 Mueblería España. Todos los derechos reservados.</p>
+        </div>
     </div>
     <!-- Incio de sesion -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -742,18 +752,17 @@
   </div>
 </div> 
 <!-- Fin de form de registro -->
-  
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Script  -->
-    <script src="/scripts/preguntas.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <!-- Helper para rutas dinámicas del navbar -->
+    <script src="../scripts/navbar-helper.js"></script>
+    <!-- Script del carrito -->
+    <script src="../scripts/carrito-global.js" defer></script>
+    <script src="../scripts/checkout.js" defer></script>
     <!-- Enlazar el archivo JavaScript -->
-<script src="/scripts/registro.js"></script>
-    <script src="/scripts/login.js"></script>
-        <script src="/scripts/recuperacion.js"></script>
-
-<!-- Script  -->
-<script src="/scripts/preguntas.js"></script>
+    <script src="../scripts/registro.js"></script>
+    <script src="../scripts/login.js"></script>
+    <script src="../scripts/recuperacion.js"></script>
 </body>
 </html>
