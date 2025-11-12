@@ -9,6 +9,9 @@
 //  */
 
 const API_BASE_URL = 'http://localhost:8080/api';
+const token = localStorage.getItem('token');
+console.log(token);
+
 
 async function manejarRespuesta(response) {
     if (!response.ok) {
@@ -48,7 +51,13 @@ export const proveedorAPI = {
      */
     obtenerTodos : async () => {
         try {
-            const response = await fetch(`${API_BASE_URL}/proveedores/admin/todos`);
+            const response = await fetch(`${API_BASE_URL}/proveedores/admin/todos`,{
+                method: 'GET',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                 }
+            });
             const data = await manejarRespuesta(response);
             return data;
             
@@ -74,7 +83,8 @@ export const proveedorAPI = {
             const response = await fetch(`${API_BASE_URL}/proveedores/admin/add`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(proveedor)
             });
@@ -94,7 +104,8 @@ export const proveedorAPI = {
             const response = await fetch(`${API_BASE_URL}/proveedores/admin/update/${id}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(proveedor)
             });
@@ -119,7 +130,13 @@ export const categoriaAPI = {
      */
     async obtenerTodas() {
         try {
-            const response = await fetch(`${API_BASE_URL}/categorias/admin/todos`);
+            const response = await fetch(`${API_BASE_URL}/categorias/admin/todos`,{
+                method: 'GET',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                 }
+            });
             return await manejarRespuesta(response);
         } catch (error) {
             console.error('Error al obtener categorías:', error);
@@ -142,7 +159,8 @@ export const categoriaAPI = {
             const response = await fetch(`${API_BASE_URL}/categorias/admin/add`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(categoria)
             });
@@ -167,7 +185,8 @@ export const categoriaAPI = {
             const response = await fetch(`${API_BASE_URL}/categorias/admin/update/${id}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(categoria)
             });
@@ -195,7 +214,13 @@ export const productoAPI = {
      */
     async obtenerTodos() {
         try {
-            const response = await fetch(`${API_BASE_URL}/productos/admin/todos`);
+            const response = await fetch(`${API_BASE_URL}/productos/admin/todos`,{
+                method: 'GET',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                 }
+            });
             return await manejarRespuesta(response);
         } catch (error) {
             console.error('Error al obtener productos:', error);
@@ -223,7 +248,8 @@ export const productoAPI = {
             const response = await fetch(`${API_BASE_URL}/productos/admin/add`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(producto)
             });
@@ -248,7 +274,8 @@ export const productoAPI = {
             const response = await fetch(`${API_BASE_URL}/productos/admin/update/${id}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(producto)
             });
@@ -284,7 +311,8 @@ export const imagenAPI = {
             const response = await fetch(`${API_BASE_URL}/imagenes/admin/add`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(imagen)
             });
