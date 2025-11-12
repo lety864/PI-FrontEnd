@@ -1,4 +1,4 @@
-// URL DE TU API DE SPRING
+/*// URL DE TU API DE SPRING
         const API_URL = 'http://localhost:8080/api/productos';
 
         // =========================================
@@ -131,4 +131,173 @@
                         </div>
                     `;
                 });
+        });*/
+// URL DE TU API DE SPRING
+const API_URL = 'http://localhost:8080/api/productos';
+
+// =========================================
+// 1. LÓGICA DE CARRITO (localStorage)
+// =========================================
+
+// Obtiene el carrito del almacenamiento local
+function getCarrito() {
+    try {
+        return JSON.parse(localStorage.getItem('carrito')) || [];
+    } catch (e) {
+        console.error("Error al parsear el carrito de localStorage:", e);
+        return [];
+    }
+}
+
+// Guarda el carrito actualizado en el almacenamiento local
+function saveCarrito(carrito) {
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+}
+
+// Actualiza los contadores visuales del carrito (los badges)
+function updateCartBadges() {
+    const carrito = getCarrito();
+    const totalItems = carrito.reduce((total, producto) => total + (producto.cantidad || 0), 0);
+    
+    const badges = [
+        document.getElementById('cart-badge-desktop'),
+        document.getElementById('cart-badge-mobile')
+    ];
+
+    badges.forEach(badge => {
+        if (badge) {
+            badge.textContent = totalItems;
+            if (totalItems > 0) {
+                badge.classList.remove('d-none');
+            } else {
+                badge.classList.add('d-none');
+            }
+        }
+    });
+}
+
+// Función principal para añadir un producto
+function anadirAlCarrito(producto) {
+    const carrito = getCarrito();
+    
+    // USAR idProducto EN LUGAR DE id (porque @JsonProperty no funciona)
+    const productoCarrito = {
+        id: producto.idProducto,  // ← ESTA ES LA SOLUCIÓN: usar idProducto
+        nombre: producto.producto,
+        precio: Number(producto.precioActual),
+        imagen: producto.imagenesProducto && producto.imagenesProducto.length > 0 
+                ? producto.imagenesProducto[0].urlImagen 
+                : 'https://placehold.co/400x300/363636/ffffff?text=Mueble+España',
+        cantidad: 1
+    };
+    
+    console.log('🛒 Agregando producto:', productoCarrito);
+    
+    // Verificar si el producto ya existe en el carrito
+    const productoExistente = carrito.find(item => item.id == productoCarrito.id);
+    
+    if (productoExistente) {
+        productoExistente.cantidad += 1;
+        console.log('🔄 Producto existente - Cantidad:', productoExistente.cantidad);
+    } else {
+        carrito.push(productoCarrito);
+        console.log('🆕 Nuevo producto agregado');
+    }
+    
+    saveCarrito(carrito);
+    updateCartBadges(); 
+
+    console.log('📦 Carrito actual:', carrito);
+    alert(`¡${productoCarrito.nombre} agregado al carrito!`);
+}
+
+// =========================================
+// 2. LÓGICA DE CARGA DE PRODUCTOS
+// =========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('productInfo');
+    const loadingMessage = document.getElementById('loading-message');
+    
+    if (!container) {
+        console.log('No se encontró productInfo en esta página');
+        return;
+    }
+    
+    updateCartBadges();
+
+    fetch(API_URL)
+        .then(respuesta => {
+            if (!respuesta.ok) {
+                throw new Error(`Error HTTP: ${respuesta.status}`);
+            }
+            return respuesta.json();
+        })
+        .then(productos => {
+            if(loadingMessage) loadingMessage.remove(); 
+            
+            if (container) {
+                container.innerHTML = ''; 
+
+                console.log('🎯 Productos cargados:', productos);
+
+                // Dibuja las tarjetas de productos
+                productos.forEach((producto) => {
+                    
+                    let primeraImagenUrl = 'https://placehold.co/400x300/363636/ffffff?text=Mueble+España';
+                    if (producto.imagenesProducto && producto.imagenesProducto.length > 0 && producto.imagenesProducto[0].urlImagen) {
+                        primeraImagenUrl = producto.imagenesProducto[0].urlImagen;
+                    }
+
+                    const colDiv = document.createElement('div');
+                    colDiv.className = 'col-lg-3 col-md-4 col-6';
+
+                    const cardHtml = `
+                        <div class="card h-100 product-card-hover">
+                            <img src="${primeraImagenUrl}" 
+                                 class="card-img-top" 
+                                 alt="${producto.producto}"
+                                 onerror="this.onerror=null; this.src='https://placehold.co/400x300/363636/ffffff?text=Mueble+España';">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title text-truncate">${producto.producto}</h5>
+                                <p class="card-text text-muted small flex-grow-1">${producto.descripcion || 'Sin descripción.'}</p>
+                                <div class="d-flex justify-content-between align-items-center mt-auto">
+                                    <span class="fs-5 fw-bold text-success">$${producto.precioActual ? Number(producto.precioActual).toFixed(2) : '0.00'}</span>
+                                    <button class="btn btn-primary btn-sm anadir-btn">
+                                        <i class="bi bi-cart-plus"></i> Añadir
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    colDiv.innerHTML = cardHtml;
+                    
+                    const boton = colDiv.querySelector('.anadir-btn');
+                    boton.addEventListener('click', () => {
+                        console.log('🖱️ Click en:', producto.producto, 'ID:', producto.idProducto);
+                        anadirAlCarrito(producto);
+                    });
+
+                    container.appendChild(colDiv);
+                });
+            }
+        })
+        .catch(error => {
+            console.error("❌ Error al cargar productos:", error);
+            if(loadingMessage && loadingMessage.parentNode) {
+                loadingMessage.remove(); 
+            }
+            if (container) {
+                container.innerHTML = `
+                    <div class="col-12 text-center alert alert-danger" role="alert">
+                        Error al conectar con el backend (${API_URL}). Asegúrate de que tu servidor Spring esté corriendo.
+                    </div>
+                `;
+            }
         });
+});
+
+// Hacer funciones disponibles globalmente
+window.anadirAlCarrito = anadirAlCarrito;
+window.updateCartBadges = updateCartBadges;
+window.getCarrito = getCarrito;
