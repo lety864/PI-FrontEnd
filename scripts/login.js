@@ -445,9 +445,58 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error al leer sesion activa:', error);
         }
     }
+//lo que me estaba comentando lety
+const loginData ={ 
+correo:emailInput.value.trim(),password:passwordInput.value.trim()}
+
+async function loginUser(loginData) {
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(loginData)
+            });
+        
+            if (!response.ok) {
+                throw new Error('Error en la solicitud de login: ' + response.statusText);
+                }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error al iniciar sesion:', error);
+            throw error;
+        }   
+    }
+    const appiUrl='http://localhost:8080/api/auth/login';
+    const apiUrl='http://localhost:8080/api/users';
+ async function loginUser(loginData) {
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(loginData)
+            });
+        
+            if (!response.ok) {
+                throw new Error('Error en la solicitud de login: ' + response.statusText);
+                }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error al iniciar sesion:', error);
+            throw error;
+        }   
+    }
+
+
+        
 
     // Mostrar credenciales de admin en consola
     console.log('CREDENCIALES DE ADMINISTRADOR');
-    console.log('Email: admin@muebleria.com');
+    console.log(' admin@ecommerce.com');
     console.log('Contraseña: admin123');
 });
