@@ -1,8 +1,13 @@
+// CONFIGURACIÓN DE LA URL BASE DE LA API
+const API_BASE_URL = '/api'; // ← AGREGUE: URL base para todas las peticiones
+
 // ========================================
 // VALIDACIÓN Y REGISTRO DEL FORMULARIO (API)
 // ========================================
 document.addEventListener('DOMContentLoaded', function() {
   console.log('✓ Sistema de registro (API) inicializado');
+    console.log('✓ API_BASE_URL configurada:', API_BASE_URL); //AGREGADO: Log de confirmación
+
   
   const form = document.getElementById("registerForm");
   
@@ -154,7 +159,10 @@ document.addEventListener('DOMContentLoaded', function() {
     try {
       // Usamos 'await' para esperar la respuesta del servidor
       // Esta es la URL de tu AuthContoller
-      const response = await fetch('http://localhost:8080/api/auth/register', {
+      // ← MODIFICADO: Se usa API_BASE_URL en lugar de URL hardcodeada
+      console.log(` Haciendo petición a: ${API_BASE_URL}/auth/register`);
+     
+      const response = await fetch(`${API_BASE_URL}/auth/register`, { // MODIFICADO: usa API_BASE_URL
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

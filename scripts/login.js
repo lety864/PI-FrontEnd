@@ -495,6 +495,9 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Sistema de login con roles inicializado');
+ // CONFIGURACIÓN DE LA URL BASE DE LA API
+  const API_BASE_URL = '/api'; // URL base para todas las peticiones
+
 
     // ELEMENTOS DEL DOM
     const loginModal = document.getElementById('loginModal');
@@ -675,32 +678,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return estamosEnRaiz ? 'index.html' : '../index.html';
     }
 }
-
-    function actualizarUIConSesion(sesion) {
-        // Esta función debería manipular tu HTML (por ejemplo, en el menú de navegación)
-        // para mostrar "Cerrar Sesión" y el nombre del usuario, y ocultar "Iniciar Sesión".
-        
-        // Ejemplo (Necesitas IDs en tu HTML para estos elementos):
-        const loginButtonNav = document.getElementById('loginButtonNav'); // Reemplaza con el ID real
-        const logoutButtonNav = document.getElementById('logoutButtonNav'); // Reemplaza con el ID real
-        const welcomeText = document.getElementById('welcomeUserText'); // Reemplaza con el ID real
-
-        if (sesion && sesion.correo) {
-            if (loginButtonNav) loginButtonNav.style.display = 'none';
-            if (logoutButtonNav) logoutButtonNav.style.display = 'block';
-            if (welcomeText) {
-                welcomeText.textContent = `Hola, ${sesion.correo.split('@')[0]}`;
-                welcomeText.style.display = 'block';
-            }
-            console.log(`UI actualizada: Sesión para ${sesion.rol} cargada.`);
-        } else {
-            if (loginButtonNav) loginButtonNav.style.display = 'block';
-            if (logoutButtonNav) logoutButtonNav.style.display = 'none';
-            if (welcomeText) welcomeText.style.display = 'none';
-        }
-    }
-
-
+    // AÑADI  RUTA DE REDIRECCION SEGUN ROL Y UBICACION
+   // PERSISTENCIA DE SESIÓN (mantiene sesión activa al recargar)
     const sesionActual = localStorage.getItem('sesionActiva');
     const tokenActual = localStorage.getItem('token');
 
@@ -708,18 +687,67 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const sesionObj = JSON.parse(sesionActual);
             
-            // Aquí puedes añadir una verificación para ver si el token ha expirado 
-            // decodificándolo o haciendo una llamada al backend (opcional, pero más robusto).
-            
-            // Por ahora, simplemente actualiza la UI
-            actualizarUIConSesion(sesionObj);
+            // ← AGREGADO: Verifica que el token siga siendo válido
+            verificarTokenYMantenerSesion(sesionObj, tokenActual);
             
         } catch (error) {
             console.error('Error al leer sesión activa. Limpiando datos.', error);
             localStorage.removeItem('sesionActiva');
-            localStorage.removeItem('jwtToken');
+            localStorage.removeItem('token');
         }
     }
+
+    // ← AGREGADO: Función para verificar token y mantener sesión
+    async function verificarTokenYMantenerSesion(sesionObj, token) {
+        try {
+            // Intenta hacer una petición simple para validar el token
+            const response = await fetch(`${API_BASE_URL}/auth/validate`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                // Token válido: mantener sesión activa
+                actualizarUIConSesion(sesionObj);
+                console.log(' Sesión mantenida activa');
+                console.log('Usuario:', sesionObj.correo);
+                console.log('Rol:', sesionObj.rol);
+            } else {
+                // Token inválido o expirado: limpiar sesión
+                console.warn(' Token expirado o inválido. Cerrando sesión...');
+                cerrarSesionAutomatica();
+            }
+        } catch (error) {
+            // Si el endpoint no existe, mantener sesión de todos modos (fallback)
+            console.warn('No se pudo validar el token, manteniendo sesión por defecto');
+            actualizarUIConSesion(sesionObj);
+        }
+    }
+
+    // ← AGREGADO: Función para cerrar sesión automáticamente
+    function cerrarSesionAutomatica() {
+        localStorage.removeItem('sesionActiva');
+        localStorage.removeItem('token');
+        
+        // Resetear UI
+        const loginButtonNav = document.getElementById('loginButtonNav');
+        const logoutButtonNav = document.getElementById('logoutButtonNav');
+        const welcomeText = document.getElementById('welcomeUserText');
+        
+        if (loginButtonNav) loginButtonNav.style.display = 'block';
+        if (logoutButtonNav) logoutButtonNav.style.display = 'none';
+        if (welcomeText) welcomeText.style.display = 'none';
+        
+        console.log('Sesión cerrada automáticamente');
+    } 
+            // Aquí puedes añadir una verificación para ver si el token ha expirado 
+            // decodificándolo o haciendo una llamada al backend (opcional, pero más robusto).
+            
+            // Por ahora, simplemente actualiza la UI
+      
 // Fin de la lógica de persistencia
 
     // EVENTO: PROCESO DE LOGIN
@@ -762,7 +790,7 @@ loginButton.addEventListener('click', async (event) => {
     try {
         // --- LLAMADA 1: VALIDAR CREDENCIALES ---
         console.log('Llamada 1: Validando credenciales en /api/auth/login...');
-        const loginResponse = await fetch('http://localhost:8080/api/auth/login', {
+        const loginResponse = await fetch(`${API_BASE_URL}/auth/login`, { // MODIFICADO: usa API_BASE_URL
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -834,6 +862,8 @@ loginButton.addEventListener('click', async (event) => {
         // 2. Guardar la información básica de la sesión para el frontend
         // Guardamos todo el objeto data para tener el rol y el correo
         localStorage.setItem('sesionActiva', JSON.stringify(data)); 
+//  AGREGADO: Guardar timestamp de inicio de sesión
+            localStorage.setItem('sesionInicio', new Date().toISOString());
 
         console.log('Login Exitoso. Rol obtenido:', data.rol);
         
@@ -845,6 +875,8 @@ loginButton.addEventListener('click', async (event) => {
         // Usamos el correo como el nombre temporal para el mensaje (puedes ajustarlo)
         const nombreUsuario = data.correo.split('@')[0];
         showLoginSuccess(alertMessage, '¡Bienvenido, ' + nombreUsuario + '!');
+        // AGREGUE: Actualizar UI inmediatamente
+            actualizarUIConSesion(data);
 
         // 3. Redireccionar según el ROL (usamos la propiedad 'rol' de la respuesta)
         const rutaDestino = obtenerRutaSegunRol(data.rol);
@@ -871,6 +903,27 @@ loginButton.addEventListener('click', async (event) => {
         markLoginFieldInvalid('passwordInput');
     }
 });
+
+//  AGREGUE: INTERCEPTOR DE FETCH PARA INCLUIR TOKEN AUTOMÁTICAMENTE
+    const fetchOriginal = window.fetch;
+    window.fetch = function(...args) {
+        const [url, options = {}] = args;
+        
+        // Si la URL es de nuestra API, agregar el token automáticamente
+        if (typeof url === 'string' && url.includes(API_BASE_URL)) {
+            const token = localStorage.getItem('token');
+            
+            if (token && !options.headers?.['Authorization']) {
+                options.headers = {
+                    ...options.headers,
+                    'Authorization': `Bearer ${token}`
+                };
+                console.log(' Token agregado automáticamente a la petición');
+            }
+        }
+        
+        return fetchOriginal(url, options);
+    };
 
     // VALIDACION EN TIEMPO REAL
     emailInput.addEventListener('input', function () {
