@@ -149,12 +149,13 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     console.log('→ Enviando payload al backend:', usuarioPayload);
+    const URL_BASE = '/api/auth';
 
     // LLAMADA FETCH API
     try {
       // Usamos 'await' para esperar la respuesta del servidor
       // Esta es la URL de tu AuthContoller
-      const response = await fetch('http://localhost:8080/api/auth/register', {
+      const response = await fetch(`${URL_BASE}/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

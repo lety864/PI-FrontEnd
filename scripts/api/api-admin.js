@@ -8,9 +8,26 @@
 //  * URL BASE del backend:
 //  */
 
+//const API_BASE_URL = 'http://localhost:8080/api';
+
 const API_BASE_URL = '/api';
-const token = localStorage.getItem('token');
-console.log(token);
+
+const URL_PRODUCTOS = `${API_BASE_URL}/productos`;
+const URL_PROVEEDORES = `${API_BASE_URL}/proveedores`;
+const URL_CATEGORIAS = `${API_BASE_URL}/categorias`;
+const URL_IMAGENES = `${API_BASE_URL}/imagenes`;
+
+
+function obtenerToken() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        // Opcional: Redirigir al login si no hay token
+        console.error("No se encontró token. Redirigiendo a login.");
+        window.location.href = '/login.html'; 
+    }
+    return token;
+}
+console.log('API Admin cargada correctamente');
 
 
 async function manejarRespuesta(response) {
@@ -51,7 +68,8 @@ export const proveedorAPI = {
      */
     obtenerTodos : async () => {
         try {
-            const response = await fetch(`${API_BASE_URL}/proveedores/admin/todos`,{
+            const token = obtenerToken();
+            const response = await fetch(`${URL_PROVEEDORES}/admin/todos`,{
                 method: 'GET',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -80,7 +98,8 @@ export const proveedorAPI = {
      */
     async crear(proveedor) {
         try {
-            const response = await fetch(`${API_BASE_URL}/proveedores/admin/add`, {
+            const token = obtenerToken();
+            const response = await fetch(`${URL_PROVEEDORES}/admin/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -101,7 +120,8 @@ export const proveedorAPI = {
      */
     async actualizar(id, proveedor) {
         try {
-            const response = await fetch(`${API_BASE_URL}/proveedores/admin/update/${id}`, {
+            const token = obtenerToken();
+            const response = await fetch(`${URL_PROVEEDORES}/admin/update/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -130,7 +150,8 @@ export const categoriaAPI = {
      */
     async obtenerTodas() {
         try {
-            const response = await fetch(`${API_BASE_URL}/categorias/admin/todos`,{
+            const token = obtenerToken();
+            const response = await fetch(`${URL_CATEGORIAS}/admin/todos`,{
                 method: 'GET',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -154,9 +175,10 @@ export const categoriaAPI = {
      */
     async crear(categoria) {
         try {
+            const token = obtenerToken();
             console.log('📤 Enviando categoría al backend:', categoria);
             
-            const response = await fetch(`${API_BASE_URL}/categorias/admin/add`, {
+            const response = await fetch(`${URL_CATEGORIAS}/admin/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -180,9 +202,10 @@ export const categoriaAPI = {
      */
     async actualizar(id, categoria) {
         try {
+            const token = obtenerToken();
             console.log(`📤 Actualizando categoría ${id}:`, categoria);
             
-            const response = await fetch(`${API_BASE_URL}/categorias/admin/update/${id}`, {
+            const response = await fetch(`${URL_CATEGORIAS}/admin/update/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -214,7 +237,8 @@ export const productoAPI = {
      */
     async obtenerTodos() {
         try {
-            const response = await fetch(`${API_BASE_URL}/productos/admin/todos`,{
+            const token = obtenerToken();
+            const response = await fetch(`${URL_PRODUCTOS}/admin/todos`,{
                 method: 'GET',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -243,9 +267,10 @@ export const productoAPI = {
      */
     async crear(producto) {
         try {
+            const token = obtenerToken();
             console.log('📤 Enviando producto al backend:', producto);
             
-            const response = await fetch(`${API_BASE_URL}/productos/admin/add`, {
+            const response = await fetch(`${URL_PRODUCTOS}/admin/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -269,9 +294,10 @@ export const productoAPI = {
      */
     async actualizar(id, producto) {
         try {
+            const token = obtenerToken();
             console.log(`Actualizando producto ${id}:`, producto);
             
-            const response = await fetch(`${API_BASE_URL}/productos/admin/update/${id}`, {
+            const response = await fetch(`${URL_PRODUCTOS}/admin/update/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -306,9 +332,10 @@ export const imagenAPI = {
      */
     async agregar(imagen) {
         try {
+            const token = obtenerToken();
             console.log('Enviando imagen al backend:', imagen);
             
-            const response = await fetch(`${API_BASE_URL}/imagenes/admin/add`, {
+            const response = await fetch(`${URL_IMAGENES}/admin/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
