@@ -337,7 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function eliminarProductoDelCarrito(id) {
         let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
         
-        // ✅ CORREGIDO: Usar != para eliminar solo el producto específico
+        // Usar != para eliminar solo el producto específico
         carrito = carrito.filter(producto => producto.id != id);
         
         localStorage.setItem('carrito', JSON.stringify(carrito));
