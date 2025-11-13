@@ -179,11 +179,52 @@ document.addEventListener('DOMContentLoaded', function() {
         showSuccess(alertMessage, `¡Registro exitoso, ${nuevoUsuario.nombre}! Redirigiendo...`);
         form.reset();
 
-        // Redirigir después de 2 segundos
+       //  LÓGICA AGREGADA:Redirección automática al modal de login
+        // Este bloque reemplaza la redirección anterior a index.html
         setTimeout(() => {
-          console.log('→ Redirigiendo a index.html...');
-           window.location.href = "index.html"; 
-        }, 2000);
+          console.log('→ Cerrando modal de registro y abriendo modal de login...');
+          
+          // PASO 1: Obtener el modal de registro actual
+          const registerModalElement = document.getElementById('registerModal');
+          const registerModal = bootstrap.Modal.getInstance(registerModalElement);
+          
+          // PASO 2: Configurar un listener para cuando el modal de registro se cierre completamente
+          // Esto asegura que el modal de login no se abra hasta que el registro esté completamente cerrado
+          registerModalElement.addEventListener('hidden.bs.modal', function openLoginModal() {
+            console.log('→ Modal de registro cerrado, abriendo login...');
+            
+            // PASO 3: Obtener y abrir el modal de login
+            const loginModalElement = document.getElementById('loginModal');
+            if (loginModalElement) {
+              const loginModal = new bootstrap.Modal(loginModalElement);
+              loginModal.show();
+              
+              // PASO 4: Pre-llenar el campo de email en el formulario de login
+              // Esto mejora la experiencia del usuario: solo necesita escribir su contraseña
+              const loginEmailField = loginModalElement.querySelector('#emailInput');
+              
+              if (loginEmailField) {
+                loginEmailField.value = email; // Asignar el email que se acaba de registrar
+                loginEmailField.classList.add('is-valid'); // Agregar clase de validación visual de Bootstrap
+                console.log('✓ Email pre-llenado en el formulario de login:', email);
+              } else {
+                console.warn(' Campo de email no encontrado en el modal de login (id="emailInput")');
+              }
+            } else {
+              console.warn(' Modal de login no encontrado (id="loginModal")');
+            }
+            
+            // PASO 5: Remover el listener después de ejecutarse para evitar duplicados
+            registerModalElement.removeEventListener('hidden.bs.modal', openLoginModal);
+          }, { once: true }); // El {once: true} asegura que el listener se ejecute solo una vez
+          
+          // PASO 6: Cerrar el modal de registro (esto dispara el evento 'hidden.bs.modal')
+          if (registerModal) {
+            registerModal.hide();
+          }
+          
+        }, 2000); // Espera 2 segundos para que el usuario vea el mensaje de éxito
+        // FIN DE LA NUEVA LÓGICA DE REDIRECCIÓN
 
       // Caso 2: Error del servidor (Ej. 409 Conflict si el email ya existe)
       } else {
