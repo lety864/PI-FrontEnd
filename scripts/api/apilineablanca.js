@@ -3,7 +3,7 @@ window.anadirAlCarrito = anadirAlCarrito;
 window.updateCartBadges = updateCartBadges;
 window.getCarrito = getCarrito;*/
 // URL DE TU API DE SPRING - CON IMÁGENES
-const API_URL = 'http://localhost:8080/api/productos/activos-con-imagenes';
+const API_URL = '/api/productos/activos-con-imagenes';
 
 // =========================================
 // 1. LÓGICA DE CARRITO (localStorage)
