@@ -1,30 +1,38 @@
+// SISTEMA DE LOGIN - MULTI-USUARIO
+
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Sistema de login con roles inicializado');
+    console.log('✓ Sistema de login inicializado');
 
-    // ==========================================================
-    // I. VARIABLES Y ELEMENTOS DOM
-    // ==========================================================
-
+    // ELEMENTOS DEL DOM
     const loginModal = document.getElementById('loginModal');
     const emailInput = document.getElementById('emailInput');
     const passwordInput = document.getElementById('passwordInput');
     const loginButton = loginModal?.querySelector('button.btn-primary');
     const loginForm = loginModal?.querySelector('form');
-    const togglePasswordButton = document.getElementById('toggleLoginPassword');
 
-    // Validacion de elementos criticos
+    // Validación de elementos críticos
     if (!loginModal || !emailInput || !passwordInput || !loginButton) {
         console.error('Error: Elementos del login no encontrados. Verifica los IDs en el HTML.');
         return;
     }
 
-    // ==========================================================
-    // II. FUNCIONES DE UTILIDAD Y ALMACENAMIENTO (Legacy/Fallback)
-    // ==========================================================
+    // BOTÓN DE MOSTRAR/OCULTAR CONTRASEÑA
+    const togglePasswordButton = document.getElementById('toggleLoginPassword');
+    
+    if (togglePasswordButton) {
+        togglePasswordButton.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            const icon = this.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('bi-eye');
+                icon.classList.toggle('bi-eye-slash');
+            }
+        });
+    }
 
-    /**
-     * @deprecated Solo para fines de fallback o testing local.
-     */
+    // FUNCIONES PARA MANEJAR USUARIOS
     function obtenerUsuarios() {
         try {
             const usuarios = localStorage.getItem("usuarios");
@@ -35,41 +43,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /**
-     * @deprecated Solo para fines de fallback o testing local.
-     */
-    function crearAdminPorDefecto() {
+    function buscarUsuarioPorCorreo(correo) {
         const usuarios = obtenerUsuarios();
-        const adminExiste = usuarios.some(u => u.rol === 'admin');
-        
-        if (!adminExiste) {
-            const adminPorDefecto = {
-                id: 'admin-001',
-                nombre: 'Administrador',
-                correo: 'admin@muebleria.com',
-                telefono: '7221234567',
-                // CORRECCIÓN LÓGICA: Esta contraseña es solo texto, no hasheada. 
-                // NO se usa en la integración con Spring Security.
-                contraseña: 'admin123', 
-                rol: 'admin',
-                fechaRegistro: new Date().toISOString()
-            };
-            
-            usuarios.push(adminPorDefecto);
-            localStorage.setItem('usuarios', JSON.stringify(usuarios));
-            console.log('Usuario administrador de fallback creado por defecto');
-        }
+        return usuarios.find(usuario => usuario.correo === correo);
     }
 
-    function validarEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
+    // CORRECCIÓN: Eliminar aria-hidden de modales
+    function corregirAccesibilidadModales() {
+        const modales = document.querySelectorAll('.modal[aria-hidden="true"]');
+        modales.forEach(modal => {
+            if (modal.hasAttribute('tabindex')) {
+                modal.removeAttribute('aria-hidden');
+            }
+        });
     }
-    
-    // ==========================================================
-    // III. FUNCIONES DE INTERFAZ DE USUARIO Y REDIRECCIÓN
-    // ==========================================================
 
+    corregirAccesibilidadModales();
+
+    // CREACIÓN DE ELEMENTO DE ALERTA
     function crearAlertaLogin() {
         let alertMessage = document.getElementById('loginAlertMessage');
 
@@ -87,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return alertMessage;
     }
 
+    // FUNCIONES DE UTILIDAD
     function limpiarCamposLogin() {
         emailInput.value = '';
         passwordInput.value = '';
@@ -109,16 +101,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!element) return;
         element.classList.remove('d-none', 'alert-success');
         element.classList.add('alert-danger');
-        element.innerHTML = '<i class="bi bi-exclamation-triangle-fill me-2"></i>' + message;
-        // CORRECCIÓN LÓGICA: No ocultar el error de inmediato para credenciales
-        // setTimeout(() => element.classList.add('d-none'), 5000); 
+        element.innerHTML = `<i class="bi bi-exclamation-triangle-fill me-2"></i>${message}`;
+        setTimeout(() => element.classList.add('d-none'), 5000);
     }
 
     function showLoginSuccess(element, message) {
         if (!element) return;
         element.classList.remove('d-none', 'alert-danger');
         element.classList.add('alert-success');
-        element.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i>' + message;
+        element.innerHTML = `<i class="bi bi-check-circle-fill me-2"></i>${message}`;
     }
 
     function markLoginFieldInvalid(id) {
@@ -143,105 +134,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /**
-     * Determina la ruta de redirección basándose en el rol y la ubicación actual.
-     * @param {string} rolIdentifier - El rol devuelto por el backend (ej. "ADMINISTRADOR").
-     */
-    function obtenerRutaSegunRol(rolIdentifier) {
-        const currentPath = window.location.pathname;
-        const estamosEnRaiz = currentPath === '/' || currentPath.endsWith('index.html') || currentPath.endsWith('/');
-
-        // CORRECCIÓN LÓGICA: Se asume que el backend devuelve "ADMINISTRADOR"
-        const esAdmin = rolIdentifier && rolIdentifier.toUpperCase() === 'ADMINISTRADOR'; 
-
-        if (esAdmin) {
-            // Si estamos en la raíz (ej. index.html), la ruta es paginas/admin.html
-            // Si estamos ya en una subcarpeta, la ruta es solo admin.html
-            return estamosEnRaiz ? 'paginas/admin.html' : 'admin.html';
-        } else {
-            // Cliente o rol no reconocido
-            // Si estamos en la raíz, se queda en index.html
-            // Si estamos en una subcarpeta (ej. paginas/login.html), debe volver a ../index.html
-            return estamosEnRaiz ? 'index.html' : '../index.html'; 
-        }
+    function validarEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
     }
 
-    function actualizarUIConSesion(sesion) {
-        // CORRECCIÓN LÓGICA: Cambié los IDs aquí para que coincidan con la nueva lógica
-        const loginButtonNav = document.getElementById('loginButtonNav'); 
-        const logoutButtonNav = document.getElementById('logoutButtonNav'); 
-        const welcomeText = document.getElementById('welcomeUserText'); 
-
-        if (sesion && sesion.correo) {
-            if (loginButtonNav) loginButtonNav.style.display = 'none';
-            if (logoutButtonNav) logoutButtonNav.style.display = 'block';
-            if (welcomeText) {
-                welcomeText.textContent = `Hola, ${sesion.correo.split('@')[0]}`;
-                welcomeText.style.display = 'block';
-            }
-            console.log(`UI actualizada: Sesión para ${sesion.rol} cargada.`);
-        } else {
-            if (loginButtonNav) loginButtonNav.style.display = 'block';
-            if (logoutButtonNav) logoutButtonNav.style.display = 'none';
-            if (welcomeText) welcomeText.style.display = 'none';
-        }
-    }
-
-    function corregirAccesibilidadModales() {
-        const modales = document.querySelectorAll('.modal[aria-hidden="true"]');
-        modales.forEach(modal => {
-            if (modal.hasAttribute('tabindex')) {
-                modal.removeAttribute('aria-hidden');
-            }
-        });
-    }
-
-    // ==========================================================
-    // IV. LÓGICA DE PERSISTENCIA Y JWT
-    // ==========================================================
-
-    function verificarYActualizarSesion() {
-        const sesionActual = localStorage.getItem('sesionActiva');
-        const tokenActual = localStorage.getItem('token'); // Se cambia 'token' por 'jwtToken'
-        
-        if (sesionActual && tokenActual) {
-            try {
-                const sesionObj = JSON.parse(sesionActual);
-                
-                // CORRECCIÓN LÓGICA: Se recomienda usar 'token' o 'jwtToken', no ambos.
-                // Asumo que el token es el valor JWT y sesionActiva es el objeto {correo, rol, token}.
-                // La variable original era `tokenActual = localStorage.getItem('token')`. Se deja 'token'
-                // para evitar romper otras partes del código.
-
-                // Aquí se podría añadir la verificación de expiración del token...
-
-                actualizarUIConSesion(sesionObj);
-                
-            } catch (error) {
-                console.error('Error al leer sesión activa. Limpiando datos.', error);
-                localStorage.removeItem('sesionActiva');
-                localStorage.removeItem('token');
-            }
-        }
-    }
-
-    // ==========================================================
-    // V. EVENTOS Y EJECUCIÓN
-    // ==========================================================
-    
-    // Lógica de compatibilidad de usuarios (Local Storage)
-    crearAdminPorDefecto(); 
-    
-    // Inicializar UI con la sesión existente
-    verificarYActualizarSesion();
-
-
-    // ----------------------------------------------------------
     // EVENTO: PROCESO DE LOGIN
-    // ----------------------------------------------------------
-    loginButton.addEventListener('click', async (event) => {
+    loginButton.addEventListener('click', (event) => {
         event.preventDefault();
-        console.log('Procesando inicio de sesion (JWT)...');
+        console.log('→ Procesando inicio de sesión...');
 
         const email = emailInput.value.trim();
         const password = passwordInput.value.trim();
@@ -249,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         clearLoginValidationStates();
 
+        // Validación: campos vacíos
         if (!email || !password) {
             showLoginError(alertMessage, 'Por favor, complete todos los campos.');
             if (!email) markLoginFieldInvalid('emailInput');
@@ -256,97 +158,98 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // Validación: formato de email
         if (!validarEmail(email)) {
-            showLoginError(alertMessage, 'Ingrese un correo electronico valido.');
+            showLoginError(alertMessage, 'Ingrese un correo electrónico válido.');
             markLoginFieldInvalid('emailInput');
             return;
         }
 
-        const loginPayload = {
-            correo: email,
-            password: password
+        // Validación: longitud de contraseña
+        if (password.length < 8) {
+            showLoginError(alertMessage, 'La contraseña debe tener 8 caracteres como mínimo.');
+            markLoginFieldInvalid('passwordInput');
+            const parentDiv = passwordInput.parentElement;
+            const feedback = parentDiv?.nextElementSibling;
+            if (feedback && feedback.classList.contains('invalid-feedback')) {
+                feedback.textContent = 'La contraseña debe tener 8 caracteres como mínimo.';
+                feedback.style.display = 'block';
+            }
+            return;
+        }
+
+        // CORREGIDO: Buscar en el array de usuarios
+        const usuarios = obtenerUsuarios();
+        
+        if (usuarios.length === 0) {
+            showLoginError(alertMessage, 'No hay usuarios registrados. Por favor, regístrese primero.');
+            markLoginFieldInvalid('emailInput');
+            return;
+        }
+
+        // Buscar el usuario por correo
+        const usuario = buscarUsuarioPorCorreo(email);
+
+        if (!usuario) {
+            showLoginError(alertMessage, 'Correo electrónico no registrado.');
+            markLoginFieldInvalid('emailInput');
+            console.log('❌ Usuario no encontrado con el correo:', email);
+            return;
+        }
+
+        // Validación: contraseña incorrecta
+        if (usuario.contraseña !== password) {
+            showLoginError(alertMessage, 'Contraseña incorrecta.');
+            markLoginFieldInvalid('passwordInput');
+            console.log('❌ Contraseña incorrecta para:', email);
+            return;
+        }
+
+        // ✓ LOGIN EXITOSO
+        console.log('✓ Login exitoso:', usuario.nombre);
+
+        const sesion = {
+            usuarioId: usuario.id || Date.now(),
+            nombre: usuario.nombre,
+            correo: usuario.correo,
+            telefono: usuario.telefono,
+            fechaLogin: new Date().toISOString()
         };
 
-        const URL_BASE = '/api/auth';
-
         try {
-            // LLAMADA API: Validar credenciales y obtener JWT/Rol
-            console.log('Llamada API: Solicitando token a /api/auth/login...');
-            const loginResponse = await fetch(`${URL_BASE}/login`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(loginPayload)
-            });
-
-            if (!loginResponse.ok) {
-                // Captura 401 Unauthorized (Credenciales incorrectas) o 404/500
-                console.log(`Llamada Fallida. Status: ${loginResponse.status}`);
-                throw new Error("Credenciales incorrectas");
-            }
-
-            const data = await loginResponse.json();
-
-            // CORRECCIÓN LÓGICA: Si el login es exitoso (200), debe contener el token y el rol.
-            if (!data.token || !data.rol) {
-                  throw new Error("Respuesta del servidor incompleta (falta token o rol).");
-            }
-            
-            // --- LÓGICA DE ÉXITO: GUARDAR SESIÓN Y REDIRIGIR ---
-            
-            // 1. Guardar el token para futuras peticiones (usamos 'token' como clave)
-            localStorage.setItem('token', data.token);
-            
-            // 2. Guardar la información básica de la sesión para el frontend
-            localStorage.setItem('sesionActiva', JSON.stringify(data)); 
-
-            console.log('Login Exitoso. Rol obtenido:', data.rol);
-            
-            // Ocultar campos y mostrar mensaje
-            emailInput.style.display = 'none';
-            passwordInput.parentElement.style.display = 'none';
-            loginButton.style.display = 'none';
-            
-            const nombreUsuario = data.correo.split('@')[0];
-            showLoginSuccess(alertMessage, '¡Bienvenido, ' + nombreUsuario + '!');
-
-            // 3. Redireccionar
-            const rutaDestino = obtenerRutaSegunRol(data.rol);
-            console.log('Redirigiendo a:', rutaDestino);
-
-            setTimeout(() => {
-                const modalInstance = bootstrap.Modal.getInstance(loginModal);
-                if (modalInstance) modalInstance.hide();
-                setTimeout(() => { window.location.href = rutaDestino; }, 500);
-            }, 2000);
-
+            localStorage.setItem('sesionActiva', JSON.stringify(sesion));
+            console.log('✓ Sesión guardada:', sesion);
         } catch (error) {
-            // Captura errores de red y de credenciales
-            console.error('Error en el proceso de login:', error.message);
-            showLoginError(alertMessage, 'Correo o contraseña incorrectos.');
-            markLoginFieldInvalid('emailInput');
-            markLoginFieldInvalid('passwordInput');
+            console.error('Error al guardar sesión:', error);
+            showLoginError(alertMessage, 'Error al iniciar sesión. Intente nuevamente.');
+            return;
         }
+
+        const nombreUsuario = usuario.nombre.split(' ')[0];
+        
+        // Ocultar los campos del formulario
+        emailInput.style.display = 'none';
+        passwordInput.parentElement.style.display = 'none';
+        loginButton.style.display = 'none';
+        
+        // Mostrar el mensaje de éxito
+        showLoginSuccess(alertMessage, `¡Bienvenido a Mueblería España, ${nombreUsuario}!`);
+
+        // Cerrar modal y redirigir
+        setTimeout(() => {
+            if (typeof bootstrap !== 'undefined') {
+                const modalInstance = bootstrap.Modal.getInstance(loginModal) || new bootstrap.Modal(loginModal);
+                modalInstance.hide();
+            }
+            console.log('→ Redirigiendo a la página principal...');
+            
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1000);
+        }, 3000);
     });
 
-    // ----------------------------------------------------------
-    // EVENTOS ADICIONALES (UI y Validaciones)
-    // ----------------------------------------------------------
-
-    // BOTON DE MOSTRAR/OCULTAR CONTRASENA
-    if (togglePasswordButton) {
-        togglePasswordButton.addEventListener('click', function() {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            
-            const icon = this.querySelector('i');
-            if (icon) {
-                icon.classList.toggle('bi-eye');
-                icon.classList.toggle('bi-eye-slash');
-            }
-        });
-    }
-
-    // VALIDACION EN TIEMPO REAL (Email)
+    // VALIDACIÓN EN TIEMPO REAL
     emailInput.addEventListener('input', function () {
         const email = this.value.trim();
         
@@ -361,13 +264,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // VALIDACION EN TIEMPO REAL (Contraseña)
     passwordInput.addEventListener('input', function () {
         const password = this.value;
         const parentDiv = this.parentElement;
         const feedback = parentDiv.nextElementSibling;
         
-        // CORRECCIÓN LÓGICA: Se cambió la validación de 8 caracteres a una lógica más limpia.
         if (password.length >= 8) {
             this.classList.add('is-valid');
             this.classList.remove('is-invalid');
@@ -378,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.classList.add('is-invalid');
             this.classList.remove('is-valid');
             if (feedback && feedback.classList.contains('invalid-feedback')) {
-                feedback.textContent = 'La contraseña debe tener 8 caracteres como minimo.';
+                feedback.textContent = 'La contraseña debe tener 8 caracteres como mínimo.';
                 feedback.style.display = 'block';
             }
         } else {
@@ -389,10 +290,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // EVENTOS DEL MODAL (Cerrar/Abrir)
+    // EVENTOS DEL MODAL
     loginModal.addEventListener('hidden.bs.modal', () => {
-        console.log('Modal de login cerrado');
+        console.log('→ Modal de login cerrado');
         limpiarCamposLogin();
+
         const video = document.getElementById('loginVideo');
         if (video) {
             video.pause();
@@ -401,70 +303,132 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     loginModal.addEventListener('shown.bs.modal', () => {
-        console.log('Modal de login abierto');
+        console.log('→ Modal de login abierto');
         limpiarCamposLogin();
+        
         const video = document.getElementById('loginVideo');
         if (video) {
             video.currentTime = 0;
             video.play().catch(() => {});
         }
-        setTimeout(() => { emailInput.focus(); }, 300);
+
+        setTimeout(() => {
+            emailInput.focus();
+        }, 300);
     });
 
-    // OBSERVADOR: Corregir aria-hidden dinamicamente
-    const observer = new MutationObserver(corregirAccesibilidadModales);
+    // OBSERVADOR: Corregir aria-hidden dinámicamente
+    const observer = new MutationObserver(() => {
+        corregirAccesibilidadModales();
+    });
+
     observer.observe(document.body, {
         attributes: true,
         attributeFilter: ['aria-hidden', 'class'],
         subtree: true
     });
 
-    // ----------------------------------------------------------
-    // VI. UTILIDADES DE CONSOLA (Para Debugging)
-    // ----------------------------------------------------------
-    
-    // Nota: Las funciones de consola no requieren estar reubicadas, 
-    // pero deben usar las funciones internas limpias (limpiarCamposLogin).
-
+    // UTILIDADES DE CONSOLA
     window.verSesionActiva = function () {
         const sesion = localStorage.getItem('sesionActiva');
-        const token = localStorage.getItem('token');
         if (sesion) {
             try {
                 const obj = JSON.parse(sesion);
-                console.log('Sesion activa:');
+                console.log('Sesión activa:');
                 console.table([obj]);
-                console.log('Token (JWT) actual:');
-                console.log(token);
                 return obj;
             } catch (error) {
-                console.error('Error al leer sesion:', error);
-                return null;
+                console.error('Error al leer sesión:', error);
             }
         } else {
-            console.log('No hay sesion activa');
-            return null;
+            console.log('No hay sesión activa');
         }
     };
 
     window.cerrarSesion = function () {
         localStorage.removeItem('sesionActiva');
-        localStorage.removeItem('token'); // Usamos 'token'
-        console.log('Sesion cerrada correctamente');
+        console.log('✓ Sesión cerrada correctamente');
         window.location.reload();
     };
 
-    // Otras utilidades de consola se mantienen igual...
-    window.limpiarLogin = limpiarCamposLogin;
-    
-    // (Otras funciones de debugging con localStorage se mantienen)
+    window.limpiarLogin = function () {
+        limpiarCamposLogin();
+        console.log('✓ Campos de login limpiados');
+    };
 
-    // Mostrar credenciales de admin en consola
-    console.log('CREDENCIALES DE ADMINISTRADOR DE FALLBACK');
-    console.log('admin@muebleria.com');
-    console.log('Contraseña: admin123');
-    console.log('---');
-    console.log('CREDENCIALES DE ADMINISTRADOR DE BACKEND');
-    console.log('admin@ecommerce.com');
-    console.log('Contraseña: 12345678');
+    window.verTodosLosUsuarios = function() {
+        const usuarios = obtenerUsuarios();
+        if (usuarios.length > 0) {
+            console.log('Total de usuarios:', usuarios.length);
+            console.table(usuarios);
+        } else {
+            console.log('No hay usuarios registrados');
+        }
+    };
+
+    // Mostrar sesión activa al cargar (si existe)
+    const sesionActual = localStorage.getItem('sesionActiva');
+    if (sesionActual) {
+        console.log('✓ Sesión activa encontrada');
+        verSesionActiva();
+    }
+
+    // ... (Tu código existente de login.js) ...
+
+    // === NUEVA LÓGICA PARA EL BOTÓN DE USUARIO ===
+    
+    const userButtons = document.querySelectorAll('.btn-action-user');
+    const welcomeModalElement = document.getElementById('welcomeModal');
+    const loginModalElement = document.getElementById('loginModal'); // Asegúrate de tener esta referencia
+    const btnLogout = document.getElementById('btnLogout');
+
+    // Manejador de clic para los botones de usuario
+    userButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            const sesionActiva = localStorage.getItem('sesionActiva');
+
+            if (sesionActiva) {
+                // 1. SI HAY SESIÓN: Preparar y mostrar modal de bienvenida
+                const usuario = JSON.parse(sesionActiva);
+                const nombreDisplay = document.getElementById('welcomeUserName');
+                const correoDisplay = document.getElementById('welcomeUserEmail');
+                
+                // Verificar rol (Simulación basada en nombre o correo según tu lógica actual)
+                // Nota: Si tienes un campo 'rol' en el localStorage úsalo, si no, adaptamos el texto
+                if (usuario.correo.includes('admin') || usuario.rol === 'admin') {
+                     nombreDisplay.textContent = `¡Bienvenido Administrador!`;
+                     nombreDisplay.classList.add('text-danger'); // Un toque visual para admin
+                } else {
+                     nombreDisplay.textContent = `¡Hola, ${usuario.nombre}!`;
+                     nombreDisplay.classList.remove('text-danger');
+                }
+                
+                if(correoDisplay) correoDisplay.textContent = usuario.correo;
+
+                // Abrir modal de bienvenida
+                const welcomeModal = new bootstrap.Modal(welcomeModalElement);
+                welcomeModal.show();
+
+            } else {
+                // 2. SI NO HAY SESIÓN: Abrir modal de Login original
+                const loginModal = new bootstrap.Modal(loginModalElement);
+                loginModal.show();
+            }
+        });
+    });
+
+    // Lógica de Logout (Cerrar Sesión)
+    if (btnLogout) {
+        btnLogout.addEventListener('click', () => {
+            localStorage.removeItem('sesionActiva');
+            // Cerrar modal
+            const modalInstance = bootstrap.Modal.getInstance(welcomeModalElement);
+            modalInstance.hide();
+            
+            // Opcional: Recargar página o mostrar alerta
+            window.location.reload();
+        });
+    }
 });

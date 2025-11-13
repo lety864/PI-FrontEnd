@@ -1,25 +1,122 @@
-// ========================================
-// VALIDACIÓN Y REGISTRO DEL FORMULARIO (API)
-// ========================================
+// SISTEMA DE REGISTRO DE USUARIOS
+
+// MODELO DE USUARIO
+class UsuarioModel {
+  constructor(data) {
+    this.id = data.id || this.generarId();
+    this.nombre = data.nombre || '';
+    this.correo = data.correo || '';
+    this.telefono = data.telefono || '';
+    this.contraseña = data.contraseña || '';
+    this.rol = data.rol || 'cliente';
+    this.fechaRegistro = data.fechaRegistro || new Date().toISOString();
+    this.activo = data.activo !== undefined ? data.activo : true;
+  }
+
+  generarId() {
+    return 'USER_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+  }
+
+  toJSON() {
+    return {
+      id: this.id,
+      nombre: this.nombre,
+      correo: this.correo,
+      telefono: this.telefono,
+      contraseña: this.contraseña,
+      rol: this.rol,
+      fechaRegistro: this.fechaRegistro,
+      activo: this.activo
+    };
+  }
+}
+
+// GESTION DE USUARIOS EN LOCALSTORAGE
+function obtenerUsuarios() {
+  try {
+    const usuarios = localStorage.getItem("usuarios");
+    return usuarios ? JSON.parse(usuarios) : [];
+  } catch (e) {
+    console.error('Error al obtener usuarios:', e);
+    return [];
+  }
+}
+
+function guardarUsuarios(usuarios) {
+  try {
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+    return true;
+  } catch (e) {
+    console.error('Error al guardar usuarios:', e);
+    return false;
+  }
+}
+
+function agregarUsuario(usuario) {
+  const usuarios = obtenerUsuarios();
+  usuarios.push(usuario);
+  const guardado = guardarUsuarios(usuarios);
+  if (guardado) {
+    console.log('Usuario agregado exitosamente');
+    console.log('Total de usuarios:', usuarios.length);
+  }
+  return guardado;
+}
+
+function correoYaRegistrado(correo) {
+  const usuarios = obtenerUsuarios();
+  return usuarios.some(usuario => usuario.correo === correo);
+}
+
+// CREAR USUARIO ADMINISTRADOR POR DEFECTO
+function crearAdminPorDefecto() {
+  const usuarios = obtenerUsuarios();
+  const adminExiste = usuarios.some(u => u.rol === 'admin');
+  
+  if (!adminExiste) {
+    const adminPorDefecto = {
+      id: 'ADMIN_' + Date.now(),
+      nombre: 'Administrador',
+      correo: 'admin@muebleria.com',
+      telefono: '7221234567',
+      contraseña: 'admin123',
+      rol: 'admin',
+      fechaRegistro: new Date().toISOString(),
+      activo: true
+    };
+    
+    usuarios.push(adminPorDefecto);
+    guardarUsuarios(usuarios);
+    
+    console.log('Usuario administrador creado');
+    console.log('Email: admin@muebleria.com');
+    console.log('Contraseña: admin123');
+  }
+}
+
+// VALIDACION Y REGISTRO DEL FORMULARIO
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('✓ Sistema de registro (API) inicializado');
+  console.log('Sistema de registro inicializado');
+  
+  crearAdminPorDefecto();
+  initValidacionTiempoReal();
+  initTogglePassword();
+  initModalHandlers();
   
   const form = document.getElementById("registerForm");
   
   if (!form) {
-    console.warn(' Formulario "registerForm" no encontrado en el DOM');
+    console.warn('Formulario "registerForm" no encontrado en el DOM');
     return;
   }
   
-  console.log('✓ Formulario encontrado y listo');
+  console.log('Formulario encontrado y listo');
   
   // Se convierte la función en "async" para poder usar "await"
   form.addEventListener("submit", async function(event) {
     event.preventDefault();
     
-    console.log('==========================================');
-    console.log('PROCESANDO REGISTRO DE USUARIO (API)');
-    console.log('==========================================');
+    console.log('Procesando registro de usuario');
 
     // Leer "nombre" y "apellidos" del HTML
     const nombre = document.getElementById("nombre")?.value.trim() || '';
@@ -30,19 +127,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const confirmPassword = document.getElementById("confirmPassword")?.value.trim() || '';
     const alertMessage = document.getElementById("alertMessage");
 
-    console.log('Datos del formulario:', {
-      nombre: nombre || '(vacío)',
-      apellidos: apellidos || '(vacío)',
-      email: email || '(vacío)',
-      phone: phone || '(vacío)',
-      password: password ? '***' : '(vacío)',
-      confirmPassword: confirmPassword ? '***' : '(vacío)'
-    });
-
     clearValidationStates();
 
-    // Validar campos vacíos
-    if (!nombre || !apellidos || !email || !phone || !password || !confirmPassword) {
+    // Validar campos vacios
+    if (!fullname || !email || !phone || !password || !confirmPassword) {
       const camposVacios = [];
       if (!nombre) {
         camposVacios.push("Nombre(s)");
@@ -53,11 +141,11 @@ document.addEventListener('DOMContentLoaded', function() {
         markFieldInvalid("apellidos");
       }
       if (!email) {
-        camposVacios.push("Correo electrónico");
+        camposVacios.push("Correo electronico");
         markFieldInvalid("username");
       }
       if (!phone) {
-        camposVacios.push("Teléfono");
+        camposVacios.push("Telefono");
         markFieldInvalid("phone");
       }
       if (!password) {
@@ -69,9 +157,11 @@ document.addEventListener('DOMContentLoaded', function() {
         markFieldInvalid("confirmPassword");
       }
 
-      const mensaje = `Por favor, rellene todos los campos obligatorios.`;
+      const mensaje = camposVacios.length === 1 
+        ? 'Por favor, rellene el campo: ' + camposVacios[0]
+        : 'Por favor, rellene todos los campos obligatorios (' + camposVacios.length + ' faltantes)';
       
-      console.log(' Validación fallida: Campos vacíos');
+      console.log('Validacion fallida: Campos vacios');
       showError(alertMessage, mensaje);
       if (alertMessage) {
         alertMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -79,39 +169,33 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    // Validar nombre (simple)
-    if (nombre.length < 2) {
-      console.log(' Validación fallida: Nombre muy corto');
-      showError(alertMessage, "Ingrese un nombre válido (mínimo 2 caracteres).");
-      markFieldInvalid("nombre");
+    // Validar nombre completo
+    const nameRegex = /^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]{3,}$/;
+    const nameWords = fullname.split(' ').filter(word => word.length > 0);
+    
+    if (!nameRegex.test(fullname) || nameWords.length < 2) {
+      console.log('Validacion fallida: Nombre incompleto');
+      showError(alertMessage, "Ingrese su nombre completo (nombre y apellido, minimo 3 caracteres).");
+      markFieldInvalid("fullname");
       if (alertMessage) alertMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       return;
     }
 
-    // Validar apellidos (simple)
-    if (apellidos.length < 2) {
-      console.log(' Validación fallida: Apellidos muy cortos');
-      showError(alertMessage, "Ingrese apellidos válidos (mínimo 2 caracteres).");
-      markFieldInvalid("apellidos");
-      if (alertMessage) alertMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      return;
-    }
-
-    // Validar correo electrónico
+    // Validar correo electronico
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      console.log(' Validación fallida: Email inválido');
-      showError(alertMessage, "Ingrese un correo electrónico válido.");
+      console.log('Validacion fallida: Email invalido');
+      showError(alertMessage, "Ingrese un correo electronico valido.");
       markFieldInvalid("username");
       if (alertMessage) alertMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       return;
     }
 
-    // Validar número de teléfono
+    // Validar numero de telefono
     const phoneRegex = /^[0-9]{10}$/;
     if (!phoneRegex.test(phone)) {
-      console.log('Validación fallida: Teléfono inválido');
-      showError(alertMessage, "Ingrese un número de teléfono válido (10 dígitos).");
+      console.log('Validacion fallida: Telefono invalido');
+      showError(alertMessage, "Ingrese un numero de telefono valido (10 digitos).");
       markFieldInvalid("phone");
       if (alertMessage) alertMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       return;
@@ -119,126 +203,135 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Validar longitud de contraseña
     if (password.length < 8) {
-      console.log('Validación fallida: Contraseña muy corta');
+      console.log('Validacion fallida: Contraseña muy corta');
       showError(alertMessage, "La contraseña debe tener al menos 8 caracteres.");
       markFieldInvalid("password");
       if (alertMessage) alertMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       return;
     }
 
-    // Validar que las contraseñas coincidan
     if (password !== confirmPassword) {
-      console.log(' Validación fallida: Las contraseñas no coinciden');
+      console.log('Validacion fallida: Las contraseñas no coinciden');
       showError(alertMessage, "Las contraseñas no coinciden.");
       markFieldInvalid("confirmPassword");
       if (alertMessage) alertMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       return;
     }
 
-    // La validación de correo duplicado ahora la hará el backend
-    console.log('✓ Todas las validaciones de frontend pasaron');
+    // Validar que el correo no este registrado
+    if (correoYaRegistrado(email)) {
+      console.log('Validacion fallida: Email ya registrado');
+      showError(alertMessage, "Este correo electronico ya esta registrado.");
+      markFieldInvalid("username");
+      if (alertMessage) alertMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      return;
+    }
 
-    // Crear el payload JSON para enviar al backend
-    // Este objeto debe coincidir con tu DTO `UsuarioRequest.java`
-    const usuarioPayload = {
-      nombre: nombre,
-      apellidos: apellidos,
+    console.log('Todas las validaciones pasaron correctamente');
+
+    // CREAR USUARIO CON ROL DE CLIENTE
+    const nuevoUsuario = new UsuarioModel({
+      nombre: fullname,
       correo: email,
-      password: password,
-      telefono: phone
-    };
+      telefono: phone,
+      contraseña: password,
+      rol: 'cliente'
+    });
 
-    console.log('→ Enviando payload al backend:', usuarioPayload);
-    const URL_BASE = '/api/auth';
+    // Mostrar en consola
+    console.log('NUEVO USUARIO REGISTRADO');
+    const usuarioJSON = nuevoUsuario.toJSON();
+    console.log('Datos del usuario:');
+    console.table([usuarioJSON]);
 
-    // LLAMADA FETCH API
-    try {
-      // Usamos 'await' para esperar la respuesta del servidor
-      // Esta es la URL de tu AuthContoller
-      const response = await fetch(`${URL_BASE}/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(usuarioPayload)
-      });
-
-      // Caso 1: Registro Exitoso (Ej. 201 Created o 200 OK)
-      if (response.ok) {
-        const nuevoUsuario = await response.json(); // Obtienes el UsuarioResponse
-        console.log('✓ Usuario registrado exitosamente en el backend:', nuevoUsuario);
-        
-        showSuccess(alertMessage, `¡Registro exitoso, ${nuevoUsuario.nombre}! Redirigiendo...`);
-        form.reset();
-
-        // Redirigir después de 2 segundos
-        setTimeout(() => {
-          console.log('→ Redirigiendo a index.html...');
-           window.location.href = "index.html"; 
-        }, 2000);
-
-      // Caso 2: Error del servidor (Ej. 409 Conflict si el email ya existe)
-      } else {
-        let errorMsg = 'Error al registrar el usuario.';
-        
-        try {
-            // Intentamos leer el mensaje de error que envía el backend
-            const errorData = await response.json();
-            errorMsg = errorData.message || `Error ${response.status}`; 
-        } catch(e) {
-            // Si el backend no envía JSON, usamos el texto de estado
-            errorMsg = `Error ${response.status}: ${response.statusText}`;
-        }
-        
-        // Error común: Correo duplicado (409 Conflict)
-        if (response.status === 409) {
-          errorMsg = 'Este correo electrónico ya está registrado.';
-          markFieldInvalid("username");
-        }
-        
-        console.log(`❌ Error ${response.status}: ${errorMsg}`);
-        showError(alertMessage, errorMsg);
-      }
+    // Guardar usuario
+    const guardado = agregarUsuario(usuarioJSON);
+    
+    // Mostrar TODOS los usuarios despues de agregar
+    if (guardado) {
+      const todosLosUsuarios = obtenerUsuarios();
+      console.log('TODOS LOS USUARIOS EN LOCALSTORAGE');
+      console.log('Total de usuarios registrados:', todosLosUsuarios.length);
       
-    // Caso 3: Error de red (El servidor no responde o está caído)
-    } catch (error) {
-      console.error('❌ Error de red al intentar registrar:', error);
-      showError(alertMessage, 'No se pudo conectar al servidor. Por favor, intente más tarde.');
+      const admins = todosLosUsuarios.filter(u => u.rol === 'admin').length;
+      const clientes = todosLosUsuarios.filter(u => u.rol === 'cliente').length;
+      console.log('Administradores:', admins);
+      console.log('Clientes:', clientes);
+      
+      console.log('Lista completa de usuarios:');
+      console.table(todosLosUsuarios);
+    }
+
+    if (guardado) {
+      const totalUsuarios = obtenerUsuarios().length;
+      console.log('Usuario guardado en localStorage correctamente');
+      console.log('Total de usuarios registrados:', totalUsuarios);
+      
+      const nombreUsuario = fullname.split(' ')[0];
+      showSuccess(alertMessage, 'Registro exitoso, ' + nombreUsuario + '! Redirigiendo al inicio de sesion...');
+
+      // Ocultar campos del formulario
+      form.querySelectorAll('.mb-3').forEach(grupo => {
+        grupo.style.display = 'none';
+      });
+      const submitButton = form.querySelector('button[type="submit"]');
+      if (submitButton) submitButton.style.display = 'none';
+
+      // Redirigir al modal de login
+      setTimeout(() => {
+        const registerModal = document.getElementById('registerModal');
+        const loginModal = document.getElementById('loginModal');
+        
+        if (registerModal && loginModal && typeof bootstrap !== 'undefined') {
+          const modalInstance = bootstrap.Modal.getInstance(registerModal) || new bootstrap.Modal(registerModal);
+          modalInstance.hide();
+          
+          setTimeout(() => {
+            const loginModalInstance = new bootstrap.Modal(loginModal);
+            loginModalInstance.show();
+          }, 500);
+        }
+      }, 2000);
+    } else {
+      console.log('Error al guardar en localStorage');
+      showError(alertMessage, "Error al guardar el usuario. Por favor, intente nuevamente.");
     }
     
   });
 });
 
 // ========================================
-// FUNCIONES AUXILIARES DE UI
+// FUNCIONES AUXILIARES
 // ========================================
 function showError(element, message) {
   if (!element) {
-    console.warn(' Elemento "alertMessage" no encontrado');
+    console.warn('Elemento "alertMessage" no encontrado');
     return;
   }
   
   element.classList.remove("d-none", "alert-success");
   element.classList.add("alert-danger");
   element.style.display = 'block';
-  element.innerHTML = `<i class="bi bi-exclamation-triangle-fill me-2"></i><strong>Error:</strong> ${message}`;
+  element.innerHTML = '<i class="bi bi-exclamation-triangle-fill me-2"></i><strong>Error:</strong> ' + message;
   
-  // No se oculta automáticamente para que el usuario pueda leerlo
+  setTimeout(() => {
+    element.classList.add("d-none");
+    element.style.display = 'none';
+  }, 7000);
 }
 
 function showSuccess(element, message) {
   if (!element) {
-    console.warn(' Elemento "alertMessage" no encontrado');
+    console.warn('Elemento "alertMessage" no encontrado');
     return;
   }
   
   element.classList.remove("d-none", "alert-danger");
   element.classList.add("alert-success");
   element.style.display = 'block';
-  element.innerHTML = `<i class="bi bi-check-circle-fill me-2"></i>${message}`;
+  element.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i>' + message;
   
-  console.log('✓ Mensaje de éxito mostrado:', message);
+  console.log('Mensaje de exito mostrado:', message);
 }
 
 function markFieldInvalid(fieldId) {
@@ -269,7 +362,7 @@ function clearValidationStates() {
 }
 
 // ========================================
-// VALIDACIÓN EN TIEMPO REAL (Corregida)
+// VALIDACIÓN EN TIEMPO REAL
 // ========================================
 function initValidacionTiempoReal() {
   const nombreField = document.getElementById("nombre");
@@ -321,7 +414,7 @@ function initValidacionTiempoReal() {
       }
       
       if (this.value && invalidCharsRegex.test(this.value)) {
-        errorMsg.textContent = '⚠️ El correo solo puede contener letras, números, puntos, guiones y guión bajo';
+        errorMsg.textContent = 'El correo solo puede contener letras, numeros, puntos, guiones y guion bajo';
         errorMsg.style.display = 'block';
         this.classList.add("is-invalid");
         this.classList.remove("is-valid");
@@ -357,12 +450,12 @@ function initValidacionTiempoReal() {
       }
       
       if (this.value && !onlyNumbers.test(this.value)) {
-        errorMsg.textContent = '⚠️ Solo puede contener números, máximo 10 dígitos';
+        errorMsg.textContent = 'Solo puede contener numeros, maximo 10 digitos';
         errorMsg.style.display = 'block';
         this.classList.add("is-invalid");
         this.classList.remove("is-valid");
       } else if (this.value && this.value.length < 10) {
-        errorMsg.textContent = '⚠️ Solo puede contener números, máximo 10 dígitos';
+        errorMsg.textContent = 'Debe contener exactamente 10 digitos';
         errorMsg.style.display = 'block';
         this.classList.add("is-invalid");
         this.classList.remove("is-valid");
@@ -411,9 +504,7 @@ function initValidacionTiempoReal() {
   }
 }
 
-// ========================================
 // MOSTRAR/OCULTAR CONTRASEÑA
-// ========================================
 function initTogglePassword() {
   const togglePasswordBtn = document.getElementById("togglePassword");
   if (togglePasswordBtn) {
@@ -444,9 +535,7 @@ function initTogglePassword() {
   }
 }
 
-// ========================================
 // LIMPIAR MODAL AL CERRAR/ABRIR
-// ========================================
 function initModalHandlers() {
   const registerModal = document.getElementById('registerModal');
 
@@ -454,6 +543,12 @@ function initModalHandlers() {
     registerModal.addEventListener('hidden.bs.modal', function () {
       const form = document.getElementById("registerForm");
       if (form) form.reset();
+      
+      form.querySelectorAll('.mb-3').forEach(grupo => {
+        grupo.style.display = '';
+      });
+      const submitButton = form.querySelector('button[type="submit"]');
+      if (submitButton) submitButton.style.display = '';
       
       const alertMessage = document.getElementById("alertMessage");
       if (alertMessage) {
@@ -487,14 +582,88 @@ function initModalHandlers() {
         video.play().catch(() => {});
       }
     });
+
+    registerModal.addEventListener('hidden.bs.modal', function () {
+      const video = document.getElementById('registerVideo');
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
+      }
+    });
   }
+}
+
+// ========================================
+// FUNCIONES DE UTILIDAD PARA CONSOLA
+// ========================================
+window.verUsuariosRegistrados = function() {
+  const usuarios = obtenerUsuarios();
+  console.log('\n');
+  console.log('==========================================');
+  console.log(' LISTADO COMPLETO DE USUARIOS');
+  console.log('==========================================');
+  console.log('Total de usuarios registrados:', usuarios.length);
+  
+  if (usuarios.length > 0) {
+    console.log('\n ARRAY COMPLETO (JSON):');
+    console.log(JSON.stringify(usuarios, null, 2));
+    
+    console.log('\n ARRAY COMPLETO (OBJETO):');
+    console.dir(usuarios);
+    
+    console.log('\n DETALLE DE CADA USUARIO:');
+    usuarios.forEach((usuario, index) => {
+      console.log(`\n--- Usuario #${index + 1} ---`);
+      console.log('ID:', usuario.id);
+      console.log('Nombre:', usuario.nombre);
+      console.log('Correo:', usuario.correo);
+      console.log('Teléfono:', usuario.telefono);
+      console.log('Fecha Registro:', new Date(usuario.fechaRegistro).toLocaleString('es-MX'));
+      console.log('Estado:', usuario.activo ? 'Activo ✓' : 'Inactivo ✗');
+    });
+    
+    console.log('\n TABLA DE USUARIOS:');
+    console.table(usuarios);
+  } else {
+    console.log(' No hay usuarios registrados');
+  }
+  console.log('==========================================');
+  console.log('\n');
+}
+
+window.buscarUsuarioPorCorreo = function(correo) {
+  const usuarios = obtenerUsuarios();
+  const usuario = usuarios.find(u => u.correo === correo);
+  if (usuario) {
+    console.log('✓ Usuario encontrado:');
+    console.log(usuario);
+    console.table([usuario]);
+  } else {
+    console.log(` No se encontró ningún usuario con el correo: ${correo}`);
+  }
+}
+
+window.limpiarUsuarios = function() {
+  localStorage.removeItem("usuarios");
+  console.log('✓ Todos los usuarios han sido eliminados del localStorage');
+}
+
+window.contarUsuarios = function() {
+  const usuarios = obtenerUsuarios();
+  console.log(` Total de usuarios registrados: ${usuarios.length}`);
+  return usuarios.length;
 }
 
 // ========================================
 // INICIALIZACIÓN
 // ========================================
 window.addEventListener('DOMContentLoaded', () => {
-  console.log('Inicializando validaciones y manejadores de modal...');
+  const usuarios = obtenerUsuarios();
+  
+  if (usuarios.length > 0) {
+    console.log('Usuarios registrados:', usuarios.length);
+    console.table(usuarios);
+  }
   
   initValidacionTiempoReal();
   initTogglePassword();

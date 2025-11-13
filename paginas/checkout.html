@@ -31,163 +31,143 @@
 
             <div class="container-fluid">
                 
-                <!-- Botón de menú móvil (Offcanvas) -->
                 <button class="btn btn-outline-light d-lg-none me-2" type="button" 
                         data-bs-toggle="offcanvas" data-bs-target="#offcanvasProducts" 
                         aria-controls="offcanvasProducts" aria-label="Abrir menú de productos">
                     <i class="bi bi-list fs-4"></i>
                 </button>
 
-                <!-- Logo/Brand -->
-                <a class="navbar-brand d-flex align-items-center" href="index.html">
-                    <img src="/assets/mundo.png" alt="Logo Mueblería España" height="30" class="me-2">
+                <a class="navbar-brand d-flex align-items-center" href="../index.html">
+                    <img src="../assets/mundo.png" alt="Logo Mueblería España" height="30" class="me-2">
                     Mueblería España
                 </a>
 
-                <!-- Menú Desktop -->
                 <div class="collapse navbar-collapse" id="mainNavbarDesktop">
+
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/index.html">Inicio</a>
+                            <a class="nav-link active" aria-current="page" href="../index.html">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/paginas/nosotros.html">Sobre Nosotros</a>
+                            <a class="nav-link" href="./paginas/nosotros.html">Sobre Nosotros</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="/paginas/contacto.html">Contacto</a>
+                            <a class="nav-link" href="./paginas/contacto.html">Contacto</a>
                         </li>
-                    </ul>
-                    
-                    <!-- Barra de búsqueda (Desktop) -->
+
+                    </ul>                    
                     <form class="d-flex me-3" role="search">
                         <input class="form-control search-input" type="search" 
                                placeholder="Buscar en la tienda" aria-label="Buscar productos">
                     </form>
                     
-                     <!-- Iconos de acción (Desktop) -->
-                    <ul class="navbar-nav">
+                     <ul class="navbar-nav">
+
                         <li class="nav-item">
-                            <a class="nav-link position-relative" href="/paginas/carrito.html" aria-label="Carrito de compras">
+                            <a class="nav-link position-relative" href="./paginas/carrito.html" aria-label="Carrito de compras">
                                 <i class="bi bi-cart-fill fs-4"></i>
-                                <!-- BADGE OCULTO DE NUM DE ITEMS DEL CARRITO - Desktop con d-none -->
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">
                                     <span class="visually-hidden">productos en el carrito</span>
                                 </span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        <li class="nav-item d-none d-lg-block">
+                            <a class="nav-link btn-action-user" href="#" role="button">
                                 <i class="bi bi-person-fill fs-4"></i>
                             </a>
                         </li> 
                     </ul>
                 </div>
 
-                <!-- Iconos de acción (Móvil) -->
                 <div class="d-flex align-items-center d-lg-none">
                     <ul class="navbar-nav flex-row">
                         <li class="nav-item ms-3">
-                            <a class="nav-link position-relative" href="#" aria-label="Carrito de compras">
+                            <a class="nav-link position-relative" href="./paginas/carrito.html" aria-label="Carrito de compras">
                                 <i class="bi bi-cart-fill fs-3"></i>
-                                    <!-- BADGE OCULTO DE NUM ITEMS DEL CARRITO - Movil con d-none -->
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">
                                     2
                                     <span class="visually-hidden">productos en el carrito</span>
                                 </span>
                             </a>
                         </li>
                         <li class="nav-item ms-3">
-                            <a class="nav-link" href="#" aria-label="Mi cuenta">
+                            <a class="nav-link btn-action-user" href="#" aria-label="Mi cuenta">
                                 <i class="bi bi-person-fill fs-3"></i>
                             </a>
                         </li>
-
-                          <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
-                              <i class="bi bi-person-fill fs-3"></i>
-                          </a>
-                      </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </div>
 
-    <!-- ========================================= -->
-    <!-- NAVBAR SECUNDARIO (Categorías - Desktop) -->
-    <!-- ========================================= -->
     <div class="container">
         <div class="floating-nav-container">
             <nav class="navbar navbar-expand-lg navbar-light d-none d-lg-block" aria-label="Navegación de categorías">
                 <div class="container-fluid">
                     <ul class="navbar-nav">
-                        <!-- Salas -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" 
                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Salas
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/paginas/catalogo.html">Ver todo</a></li>
-                                <li><a class="dropdown-item" href="/paginas/catalogo.html">Modulares de 4 piezas</a></li>
-                                <li><a class="dropdown-item" href="/paginas/catalogo.html">Modulares de 5 piezas</a></li>
-                                <li><a class="dropdown-item" href="/paginas/catalogo.html">Sofacamas</a></li>
-                                <li><a class="dropdown-item" href="/paginas/catalogo.html">Reclinables</a></li>
+                                <li><a class="dropdown-item" href="./paginas/salas.html">Ver todo</a></li>
+                                <li><a class="dropdown-item" href="./paginas/salas.html">Modulares de 4 piezas</a></li>
+                                <li><a class="dropdown-item" href="./paginas/salas.html">Modulares de 5 piezas</a></li>
+                                <li><a class="dropdown-item" href="./paginas/salas.html">Sofacamas</a></li>
+                                <li><a class="dropdown-item" href="./paginas/salas.html">Reclinables</a></li>
                             </ul>
                         </li>
 
-                        <!-- Dormitorio -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" 
                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Dormitorio
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="paginas/catalogo.html">Ver todo</a></li>
-                                <li><a class="dropdown-item" href="paginas/catalogo.html">Recámaras king size y matrimonial</a></li>
-                                <li><a class="dropdown-item" href="paginas/catalogo.html">Cabeceras</a></li>
-                                <li><a class="dropdown-item" href="paginas/catalogo.html">Bases</a></li>
+                                <li><a class="dropdown-item" href="./paginas/dormitorios.html">Ver todo</a></li>
+                                <li><a class="dropdown-item" href="./paginas/dormitorios.html">Recámaras king size y matrimonial</a></li>
+                                <li><a class="dropdown-item" href="./paginas/dormitorios.html">Cabeceras</a></li>
+                                <li><a class="dropdown-item" href="./paginas/dormitorios.html">Bases</a></li>
                             </ul>
                         </li>
 
-                        <!-- Comedores -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" 
                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Comedores
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="paginas/catalogo.html">Ver todo</a></li>
-                                <li><a class="dropdown-item" href="paginas/catalogo.html">4 sillas</a></li>
-                                <li><a class="dropdown-item" href="paginas/catalogo.html">6 sillas</a></li>
-                                <li><a class="dropdown-item" href="paginas/catalogo.html">8 sillas</a></li>
+                                <li><a class="dropdown-item" href="./paginas/comedores.html">Ver todo</a></li>
+                                <li><a class="dropdown-item" href="./paginas/comedores.html">4 sillas</a></li>
+                                <li><a class="dropdown-item" href="./paginas/comedores.html">6 sillas</a></li>
+                                <li><a class="dropdown-item" href="./paginas/comedores.html">8 sillas</a></li>
                             </ul>
                         </li>
-
                         <li class="nav-item">
-                            <a class="nav-link" href="paginas/catalogo.html">Roperos</a>
+                            <a class="nav-link" href="./paginas/roperos.html">Roperos</a>
                         </li>
-                        
                         <li class="nav-item">
-                            <a class="nav-link" href="paginas/catalogo.html">Colchones</a>
+                            <a class="nav-link" href="./paginas/colchones.html">Colchones</a>
                         </li>
 
-                        <!-- Línea Blanca -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="paginas/catalogo.html" role="button" 
                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Línea blanca
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="paginas/catalogo.html">Ver todo</a></li>
-                                <li><a class="dropdown-item" href="paginas/catalogo.html">Lavadoras</a></li>
-                                <li><a class="dropdown-item" href="paginas/catalogo.html">Estufas</a></li>
-                                <li><a class="dropdown-item" href="paginas/catalogo.html">Refrigeradores</a></li>
-                                <li><a class="dropdown-item" href="paginas/catalogo.html">Microondas</a></li>
+                                <li><a class="dropdown-item" href="./paginas/lineaBlanca.html">Ver todo</a></li>
+                                <li><a class="dropdown-item" href="./paginas/lineaBlanca.html">Lavadoras</a></li>
+                                <li><a class="dropdown-item" href="./paginas/lineaBlanca.html">Estufas</a></li>
+                                <li><a class="dropdown-item" href="./paginas/lineaBlanca.html">Refrigeradores</a></li>
+                                <li><a class="dropdown-item" href="./paginas/lineaBlanca.html">Microondas</a></li>
                             </ul>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link fw-bold text-danger" href="#ofertas">Ofertas</a>
+                            <a class="nav-link fw-bold text-danger" href="./paginas/ofertas.html">Ofertas</a>
                         </li>
                     </ul>
                 </div>
@@ -195,26 +175,25 @@
         </div>
     </div>
 
-    <!-- ========================================= -->
-    <!-- OFFCANVAS (Menú Móvil)                   -->
-    <!-- ========================================= -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasProducts" 
          aria-labelledby="offcanvasProductsLabel">
+         
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasProductsLabel">PRODUCTOS</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar menú"></button>
         </div>
+        
         <div class="offcanvas-body">
-            <!-- Búsqueda en móvil -->
             <div class="px-3 mb-3">
+                
                 <form class="d-flex" role="search">
+                    
                     <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar">
                     <button class="btn btn-outline-primary" type="submit">Buscar</button>
                 </form>
             </div>
 
             <ul class="list-group list-group-flush">
-                <!-- Salas -->
                 <li class="list-group-item">
                     <a href="#collapseSalas" data-bs-toggle="collapse" role="button" 
                        aria-expanded="false" aria-controls="collapseSalas">
@@ -222,16 +201,15 @@
                     </a>
                     <div class="collapse" id="collapseSalas">
                         <ul class="list-unstyled ps-3 mt-2">
-                            <li><a href="paginas/catalogo.html">Ver todo</a></li>
-                            <li><a href="paginas/catalogo.html">Modulares de 4 piezas</a></li>
-                            <li><a href="paginas/catalogo.html">Modulares de 5 piezas</a></li>
-                            <li><a href="paginas/catalogo.html">Sofacamas</a></li>
-                            <li><a href="paginas/catalogo.html">Reclinables</a></li>
+                            <li><a href="./paginas/salas.html">Ver todo</a></li>
+                            <li><a href="./paginas/salas.html">Modulares de 4 piezas</a></li>
+                            <li><a href="./paginas/salas.html">Modulares de 5 piezas</a></li>
+                            <li><a href="./paginas/salas.html">Sofacamas</a></li>
+                            <li><a href="./paginas/salas.html">Reclinables</a></li>
                         </ul>
                     </div>
                 </li>
 
-                <!-- Dormitorio -->
                 <li class="list-group-item">
                     <a href="#collapseDormitorio" data-bs-toggle="collapse" role="button" 
                        aria-expanded="false" aria-controls="collapseDormitorio">
@@ -239,15 +217,14 @@
                     </a>
                     <div class="collapse" id="collapseDormitorio">
                         <ul class="list-unstyled ps-3 mt-2">
-                            <li><a href="paginas/catalogo.html">Ver todo</a></li>
-                            <li><a href="paginas/catalogo.html">Recámaras king size y matrimonial</a></li>
-                            <li><a href="paginas/catalogo.html">Cabeceras</a></li>
-                            <li><a href="paginas/catalogo.html">Bases</a></li>
+                            <li><a href="./paginas/dormitorios.html">Ver todo</a></li>
+                            <li><a href="./paginas/dormitorios.html">Recámaras king size y matrimonial</a></li>
+                            <li><a href="./paginas/dormitorios.html">Cabeceras</a></li>
+                            <li><a href="./paginas/dormitorios.html">Bases</a></li>
                         </ul>
                     </div>
                 </li>
 
-                <!-- Comedores -->
                 <li class="list-group-item">
                     <a href="#collapseComedores" data-bs-toggle="collapse" role="button" 
                        aria-expanded="false" aria-controls="collapseComedores">
@@ -255,18 +232,17 @@
                     </a>
                     <div class="collapse" id="collapseComedores">
                         <ul class="list-unstyled ps-3 mt-2">
-                            <li><a href="paginas/catalogo.html">Ver todo</a></li>
-                            <li><a href="paginas/catalogo.html">4 sillas</a></li>
-                            <li><a href="paginas/catalogo.html">6 sillas</a></li>
-                            <li><a href="paginas/catalogo.html">8 sillas</a></li>
+                            <li><a href="./paginas/comedores.html">Ver todo</a></li>
+                            <li><a href="./paginas/comedores.html">4 sillas</a></li>
+                            <li><a href="./paginas/comedores.html">6 sillas</a></li>
+                            <li><a href="./paginas/comedores.html">8 sillas</a></li>
                         </ul>
                     </div>
                 </li>
 
-                <li class="list-group-item"><a href="paginas/catalogo.html">Roperos</a></li>
-                <li class="list-group-item"><a href="paginas/catalogo.html">Colchones</a></li>
+                <li class="list-group-item"><a href="./paginas/roperos.html">Roperos</a></li>
+                <li class="list-group-item"><a href="./paginas/colchones.html">Colchones</a></li>
 
-                <!-- Línea Blanca -->
                 <li class="list-group-item">
                     <a href="#collapseLineaBlanca" data-bs-toggle="collapse" role="button" 
                        aria-expanded="false" aria-controls="collapseLineaBlanca">
@@ -274,29 +250,28 @@
                     </a>
                     <div class="collapse" id="collapseLineaBlanca">
                         <ul class="list-unstyled ps-3 mt-2">
-                            <li><a href="paginas/catalogo.html">Ver todo</a></li>
-                            <li><a href="paginas/catalogo.html">Lavadoras</a></li>
-                            <li><a href="paginas/catalogo.html">Estufas</a></li>
-                            <li><a href="paginas/catalogo.html">Refrigeradores</a></li>
-                            <li><a href="paginas/catalogo.html">Microondas</a></li>
+                            <li><a href="./paginas/lineaBlanca.html">Ver todo</a></li>
+                            <li><a href="./paginas/lineaBlanca.html">Lavadoras</a></li>
+                            <li><a href="./paginas/lineaBlanca.html">Estufas</a></li>
+                            <li><a href="./paginas/lineaBlanca.html">Refrigeradores</a></li>
+                            <li><a href="./paginas/lineaBlanca.html">Microondas</a></li>
                         </ul>
                     </div>
                 </li>
 
                 <li class="list-group-item">
-                    <a href="#ofertas" class="fw-bold text-danger">Ofertas</a>
+                    <a href="./paginas/ofertas.html" class="fw-bold text-danger">Ofertas</a>
                 </li>
             </ul>
-
             <hr class="my-3">
 
-            <!-- Enlaces adicionales -->
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><a href="paginas/nosotros.html">Nosotros</a></li>
                 <li class="list-group-item"><a href="paginas/contacto.html">Contacto</a></li>
             </ul>
         </div>
     </div>
+
     <!--FIN DE NAVBAR-->
 
     <!--AQUI VA EL CODIGO DEL CHECKOUT-->
@@ -590,7 +565,6 @@
         </div>
     </div>
 </form>
-                   <!-- Enlace de recuperación de contraseña -->
                    <div class="mb-3 text-end">
                    <a href="#" class="text-decoration-none" style="color: #CB997E;" data-bs-toggle="modal" data-bs-target="#recoveryModal" data-bs-dismiss="modal">
                      ¿Olvidaste tu contraseña? </a></div>
@@ -615,9 +589,6 @@
     </div>
   </div>
 </div> 
-<!-- Fin de inicio de sesion -->
-
-<!-- Modal de Recuperación de Contraseña -->
 <div class="modal fade" id="recoveryModal" tabindex="-1" aria-labelledby="recoveryModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -639,7 +610,6 @@
             <input type="email" class="form-control" id="recoveryEmail" placeholder="tu@email.com" required>
           </div>
 
-          <!-- Mensaje de alerta -->
           <div id="recoveryAlertMessage" class="alert d-none" role="alert"></div>
 
           <div class="d-grid gap-2">
@@ -659,9 +629,6 @@
     </div>
   </div>
 </div>
-<!-- Fin de Modal de Recuperación de Contraseña -->
-                    
-<!-- Form de registro --> 
 <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
@@ -679,25 +646,21 @@
               
               <form id="registerForm"> 
                 
-                <!-- Nombre completo -->
                 <div class="mb-3">
                   <label for="fullname" class="form-label">Nombre Completo</label>
-                  <input type="text" class="form-control" id="fullname" placeholder="Ej. Nombre Apellido 1 Apellido 2" required>
+                  <input type="text" class="form-control" id="fullname" placeholder="Ej. Nombre Apellido1 Apellido2" required>
                 </div>
 
-                <!-- Correo -->
                 <div class="mb-3">
                   <label for="username" class="form-label">Correo Electrónico</label>
                   <input type="email" class="form-control" id="username" placeholder="tu@email.com" required>
                 </div>
 
-                <!-- Teléfono -->
                 <div class="mb-3">
                   <label for="phone" class="form-label">Número de Teléfono</label>
                   <input type="tel" class="form-control" id="phone" placeholder="Ej. 7221234567" pattern="[0-9]{10}" required>
                 </div>
 
-                <!-- Contraseña -->
                 <div class="mb-3">
                   <label for="password" class="form-label">Contraseña</label>
                   <div class="input-group"> 
@@ -708,7 +671,6 @@
                   </div>
                 </div>
 
-                <!-- Confirmar Contraseña -->
                 <div class="mb-3">
                   <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
                   <div class="input-group"> 
@@ -719,7 +681,6 @@
                   </div>
                 </div>
 
-                <!-- Mensajes de alerta -->
                 <div id="alertMessage" class="alert d-none" role="alert"></div>
 
                 <div class="d-grid gap-2">
@@ -737,7 +698,6 @@
 
             </div>
 
-            <!-- Video del lado derecho -->
             <div class="col-md-6 d-none d-md-block p-0 modal-video-col">
               <video id="registerVideo" autoplay muted playsinline>
                 <source src="/assets/registro.mp4" type="video/mp4">
@@ -751,6 +711,31 @@
     </div>
   </div>
 </div> 
+<div class="modal fade" id="welcomeModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center pb-5">
+        <div class="mb-4">
+            <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                <i class="bi bi-person-circle fs-1 text-primary"></i>
+            </div>
+        </div>
+        
+        <h3 class="mb-2" id="welcomeUserName">¡Bienvenido!</h3>
+        <p class="text-muted mb-4" id="welcomeUserEmail">usuario@ejemplo.com</p>
+        
+        <div class="d-grid gap-2 col-8 mx-auto">
+            <button type="button" class="btn btn-danger mt-2" id="btnLogout">
+                <i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión
+            </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Fin de form de registro -->
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
