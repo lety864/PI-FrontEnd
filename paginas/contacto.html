@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css">
     
@@ -15,12 +14,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Design System CSS (SIEMPRE PRIMERO) -->
-    <link rel="stylesheet" href="/estilos/global.css">
+    <link rel="stylesheet" href="../estilos/global.css">
     
     <!-- Page-Specific Styles -->
-    <link rel="stylesheet" href="/estilos/contacto.css">
+    <link rel="stylesheet" href="../estilos/contacto.css">
 
-    <script defer src="/scripts/contacto.js"></script>
+    <script defer src="../scripts/contacto.js"></script>
     <title>Contacto</title>
 
 </head>
@@ -28,7 +27,7 @@
     <!-- ========================================= -->
     <!-- NAVBAR PRINCIPAL (Sticky, con búsqueda) -->
     <!-- ========================================= -->
- <div class="full-width-nav-container sticky-top">
+  <div class="full-width-nav-container sticky-top">
         <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Navegación principal">
 
             <div class="container-fluid">
@@ -48,13 +47,13 @@
 
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-3">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="../index.html">Inicio</a>
+                            <a class="nav-link" aria-current="page" href="../index.html">Inicio</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../paginas/nosotros.html">Sobre Nosotros</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../paginas/contacto.html">Contacto</a>
+                            <a class="nav-link active" href="../paginas/contacto.html">Contacto</a>
                         </li>
 
                     </ul>                    
@@ -359,8 +358,8 @@
                         <div class="invalid-feedback"><h6 class="text-danger">Por favor ingresa tu nombre.</h6></div>
                     </div>
                     <div class="mb-3 campos-formato">
-                        <label for="phone" class="form-label label-formato">Telefono</label>
-                        <input type="text" class="form-control form-control-lg input-formato" id="phone" name="phone" placeholder="5562341861">
+                        <label for="phone2" class="form-label label-formato">Telefono</label>
+                        <input type="text" class="form-control form-control-lg input-formato" id="phone2" name="phone2" placeholder="5562341861">
                         <div class="invalid-feedback"><h6 class="text-danger">Por favor ingresa un numero telefonico valido.</h6></div>
                     </div>
                     <div class="mb-3 campos-formato">
@@ -453,13 +452,6 @@
         </div>
     </footer>
     <!-- ========== BARRA DE COPYRIGHT ========== -->
-    <div class="copyright-bar">
-        <div class="container text-center">
-            <p class="mb-0">&copy; 2025 Mueblería España. Todos los derechos reservados.</p>
-        </div>
-    </div>
-
-        <!-- ========== BARRA DE COPYRIGHT ========== -->
     <div class="copyright-bar">
         <div class="container text-center">
             <p class="mb-0">&copy; 2025 Mueblería España. Todos los derechos reservados.</p>
@@ -598,9 +590,14 @@
               
               <form id="registerForm"> 
                 
+               <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre(s)</label>
+                  <input type="text" class="form-control" id="nombre" placeholder="Ej. Ana María" required>
+                </div>
+
                 <div class="mb-3">
-                  <label for="fullname" class="form-label">Nombre Completo</label>
-                  <input type="text" class="form-control" id="fullname" placeholder="Ej. Nombre Apellido1 Apellido2" required>
+                  <label for="apellidos" class="form-label">Apellidos</label>
+                  <input type="text" class="form-control" id="apellidos" placeholder="Ej. Pérez López" required>
                 </div>
 
                 <div class="mb-3">
@@ -709,23 +706,18 @@
             }
         });
     });
-
     </script>
-     <!-- Enlazar el archivo JavaScript -->
-    <script src="scripts/registro.js"></script>
-    <link rel="stylesheet" href="estilos/registro.css">
- 
-    <!-- Helper para rutas dinámicas del navbar -->
-    <script src="scripts/navbar-helper.js"></script>
-    <!-- Script del carrito -->
-    <script src="/scripts/carrito-global.js" defer></script>
-    <script src="/scripts/sesionController.js"></script>
+        
+        <!-- Helper para rutas dinámicas del navbar -->
+        <script src="/scripts/navbar-helper.js"></script>
+        <!-- Script del carrito -->
+        <script src="/scripts/carrito-global.js" defer></script>
+        
+        <script src="../scripts/registro.js"></script>
+        <link rel="stylesheet" href="/estilos/registro.css">
+        <script src="../scripts/login.js"></script>
+        <script src="../scripts/recuperacion.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-       <script src="../scripts/registro.js"></script>
-    <script src="../scripts/login.js"></script>
-    <script src="../scripts/recuperacion.js"></script>
 
 </body>
 </html>

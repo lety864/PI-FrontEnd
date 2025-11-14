@@ -43,10 +43,10 @@
 
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-3">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="../index.html">Inicio</a>
+                            <a class="nav-link" aria-current="page" href="../index.html">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../paginas/nosotros.html">Sobre Nosotros</a>
+                            <a class="nav-link active" href="../paginas/nosotros.html">Sobre Nosotros</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../paginas/contacto.html">Contacto</a>
@@ -720,9 +720,14 @@
               
               <form id="registerForm"> 
                 
+               <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre(s)</label>
+                  <input type="text" class="form-control" id="nombre" placeholder="Ej. Ana María" required>
+                </div>
+
                 <div class="mb-3">
-                  <label for="fullname" class="form-label">Nombre Completo</label>
-                  <input type="text" class="form-control" id="fullname" placeholder="Ej. Nombre Apellido1 Apellido2" required>
+                  <label for="apellidos" class="form-label">Apellidos</label>
+                  <input type="text" class="form-control" id="apellidos" placeholder="Ej. Pérez López" required>
                 </div>
 
                 <div class="mb-3">
@@ -816,8 +821,14 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
   <script src="../scripts/nosotros.js"></script>
   <!-- Enlazar el archivo JavaScript -->
-<script src="../scripts/registro.js"></script>
-    <script src="../scripts/login.js"></script>
-    <script src="../scripts/recuperacion.js"></script>
+  <script src="../scripts/registro.js"></script>
+  <link rel="stylesheet" href="../estilos/registro.css">
+  <script src="../scripts/login.js"></script>
+  <script src="../scripts/recuperacion.js"></script>
+  <!-- Helper para rutas dinámicas del navbar -->
+  <script src="../scripts/navbar-helper.js"></script>
+  <!-- Script del carrito -->
+  <script src="../scripts/carrito-global.js" defer></script>
+  
 </body>
 </html>

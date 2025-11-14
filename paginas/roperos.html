@@ -719,9 +719,14 @@
               
               <form id="registerForm"> 
                 
+              <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre(s)</label>
+                  <input type="text" class="form-control" id="nombre" placeholder="Ej. Ana María" required>
+                </div>
+
                 <div class="mb-3">
-                  <label for="fullname" class="form-label">Nombre Completo</label>
-                  <input type="text" class="form-control" id="fullname" placeholder="Ej. Nombre Apellido1 Apellido2" required>
+                  <label for="apellidos" class="form-label">Apellidos</label>
+                  <input type="text" class="form-control" id="apellidos" placeholder="Ej. Pérez López" required>
                 </div>
 
                 <div class="mb-3">
@@ -816,6 +821,7 @@
     <!-- Script del carrito -->
     <script src="../scripts/carrito-global.js" defer></script>
     <script src="../scripts/registro.js"></script>
+    <link rel="stylesheet" href="../estilos/registro.css">
     <script src="../scripts/login.js"></script>
     <script src="../scripts/recuperacion.js"></script>
 

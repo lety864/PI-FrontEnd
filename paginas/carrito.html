@@ -314,7 +314,7 @@
     <h3 class="Totaltotal">Total: <span id="cart-total">$0.00</span></h3>
     <div>
       <button id="clear-cart" class="btn btn-outline-danger me-2">Vaciar Carrito</button>
-      <a href="/paginas/checkout.html" class="btn btn-success">Finalizar Compra</a>
+      <a href="/paginas/checkout.html" class="btn btn-success" id="btnFinalizarCompra">Finalizar Compra</a>
     </div>
   </div>
 </main>
@@ -391,10 +391,6 @@
         </div>
     </div>
     
-<!-- ============================================================== -->
-<!-- BLOQUE DE MODALES (Login, Registro, Recuperación, Bienvenida) -->
-<!-- Pegar esto antes del cierre de </body> en todas las páginas    -->
-<!-- ============================================================== -->
 
 <!-- 1. MODAL DE INICIO DE SESIÓN -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -529,9 +525,14 @@
               
               <form id="registerForm"> 
                 
+               <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre(s)</label>
+                  <input type="text" class="form-control" id="nombre" placeholder="Ej. Ana María" required>
+                </div>
+
                 <div class="mb-3">
-                  <label for="fullname" class="form-label">Nombre Completo</label>
-                  <input type="text" class="form-control" id="fullname" placeholder="Ej. Nombre Apellido1 Apellido2" required>
+                  <label for="apellidos" class="form-label">Apellidos</label>
+                  <input type="text" class="form-control" id="apellidos" placeholder="Ej. Pérez López" required>
                 </div>
 
                 <div class="mb-3">
@@ -630,10 +631,11 @@
     
     <!-- Script del carrito -->
     <script src="../scripts/carrito-global.js" defer></script>
-    <script src="../scripts/carrito-pagina.js" defer></T>
+    <script src="../scripts/carrito-pagina.js" defer></script>
     
     <!-- Scripts de autenticación -->
     <script src="../scripts/registro.js"></script>
+    <link rel="stylesheet" href="../estilos/registro.css">
     <script src="../scripts/login.js"></script>
     <script src="../scripts/recuperacion.js"></script>
     

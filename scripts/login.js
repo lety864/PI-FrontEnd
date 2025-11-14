@@ -1,7 +1,7 @@
 // SISTEMA DE LOGIN - MULTI-USUARIO
 
 // CONFIGURACIÓN DE LA URL BASE DE LA API
-const API_BASE_URL = '/api'; // URL base para todas las peticiones
+const API = '/api'; // URL base para todas las peticiones
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('✓ Sistema de login inicializado');
@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // Hacemos fetch al endpoint de tu AuthContoller.java
-            const loginResponse = await fetch(`${API_BASE_URL}/auth/login`, {
+            const loginResponse = await fetch(`${API}/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -443,5 +443,38 @@ document.addEventListener('DOMContentLoaded', () => {
             window.cerrarSesion(); 
         });
     }
+
+
+    //bloquear el boton cuando de click en finalizar compra
+    const btnFinalizarCompra = document.getElementById('btnFinalizarCompra');
+
+    btnFinalizarCompra.addEventListener('click', function(event) {
+        
+        const sesionJSON = localStorage.getItem('sesionActiva');
+        const sesion = JSON.parse(sesionJSON);
+            
+            // 2. Obtiene los datos de autenticación de localStorage
+            const userToken = localStorage.getItem('jwtToken'); 
+            const userEmail = sesion.correo; // Si tienes el email en la sesión
+            
+            // Condición: el usuario debe tener AMBOS (token y email)
+            const hasValidAccount = userToken && userEmail;
+
+            if (!hasValidAccount) {
+                // Si no tiene token O no tiene email:
+                event.preventDefault(); // <-- **IMPORTANTE:** Detiene la acción por defecto
+                
+                // Muestra el modal con el mensaje de error: "No tienes una cuenta"
+                unauthorizedModal.show();
+                
+                console.warn("Finalización de Compra bloqueada. El usuario debe iniciar sesión.");
+            } else {
+                // Si la cuenta es válida, permite la acción por defecto o inicia el proceso.
+                console.log("Usuario autorizado. Redireccionando al checkout...");
+                // Aquí podrías agregar la lógica final de redirección o inicio de API
+                // window.location.href = '/paginas/checkout.html';
+            }
+    });
+    
 
 });

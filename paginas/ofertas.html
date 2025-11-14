@@ -317,7 +317,7 @@
             <div class="col-md-6 col-lg-3">
                 <article class="product-card">
                     <div class="product-image-container">
-                        <img src="../assets/catalogos/linea_blanca/lb_1.png" 
+                        <img src="../assets/catalogos//linea_blanca/refrifrench_5.png" 
                              alt="Refrigerador Mabe Top Mount 19 p³" 
                              class="product-image" loading="lazy">
                         <span class="product-badge">Oferta</span>
@@ -811,9 +811,14 @@
               
               <form id="registerForm"> 
                 
+              <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre(s)</label>
+                  <input type="text" class="form-control" id="nombre" placeholder="Ej. Ana María" required>
+                </div>
+
                 <div class="mb-3">
-                  <label for="fullname" class="form-label">Nombre Completo</label>
-                  <input type="text" class="form-control" id="fullname" placeholder="Ej. Nombre Apellido1 Apellido2" required>
+                  <label for="apellidos" class="form-label">Apellidos</label>
+                  <input type="text" class="form-control" id="apellidos" placeholder="Ej. Pérez López" required>
                 </div>
 
                 <div class="mb-3">
@@ -907,6 +912,7 @@
     <script src="../scripts/navbar-helper.js"></script>
     <!-- Script del carrito -->
     <script src="../scripts/carrito-global.js" defer></script>
+    <link rel="stylesheet" href="../estilos/registro.css">
     <script src="../scripts/registro.js"></script>
     <script src="../scripts/login.js"></script>
     <script src="../scripts/recuperacion.js"></script>

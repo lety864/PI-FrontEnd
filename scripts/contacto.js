@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
       resultado.innerHTML="";
       
       const nombre = form.name.value.trim();
-      const telefono = +form.phone.value.trim();
+      const telefono = +form.phone2.value.trim();
       const email = form.email.value.trim();
       const mensaje = form.mensaje.value.trim();
 

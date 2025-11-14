@@ -495,23 +495,23 @@ function initValidacionTiempoReal() {
       }
     });
   }
-
+  
   if (confirmPasswordField && passwordField) {
     confirmPasswordField.addEventListener("input", function() {
-      const password = passwordField.value;
-      const confirmPassword = this.value;
-      
-      if (confirmPassword && confirmPassword === password && password.length >= 8) {
-        this.classList.add("is-valid");
-        this.classList.remove("is-valid");
-      } else if (confirmPassword) {
-        this.classList.add("is-invalid");
-        this.classList.remove("is-valid");
-      } else {
-        this.classList.remove("is-invalid", "is-valid");
-      }
-    });
-  }
+    const password = passwordField.value;
+    const confirmPassword = this.value;
+
+    if (confirmPassword && confirmPassword === password && password.length >= 8) {
+      this.classList.add("is-valid");
+      this.classList.remove("is-invalid");
+    } else if (confirmPassword) {
+      this.classList.add("is-invalid");
+      this.classList.remove("is-valid");
+    } else {
+      this.classList.remove("is-invalid", "is-valid");
+    }
+  });
+}
 }
 
 // ========================================
