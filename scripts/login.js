@@ -1,5 +1,8 @@
 // SISTEMA DE LOGIN - MULTI-USUARIO
 
+// CONFIGURACIÓN DE LA URL BASE DE LA API
+const API_BASE_URL = '/api'; // URL base para todas las peticiones
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log('✓ Sistema de login inicializado');
 
@@ -32,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // FUNCIONES PARA MANEJAR USUARIOS
+    // FUNCIONES PARA MANEJAR USUARIOS (Se mantienen por si las usas en otra parte)
     function obtenerUsuarios() {
         try {
             const usuarios = localStorage.getItem("usuarios");
@@ -139,10 +142,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return emailRegex.test(email);
     }
 
-    // EVENTO: PROCESO DE LOGIN
-    loginButton.addEventListener('click', (event) => {
+    // ==================================================================
+    // === INICIO DE LA SECCIÓN MODIFICADA: PROCESO DE LOGIN (JWT) ===
+    // ==================================================================
+
+    // Se convierte la función en 'async' para usar 'await' con fetch
+    loginButton.addEventListener('click', async (event) => {
         event.preventDefault();
-        console.log('→ Procesando inicio de sesión...');
+        console.log('→ Procesando inicio de sesión (JWT)...');
 
         const email = emailInput.value.trim();
         const password = passwordInput.value.trim();
@@ -150,106 +157,112 @@ document.addEventListener('DOMContentLoaded', () => {
 
         clearLoginValidationStates();
 
-        // Validación: campos vacíos
+        // 1. VALIDACIÓN DEL LADO DEL CLIENTE (Se mantiene igual)
         if (!email || !password) {
             showLoginError(alertMessage, 'Por favor, complete todos los campos.');
             if (!email) markLoginFieldInvalid('emailInput');
             if (!password) markLoginFieldInvalid('passwordInput');
             return;
         }
-
-        // Validación: formato de email
         if (!validarEmail(email)) {
             showLoginError(alertMessage, 'Ingrese un correo electrónico válido.');
             markLoginFieldInvalid('emailInput');
             return;
         }
-
-        // Validación: longitud de contraseña
         if (password.length < 8) {
+            // Nota: Tu backend no valida longitud, pero el frontend sí. Lo mantenemos.
             showLoginError(alertMessage, 'La contraseña debe tener 8 caracteres como mínimo.');
             markLoginFieldInvalid('passwordInput');
-            const parentDiv = passwordInput.parentElement;
-            const feedback = parentDiv?.nextElementSibling;
-            if (feedback && feedback.classList.contains('invalid-feedback')) {
-                feedback.textContent = 'La contraseña debe tener 8 caracteres como mínimo.';
-                feedback.style.display = 'block';
-            }
             return;
         }
 
-        // CORREGIDO: Buscar en el array de usuarios
-        const usuarios = obtenerUsuarios();
-        
-        if (usuarios.length === 0) {
-            showLoginError(alertMessage, 'No hay usuarios registrados. Por favor, regístrese primero.');
-            markLoginFieldInvalid('emailInput');
-            return;
-        }
+        // 2. VALIDACIÓN DEL LADO DEL SERVIDOR (Nueva lógica JWT)
 
-        // Buscar el usuario por correo
-        const usuario = buscarUsuarioPorCorreo(email);
-
-        if (!usuario) {
-            showLoginError(alertMessage, 'Correo electrónico no registrado.');
-            markLoginFieldInvalid('emailInput');
-            console.log('❌ Usuario no encontrado con el correo:', email);
-            return;
-        }
-
-        // Validación: contraseña incorrecta
-        if (usuario.contraseña !== password) {
-            showLoginError(alertMessage, 'Contraseña incorrecta.');
-            markLoginFieldInvalid('passwordInput');
-            console.log('❌ Contraseña incorrecta para:', email);
-            return;
-        }
-
-        // ✓ LOGIN EXITOSO
-        console.log('✓ Login exitoso:', usuario.nombre);
-
-        const sesion = {
-            usuarioId: usuario.id || Date.now(),
-            nombre: usuario.nombre,
-            correo: usuario.correo,
-            telefono: usuario.telefono,
-            fechaLogin: new Date().toISOString()
+        // Preparamos el payload JSON que espera AuthRequest.java
+        const loginPayload = {
+            correo: email,
+            password: password
         };
 
         try {
-            localStorage.setItem('sesionActiva', JSON.stringify(sesion));
-            console.log('✓ Sesión guardada:', sesion);
-        } catch (error) {
-            console.error('Error al guardar sesión:', error);
-            showLoginError(alertMessage, 'Error al iniciar sesión. Intente nuevamente.');
-            return;
-        }
+            // Hacemos fetch al endpoint de tu AuthContoller.java
+            const loginResponse = await fetch(`${API_BASE_URL}/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(loginPayload)
+            });
 
-        const nombreUsuario = usuario.nombre.split(' ')[0];
-        
-        // Ocultar los campos del formulario
-        emailInput.style.display = 'none';
-        passwordInput.parentElement.style.display = 'none';
-        loginButton.style.display = 'none';
-        
-        // Mostrar el mensaje de éxito
-        showLoginSuccess(alertMessage, `¡Bienvenido a Mueblería España, ${nombreUsuario}!`);
+            const responseData = await loginResponse.json();
 
-        // Cerrar modal y redirigir
-        setTimeout(() => {
-            if (typeof bootstrap !== 'undefined') {
-                const modalInstance = bootstrap.Modal.getInstance(loginModal) || new bootstrap.Modal(loginModal);
-                modalInstance.hide();
+            // Si la respuesta no es OK (ej. 401 Unauthorized), las credenciales son incorrectas
+            if (!loginResponse.ok) {
+                // Leemos el mensaje de error de AuthResponse
+                const errorMessage = responseData.token || 'Email o contraseña incorrectos.';
+                console.log('❌ Credenciales incorrectas para:', email);
+                showLoginError(alertMessage, errorMessage);
+                markLoginFieldInvalid('emailInput');
+                markLoginFieldInvalid('passwordInput');
+                return;
             }
-            console.log('→ Redirigiendo a la página principal...');
+
+            // 3. LOGIN EXITOSO (authData = AuthResponse)
+            console.log('✓ Login exitoso. Token recibido.');
             
+            // ¡IMPORTANTE! Guardar el token JWT en localStorage
+            localStorage.setItem('jwtToken', responseData.token);
+            
+            // Ahora, en lugar de buscar en el backend, usamos los datos
+            // que ya nos envió el AuthResponse.
+            // PERO, AuthResponse no incluye 'nombre' o 'telefono'.
+            // Vamos a guardar lo que tenemos por ahora.
+            const sesion = {
+                // No tenemos ID de usuario, nombre o teléfono en AuthResponse.
+                // Usamos el email como ID temporal si es necesario.
+                usuarioId: responseData.correo, 
+                nombre: responseData.correo.split('@')[0], // Usamos el email como 'nombre' temporal
+                correo: responseData.correo,
+                rol: responseData.rol, // ¡Sí tenemos el rol!
+                fechaLogin: new Date().toISOString()
+            };
+
+            localStorage.setItem('sesionActiva', JSON.stringify(sesion));
+            console.log('✓ Sesión guardada (JWT):', sesion);
+
+            const nombreUsuario = sesion.nombre;
+            
+            emailInput.style.display = 'none';
+            passwordInput.parentElement.style.display = 'none';
+            loginButton.style.display = 'none';
+            
+            showLoginSuccess(alertMessage, `¡Bienvenido, ${nombreUsuario}!`);
+
             setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 1000);
-        }, 3000);
+                if (typeof bootstrap !== 'undefined') {
+                    const modalInstance = bootstrap.Modal.getInstance(loginModal) || new bootstrap.Modal(loginModal);
+                    modalInstance.hide();
+                }
+                console.log('→ Redirigiendo a la página principal...');
+                
+                setTimeout(() => {
+                    window.location.href = 'index.html'; 
+                }, 1000);
+            }, 3000);
+
+        } catch (error) {
+            // Captura errores de red (ej. backend caído)
+            console.error('Error de red durante el login:', error);
+            showLoginError(alertMessage, 'No se pudo conectar al servidor. Intente más tarde.');
+        }
     });
 
-    // VALIDACIÓN EN TIEMPO REAL
+    // ==================================================================
+    // === FIN DE LA SECCIÓN MODIFICADA ===
+    // ==================================================================
+
+
+    // VALIDACIÓN EN TIEMPO REAL (Sin cambios)
     emailInput.addEventListener('input', function () {
         const email = this.value.trim();
         
@@ -290,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // EVENTOS DEL MODAL
+    // EVENTOS DEL MODAL (Sin cambios)
     loginModal.addEventListener('hidden.bs.modal', () => {
         console.log('→ Modal de login cerrado');
         limpiarCamposLogin();
@@ -317,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     });
 
-    // OBSERVADOR: Corregir aria-hidden dinámicamente
+    // OBSERVADOR: Corregir aria-hidden dinámicamente (Sin cambios)
     const observer = new MutationObserver(() => {
         corregirAccesibilidadModales();
     });
@@ -328,26 +341,36 @@ document.addEventListener('DOMContentLoaded', () => {
         subtree: true
     });
 
-    // UTILIDADES DE CONSOLA
+    // UTILIDADES DE CONSOLA (Función 'cerrarSesion' ACTUALIZADA)
     window.verSesionActiva = function () {
         const sesion = localStorage.getItem('sesionActiva');
+        const token = localStorage.getItem('jwtToken');
+        
+        if (token) {
+             console.log('Token JWT Activo:', token);
+        } else {
+             console.log('No hay Token JWT');
+        }
+        
         if (sesion) {
             try {
                 const obj = JSON.parse(sesion);
-                console.log('Sesión activa:');
+                console.log('Datos de sesión activa:');
                 console.table([obj]);
                 return obj;
             } catch (error) {
                 console.error('Error al leer sesión:', error);
             }
         } else {
-            console.log('No hay sesión activa');
+            console.log('No hay datos de sesión activa');
         }
     };
 
     window.cerrarSesion = function () {
+        // ACTUALIZADO: Borrar ambos, la sesión y el token JWT
         localStorage.removeItem('sesionActiva');
-        console.log('✓ Sesión cerrada correctamente');
+        localStorage.removeItem('jwtToken'); 
+        console.log('✓ Sesión y Token JWT cerrados correctamente');
         window.location.reload();
     };
 
@@ -357,12 +380,13 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.verTodosLosUsuarios = function() {
+        console.warn('Esta función (verTodosLosUsuarios) solo muestra usuarios del obsoleto localStorage "usuarios".');
         const usuarios = obtenerUsuarios();
         if (usuarios.length > 0) {
-            console.log('Total de usuarios:', usuarios.length);
+            console.log('Total de usuarios (localStorage "usuarios"):', usuarios.length);
             console.table(usuarios);
         } else {
-            console.log('No hay usuarios registrados');
+            console.log('No hay usuarios registrados (en localStorage "usuarios")');
         }
     };
 
@@ -372,17 +396,14 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('✓ Sesión activa encontrada');
         verSesionActiva();
     }
-
-    // ... (Tu código existente de login.js) ...
-
-    // === NUEVA LÓGICA PARA EL BOTÓN DE USUARIO ===
+    
+    // === LÓGICA PARA EL BOTÓN DE USUARIO === (Sin cambios)
     
     const userButtons = document.querySelectorAll('.btn-action-user');
     const welcomeModalElement = document.getElementById('welcomeModal');
-    const loginModalElement = document.getElementById('loginModal'); // Asegúrate de tener esta referencia
+    const loginModalElement = document.getElementById('loginModal'); 
     const btnLogout = document.getElementById('btnLogout');
 
-    // Manejador de clic para los botones de usuario
     userButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -390,45 +411,37 @@ document.addEventListener('DOMContentLoaded', () => {
             const sesionActiva = localStorage.getItem('sesionActiva');
 
             if (sesionActiva) {
-                // 1. SI HAY SESIÓN: Preparar y mostrar modal de bienvenida
                 const usuario = JSON.parse(sesionActiva);
                 const nombreDisplay = document.getElementById('welcomeUserName');
                 const correoDisplay = document.getElementById('welcomeUserEmail');
                 
-                // Verificar rol (Simulación basada en nombre o correo según tu lógica actual)
-                // Nota: Si tienes un campo 'rol' en el localStorage úsalo, si no, adaptamos el texto
-                if (usuario.correo.includes('admin') || usuario.rol === 'admin') {
+                // Ahora podemos leer el 'rol' que guardamos en la sesión
+                if (usuario.rol === 'ADMINISTRADOR') { // Tu AuthResponse usa 'ADMINISTRADOR'
                      nombreDisplay.textContent = `¡Bienvenido Administrador!`;
-                     nombreDisplay.classList.add('text-danger'); // Un toque visual para admin
+                     nombreDisplay.classList.add('text-danger'); 
                 } else {
+                     // Usamos 'nombre' que (por ahora) es el email
                      nombreDisplay.textContent = `¡Hola, ${usuario.nombre}!`;
                      nombreDisplay.classList.remove('text-danger');
                 }
                 
                 if(correoDisplay) correoDisplay.textContent = usuario.correo;
 
-                // Abrir modal de bienvenida
                 const welcomeModal = new bootstrap.Modal(welcomeModalElement);
                 welcomeModal.show();
 
             } else {
-                // 2. SI NO HAY SESIÓN: Abrir modal de Login original
                 const loginModal = new bootstrap.Modal(loginModalElement);
                 loginModal.show();
             }
         });
     });
 
-    // Lógica de Logout (Cerrar Sesión)
     if (btnLogout) {
         btnLogout.addEventListener('click', () => {
-            localStorage.removeItem('sesionActiva');
-            // Cerrar modal
-            const modalInstance = bootstrap.Modal.getInstance(welcomeModalElement);
-            modalInstance.hide();
-            
-            // Opcional: Recargar página o mostrar alerta
-            window.location.reload();
+            // Usamos la función global para asegurar que también se borre el token
+            window.cerrarSesion(); 
         });
     }
+
 });

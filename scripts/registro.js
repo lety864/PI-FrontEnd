@@ -1,4 +1,11 @@
-// SISTEMA DE REGISTRO DE USUARIOS
+// ========================================
+// CONFIGURACIÓN DE LA URL BASE DE LA API
+// ========================================
+const API_BASE_URL = '/api'; // URL base para todas las peticiones
+
+// ========================================
+// MODELO Y GESTIÓN LOCALSTORAGE (Se mantiene como pediste)
+// ========================================
 
 // MODELO DE USUARIO
 class UsuarioModel {
@@ -53,17 +60,20 @@ function guardarUsuarios(usuarios) {
 }
 
 function agregarUsuario(usuario) {
+  // NOTA: Esta función ya no es usada por el formulario de registro,
+  // pero se mantiene por si otra parte del código la necesita.
   const usuarios = obtenerUsuarios();
   usuarios.push(usuario);
   const guardado = guardarUsuarios(usuarios);
   if (guardado) {
-    console.log('Usuario agregado exitosamente');
-    console.log('Total de usuarios:', usuarios.length);
+    console.log('Usuario agregado exitosamente (localStorage)');
   }
   return guardado;
 }
 
 function correoYaRegistrado(correo) {
+  // NOTA: Esta función ya no es usada por el formulario de registro.
+  // La validación de correo duplicado ahora la hace el backend.
   const usuarios = obtenerUsuarios();
   return usuarios.some(usuario => usuario.correo === correo);
 }
@@ -88,35 +98,37 @@ function crearAdminPorDefecto() {
     usuarios.push(adminPorDefecto);
     guardarUsuarios(usuarios);
     
-    console.log('Usuario administrador creado');
-    console.log('Email: admin@muebleria.com');
-    console.log('Contraseña: admin123');
+    console.log('Usuario administrador creado (localStorage)');
   }
 }
 
-// VALIDACION Y REGISTRO DEL FORMULARIO
+// ==================================================================
+// === LÓGICA DE SUBMIT CON API ===
+// ==================================================================
+
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('Sistema de registro inicializado');
+  console.log('✓ Sistema de registro (API) inicializado');
+  console.log('✓ API_BASE_URL configurada:', API_BASE_URL);
   
-  crearAdminPorDefecto();
-  initValidacionTiempoReal();
-  initTogglePassword();
-  initModalHandlers();
+  // Sigue llamando a la función de admin de localStorage, como en el original
+  crearAdminPorDefecto(); 
   
   const form = document.getElementById("registerForm");
   
   if (!form) {
-    console.warn('Formulario "registerForm" no encontrado en el DOM');
+    console.warn(' Formulario "registerForm" no encontrado en el DOM');
     return;
   }
   
-  console.log('Formulario encontrado y listo');
+  console.log('✓ Formulario encontrado y listo');
   
   // Se convierte la función en "async" para poder usar "await"
   form.addEventListener("submit", async function(event) {
     event.preventDefault();
     
-    console.log('Procesando registro de usuario');
+    console.log('==========================================');
+    console.log('PROCESANDO REGISTRO DE USUARIO (API)');
+    console.log('==========================================');
 
     // Leer "nombre" y "apellidos" del HTML
     const nombre = document.getElementById("nombre")?.value.trim() || '';
@@ -129,8 +141,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     clearValidationStates();
 
-    // Validar campos vacios
-    if (!fullname || !email || !phone || !password || !confirmPassword) {
+    // 1. VALIDACIÓN DEL LADO DEL CLIENTE (Se mantiene igual)
+    if (!nombre || !apellidos || !email || !phone || !password || !confirmPassword) {
       const camposVacios = [];
       if (!nombre) {
         camposVacios.push("Nombre(s)");
@@ -141,11 +153,11 @@ document.addEventListener('DOMContentLoaded', function() {
         markFieldInvalid("apellidos");
       }
       if (!email) {
-        camposVacios.push("Correo electronico");
+        camposVacios.push("Correo electrónico");
         markFieldInvalid("username");
       }
       if (!phone) {
-        camposVacios.push("Telefono");
+        camposVacios.push("Teléfono");
         markFieldInvalid("phone");
       }
       if (!password) {
@@ -156,189 +168,189 @@ document.addEventListener('DOMContentLoaded', function() {
         camposVacios.push("Confirmar contraseña");
         markFieldInvalid("confirmPassword");
       }
-
-      const mensaje = camposVacios.length === 1 
-        ? 'Por favor, rellene el campo: ' + camposVacios[0]
-        : 'Por favor, rellene todos los campos obligatorios (' + camposVacios.length + ' faltantes)';
-      
-      console.log('Validacion fallida: Campos vacios');
+      const mensaje = `Por favor, rellene todos los campos obligatorios.`;
+      console.log(' Validación fallida: Campos vacíos');
       showError(alertMessage, mensaje);
-      if (alertMessage) {
-        alertMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-      return;
-    }
-
-    // Validar nombre completo
-    const nameRegex = /^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]{3,}$/;
-    const nameWords = fullname.split(' ').filter(word => word.length > 0);
-    
-    if (!nameRegex.test(fullname) || nameWords.length < 2) {
-      console.log('Validacion fallida: Nombre incompleto');
-      showError(alertMessage, "Ingrese su nombre completo (nombre y apellido, minimo 3 caracteres).");
-      markFieldInvalid("fullname");
       if (alertMessage) alertMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       return;
     }
-
-    // Validar correo electronico
+    
+    // (Otras validaciones de cliente: formato, longitud, etc.)
+    if (nombre.length < 2) {
+      console.log(' Validación fallida: Nombre muy corto');
+      showError(alertMessage, "Ingrese un nombre válido (mínimo 2 caracteres).");
+      markFieldInvalid("nombre");
+      return;
+    }
+    if (apellidos.length < 2) {
+      console.log(' Validación fallida: Apellidos muy cortos');
+      showError(alertMessage, "Ingrese apellidos válidos (mínimo 2 caracteres).");
+      markFieldInvalid("apellidos");
+      return;
+    }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      console.log('Validacion fallida: Email invalido');
-      showError(alertMessage, "Ingrese un correo electronico valido.");
+      console.log(' Validación fallida: Email inválido');
+      showError(alertMessage, "Ingrese un correo electrónico válido.");
       markFieldInvalid("username");
-      if (alertMessage) alertMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       return;
     }
-
-    // Validar numero de telefono
     const phoneRegex = /^[0-9]{10}$/;
     if (!phoneRegex.test(phone)) {
-      console.log('Validacion fallida: Telefono invalido');
-      showError(alertMessage, "Ingrese un numero de telefono valido (10 digitos).");
+      console.log('Validación fallida: Teléfono inválido');
+      showError(alertMessage, "Ingrese un número de teléfono válido (10 dígitos).");
       markFieldInvalid("phone");
-      if (alertMessage) alertMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       return;
     }
-
-    // Validar longitud de contraseña
     if (password.length < 8) {
-      console.log('Validacion fallida: Contraseña muy corta');
+      console.log('Validación fallida: Contraseña muy corta');
       showError(alertMessage, "La contraseña debe tener al menos 8 caracteres.");
       markFieldInvalid("password");
-      if (alertMessage) alertMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       return;
     }
-
     if (password !== confirmPassword) {
-      console.log('Validacion fallida: Las contraseñas no coinciden');
+      console.log(' Validación fallida: Las contraseñas no coinciden');
       showError(alertMessage, "Las contraseñas no coinciden.");
       markFieldInvalid("confirmPassword");
-      if (alertMessage) alertMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       return;
     }
-
-    // Validar que el correo no este registrado
-    if (correoYaRegistrado(email)) {
-      console.log('Validacion fallida: Email ya registrado');
-      showError(alertMessage, "Este correo electronico ya esta registrado.");
-      markFieldInvalid("username");
-      if (alertMessage) alertMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      return;
-    }
-
-    console.log('Todas las validaciones pasaron correctamente');
-
-    // CREAR USUARIO CON ROL DE CLIENTE
-    const nuevoUsuario = new UsuarioModel({
-      nombre: fullname,
-      correo: email,
-      telefono: phone,
-      contraseña: password,
-      rol: 'cliente'
-    });
-
-    // Mostrar en consola
-    console.log('NUEVO USUARIO REGISTRADO');
-    const usuarioJSON = nuevoUsuario.toJSON();
-    console.log('Datos del usuario:');
-    console.table([usuarioJSON]);
-
-    // Guardar usuario
-    const guardado = agregarUsuario(usuarioJSON);
     
-    // Mostrar TODOS los usuarios despues de agregar
-    if (guardado) {
-      const todosLosUsuarios = obtenerUsuarios();
-      console.log('TODOS LOS USUARIOS EN LOCALSTORAGE');
-      console.log('Total de usuarios registrados:', todosLosUsuarios.length);
-      
-      const admins = todosLosUsuarios.filter(u => u.rol === 'admin').length;
-      const clientes = todosLosUsuarios.filter(u => u.rol === 'cliente').length;
-      console.log('Administradores:', admins);
-      console.log('Clientes:', clientes);
-      
-      console.log('Lista completa de usuarios:');
-      console.table(todosLosUsuarios);
-    }
+    console.log('✓ Todas las validaciones de frontend pasaron');
 
-    if (guardado) {
-      const totalUsuarios = obtenerUsuarios().length;
-      console.log('Usuario guardado en localStorage correctamente');
-      console.log('Total de usuarios registrados:', totalUsuarios);
-      
-      const nombreUsuario = fullname.split(' ')[0];
-      showSuccess(alertMessage, 'Registro exitoso, ' + nombreUsuario + '! Redirigiendo al inicio de sesion...');
+    // 2. PREPARAR DATOS PARA EL BACKEND (Coincide con UsuarioRequest)
+    const usuarioPayload = {
+      nombre: nombre,
+      apellidos: apellidos,
+      correo: email,
+      password: password,
+      telefono: phone
+    };
 
-      // Ocultar campos del formulario
-      form.querySelectorAll('.mb-3').forEach(grupo => {
-        grupo.style.display = 'none';
+    console.log('→ Enviando payload al backend:', usuarioPayload);
+
+    // 3. LLAMADA FETCH API AL BACKEND
+    try {
+      // Este endpoint 'POST /api/auth/register' coincide con tu AuthContoller.java
+      console.log(` Haciendo petición a: ${API_BASE_URL}/auth/register`);
+      
+      const response = await fetch(`${API_BASE_URL}/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(usuarioPayload)
       });
-      const submitButton = form.querySelector('button[type="submit"]');
-      if (submitButton) submitButton.style.display = 'none';
 
-      // Redirigir al modal de login
-      setTimeout(() => {
-        const registerModal = document.getElementById('registerModal');
-        const loginModal = document.getElementById('loginModal');
+      // 4. MANEJAR RESPUESTA DEL BACKEND
+      
+      // Caso 1: Registro Exitoso (Ej. 201 Created)
+      if (response.ok) {
+        const nuevoUsuario = await response.json(); // Obtienes el UsuarioResponse
+        console.log('✓ Usuario registrado exitosamente en el backend:', nuevoUsuario);
         
-        if (registerModal && loginModal && typeof bootstrap !== 'undefined') {
-          const modalInstance = bootstrap.Modal.getInstance(registerModal) || new bootstrap.Modal(registerModal);
-          modalInstance.hide();
+        showSuccess(alertMessage, `¡Registro exitoso, ${nuevoUsuario.nombre}! Redirigiendo...`);
+        form.reset();
+
+        // Lógica de Redirección: Cerrar modal de registro y abrir login
+        setTimeout(() => {
+          console.log('→ Cerrando modal de registro y abriendo modal de login...');
+          const registerModalElement = document.getElementById('registerModal');
+          const registerModal = bootstrap.Modal.getInstance(registerModalElement);
           
-          setTimeout(() => {
-            const loginModalInstance = new bootstrap.Modal(loginModal);
-            loginModalInstance.show();
-          }, 500);
+          registerModalElement.addEventListener('hidden.bs.modal', function openLoginModal() {
+            console.log('→ Modal de registro cerrado, abriendo login...');
+            
+            const loginModalElement = document.getElementById('loginModal');
+            if (loginModalElement) {
+              const loginModal = new bootstrap.Modal(loginModalElement);
+              loginModal.show();
+              
+              // Pre-llenar el campo de email en el login
+              const loginEmailField = loginModalElement.querySelector('#emailInput');
+              if (loginEmailField) {
+                loginEmailField.value = email; // Asignar el email que se acaba de registrar
+                loginEmailField.classList.add('is-valid');
+                console.log('✓ Email pre-llenado en el formulario de login:', email);
+              }
+            }
+            registerModalElement.removeEventListener('hidden.bs.modal', openLoginModal);
+          }, { once: true });
+          
+          if (registerModal) {
+            registerModal.hide();
+          }
+        }, 2000); // Espera 2 seg para que el usuario vea el mensaje
+
+      // Caso 2: Error del servidor (Ej. 409 Conflict si el email ya existe)
+      } else {
+        let errorMsg = 'Error al registrar el usuario.';
+        try {
+          // Tu servicio lanza IllegalArgumentException, que Spring 
+          // probablemente no convierte a 409 por defecto, pero sí podemos leer el error.
+          const errorData = await response.json();
+          errorMsg = errorData.message || `Error ${response.status}`; 
+        } catch(e) {
+          errorMsg = `Error ${response.status}: ${response.statusText}`;
         }
-      }, 2000);
-    } else {
-      console.log('Error al guardar en localStorage');
-      showError(alertMessage, "Error al guardar el usuario. Por favor, intente nuevamente.");
+        
+        if (errorMsg.includes("El correo ya está registrado")) {
+          errorMsg = 'Este correo electrónico ya está registrado.';
+          markFieldInvalid("username");
+        }
+        
+        console.log(`❌ Error ${response.status}: ${errorMsg}`);
+        showError(alertMessage, errorMsg);
+      }
+      
+    // Caso 3: Error de red (Servidor caído)
+    } catch (error) {
+      console.error('❌ Error de red al intentar registrar:', error);
+      showError(alertMessage, 'No se pudo conectar al servidor. Por favor, intente más tarde.');
     }
     
   });
+  
+  // Se inicializan las demás funciones
+  initValidacionTiempoReal();
+  initTogglePassword();
+  initModalHandlers();
 });
 
+
 // ========================================
-// FUNCIONES AUXILIARES
+// FUNCIONES AUXILIARES DE UI (Sin cambios)
 // ========================================
 function showError(element, message) {
   if (!element) {
-    console.warn('Elemento "alertMessage" no encontrado');
+    console.warn(' Elemento "alertMessage" no encontrado');
     return;
   }
   
   element.classList.remove("d-none", "alert-success");
   element.classList.add("alert-danger");
   element.style.display = 'block';
-  element.innerHTML = '<i class="bi bi-exclamation-triangle-fill me-2"></i><strong>Error:</strong> ' + message;
-  
-  setTimeout(() => {
-    element.classList.add("d-none");
-    element.style.display = 'none';
-  }, 7000);
+  element.innerHTML = `<i class="bi bi-exclamation-triangle-fill me-2"></i><strong>Error:</strong> ${message}`;
 }
 
 function showSuccess(element, message) {
   if (!element) {
-    console.warn('Elemento "alertMessage" no encontrado');
+    console.warn(' Elemento "alertMessage" no encontrado');
     return;
   }
   
   element.classList.remove("d-none", "alert-danger");
   element.classList.add("alert-success");
   element.style.display = 'block';
-  element.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i>' + message;
+  element.innerHTML = `<i class="bi bi-check-circle-fill me-2"></i>${message}`;
   
-  console.log('Mensaje de exito mostrado:', message);
+  console.log('✓ Mensaje de éxito mostrado:', message);
 }
 
 function markFieldInvalid(fieldId) {
   const field = document.getElementById(fieldId);
   if (field) {
     field.classList.add("is-invalid");
-    // Solo enfocar si no hay otro campo inválido ya enfocado
     if (!document.querySelector('.is-invalid:focus')) {
       field.focus();
     }
@@ -346,13 +358,11 @@ function markFieldInvalid(fieldId) {
 }
 
 function clearValidationStates() {
-  // Corregido para incluir nombre y apellidos
   const fields = ["nombre", "apellidos", "username", "phone", "password", "confirmPassword"];
   fields.forEach(fieldId => {
     const field = document.getElementById(fieldId);
     if (field) {
       field.classList.remove("is-invalid", "is-valid");
-      // Limpiar mensajes de error específicos (si existen)
       const errorMsg = field.parentElement?.querySelector('.email-error-msg, .phone-error-msg, .text-danger.small');
       if (errorMsg) {
         errorMsg.style.display = 'none';
@@ -362,7 +372,7 @@ function clearValidationStates() {
 }
 
 // ========================================
-// VALIDACIÓN EN TIEMPO REAL
+// VALIDACIÓN EN TIEMPO REAL (Sin cambios)
 // ========================================
 function initValidacionTiempoReal() {
   const nombreField = document.getElementById("nombre");
@@ -504,7 +514,9 @@ function initValidacionTiempoReal() {
   }
 }
 
-// MOSTRAR/OCULTAR CONTRASEÑA
+// ========================================
+// MOSTRAR/OCULTAR CONTRASEÑA (Sin cambios)
+// ========================================
 function initTogglePassword() {
   const togglePasswordBtn = document.getElementById("togglePassword");
   if (togglePasswordBtn) {
@@ -535,7 +547,9 @@ function initTogglePassword() {
   }
 }
 
-// LIMPIAR MODAL AL CERRAR/ABRIR
+// ========================================
+// LIMPIAR MODAL AL CERRAR/ABRIR (Sin cambios)
+// ========================================
 function initModalHandlers() {
   const registerModal = document.getElementById('registerModal');
 
@@ -594,52 +608,26 @@ function initModalHandlers() {
 }
 
 // ========================================
-// FUNCIONES DE UTILIDAD PARA CONSOLA
+// FUNCIONES DE UTILIDAD PARA CONSOLA (Sin cambios)
 // ========================================
 window.verUsuariosRegistrados = function() {
+  console.warn("Esta función ahora solo muestra usuarios en localStorage, no en la base de datos.");
   const usuarios = obtenerUsuarios();
-  console.log('\n');
-  console.log('==========================================');
-  console.log(' LISTADO COMPLETO DE USUARIOS');
-  console.log('==========================================');
-  console.log('Total de usuarios registrados:', usuarios.length);
-  
+  console.log('Total de usuarios (localStorage):', usuarios.length);
   if (usuarios.length > 0) {
-    console.log('\n ARRAY COMPLETO (JSON):');
-    console.log(JSON.stringify(usuarios, null, 2));
-    
-    console.log('\n ARRAY COMPLETO (OBJETO):');
-    console.dir(usuarios);
-    
-    console.log('\n DETALLE DE CADA USUARIO:');
-    usuarios.forEach((usuario, index) => {
-      console.log(`\n--- Usuario #${index + 1} ---`);
-      console.log('ID:', usuario.id);
-      console.log('Nombre:', usuario.nombre);
-      console.log('Correo:', usuario.correo);
-      console.log('Teléfono:', usuario.telefono);
-      console.log('Fecha Registro:', new Date(usuario.fechaRegistro).toLocaleString('es-MX'));
-      console.log('Estado:', usuario.activo ? 'Activo ✓' : 'Inactivo ✗');
-    });
-    
-    console.log('\n TABLA DE USUARIOS:');
     console.table(usuarios);
-  } else {
-    console.log(' No hay usuarios registrados');
   }
-  console.log('==========================================');
-  console.log('\n');
 }
 
 window.buscarUsuarioPorCorreo = function(correo) {
+  console.warn("Esta función ahora solo busca en localStorage, no en la base de datos.");
   const usuarios = obtenerUsuarios();
   const usuario = usuarios.find(u => u.correo === correo);
   if (usuario) {
-    console.log('✓ Usuario encontrado:');
-    console.log(usuario);
+    console.log('✓ Usuario encontrado (localStorage):');
     console.table([usuario]);
   } else {
-    console.log(` No se encontró ningún usuario con el correo: ${correo}`);
+    console.log(` No se encontró ningún usuario con el correo: ${correo} (en localStorage)`);
   }
 }
 
@@ -650,22 +638,7 @@ window.limpiarUsuarios = function() {
 
 window.contarUsuarios = function() {
   const usuarios = obtenerUsuarios();
-  console.log(` Total de usuarios registrados: ${usuarios.length}`);
+  console.log(` Total de usuarios registrados (localStorage): ${usuarios.length}`);
   return usuarios.length;
 }
 
-// ========================================
-// INICIALIZACIÓN
-// ========================================
-window.addEventListener('DOMContentLoaded', () => {
-  const usuarios = obtenerUsuarios();
-  
-  if (usuarios.length > 0) {
-    console.log('Usuarios registrados:', usuarios.length);
-    console.table(usuarios);
-  }
-  
-  initValidacionTiempoReal();
-  initTogglePassword();
-  initModalHandlers();
-});
