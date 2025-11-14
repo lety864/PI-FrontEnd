@@ -6,50 +6,38 @@
     <meta name="description" content="Mueblería España - Muebles artesanales únicos y electrodomésticos de las mejores marcas. Encuentra el mueble perfecto para tu hogar.">
     <title>Inicio - Mueblería España</title>
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     
 
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css">
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Design System CSS (SIEMPRE PRIMERO) -->
     <link rel="stylesheet" href="estilos/global.css">
     
-    <!-- Page-Specific Styles -->
     <link rel="stylesheet" href="estilos/index.css">
-
+    <link rel="stylesheet" href="estilos/registro.css">
     
 </head>
 <body>
-    <!-- ========================================= -->
-    <!-- NAVBAR PRINCIPAL (Sticky, con búsqueda) -->
-    <!-- ========================================= -->
     <div class="full-width-nav-container sticky-top">
         <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Navegación principal">
 
             <div class="container-fluid">
                 
-                <!-- Botón de menú móvil (Offcanvas) -->
                 <button class="btn btn-outline-light d-lg-none me-2" type="button" 
                         data-bs-toggle="offcanvas" data-bs-target="#offcanvasProducts" 
                         aria-controls="offcanvasProducts" aria-label="Abrir menú de productos">
                     <i class="bi bi-list fs-4"></i>
                 </button>
 
-                <!-- Logo/Brand -->
                 <a class="navbar-brand d-flex align-items-center" href="index.html">
                     <img src="./assets/mundo.png" alt="Logo Mueblería España" height="30" class="me-2">
                     Mueblería España
-
                 </a>
 
-                <!-- Menú Desktop -->
                 <div class="collapse navbar-collapse" id="mainNavbarDesktop">
 
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-3">
@@ -64,70 +52,56 @@
                         </li>
 
                     </ul>                    
-                    <!-- Barra de búsqueda (Desktop) -->
                     <form class="d-flex me-3" role="search">
                         <input class="form-control search-input" type="search" 
                                placeholder="Buscar en la tienda" aria-label="Buscar productos">
                     </form>
                     
-                     <!-- Iconos de acción (Desktop) -->
-                    <ul class="navbar-nav">
+                     <ul class="navbar-nav">
 
                         <li class="nav-item">
                             <a class="nav-link position-relative" href="paginas/carrito.html" aria-label="Carrito de compras">
                                 <i class="bi bi-cart-fill fs-4"></i>
-                                <!-- BADGE OCULTO DE NUM DE ITEMS DEL CARRITO - Desktop con d-none -->
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">
                                     <span class="visually-hidden">productos en el carrito</span>
                                 </span>
                             </a>
                         </li>
-                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        <li class="nav-item d-none d-lg-block">
+                            <a class="nav-link btn-action-user" href="#" role="button">
                                 <i class="bi bi-person-fill fs-4"></i>
                             </a>
                         </li> 
                     </ul>
                 </div>
 
-                <!-- Iconos de acción (Móvil) -->
                 <div class="d-flex align-items-center d-lg-none">
                     <ul class="navbar-nav flex-row">
                         <li class="nav-item ms-3">
                             <a class="nav-link position-relative" href="paginas/carrito.html" aria-label="Carrito de compras">
                                 <i class="bi bi-cart-fill fs-3"></i>
-                                    <!-- BADGE OCULTO DE NUM ITEMS DEL CARRITO - Movil con d-none -->
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">
                                     2
                                     <span class="visually-hidden">productos en el carrito</span>
                                 </span>
                             </a>
                         </li>
                         <li class="nav-item ms-3">
-                            <a class="nav-link" href="#" aria-label="Mi cuenta">
+                            <a class="nav-link btn-action-user" href="#" aria-label="Mi cuenta">
                                 <i class="bi bi-person-fill fs-3"></i>
                             </a>
                         </li>
-
-                          <!-- <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
-                              <i class="bi bi-person-fill fs-3"></i>
-                          </a> -->
-                      </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </div>
 
-    <!-- ========================================= -->
-    <!-- NAVBAR SECUNDARIO (Categorías - Desktop) -->
-    <!-- ========================================= -->
     <div class="container">
         <div class="floating-nav-container">
             <nav class="navbar navbar-expand-lg navbar-light d-none d-lg-block" aria-label="Navegación de categorías">
                 <div class="container-fluid">
                     <ul class="navbar-nav">
-                        <!-- Salas -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" 
                                data-bs-toggle="dropdown" aria-expanded="false">
@@ -142,7 +116,6 @@
                             </ul>
                         </li>
 
-                        <!-- Dormitorio -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" 
                                data-bs-toggle="dropdown" aria-expanded="false">
@@ -156,7 +129,6 @@
                             </ul>
                         </li>
 
-                        <!-- Comedores -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" 
                                data-bs-toggle="dropdown" aria-expanded="false">
@@ -176,7 +148,6 @@
                             <a class="nav-link" href="./paginas/colchones.html">Colchones</a>
                         </li>
 
-                        <!-- Línea Blanca -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="paginas/catalogo.html" role="button" 
                                data-bs-toggle="dropdown" aria-expanded="false">
@@ -200,9 +171,6 @@
         </div>
     </div>
 
-    <!-- ========================================= -->
-    <!-- OFFCANVAS (Menú Móvil)                   -->
-    <!-- ========================================= -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasProducts" 
          aria-labelledby="offcanvasProductsLabel">
          
@@ -212,7 +180,6 @@
         </div>
         
         <div class="offcanvas-body">
-            <!-- Búsqueda en móvil -->
             <div class="px-3 mb-3">
                 
                 <form class="d-flex" role="search">
@@ -223,7 +190,6 @@
             </div>
 
             <ul class="list-group list-group-flush">
-                <!-- Salas -->
                 <li class="list-group-item">
                     <a href="#collapseSalas" data-bs-toggle="collapse" role="button" 
                        aria-expanded="false" aria-controls="collapseSalas">
@@ -240,7 +206,6 @@
                     </div>
                 </li>
 
-                <!-- Dormitorio -->
                 <li class="list-group-item">
                     <a href="#collapseDormitorio" data-bs-toggle="collapse" role="button" 
                        aria-expanded="false" aria-controls="collapseDormitorio">
@@ -256,7 +221,6 @@
                     </div>
                 </li>
 
-                <!-- Comedores -->
                 <li class="list-group-item">
                     <a href="#collapseComedores" data-bs-toggle="collapse" role="button" 
                        aria-expanded="false" aria-controls="collapseComedores">
@@ -275,7 +239,6 @@
                 <li class="list-group-item"><a href="./paginas/roperos.html">Roperos</a></li>
                 <li class="list-group-item"><a href="./paginas/colchones.html">Colchones</a></li>
 
-                <!-- Línea Blanca -->
                 <li class="list-group-item">
                     <a href="#collapseLineaBlanca" data-bs-toggle="collapse" role="button" 
                        aria-expanded="false" aria-controls="collapseLineaBlanca">
@@ -298,7 +261,6 @@
             </ul>
             <hr class="my-3">
 
-            <!-- Enlaces adicionales -->
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><a href="paginas/nosotros.html">Nosotros</a></li>
                 <li class="list-group-item"><a href="paginas/contacto.html">Contacto</a></li>
@@ -307,14 +269,9 @@
     </div>
 
 
-    <!-- ========== MAIN CONTENT ========== -->
     <main>
-        <!-- ========================================= -->
-        <!-- HERO SECTION (Carousel Bootstrap)        -->
-        <!-- ========================================= -->
-         <div class="hero-carousel-container">
+        <div class="hero-carousel-container">
         <section id="heroCarousel" class="carousel slide" data-bs-ride="carousel" aria-label="Banner principal">
-            <!-- Indicadores -->
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" 
                         class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -326,7 +283,6 @@
 
 
             <div class="carousel-inner">
-                <!-- Slide 1: Principal -->
                 <div class="carousel-item active" style="background-image: url('assets/inicio/Hero1.png');">
                     <div class="carousel-caption d-none d-md-block">
                         <h1>Muebles con alma, hogares con historia</h1>
@@ -335,121 +291,6 @@
                     </div>
                 </div>
 
-    <!-- Incio de sesion -->
-    <!-- <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-body p-0">
-            <div class="container-fluid">
-              <div class="row">
-
-                <div class="col-md-6 d-none d-md-block p-0 modal-video-col">
-                  <video autoplay muted playsinline>
-                    <source src="./assets/inicio.mp4" type="video/mp4">
-                    Tu navegador no soporta la etiqueta de video.
-                  </video>
-                </div>
-
-                <div class="col-md-6 p-4 p-md-5">
-                  
-                  <div class="d-flex justify-content-end">
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-
-                  <h2 class="mb-4">Bienvenido</h2>
-                  
-                  <form>
-                    <div class="mb-3">
-                      <label for="emailInput" class="form-label">Correo Electrónico</label>
-                      <input type="email" class="form-control" id="emailInput" placeholder="tu@email.com">
-                    </div>
-                    <div class="mb-3">
-                      <label for="passwordInput" class="form-label">Contraseña</label>
-                      <input type="password" class="form-control" id="passwordInput">
-                    </div>
-                    <div class="d-grid gap-2">
-                        <button type="button" class="btn btn-primary btn-lg">Ingresar</button>
-                    </div>
-                  </form>
-
-                  <hr class="my-4">
-
-                  <div class="text-center">
-                    <p>¿No tienes una cuenta? 
-                      <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Regístrate</a>
-                    </p>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-    <!-- Fin de inicio de sesion -->
-
-    <!-- Form de registro -->
-    <!-- <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-body p-0">
-            <div class="container-fluid">
-              <div class="row">
-
-                <div class="col-md-6 p-4 p-md-5">
-
-                  <div class="d-flex justify-content-end">
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-
-                  <h2 class="mb-4">Crea tu Cuenta</h2>
-                  
-                  <form>
-                    <div class="mb-3">
-                      <label for="regName" class="form-label">Nombre Completo</label>
-                      <input type="text" class="form-control" id="regName" placeholder="Tu nombre">
-                    </div>
-                    <div class="mb-3">
-                      <label for="regEmail" class="form-label">Correo Electrónico</label>
-                      <input type="email" class="form-control" id="regEmail" placeholder="tu@email.com">
-                    </div>
-                    <div class="mb-3">
-                      <label for="regPassword" class="form-label">Crea una Contraseña</label>
-                      <input type="password" class="form-control" id="regPassword">
-                    </div>
-                    <div class="d-grid gap-2">
-                        <button type="button" class="btn btn-primary btn-lg">Registrarme</button>
-                    </div>
-                  </form>
-
-                  <hr class="my-4">
-
-                  <div class="text-center">
-                    <p>¿Ya tienes una cuenta? 
-                      <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Inicia Sesión</a>
-                    </p>
-                  </div>
-
-                </div>
-
-                <div class="col-md-6 d-none d-md-block p-0 modal-video-col">
-                  <video autoplay muted playsinline>
-                    <source src="./assets/registro.mp4" type="video/mp4">
-                    Tu navegador no soporta la etiqueta de video.
-                  </video>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-    <!-- Fin de form de registro -->
-
-
-                <!-- Slide 2: Ofertas -->
                 <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1617806118233-18e1de247200?w=1600&q=80');">
                     <div class="carousel-caption d-none d-md-block">
                         <h1>¡Ofertas que renuevan tu hogar!</h1>
@@ -458,7 +299,6 @@
                     </div>
                 </div>
 
-                <!-- Slide 3: Novedades -->
                 <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=1600&q=80');">
                     <div class="carousel-caption d-none d-md-block">
                         <h1>Lo nuevo ha llegado: Colección 2025</h1>
@@ -468,7 +308,6 @@
                 </div>
             </div>
 
-            <!-- Controles -->
             <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Anterior</span>
@@ -478,23 +317,15 @@
                 <span class="visually-hidden">Siguiente</span>
             </button>
         </section>
-        </div> <!-- /.hero-carousel-container -->
-
-        <!-- ========================================= -->
-        <!-- CATEGORÍAS DE MUEBLES                    -->
-        <!-- ========================================= -->
-        <section class="py-5" style="margin-top: 80px;">
+        </div> <section class="py-5" style="margin-top: 80px;">
             <div class="container">
-                <!-- Section Header -->
                 <div class="section-header">
                     <p class="section-label">Nuestros Muebles</p>
                     <h2>Encuentra el Mueble Perfecto</h2>
                     <p>Los más vendidos: desde piezas artesanales únicas hasta muebles modernos.</p>
                 </div>
 
-                <!-- Grid de Categorías -->
                 <div class="row g-4">
-                    <!-- Salas -->
                     <div class="col-md-6 col-lg-3">
                         <article class="category-card">
                             <img src="assets/inicio/inicio-sala.png" 
@@ -511,7 +342,6 @@
                         </article>
                     </div>
 
-                    <!-- Dormitorio -->
                     <div class="col-md-6 col-lg-3">
                         <article class="category-card">
                             <img src="assets/inicio/inicio-cama.png" 
@@ -528,7 +358,6 @@
                         </article>
                     </div>
 
-                    <!-- Comedores -->
                     <div class="col-md-6 col-lg-3">
                         <article class="category-card">
                             <img src="assets/inicio/inicio-comedor.png" 
@@ -545,7 +374,6 @@
                         </article>
                     </div>
 
-                    <!-- Roperos -->
                     <div class="col-md-6 col-lg-3">
                         <article class="category-card">
                             <img src="assets/inicio/inicio-ropero1.png" 
@@ -565,9 +393,6 @@
             </div>
         </section>
 
-        <!-- ========================================= -->
-        <!-- LÍNEA BLANCA                             -->
-        <!-- ========================================= -->
         <section class="py-5" style="margin-top: 20px;">
             <div class="container">
                 <div class="section-header">
@@ -577,7 +402,6 @@
                 </div>
 
                 <div class="row g-4">
-                    <!-- Refrigeradores -->
                     <div class="col-md-6 col-lg-3">
                         <article class="category-card">
                             <img src="assets/inicio/inicio-refrigerador1.png" 
@@ -594,7 +418,6 @@
                         </article>
                     </div>
 
-                    <!-- Estufas -->
                     <div class="col-md-6 col-lg-3">
                         <article class="category-card">
                             <img src="assets/inicio/inicio-estufa1.png" 
@@ -611,7 +434,6 @@
                         </article>
                     </div>
 
-                    <!-- Lavadoras -->
                     <div class="col-md-6 col-lg-3">
                         <article class="category-card">
                             <img src="assets/inicio/inicio-lavadora.png" 
@@ -628,7 +450,6 @@
                         </article>
                     </div>
 
-                    <!-- Microondas -->
                     <div class="col-md-6 col-lg-3">
                         <article class="category-card">
                             <img src="assets/inicio/inicio-microondas.png" 
@@ -648,9 +469,6 @@
             </div>
         </section>
 
-        <!-- ========================================= -->
-        <!-- BANNER DE COLCHONES                      -->
-        <!-- ========================================= -->
         <section class="py-5" style="margin-top: 60px;">
             <div class="container">
                 <div class="promo-banner">
@@ -680,9 +498,6 @@
             </div>
         </section>
 
-        <!-- ========================================= -->
-        <!-- PRODUCTOS DESTACADOS (con precios)       -->
-        <!-- ========================================= -->
         <section class="py-5" style="margin-top: 40px;" id="ofertas">
             <div class="container">
                 <div class="section-header">
@@ -692,7 +507,6 @@
                 </div>
 
                 <div class="row g-4">
-                    <!-- Producto 1 -->
                     <div class="col-md-6 col-lg-3">
                         <article class="product-card">
                             <div class="product-image-container">
@@ -728,7 +542,6 @@
                         </article>
                     </div>
 
-                    <!-- Producto 2 -->
                     <div class="col-md-6 col-lg-3">
                         <article class="product-card">
                             <div class="product-image-container">
@@ -764,7 +577,6 @@
                         </article>
                     </div>
 
-                    <!-- Producto 3 -->
                     <div class="col-md-6 col-lg-3">
                         <article class="product-card">
                             <div class="product-image-container">
@@ -798,7 +610,6 @@
                         </article>
                     </div>
 
-                    <!-- Producto 4 -->
                     <div class="col-md-6 col-lg-3">
                         <article class="product-card">
                             <div class="product-image-container">
@@ -837,9 +648,6 @@
             </div>
         </section>
 
-        <!-- ========================================= -->
-        <!-- VISITA SUCURSALES                        -->
-        <!-- ========================================= -->
         <section class="py-5" style="margin-top: 50px; margin-bottom: 90px;">
             <div class="container">
                 <div class="row align-items-center g-5">
@@ -871,11 +679,9 @@
         </section>
     </main>
 
-    <!-- ========== NUEVO FOOTER ========== -->
     <footer class="site-footer">
         <div class="container">
             <div class="row">
-                <!-- Columna 1: Sobre Nosotros -->
                 <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                     <div class="footer-widget">
                         <h4 class="widget-title">Mueblería España</h4>
@@ -887,7 +693,6 @@
                     </div>
                 </div>
 
-                <!-- Columna 2: Enlaces Rápidos -->
                 <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
                     <div class="footer-widget">
                         <h4 class="widget-title">Enlaces</h4>
@@ -900,7 +705,6 @@
                     </div>
                 </div>
 
-                <!-- Columna 3: Atención al Cliente -->
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                     <div class="footer-widget">
                         <h4 class="widget-title">Atención al Cliente</h4>
@@ -914,7 +718,6 @@
                     </div>
                 </div>
 
-                <!-- Columna 4: Contacto -->
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-widget">
                         <h4 class="widget-title">Contacto</h4>
@@ -937,14 +740,13 @@
             </div>
         </div>
     </footer>
-    <!-- ========== BARRA DE COPYRIGHT ========== -->
     <div class="copyright-bar">
         <div class="container text-center">
             <p class="mb-0">&copy; 2025 Mueblería España. Todos los derechos reservados.</p>
         </div>
     </div>
-  <!-- Incio de sesion -->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-body p-0">
@@ -995,7 +797,6 @@
         </div>
     </div>
 </form>
-                   <!-- Enlace de recuperación de contraseña -->
                    <div class="mb-3 text-end">
                    <a href="#" class="text-decoration-none" style="color: #CB997E;" data-bs-toggle="modal" data-bs-target="#recoveryModal" data-bs-dismiss="modal">
                      ¿Olvidaste tu contraseña? </a></div>
@@ -1020,9 +821,6 @@
     </div>
   </div>
 </div> 
-<!-- Fin de inicio de sesion -->
-
-<!-- Modal de Recuperación de Contraseña -->
 <div class="modal fade" id="recoveryModal" tabindex="-1" aria-labelledby="recoveryModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -1044,7 +842,6 @@
             <input type="email" class="form-control" id="recoveryEmail" placeholder="tu@email.com" required>
           </div>
 
-          <!-- Mensaje de alerta -->
           <div id="recoveryAlertMessage" class="alert d-none" role="alert"></div>
 
           <div class="d-grid gap-2">
@@ -1064,9 +861,6 @@
     </div>
   </div>
 </div>
-<!-- Fin de Modal de Recuperación de Contraseña -->
-                    
-<!-- Form de registro --> 
 <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
@@ -1084,29 +878,21 @@
               
               <form id="registerForm"> 
                 
-               <div class="mb-3">
-                  <label for="nombre" class="form-label">Nombre(s)</label>
-                  <input type="text" class="form-control" id="nombre" placeholder="Ej. Ana María" required>
-                </div>
-
                 <div class="mb-3">
-                  <label for="apellidos" class="form-label">Apellidos</label>
-                  <input type="text" class="form-control" id="apellidos" placeholder="Ej. Pérez López" required>
+                  <label for="fullname" class="form-label">Nombre Completo</label>
+                  <input type="text" class="form-control" id="fullname" placeholder="Ej. Nombre Apellido1 Apellido2" required>
                 </div>
 
-                <!-- Correo -->
                 <div class="mb-3">
                   <label for="username" class="form-label">Correo Electrónico</label>
                   <input type="email" class="form-control" id="username" placeholder="tu@email.com" required>
                 </div>
 
-                <!-- Teléfono -->
                 <div class="mb-3">
                   <label for="phone" class="form-label">Número de Teléfono</label>
                   <input type="tel" class="form-control" id="phone" placeholder="Ej. 7221234567" pattern="[0-9]{10}" required>
                 </div>
 
-                <!-- Contraseña -->
                 <div class="mb-3">
                   <label for="password" class="form-label">Contraseña</label>
                   <div class="input-group"> 
@@ -1117,7 +903,6 @@
                   </div>
                 </div>
 
-                <!-- Confirmar Contraseña -->
                 <div class="mb-3">
                   <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
                   <div class="input-group"> 
@@ -1128,7 +913,6 @@
                   </div>
                 </div>
 
-                <!-- Mensajes de alerta -->
                 <div id="alertMessage" class="alert d-none" role="alert"></div>
 
                 <div class="d-grid gap-2">
@@ -1146,7 +930,6 @@
 
             </div>
 
-            <!-- Video del lado derecho -->
             <div class="col-md-6 d-none d-md-block p-0 modal-video-col">
               <video id="registerVideo" autoplay muted playsinline>
                 <source src="/assets/registro.mp4" type="video/mp4">
@@ -1160,13 +943,35 @@
     </div>
   </div>
 </div> 
-<!-- Fin de form de registro -->
- 
-    <!-- Bootstrap 5 JS Bundle -->
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<div class="modal fade" id="welcomeModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center pb-5">
+        <div class="mb-4">
+            <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                <i class="bi bi-person-circle fs-1 text-primary"></i>
+            </div>
+        </div>
+        
+        <h3 class="mb-2" id="welcomeUserName">¡Bienvenido!</h3>
+        <p class="text-muted mb-4" id="welcomeUserEmail">usuario@ejemplo.com</p>
+        
+        <div class="d-grid gap-2 col-8 mx-auto">
+            <button type="button" class="btn btn-danger mt-2" id="btnLogout">
+                <i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión
+            </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <!-- Smooth Scroll -->
-   <script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <script>
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
@@ -1182,14 +987,11 @@
         });
     });
     </script>
-     <!-- Enlazar el archivo JavaScript -->
-<script src="scripts/registro.js"></script>
+     <script src="scripts/registro.js"></script>
     <link rel="stylesheet" href="estilos/registro.css">
     <script src="scripts/login.js"></script>
         <script src="scripts/recuperacion.js"></script>
-        <!-- Helper para rutas dinámicas del navbar -->
         <script src="scripts/navbar-helper.js"></script>
-        <!-- Script del carrito -->
         <script src="scripts/carrito-global.js" defer></script>
 
 </body>
